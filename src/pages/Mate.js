@@ -1,5 +1,3 @@
-// Mate.js
-
 import React, { useState } from 'react';
 import './Mate.css';
 
@@ -20,11 +18,14 @@ const userData = [
 
 export default function Mate() {
   const [isFilterVisible, setFilterVisible] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState(null);
+  const [selectedFilters, setSelectedFilters] = useState({});
 
   const handleFilterClick = (filter) => {
     setFilterVisible((prev) => !prev);
-    setSelectedFilter((prev) => (prev === filter ? null : filter));
+  };
+
+  const handleOptionChange = (filter, option) => {
+    setSelectedFilters((prev) => ({ ...prev, [filter]: option }));
   };
 
   const renderFilterOptions = () => {
@@ -32,26 +33,30 @@ export default function Mate() {
       return (
         <div className="filter-options">
           {Object.keys(filterOptions).map((filter, index) => (
-            <button key={index} onClick={() => setSelectedFilter(filter)}>
-              {filter}
-            </button>
-          ))}
-        </div>
-      );
-    }
-    return null;
-  };
-
-  const renderSelectedFilterOptions = () => {
-    if (selectedFilter && (selectedFilter === "지역" || selectedFilter === "성별" || selectedFilter === "나이" || selectedFilter === "MBTI")) {
-      return (
-        <div className="selected-filter-options">
-          {filterOptions[selectedFilter].map((option, index) => (
-            <div key={index} className="filter-option">
-              <input type="radio" name={selectedFilter} value={option} />
-              <label>{option}</label>
+            <div key={index}>
+              <p>{`[${filter}]`}</p>
+              <ul>
+                {filterOptions[filter].map((option, optionIndex) => (
+                  <li key={optionIndex}>
+                    <label className="radio-label">
+                      <input
+                        type="radio"
+                        id={`${filter}_${optionIndex}`}
+                        name={filter}
+                        value={option}
+                        checked={selectedFilters[filter] === option}
+                        onChange={() => handleOptionChange(filter, option)}
+                      />
+                      {option}
+                    </label>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
+          <div className="ok_button">
+            <button>확인</button>
+          </div>
         </div>
       );
     }
@@ -64,7 +69,6 @@ export default function Mate() {
       <div className='Mate-filter'>
         <button onClick={() => handleFilterClick("카테고리")}>카테고리</button>
         {renderFilterOptions()}
-        {renderSelectedFilterOptions()}
       </div>
       <div className='Mate-product-list'>
         {userData.map(user => (

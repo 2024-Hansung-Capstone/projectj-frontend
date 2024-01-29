@@ -1,53 +1,58 @@
 .Mate-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .user-image {
-    width: 100%;
-    max-height: 150px;
-    object-fit: cover;
-  }
-  
-  .Mate-filter > button {
-    margin-bottom: 20px;
-    display: inline-block;
-    margin-right: 10px; 
-  }
-  
-  .Mate-product-list {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .Mate-product-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin: 10px;
-    width: 30%;
-    box-sizing: border-box;
-  }
-  
-  .user-info {
-    margin-bottom: 10px;
-  }
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
-  /* Mate.css */
+.user-image {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+}
 
-.filter-options {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .filter-option {
-    margin-right: 10px; /* Adjust as needed */
-  }
-  
-  .Mate-filter > button {
-    margin-right: 10px; /* Adjust as needed */
-  }
-  
+.Mate-filter {
+  gap: 10px; /* 간격 조절 */
+}
+
+.Mate-filter > button {
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.Mate-product-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Mate-product-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+  width: 30%;
+  box-sizing: border-box;
+}
+
+.user-info {
+  margin-bottom: 10px;
+}
+
+
+.Mate-filter > button {
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.filter-options ul {
+  list-style: none;
+  margin-left: 10px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5개씩 나누어 표시 */
+  gap: 10px;
+}
+.filter-options input {
+  margin: 1px;
+}
