@@ -1,0 +1,77 @@
+.Mate-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.user-image {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+}
+
+.Mate-filter {
+  gap: 10px; /* 간격 조절 */
+  /*border: groove 1px red;*/
+  padding: 10px;
+  width: 100%;
+}
+
+.Mate-filter > button {
+  font-family: 'seolleimcool-SemiBold';
+  margin-bottom: 20px;
+  display: inline-block;
+  background-color: white; /* 하얀색 배경 */
+  color: black; /* 검정 글씨 */
+  border: 1px solid skyblue; /* 빨간색 테두리 */
+  padding: 10px 20px; /* 버튼 안의 여백 조절 */
+  border-radius: 5px; /* 테두리의 모서리를 둥글게 만듭니다. */
+  outline: none; /* 기본 포커스 스타일 제거 */
+}
+
+
+.Mate-product-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Mate-product-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+  width: 30%;
+  box-sizing: border-box;
+}
+
+.user-info {
+  margin-bottom: 10px;
+}
+
+
+.Mate-filter > button {
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.filter-options ul {
+  list-style: none;
+  margin-left: 10px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5개씩 나누어 표시 */
+  gap: 10px;
+}
+.filter-options input {
+  margin: 1px;
+}
+
+
+@font-face {
+  font-family: 'seolleimcool-SemiBold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/seolleimcool-SemiBold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}

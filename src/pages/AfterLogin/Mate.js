@@ -76,7 +76,7 @@ export default function Mate() {
             <img className="user-image" src="/user.jpeg" alt="user"/>
             <h3>{user.name}</h3>
             <p>{`${user.age} 세`}</p>
-            <button>채팅하기</button>
+            <button>쪽지보내기</button>
           </div>
         ))}
       </div>

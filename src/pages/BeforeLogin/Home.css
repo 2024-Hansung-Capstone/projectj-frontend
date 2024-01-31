@@ -1,0 +1,26 @@
+.Home-container {
+    background-color: white;
+    color: black;
+    padding: 5px;
+    margin: 10px;
+}
+.Home-photoList {
+    border: groove 1px red;
+    margin: 10px;
+    width: 100%;
+}
+.Home-slider1{
+    border: groove 1px red;
+    width: 100%;
+    margin: 10px;
+}
+.Home-slider2{
+    border: groove 1px red;
+    width: 100%;
+    margin: 10px;
+}
+.Home-slider3{
+    border: groove 1px red;
+    width: 100%;
+    margin: 10px;
+}
