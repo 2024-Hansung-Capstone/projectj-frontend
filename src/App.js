@@ -1,10 +1,19 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "./pages/BeforeLogin/Header";
-import HomeBeforeLogin from "./pages/BeforeLogin/Home";
-import HomeAfterLogin from "./pages/AfterLogin/Home";
+
+// AfterLogin
 import Category from "./components/Category";
-import Mate from "./pages/BeforeLogin/Mate";
+import HeaderA from "./pages/AfterLogin/Header";
+import HomeA from "./pages/AfterLogin/Home";
+import MateA from "./pages/BeforeLogin/Mate";
+import CommunityA from "./pages/AfterLogin/Community";
+
+// BeforeLogin
+import HeaderB from "./pages/BeforeLogin/Header";
+import HomeB from "./pages/BeforeLogin/Home";
+import MateB from "./pages/BeforeLogin/Mate";
+import CommunityB from "./pages/BeforeLogin/Community";
+
 
 function App() {
   const isAuthenticated = true; // 실제 인증 상태로 대체
@@ -13,14 +22,15 @@ function App() {
     <div className="root-wrap">
       <BrowserRouter>
         <div className="header-section">
-          <Header />
+          {isAuthenticated ? <HeaderA /> : <HeaderB />}
         </div>
         <div className="main-section">
           <Category />
           <Routes>
             {/*  */}
-            <Route path="/" element={isAuthenticated ? <HomeBeforeLogin /> : <HomeAfterLogin />} />
-            <Route path="/Mate" element={<Mate />} />
+            <Route path="/" element={isAuthenticated ? <HomeB /> : <HomeA />} />
+            <Route path="/Mate" element={isAuthenticated ? <MateB /> : <MateA />} />
+            <Route path="/Community" element={isAuthenticated ? <CommunityB /> : <CommunityA />} />
           </Routes>
         </div>
         <div className="footer-section"></div>

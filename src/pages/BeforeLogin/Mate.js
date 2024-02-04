@@ -20,12 +20,19 @@ export default function Mate() {
   const [isFilterVisible, setFilterVisible] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({});
 
-  const handleFilterClick = (filter) => {
+  const handleFilterClick = () => {
     setFilterVisible((prev) => !prev);
   };
 
-  const handleOptionChange = (filter, option) => {
+  const handleOptionButtonClick = (filter, option) => {
     setSelectedFilters((prev) => ({ ...prev, [filter]: option }));
+    // 필터링 옵션 버튼 클릭 시에는 옵션 창을 닫지 않음
+  };
+
+  const handleConfirmButtonClick = () => {
+    setFilterVisible(false);
+    // 확인 버튼 클릭 시에 필터링 옵션 창을 닫음
+    // 이 부분에 필요한 로직 추가
   };
 
   const renderFilterOptions = () => {
@@ -38,16 +45,15 @@ export default function Mate() {
               <ul>
                 {filterOptions[filter].map((option, optionIndex) => (
                   <li key={optionIndex}>
-                    <label className="radio-label">
-                      <input
-                        type="radio"
+                    <label className="button-label">
+                      <button
                         id={`${filter}_${optionIndex}`}
                         name={filter}
-                        value={option}
-                        checked={selectedFilters[filter] === option}
-                        onChange={() => handleOptionChange(filter, option)}
-                      />
-                      {option}
+                        className={selectedFilters[filter] === option ? 'clicked' : ''}
+                        onClick={() => handleOptionButtonClick(filter, option)}
+                      >
+                        {option}
+                      </button>
                     </label>
                   </li>
                 ))}
@@ -55,7 +61,7 @@ export default function Mate() {
             </div>
           ))}
           <div className="ok_button">
-            <button>확인</button>
+            <button onClick={handleConfirmButtonClick}>확인</button>
           </div>
         </div>
       );
@@ -67,7 +73,7 @@ export default function Mate() {
     <div className='Mate-container'>
       <h1>자취 메이트</h1>
       <div className='Mate-filter'>
-        <button onClick={() => handleFilterClick("카테고리")}>카테고리</button>
+        <button onClick={handleFilterClick}>필터링</button>
         {renderFilterOptions()}
       </div>
       <div className='Mate-product-list'>
