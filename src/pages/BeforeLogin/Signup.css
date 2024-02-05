@@ -1,0 +1,83 @@
+.signup-form-container {
+    width: 400px;
+    margin: 0 auto; /* 媛��대뜲 �뺣젹�� �꾪븳 �ㅽ��� 異붽� */
+    margin-top: 120px;
+    margin-bottom: 120px;
+    text-align: center;
+    padding: 60px; /* �대� �щ갚 */
+    border: 1px solid #ddd; /* �� */
+    border-radius: 10px; /* �κ렐 �ㅻえ瑜� �꾪븳 �뚮몢由� 諛섍꼍 異붽� */
+}
+
+.signup-form-title {
+    margin-top: 20px; /* �곷떒 �щ갚 議곗젙 */
+    margin-bottom: 40px; /* �섎떒 �щ갚 議곗젙 */
+    text-align: center;
+    font-size: 36px;
+    color: #000000;
+}
+
+.signup-form-item {
+    width: calc(100% - 20px);
+    margin-bottom: 20px;
+    margin-left: 10px; /* 醫뚯륫 留덉쭊 異붽� */
+}
+
+.signup-form-item input,
+.signup-form-item select,
+.signup-form-item input[type="date"] {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+.date-picker {
+    display: flex;
+  }
+  
+  .date-input {
+    flex: 1;
+    margin-right: 10px;
+  }
+
+.signup-form-button {
+    width: calc(100% - 20px);
+    height: 50px;
+    font-size: 18px;
+    font-weight: bold; 
+    margin-top: 40px;
+    margin-bottom: 5px;
+    background-color: #29ADB2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.signup-form-button:hover {
+    background-color: #209094;
+}
+
+.signup-form-item.checkbox {
+    position: relative;
+    margin-left: 25px;
+}
+
+.signup-form-item.checkbox input {
+    position: absolute;
+    top: 50%;
+    left: -140px;
+    transform: translateY(-50%) scale(0.5);
+}
+
+.signup-form-item.checkbox label {
+    position: relative;
+    text-align: left;
+    padding-left: 5px;
+    font-size: 14px;
+}
