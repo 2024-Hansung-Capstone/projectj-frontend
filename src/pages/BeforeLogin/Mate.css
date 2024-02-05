@@ -11,8 +11,6 @@
 }
 
 .Mate-filter {
-  gap: 10px; /* 간격 조절 */
-  /*border: groove 1px red;*/
   padding: 10px;
   width: 100%;
 }
@@ -21,14 +19,13 @@
   font-family: 'seolleimcool-SemiBold';
   margin-bottom: 20px;
   display: inline-block;
-  background-color: white; /* 하얀색 배경 */
-  color: black; /* 검정 글씨 */
-  border: 1px solid skyblue; /* 빨간색 테두리 */
-  padding: 10px 20px; /* 버튼 안의 여백 조절 */
-  border-radius: 5px; /* 테두리의 모서리를 둥글게 만듭니다. */
-  outline: none; /* 기본 포커스 스타일 제거 */
+  background-color: white;
+  color: black; 
+  border: 1px solid black;
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  outline: none; 
 }
-
 
 .Mate-product-list {
   display: flex;
@@ -50,43 +47,68 @@
   margin-bottom: 10px;
 }
 
-
-.Mate-filter > button {
-  margin-bottom: 20px;
-  display: inline-block;
-}
-
 .filter-options ul {
   list-style: none;
   margin-left: 10px;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5개씩 나누어 표시 */
+  grid-template-columns: repeat(10, 1fr); /*10개씩 나누어 표시 */
   gap: 10px;
 }
-.filter-options input {
-  margin: 1px;
-  background-color: white; /* 초기 배경색은 흰색으로 설정 */
-  color: skyblue; /* 초기 글자색은 하늘색으로 설정 */
-  border: 1px solid skyblue; /* 초기 테두리 색은 하늘색으로 설정 */
+
+.special-filter {
+  display: inline;
+  box-shadow: inset 0 -10px 0 #d4ef6f;
 }
 
 .filter-options input.clicked {
-  background-color: skyblue; /* 클릭 시 배경색을 하늘색으로 변경 */
-  color: white; /* 클릭 시 글자색을 흰색으로 변경 */
-  border: 1px solid white; /* 클릭 시 테두리 색을 흰색으로 변경 */
+  background-color: skyblue;
+  color: white; 
+  border: 1px solid white;
 }
 
 .ok_button {
   font-family: 'seolleimcool-SemiBold';
-  margin-bottom: 20px;
   display: inline-block;
-  background-color: white; 
+  background-color: white;
   color: black; 
-  border: 1px solid skyblue;
-  padding: 10px 20px;
+  padding: 10px 20px; 
   border-radius: 5px; 
+  outline: none; 
+}
+
+
+.filter-options button {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 10px 20px;
+  border-radius: 5px;
   outline: none;
+  transition: background-color 0.3s, color 0.3s;
+  width: 100%; /* 버튼의 가로 크기를 100%로 설정 */
+  box-sizing: border-box; /* padding과 border를 포함한 전체 크기로 설정 */
+  margin-bottom: 5px; /* 버튼 사이의 간격을 조절할 수 있습니다. */
+}
+
+.filter-options button.clicked {
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+}
+
+.ok_button button {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.ok_button button:hover {
+  background-color: #29adb2;
+  color: white;
 }
 
 @font-face {

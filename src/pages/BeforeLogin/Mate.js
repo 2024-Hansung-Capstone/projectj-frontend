@@ -4,7 +4,7 @@ import './Mate.css';
 const filterOptions = {
   "지역": ["서울", "경기", "인천", "부산", "대구", "광주", "대전", "울산", "세종", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"],
   "성별": ["남성", "여성"],
-  "나이": ["10대", "20대", "30대", "40대", "50대 이상"],
+  "나이": ["10대", "20대", "30대", "40대", "50대"],
   "MBTI": ["ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP", "ESTP", "ESFP", "ENFP", "ENTP", "ESTJ", "ESFJ", "ENFJ", "ENTJ"],
 };
 
@@ -41,7 +41,7 @@ export default function Mate() {
         <div className="filter-options">
           {Object.keys(filterOptions).map((filter, index) => (
             <div key={index}>
-              <p>{`[${filter}]`}</p>
+              <p className="special-filter">{`[${filter}]`}</p>
               <ul>
                 {filterOptions[filter].map((option, optionIndex) => (
                   <li key={optionIndex}>
