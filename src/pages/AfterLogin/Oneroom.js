@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import FilterBar from '../../components/FilterBar';
+import Map from '../../components/Map';
 import './Oneroom.css';
 
 const Oneroom = () => {
@@ -32,18 +33,8 @@ const Oneroom = () => {
 
   return (
     <div className='oneroom-container'>
-      <div className='main-content'>
-        <h2>필터</h2>
-      </div>
       <div className='filter-section'>
         <div className='filter-bar'>
-          {console.log({
-            isMonthly,
-            isJeonse,
-            jeonseAmount,
-            depositAmount,
-            monthlyRent,
-          })}
           <FilterBar
             isMonthly={isMonthly}
             isJeonse={isJeonse}
@@ -57,6 +48,9 @@ const Oneroom = () => {
             onMonthlyRentChange={handleMonthlyRentChange}
           />
         </div>
+      </div>
+      <div className='map-section'>
+        <Map />
       </div>
     </div>
   );

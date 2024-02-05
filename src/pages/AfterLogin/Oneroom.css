@@ -1,0 +1,13 @@
+.oneroom-container {
+    display: flex;
+  }
+  
+  .filter-section {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .map-section {
+    flex: 2;
+    padding: 20px;
+  }
