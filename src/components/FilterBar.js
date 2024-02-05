@@ -1,5 +1,6 @@
 import React from 'react';
-import { Checkbox, Slider } from 'antd'; // 예시로 Ant Design의 Checkbox와 Slider 컴포넌트 사용
+import { Checkbox, Slider } from 'antd';
+import './FilterBar.css';
 
 const FilterBar = ({
   isMonthly,
@@ -36,15 +37,17 @@ const FilterBar = ({
           />
         </div>
       )}
-      <div className='filter-item'>
-        <p>보증금</p>
-        <Slider
-          min={0}
-          max={100000000} // 최대 보증금 범위 설정
-          value={depositAmount}
-          onChange={onDepositAmountChange}
-        />
-      </div>
+      {isMonthly && (
+        <div className='filter-item'>
+          <p>보증금</p>
+          <Slider
+            min={0}
+            max={100000000} // 최대 보증금 범위 설정
+            value={depositAmount}
+            onChange={onDepositAmountChange}
+          />
+        </div>
+      )}
       {isMonthly && (
         <div className='filter-item'>
           <p>월세</p>
@@ -56,6 +59,16 @@ const FilterBar = ({
           />
         </div>
       )}
+      <hr className='filter-line' />
+      <div className='filter-item'>
+        <Checkbox>오피스텔만 보기</Checkbox>
+      </div>
+      <div className='filter-item'>
+        <Checkbox>원룸</Checkbox>
+      </div>
+      <div className='filter-item'>
+        <Checkbox>투룸</Checkbox>
+      </div>
     </div>
   );
 };

@@ -33,7 +33,7 @@ const Oneroom = () => {
   return (
     <div className='oneroom-container'>
       <div className='main-content'>
-        <h2>메인 콘텐츠 (Oneroom)</h2>
+        <h2>필터</h2>
       </div>
       <div className='filter-section'>
         <div className='filter-bar'>
