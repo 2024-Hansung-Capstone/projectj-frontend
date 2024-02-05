@@ -10,8 +10,8 @@
 }
 
 .signup-form-title {
-    margin-top: 20px; /* �곷떒 �щ갚 議곗젙 */
-    margin-bottom: 40px; /* �섎떒 �щ갚 議곗젙 */
+    margin-top: 20px;
+    margin-bottom: 40px; 
     text-align: center;
     font-size: 36px;
     color: #000000;
@@ -20,7 +20,7 @@
 .signup-form-item {
     width: calc(100% - 20px);
     margin-bottom: 20px;
-    margin-left: 10px; /* 醫뚯륫 留덉쭊 異붽� */
+    margin-left: 10px;
 }
 
 .signup-form-item input,
@@ -41,6 +41,7 @@
   .date-input {
     flex: 1;
     margin-right: 10px;
+    margin-bottom: 30px;
   }
 
 .signup-form-button {

@@ -3,21 +3,21 @@
     margin: 0 auto;
     margin-top: 120px;
     text-align: center;
-    padding: 40px; /* �대� �щ갚 */
-    border: 1px solid #ddd; /* �� */
-    border-radius: 10px; /* �κ렐 �ㅻえ瑜� �꾪븳 �뚮몢由� 諛섍꼍 異붽� */
+    padding: 40px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
 }
 
 .login-form-item {
     width: calc(100% - 20px);
     margin-bottom: 10px;
-    margin-left: 10px; /* 醫뚯륫 留덉쭊 異붽� */
+    margin-left: 10px;
 }
 
 .login-form-title {
-    margin-top: 40px; /* �곷떒 �щ갚 議곗젙 */
+    margin-top: 40px; 
     text-align: center;
-    margin-bottom: 40px; /* �섎떒 �щ갚 議곗젙 */
+    margin-bottom: 40px;
     font-size: 36px;
     color: #000000;
 }
