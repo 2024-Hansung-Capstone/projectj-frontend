@@ -5,8 +5,10 @@
     margin: 10px;
 }
 .Home-photoList {
-    border: groove 1px red;
     margin: 10px;
+    width: 100%;
+}
+.card-photo {
     width: 100%;
 }
 .Home-slider1{
