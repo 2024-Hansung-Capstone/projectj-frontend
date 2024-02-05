@@ -8,10 +8,13 @@ const Category = () => {
   return (
     <div className="category-container">
       {categories.map((category, index) => (
-        <Link key={index} to={category === "홈" ? '/' : category === "자취메이트" ? '/Mate' : `/${category.toLowerCase()}`} className="category-item">
+        <Link
+          key={index}
+          to={category === "홈" ? '/' : category === "자취메이트" ? '/Mate' : category === "원룸" ? '/Oneroom' : `/${category.toLowerCase()}`}
+          className="category-item"
+        >
           {category}
-        </Link>  // 카테고리 링크 위치
-  
+        </Link>
       ))}
     </div>
   );

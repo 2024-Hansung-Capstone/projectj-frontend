@@ -7,6 +7,7 @@ import HeaderA from "./pages/AfterLogin/Header";
 import HomeA from "./pages/AfterLogin/Home";
 import MateA from "./pages/BeforeLogin/Mate";
 import CommunityA from "./pages/AfterLogin/Community";
+import Oneroom from "./pages/AfterLogin/Oneroom";
 
 // BeforeLogin
 import HeaderB from "./pages/BeforeLogin/Header";
@@ -34,6 +35,7 @@ function App() {
             <Route path="/Community" element={isAuthenticated ? <CommunityB /> : <CommunityA />} />
             <Route path="/Login" element={<Login />}/>
             <Route path="/Signup" element={<Signup />}/>
+            <Route path="/Oneroom" element={<Oneroom />} />
           </Routes>
         </div>
         <div className="footer-section"></div>
