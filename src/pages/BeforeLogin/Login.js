@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 
-const Login= () => {
+const Login = () => {
   const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    console.log('로그인 버튼이 클릭되었습니다.');
+    if (!username && !password) {
+      alert('아이디와 비밀번호를 입력해주십시오.');
+    } else if (!username) {
+      alert('아이디를 입력해주십시오.');
+    } else if (!password) {
+      alert('비밀번호를 입력해주십시오.');
+    } else {
+      console.log('로그인 버튼이 클릭되었습니다.');
+      // 로그인 로직 추가
+    }
   };
 
   return (
@@ -17,12 +28,16 @@ const Login= () => {
           <input
             type="text"
             placeholder="아이디"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div className="login-form-item">
           <input
             type="password"
             placeholder="비밀번호"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div>
