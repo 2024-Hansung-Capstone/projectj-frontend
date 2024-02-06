@@ -1,3 +1,5 @@
+// Mate.js
+
 import React, { useState } from 'react';
 import './Mate.css';
 
@@ -70,7 +72,7 @@ export default function Mate() {
   };
 
   return (
-    <div className='Mate-container'>
+    <div className={`Mate-container ${isFilterVisible ? 'filter-open' : ''}`}>
       <h1>자취 메이트</h1>
       <div className='Mate-filter'>
         <button onClick={handleFilterClick}>필터링</button>
