@@ -1,0 +1,80 @@
+.cooking-container {
+  display: flex;
+  height: 100vh;
+}
+
+.filter-section {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  margin-right: 40px;
+}
+
+.filter-bar {
+  padding: 20px;
+  border-right: 1px solid #eee;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.filter-bar::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+  font-size: 24px;
+  margin-left: 10px;
+}
+
+.best-dishes {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.best-dishes img {
+  width: 30%;
+}
+
+.divider {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  margin: 10px 0;
+  margin-bottom: 40px;
+}
+
+.dishes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.dish-item img {
+  width: 100%;
+}
+
+.dish-info {
+  text-align: center;
+}
+
+.dish-info p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.bold-title {
+  font-weight: bold;
+}

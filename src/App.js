@@ -8,6 +8,7 @@ import HeaderA from "./pages/AfterLogin/Header";
 import HomeA from "./pages/AfterLogin/Home";
 import MateA from "./pages/BeforeLogin/Mate";
 import Oneroom from "./pages/AfterLogin/Oneroom";
+import Cooking from "./pages/AfterLogin/Cooking";
 // BeforeLogin
 import HeaderB from "./pages/BeforeLogin/Header";
 import HomeB from "./pages/BeforeLogin/Home";
@@ -35,6 +36,7 @@ function App() {
             <Route path="/Login" element={<Login />}/>
             <Route path="/Signup" element={<Signup />}/>
             <Route path="/Oneroom" element={<Oneroom />} />
+            <Route path="/Cooking" element={<Cooking />} />
           </Routes>
         </div>
         <div className="footer-section"></div>

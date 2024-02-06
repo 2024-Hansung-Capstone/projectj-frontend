@@ -1,8 +1,8 @@
 import React from 'react';
 import { Checkbox, Slider } from 'antd';
-import './FilterBar.css';
+import './OneroomFilterBar.css';
 
-const FilterBar = ({
+const OneroomFilterBar = ({
   isMonthly,
   isJeonse,
   jeonseAmount,
@@ -73,4 +73,4 @@ const FilterBar = ({
   );
 };
 
-export default FilterBar;
+export default OneroomFilterBar;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import FilterBar from '../../components/FilterBar';
+import OneroomFilterBar from '../../components/OneroomFilterBar';
 import Map from '../../components/Map';
 import './Oneroom.css';
 
@@ -35,7 +35,7 @@ const Oneroom = () => {
     <div className='oneroom-container'>
       <div className='filter-section'>
         <div className='filter-bar'>
-          <FilterBar
+          <OneroomFilterBar
             isMonthly={isMonthly}
             isJeonse={isJeonse}
             jeonseAmount={jeonseAmount}
