@@ -15,3 +15,22 @@
     margin-top: 10px;
     margin-bottom: 20px;
   }
+
+  .filter-bar-container .ant-btn-primary {
+    background-color: #29adb2;
+    border-color: #29adb2;
+}
+
+.filter-bar-container .ant-btn-primary:hover {
+    background-color: #209094 !important;
+    border-color: #209094 !important;
+}
+
+.filter-item:first-child {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.filter-item h3 {
+  margin-bottom: 2px;
+}
