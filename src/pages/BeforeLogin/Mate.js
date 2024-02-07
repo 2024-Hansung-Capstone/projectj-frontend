@@ -1,14 +1,6 @@
-// Mate.js
-
 import React, { useState } from 'react';
+import MateFilterBar from '../../components/MateFilterBar';
 import './Mate.css';
-
-const filterOptions = {
-  "지역": ["서울", "경기", "인천", "부산", "대구", "광주", "대전", "울산", "세종", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"],
-  "성별": ["남성", "여성"],
-  "나이": ["10대", "20대", "30대", "40대", "50대"],
-  "MBTI": ["ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP", "ESTP", "ESFP", "ENFP", "ENTP", "ESTJ", "ESFJ", "ENFJ", "ENTJ"],
-};
 
 const userData = [
   { id: 1, name: 'user1', age: 21 },
@@ -16,77 +8,53 @@ const userData = [
   { id: 3, name: 'user3', age: 22 },
   { id: 4, name: 'user4', age: 23 },
   { id: 5, name: 'user5', age: 24 },
+  { id: 6, name: 'user6', age: 20 },
+  { id: 7, name: 'user7', age: 26 },
+  { id: 8, name: 'user8', age: 28 },
+  { id: 9, name: 'user9', age: 23 },
+  { id: 10, name: 'user10', age: 24 },
 ];
 
 export default function Mate() {
   const [isFilterVisible, setFilterVisible] = useState(false);
-  const [selectedFilters, setSelectedFilters] = useState({});
 
   const handleFilterClick = () => {
     setFilterVisible((prev) => !prev);
-  };
-
-  const handleOptionButtonClick = (filter, option) => {
-    setSelectedFilters((prev) => ({ ...prev, [filter]: option }));
-    // 필터링 옵션 버튼 클릭 시에는 옵션 창을 닫지 않음
+    updateFilterBarHeight();
   };
 
   const handleConfirmButtonClick = () => {
     setFilterVisible(false);
-    // 확인 버튼 클릭 시에 필터링 옵션 창을 닫음
-    // 이 부분에 필요한 로직 추가
+    updateFilterBarHeight();
   };
 
-  const renderFilterOptions = () => {
-    if (isFilterVisible) {
-      return (
-        <div className="filter-options">
-          {Object.keys(filterOptions).map((filter, index) => (
-            <div key={index}>
-              <p className="special-filter">{`[${filter}]`}</p>
-              <ul>
-                {filterOptions[filter].map((option, optionIndex) => (
-                  <li key={optionIndex}>
-                    <label className="button-label">
-                      <button
-                        id={`${filter}_${optionIndex}`}
-                        name={filter}
-                        className={selectedFilters[filter] === option ? 'clicked' : ''}
-                        onClick={() => handleOptionButtonClick(filter, option)}
-                      >
-                        {option}
-                      </button>
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-          <div className="ok_button">
-            <button onClick={handleConfirmButtonClick}>확인</button>
-          </div>
-        </div>
-      );
+  const updateFilterBarHeight = () => {
+    const mateFilter = document.querySelector('.Mate-filter');
+    if (mateFilter) {
+      mateFilter.style.height = isFilterVisible ? '200px' : '100px';
     }
-    return null;
   };
 
   return (
     <div className={`Mate-container ${isFilterVisible ? 'filter-open' : ''}`}>
-      <h1>자취 메이트</h1>
-      <div className='Mate-filter'>
-        <button onClick={handleFilterClick}>필터링</button>
-        {renderFilterOptions()}
+      <div className='Mate-recommend'>
+        <h4>추천 메이트 (카드뷰) </h4>
       </div>
-      <div className='Mate-product-list'>
-        {userData.map(user => (
-          <div key={user.id} className='Mate-product-item'>
-            <img className="user-image" src="/user.jpeg" alt="user"/>
-            <h3>{user.name}</h3>
-            <p>{`${user.age} 세`}</p>
-            <button>로그인 후 쪽지보내기</button>
-          </div>
-        ))}
+      <div className='Mate-main'>
+        <div className='Mate-filter'>
+          <button onClick={handleFilterClick}>필터링</button>
+          {isFilterVisible && <MateFilterBar onConfirm={handleConfirmButtonClick} />}
+        </div>
+        <div className='Mate-product-list'>
+          {userData.map(user => (
+            <div key={user.id} className='Mate-product-item'>
+              <img className="user-image" src="/user.jpeg" alt="user"/>
+              <h3>{user.name}</h3>
+              <p>{`${user.age} 세`}</p>
+              <button>로그인 후 쪽지보내기</button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -3,10 +3,9 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import './Home.css';
 
 export const images = [
-  "/card3.jpg",
-  "/card3.jpg",
-  "/card3.jpg",
-  // Add more image paths as needed
+  "/list1.png",
+  "/list2.png",
+  "/list3.png",
 ];
 
 const Home = () => {

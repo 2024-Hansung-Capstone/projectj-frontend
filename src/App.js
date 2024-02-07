@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Category from "./components/Category";
-
+import Footer from "./components/Footer"
 // AfterLogin
 import HeaderA from "./pages/AfterLogin/Header";
 import HomeA from "./pages/AfterLogin/Home";
@@ -39,7 +39,9 @@ function App() {
             <Route path="/Cooking" element={<Cooking />} />
           </Routes>
         </div>
-        <div className="footer-section"></div>
+        <div className="footer-section">
+          <Footer />
+        </div>
       </BrowserRouter>
     </div>
   );
