@@ -1,33 +1,31 @@
 .community-container {
-    display: flex;
-  }
-  
-  .board-list {
-    width: 200px; /* Adjust the width as needed */
-    padding: 20px;
-    background-color: #f0f0f0; /* Adjust the background color as needed */
-  }
-  
-  .board-list ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .board-list li {
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
-  
-  .scroll-view {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto; /* Enable vertical scrolling */
-    background-color: #ffffff; /* Adjust the background color as needed */
-  }
-  
-  .scroll-view h1 {
-    margin-bottom: 20px;
-  }
-  
-  /* Customize styling as per your design preferences */
-  
+  display: flex;
+}
+
+.board-list {
+  width: 150px;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.board-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.board-list li {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.scroll-view {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  height: 800px;
+}
+
+.scroll-view h1 {
+  margin-bottom: 20px;
+}

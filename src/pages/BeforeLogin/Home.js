@@ -42,6 +42,7 @@ const Home = () => {
       <div className='Home-OneRoom'><h4>원룸 (추천 원룸 / 원룸 검색창)</h4></div>
       <div className='Home-Mate'><h4>자취메이트 (추천 메이트)</h4></div>
       <div className='Home-Community'><h4>커뮤니티(핫 게시물)</h4></div>
+      <div className='Home-Tip'><h4>생활꿀팁 (청소편) -  유튜브 연결</h4></div>
     </div>
   );
 };

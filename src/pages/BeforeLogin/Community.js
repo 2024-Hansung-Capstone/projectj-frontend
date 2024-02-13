@@ -1,22 +1,21 @@
 import React from 'react';
 import './Community.css';
+import Community_Item from './Community_Item';
 
 export default function Community() {
   return (
     <div className='community-container'>
       <div className='board-list'>
-        {/* Left side: Board List */}
         <ul>
-          <li>게시판 1</li>
-          <li>게시판 2</li>
-          <li>게시판 3</li>
-          {/* Add more board items as needed */}
+          <li>원룸 찾기</li>
+          <li>고민상담</li>
+          <li>중고마켓</li>
+          <li> ... </li>
         </ul>
       </div>
       <div className='scroll-view'>
-        {/* Right side: Scrollable Content */}
         <h1>커뮤니티</h1>
-        {/* Add your scrollable content here */}
+        <Community_Item />
       </div>
     </div>
   );

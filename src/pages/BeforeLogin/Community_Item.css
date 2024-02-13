@@ -1,0 +1,50 @@
+.ci-container {
+    border: groove 1px black;
+    width: 100%;
+    height: 450px;
+    text-align: center;
+}
+.ci-title {
+    display: flex;
+    width: 50%;
+    padding: 10px;
+}
+.ci-userPhoto {
+    border: groove 1px red;
+    width: 17%;
+    margin-right: 5px;
+    border-radius: 100%;
+}
+.ci-userName {
+    border: groove 1px red;
+    width: 40%;
+    margin-right: 5px;
+}
+.ci-date {
+    border: groove 1px red;
+    width: 40%;
+    margin-right: 5px;
+}
+.ci-post{
+    border: groove 1px red;
+    height: 220px;
+    margin: 10px;
+    
+}
+.ci-comment{
+    display: flex;
+    border: groove 1px red;
+    margin: 10px;
+}
+.ci-write {
+    width: 90%;
+    margin: 10px;
+    background-color: #edecec;
+    border-radius: 10px;
+}
+.ci-send {
+    width: 10%;
+    margin: 10px;
+    background-color: #29adb2;
+    border-radius: 10px;
+}
