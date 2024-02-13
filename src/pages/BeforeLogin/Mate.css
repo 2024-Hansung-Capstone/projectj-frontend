@@ -11,6 +11,9 @@
 .Mate-recommend {
   border: 1px groove red;
   margin: 10px;
+  display: flex;
+  overflow-x: auto; /* Allow horizontal scrolling */
+  white-space: nowrap; /* Prevent items from wrapping to the next line */
 }
 
 .user-image {
@@ -55,6 +58,8 @@
 .user-info {
   margin-bottom: 10px;
 }
+
+
 
 @font-face {
   font-family: 'seolleimcool-SemiBold';

@@ -38,10 +38,10 @@ const Home = () => {
           </button>
         </div>
       </div>
-      <div className='Home-slider1'><h4>요리</h4></div>
-      <div className='Home-slider2'><h4>원룸</h4></div>
-      <div className='Home-slider3'><h4>자취메이트</h4></div>
-      <div className='Home-slider3'><h4>커뮤니티</h4></div>
+      <div className='Home-Cook'><h4>요리 (추천 레시피 / 인기 급상승 레시피)</h4></div>
+      <div className='Home-OneRoom'><h4>원룸 (추천 원룸 / 원룸 검색창)</h4></div>
+      <div className='Home-Mate'><h4>자취메이트 (추천 메이트)</h4></div>
+      <div className='Home-Community'><h4>커뮤니티(핫 게시물)</h4></div>
     </div>
   );
 };

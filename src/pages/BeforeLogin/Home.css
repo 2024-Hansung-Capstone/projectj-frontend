@@ -5,24 +5,32 @@
     margin: 10px;
 }
 .Home-photoList {
-    margin: 10px;
     width: 100%;
 }
 .card-photo {
     width: 100%;
 }
-.Home-slider1{
-    border: groove 1px red;
+.Home-Cook{
+    border: groove 1px black;
     width: 100%;
+    height: 250px;
     margin: 10px;
 }
-.Home-slider2{
-    border: groove 1px red;
+.Home-OneRoom{
+    border: groove 1px black;
     width: 100%;
+    height: 205px;
     margin: 10px;
 }
-.Home-slider3{
-    border: groove 1px red;
+.Home-Mate{
+    border: groove 1px black;
     width: 100%;
+    height: 250px;
+    margin: 10px;
+}
+.Home-Community{
+    border: groove 1px black;
+    width: 100%;
+    height: 250px;
     margin: 10px;
 }
