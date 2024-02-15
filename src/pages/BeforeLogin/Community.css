@@ -1,5 +1,6 @@
 .community-container {
   display: flex;
+  height: 1000px;
 }
 
 .board-list {
@@ -18,12 +19,25 @@
   cursor: pointer;
 }
 
+.community-scroll {
+  border: groove 1px black;
+  display: column;
+  width: 100%;
+  height: 1000px;
+  margin: 10px;
+  padding: 10px;
+  
+}
+.community-title {
+  
+}
 .scroll-view {
+  border: groove 1px black;
   flex: 1;
   padding: 20px;
   overflow-y: auto;
   background-color: #ffffff;
-  height: 800px;
+  height: 900px;
 }
 
 .scroll-view h1 {

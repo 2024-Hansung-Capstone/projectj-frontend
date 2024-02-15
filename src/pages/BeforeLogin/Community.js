@@ -1,6 +1,6 @@
 import React from 'react';
 import './Community.css';
-import Community_Item from './Community_Item';
+import Community_Item from '../../item/Community_Item';
 
 export default function Community() {
   return (
@@ -13,10 +13,17 @@ export default function Community() {
           <li> ... </li>
         </ul>
       </div>
-      <div className='scroll-view'>
-        <h1>커뮤니티</h1>
-        <Community_Item />
+      <div className='community-scroll'>
+        <div className='community-title'>
+          <h1>커뮤니티</h1>
+        </div>
+        <div className='scroll-view'>
+          <Community_Item />
+          <Community_Item />
+          <Community_Item />
+          <Community_Item />
+        </div>
       </div>
-    </div>
+  </div>
   );
 }

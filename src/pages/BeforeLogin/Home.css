@@ -24,9 +24,12 @@
 }
 .Home-Mate{
     border: groove 1px black;
+    display: flex;
     width: 100%;
-    height: 250px;
     margin: 10px;
+    overflow-x: scroll; /* Allow horizontal scrolling */
+    white-space: nowrap; /* Prevent items from wrapping to the next line */
+      
 }
 .Home-Community{
     border: groove 1px black;
