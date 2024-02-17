@@ -9,6 +9,7 @@
 }
 .card-photo {
     width: 100%;
+    image-rendering: auto;
 }
 .Home-Cook{
     border: groove 1px black;

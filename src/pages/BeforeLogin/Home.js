@@ -4,11 +4,12 @@ import './Home.css';
 import Mate_Item from '../../item/Mate_Item';
 
 export const images = [
-  "/list1.png",
-  "/list2.png",
-  "/list3.png",
+  "/mainPhoto_1.webp",
+  "/mainPhoto_2.webp",
+  "/mainPhoto_3.webp",
+  "/mainPhoto_4.webp",
+  "/mainPhoto_5.webp",
 ];
-
 
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -26,16 +27,21 @@ const Home = () => {
   const setScrollableStyle = () => {
     const mateRecommend = document.querySelector('.Mate-recommend');
     if (mateRecommend) {
-      // 조건 추가: Mate-recommend의 실제 너비가 컨테이너를 벗어날 때만 스크롤 적용
-      //mateRecommend.style.overflowX = mateRecommend.scrollWidth > mateRecommend.clientWidth ? 'auto' : 'hidden';
       mateRecommend.style.whiteSpace = 'nowrap';
     }
   };
-  
+
   useEffect(() => {
     setScrollableStyle();
-  }, []);
-  
+
+    // Set up automatic slideshow
+    const intervalId = setInterval(() => {
+      nextSlide();
+    }, 3000);
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [currentImageIndex]);
 
   return (
     <div className='Home-container'>
@@ -45,14 +51,6 @@ const Home = () => {
           src={images[currentImageIndex]}
           alt="로고"
         />
-        <div className="slider-buttons">
-          <button onClick={prevSlide}>
-            <IoIosArrowBack />
-          </button>
-          <button onClick={nextSlide}>
-            <IoIosArrowForward />
-          </button>
-        </div>
       </div>
       <h4>요리 (추천 레시피 / 인기 급상승 레시피)</h4>
       <div className='Home-Cook'>
