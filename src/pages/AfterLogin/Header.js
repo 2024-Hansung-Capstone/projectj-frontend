@@ -11,36 +11,39 @@ export default function Header() {
           <Link className="logo-link" to="/">
             <img
               className="logo-image"
-              src="/logo7.png"
+              src="/logo.png"
               alt="로고"
             />
           </Link>
         </div>
         <div className="search-container">
-            <div className="search-icon">
+          <div className="search-icon">
             <IoSearchOutline />
-              <input
-                type="text"
-                placeholder="검색어를 입력하세요."
-                className="search-input"
-              />
-            </div>
+            <input
+              type="text"
+              placeholder="검색어를 입력하세요."
+              className="search-input"
+            />
           </div>
-          <div className="header-right-wrap">
+        </div>
+        <div className="header-right-wrap">
           <ul className="nav-list">
             <li>
               <Link className="header-login" to="/Login">
                 로그인
               </Link>
             </li>
-            <li>
+            <li className="signup-container">
               <Link className="header-signup" to="/Signup">
                 회원가입
               </Link>
+              <div className="bubble">
+                회원가입 시  + 1,000p
+              </div>
             </li>
           </ul>
-          </div>
         </div>
       </div>
+    </div>
   );
 }
