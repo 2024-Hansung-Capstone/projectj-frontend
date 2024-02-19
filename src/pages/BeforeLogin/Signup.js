@@ -16,7 +16,6 @@ const Signup = () => {
     const usernameInput = document.getElementById('usernameInput');
     const passwordInput = document.getElementById('passwordInput');
     const confirmPasswordInput = document.getElementById('confirmPasswordInput');
-    const phoneNumberInput = document.getElementById('phoneNumberInput');
     const emailInput = document.getElementById('emailInput');
     const yearInput = document.getElementById('yearInput');
     const monthInput = document.getElementById('monthInput');
@@ -35,9 +34,6 @@ const Signup = () => {
     }
     if (!confirmPasswordInput.value) {
       newErrorMessages.push('비밀번호를 다시 입력해주십시오.');
-    }
-    if (!phoneNumberInput.value) {
-      newErrorMessages.push('전화번호를 입력해주십시오.');
     }
     if (!emailInput.value) {
       newErrorMessages.push('이메일을 입력해주십시오.');
@@ -105,14 +101,6 @@ const Signup = () => {
             id="confirmPasswordInput"
           />
           {errorMessages.includes('비밀번호를 다시 입력해주십시오.') && <p className="error-message">비밀번호를 다시 입력해주십시오.</p>}
-        </div>
-        <div className="signup-form-item">
-          <input
-            type="phonenumber"
-            placeholder="전화번호"
-            id="phoneNumberInput"
-          />
-          {errorMessages.includes('전화번호를 입력해주십시오.') && <p className="error-message">전화번호를 입력해주십시오.</p>}
         </div>
         <div className="signup-form-item">
           <input
