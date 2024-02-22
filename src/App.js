@@ -6,7 +6,7 @@ import Footer from "./components/Footer"
 // AfterLogin
 import HeaderA from "./pages/AfterLogin/Header";
 import HomeA from "./pages/AfterLogin/Home";
-import MateA from "./pages/BeforeLogin/Mate";
+import MateA from "./pages/AfterLogin/Mate";
 import Oneroom from "./pages/AfterLogin/Oneroom";
 import Cooking from "./pages/AfterLogin/Cooking";
 // BeforeLogin
@@ -30,8 +30,8 @@ function App() {
           <Category />
           <Routes>
             {/*  */}
-            <Route path="/" element={isAuthenticated ? <HomeB /> : <HomeA />} />
-            <Route path="/Mate" element={isAuthenticated ? <MateB /> : <MateA />} />
+            <Route path="/" element={isAuthenticated ? <HomeA /> : <HomeB />} />
+            <Route path="/Mate" element={isAuthenticated ? <MateA /> : <MateB />} />
             <Route path="/Community" element={<Community />} />
             <Route path="/Login" element={<Login />}/>
             <Route path="/Signup" element={<Signup />}/>
