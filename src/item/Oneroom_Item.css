@@ -1,0 +1,14 @@
+.room-item {
+    text-align: center;
+  }
+  
+  .room-item img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .location {
+    font-size: 14px;
+  }
+  

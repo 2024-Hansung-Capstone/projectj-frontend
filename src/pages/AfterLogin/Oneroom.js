@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import OneroomFilterBar from '../../components/OneroomFilterBar';
 import Map from '../../components/Map';
+import Oneroom_Item from '../../item/Oneroom_Item';
 import './Oneroom.css';
 
 const Oneroom = () => {
@@ -50,6 +50,14 @@ const Oneroom = () => {
         </div>
       </div>
       <div className='map-section'>
+        <div className='popular-rooms'>
+          <h2>인기 원룸 Top 3</h2>
+          <div className='popular-room-list'>
+            <Oneroom_Item roomImage='/path/to/room1.jpg' location='서울특별시 강남구 논현동' />
+            <Oneroom_Item roomImage='/path/to/room2.jpg' location='서울특별시 서초구 방배동' />
+            <Oneroom_Item roomImage='/path/to/room3.jpg' location='서울특별시 강북구 수유동' />
+          </div>
+        </div>
         <Map />
       </div>
     </div>
