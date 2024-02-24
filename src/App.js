@@ -16,6 +16,7 @@ import MateB from "./pages/BeforeLogin/Mate";
 import Login from "./pages/BeforeLogin/Login";
 import Signup from "./pages/BeforeLogin/Signup";
 import Community from "./pages/BeforeLogin/Community";
+import TermsOfService from "./pages/BeforeLogin/TermsOfService";
 
 function App() {
   const isAuthenticated = true; // 실제 인증 상태로 대체
@@ -37,6 +38,7 @@ function App() {
             <Route path="/Signup" element={<Signup />}/>
             <Route path="/Oneroom" element={<Oneroom />} />
             <Route path="/Cooking" element={<Cooking />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
           </Routes>
         </div>
         <div className="footer-section">

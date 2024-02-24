@@ -1,12 +1,12 @@
 .signup-form-container {
     width: 400px;
-    margin: 0 auto; /* 媛��대뜲 �뺣젹�� �꾪븳 �ㅽ��� 異붽� */
+    margin: 0 auto;
     margin-top: 120px;
     margin-bottom: 120px;
     text-align: center;
-    padding: 60px; /* �대� �щ갚 */
-    border: 1px solid #ddd; /* �� */
-    border-radius: 10px; /* �κ렐 �ㅻえ瑜� �꾪븳 �뚮몢由� 諛섍꼍 異붽� */
+    padding: 60px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
 }
 
 .signup-form-title {

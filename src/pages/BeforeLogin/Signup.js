@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Signup.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -76,7 +76,6 @@ const Signup = () => {
             placeholder="이름"
             id="nameInput"
           />
-          {errorMessages.includes('이름을 입력해주십시오.') && <p className="error-message">이름을 입력해주십시오.</p>}
         </div>
         <div className="signup-form-item">
           <input
@@ -84,7 +83,6 @@ const Signup = () => {
             placeholder="아이디"
             id="usernameInput"
           />
-          {errorMessages.includes('아이디를 입력해주십시오.') && <p className="error-message">아이디를 입력해주십시오.</p>}
         </div>
         <div className="signup-form-item">
           <input
@@ -92,7 +90,6 @@ const Signup = () => {
             placeholder="비밀번호"
             id="passwordInput"
           />
-          {errorMessages.includes('비밀번호를 입력해주십시오.') && <p className="error-message">비밀번호를 입력해주십시오.</p>}
         </div>
         <div className="signup-form-item">
           <input
@@ -100,7 +97,6 @@ const Signup = () => {
             placeholder="비밀번호 확인"
             id="confirmPasswordInput"
           />
-          {errorMessages.includes('비밀번호를 다시 입력해주십시오.') && <p className="error-message">비밀번호를 다시 입력해주십시오.</p>}
         </div>
         <div className="signup-form-item">
           <input
@@ -108,7 +104,6 @@ const Signup = () => {
             placeholder="이메일"
             id="emailInput"
           />
-          {errorMessages.includes('이메일을 입력해주십시오.') && <p className="error-message">이메일을 입력해주십시오.</p>}
         </div>
         <div className="signup-form-item">
           <select id="genderSelect">
@@ -131,7 +126,6 @@ const Signup = () => {
               {generateOptions(1, 31)}
             </select>
           </div>
-          {errorMessages.includes('생년월일을 입력해주십시오.') && <p className="error-message">생년월일을 입력해주십시오.</p>}
         </div>
 
         <div className="signup-form-item checkbox">
@@ -149,7 +143,9 @@ const Signup = () => {
             id="termsCheckbox"
             onChange={() => setTermsChecked(!isTermsChecked)}
           />
-          <label htmlFor="termsCheckbox">[필수] 회원가입 및 운영약관 동의</label>
+          <label htmlFor="termsCheckbox">
+            <a href="/terms-of-service" target="_blank" rel="noopener noreferrer">[필수] 회원가입 및 운영약관 동의</a>
+          </label>
         </div>
 
         <div className="signup-form-item checkbox">
