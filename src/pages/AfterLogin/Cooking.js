@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CookingFilterBar from '../../components/CookingFilterBar';
 import Cooking_Item from '../../item/Cooking_Item';
 import './Cooking.css';
 
 const Cooking = () => {
+  const [isFilterBarOpen, setFilterBarOpen] = useState(true);
+
+  const toggleFilterBar = () => {
+    setFilterBarOpen(!isFilterBarOpen);
+  };
+
   return (
     <div className='cooking-container'>
-      <div className='filter-section'>
-        <div className='filter-bar'>
-          <CookingFilterBar />
-        </div>
+      {/* Toggle Button */}
+      <div className={`toggle-button ${isFilterBarOpen ? 'open' : 'closed'}`} onClick={toggleFilterBar}>
+        {isFilterBarOpen ? (
+          <span>&lt;&lt;</span>
+        ) : (
+          <span>&gt;&gt;</span>
+        )}
       </div>
+      {/* Filter Section */}
+      {isFilterBarOpen && (
+        <div className='filter-section'>
+          <div className='filter-bar'>
+            <CookingFilterBar />
+          </div>
+        </div>
+      )}
+      {/* Map Section */}
       <div className='map-section'>
         <div className='header'>
           <h1>이달의 BEST 요리</h1>

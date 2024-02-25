@@ -1,3 +1,26 @@
+.toggle-button {
+  width: 1%;
+  background-color: #3f3f3f;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.toggle-button span {
+  font-size: 12px;
+}
+
+.toggle-button.open {
+  border-bottom: 1px solid #ccc;
+}
+
+.toggle-button.closed {
+  border-top: 1px solid #ccc;
+}
+
 .cooking-container {
   display: flex;
   height: 100vh;

@@ -55,3 +55,25 @@
 .popular-room-list > *:last-child {
   margin-right: 0;
 }
+
+.toggle-button {
+  width: 1%; /* 전체 영역을 버튼으로 만듦 */
+  background-color: #3f3f3f; /* 버튼 배경색 */
+  padding: 5px; /* 버튼 여백 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.toggle-button span {
+  font-size: 12px;
+}
+
+.toggle-button.open {
+  border-bottom: 1px solid #ccc; /* 열려있는 경우 밑에 구분선 추가 */
+}
+
+.toggle-button.closed {
+  border-top: 1px solid #ccc; /* 닫혀있는 경우 위에 구분선 추가 */
+}
