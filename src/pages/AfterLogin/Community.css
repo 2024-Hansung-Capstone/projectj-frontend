@@ -24,7 +24,7 @@
 }
 .board-list li.selected-item {
   color: white;
-  background: linear-gradient(to right, #29adb2, #2dbbc0, #69e5ec);
+  background: #29adb2;
 }
 
 .community-scroll {

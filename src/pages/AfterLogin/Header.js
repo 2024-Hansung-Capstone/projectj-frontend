@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { IoSearchOutline } from "react-icons/io5";
+import { AiOutlineMessage } from "react-icons/ai";
+import { TbMessage } from "react-icons/tb";
 import './Header.css';
 
 export default function Header() {
@@ -33,7 +35,7 @@ export default function Header() {
                 마이페이지
               </Link>
               <Link className="header-message" to="/Message">
-                메시지
+                <TbMessage />
               </Link>
             </li>
           </ul>

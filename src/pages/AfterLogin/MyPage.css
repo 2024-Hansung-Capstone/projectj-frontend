@@ -1,62 +1,109 @@
 .mypage-container {
-    border: 1px groove blue;
+    width: 90%;
+    margin: 30px;
     padding: 10px;
-    margin: 20px;
+    padding-bottom: 100px;
 }
 .mypage-user-container {
-    border: 1px groove red;
+    border: 2px double gray;
+    width: 95%;
     padding: 10px;
     margin: 10px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
 }
 .mypage-user-container2 {
-    display: flex;
-    border: 1px groove green;
+    display: block;
+    width: 95%;
     padding: 10px;
     margin: 10px;
+    font-size: 20px;
+}
+.mypage-user-container3 {
+    display: flex;
+    width: 95%;
+    font-size: 20px;
+    margin-left: 25px;
+    border-radius: 15px;
+}
+.mypage-user-container3 > div {
+    padding: 10px;
+    margin-left: 55px;
+    border-right: 1px solid rgb(208, 209, 207);
+  }
+  
+.mypage-user-container3 > div:last-child {
+    border-right: none;
+  }
+
+.mypage-blank {
+    background-color: rgb(208, 209, 207);
+    margin: 10px;
+    margin-top : 30px;
+    height: 3px;
 }
 .mypage-user {
-    border: 1px groove purple;
-    padding: 10px;
-    margin: 10px;
+    display: flex;
+    padding: 5px;
+    margin: 5px;
 }
 .mypage-userImage {
-
+    font-size: 80px;
+    padding-top: 20px;
 }
 .mypage-userName {
-
-}
-.mypage-membership {
-
-}
-.mypage-list {
-    border: 1px groove gray;
-    padding: 10px;
     margin: 10px;
 }
+.mypage-membership {
+    margin: 10px;
+    padding-top: 10px;
+}
+.mypage-list {
+    padding: 10px;
+    margin: 10px;
+    font-size: 20px;
+}
+.mypage-list > div {
+    padding-bottom: 20px;
+    margin: 10px;
+    border-bottom: 1px solid rgb(208, 209, 207);
+  }
 .mypage-edit {
-
+    margin: 10px;
+    padding: 10px;
 }
 .mypage-point {
     flex: 1;
     padding: 10px;
+    margin: 10px;
 }
 .mypage-message {
     flex: 1;
     padding: 10px;
+    margin: 10px;
 }
 .mypage-heart {
     flex: 1;
     padding: 10px;
+    margin: 10px;
 }   
 .mypage-event {
-
+    padding: 10px;
+    margin: 10px;
 }
 .mypage-question {
-
+    padding: 10px;
+    margin: 10px;
 }
 .mypage-notice {
-
+    padding: 10px;
+    margin: 10px;
 }
 .mypage-service {
-
+    padding: 10px;
+    margin: 10px;
+}
+.mypage-logout {
+    padding: 10px;
+    margin: 10px;
 }
