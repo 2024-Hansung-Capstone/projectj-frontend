@@ -29,17 +29,12 @@ export default function Header() {
         <div className="header-right-wrap">
           <ul className="nav-list">
             <li>
-              <Link className="header-login" to="/Login">
-                로그인
+              <Link className="header-mypage" to="/MyPage">
+                마이페이지
               </Link>
-            </li>
-            <li className="signup-container">
-              <Link className="header-signup" to="/Signup">
-                회원가입
+              <Link className="header-message" to="/Message">
+                메시지
               </Link>
-              <div className="bubble">
-                회원가입 시  + 1,000p
-              </div>
             </li>
           </ul>
         </div>

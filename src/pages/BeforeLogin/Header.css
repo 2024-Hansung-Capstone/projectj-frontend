@@ -76,23 +76,13 @@
   padding: 0; /* 기본적인 패딩 제거 */
 }
 
-.header-login,
-.header-signup {
+.header-mypage{
   font-family: 'NanumSquareNeo-Variable';
   text-decoration: none;
   margin: 20px;
   font-size: 20px;
   color: black;
 }
-
-.header-signup {
-  border: 2px groove #29adb2;
-  color: #29adb2;
-  padding: 10px;
-  margin-right: 50px;
-  border-radius: 5px;
-}
-
 
 @font-face {
   font-family: 'JalnanGothic';

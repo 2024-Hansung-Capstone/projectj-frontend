@@ -1,0 +1,62 @@
+.mypage-container {
+    border: 1px groove blue;
+    padding: 10px;
+    margin: 20px;
+}
+.mypage-user-container {
+    border: 1px groove red;
+    padding: 10px;
+    margin: 10px;
+}
+.mypage-user-container2 {
+    display: flex;
+    border: 1px groove green;
+    padding: 10px;
+    margin: 10px;
+}
+.mypage-user {
+    border: 1px groove purple;
+    padding: 10px;
+    margin: 10px;
+}
+.mypage-userImage {
+
+}
+.mypage-userName {
+
+}
+.mypage-membership {
+
+}
+.mypage-list {
+    border: 1px groove gray;
+    padding: 10px;
+    margin: 10px;
+}
+.mypage-edit {
+
+}
+.mypage-point {
+    flex: 1;
+    padding: 10px;
+}
+.mypage-message {
+    flex: 1;
+    padding: 10px;
+}
+.mypage-heart {
+    flex: 1;
+    padding: 10px;
+}   
+.mypage-event {
+
+}
+.mypage-question {
+
+}
+.mypage-notice {
+
+}
+.mypage-service {
+
+}
