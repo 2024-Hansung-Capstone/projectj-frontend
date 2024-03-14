@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Mobile, PC } from "./pages/utils/MediaQueries";
 
 import Category from "./components/Category";
 import Footer from "./components/Footer"
@@ -31,6 +32,7 @@ function App() {
         </div>
         <div className="main-section">
           <Category />
+          <PC>
           <Routes>
             {/*  */}
             <Route path="/" element={isAuthenticated ? <HomeA /> : <HomeB />} />
@@ -44,6 +46,7 @@ function App() {
             <Route path="/MyPage" element={<MyPage />} />
             <Route path="/Message" element={<Message />} />
           </Routes>
+          </PC>
         </div>
         <div className="footer-section">
           <Footer />

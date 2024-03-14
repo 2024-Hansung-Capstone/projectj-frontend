@@ -1,6 +1,11 @@
-.community-container {
+.community-container-wrapper {
   display: flex;
-  height: 1000px;
+  justify-content: center; /* 수평 가운데 정렬 */
+}
+
+.community-container {
+  justify-content: center; /* 수평 가운데 정렬 */
+  margin: 0 auto; /* 좌우 여백을 자동으로 추가하여 가운데 정렬 */
 }
 
 .board-list {
@@ -29,11 +34,8 @@
 
 .community-scroll {
   display: column;
-  width: 100%;
-  height: 1000px;
   margin: 10px;
-  padding: 10px;
-  
+  padding: 10px; 
 }
 
 .scroll-view {
@@ -62,4 +64,14 @@
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/SOYOMapleBoldTTF.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
+}
+
+@media (min-width: 1150px) {
+  /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
+  .community-container-wrapper {
+    width: 100%; /* 요소의 너비를 100%로 설정 */
+    max-width: 1200px; /* 최대 너비를 1200px로 제한 */
+    margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
+    margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
+  }
 }

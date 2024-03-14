@@ -33,3 +33,13 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@media (min-width: 1150px) {
+  /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
+  .category-container {
+    width: 100%; /* 요소의 너비를 100%로 설정 */
+    max-width: 1200px; /* 최대 너비를 1200px로 제한 */
+    margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
+    margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
+  }
+}

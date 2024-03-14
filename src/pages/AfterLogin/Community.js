@@ -26,7 +26,8 @@ export default function Community() {
   };
 
   return (
-    <div className='community-container'>
+    <div className='community-container-wrapper'>
+      <div className='community-container'>
       <div className='board-list'>
         <ul>
           {boardListItems.map((item, index) => (
@@ -49,6 +50,7 @@ export default function Community() {
           <Community_Item />
           <Community_Item />
         </div>
+      </div>
       </div>
     </div>
   );
