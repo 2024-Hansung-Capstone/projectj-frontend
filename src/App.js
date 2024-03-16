@@ -2,6 +2,11 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Mobile, PC } from "./pages/utils/MediaQueries";
 
+// ...
+import { ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client'
+// ...
+
 import Category from "./components/Category";
 import Footer from "./components/Footer"
 // AfterLogin
@@ -21,11 +26,20 @@ import Signup from "./pages/BeforeLogin/Signup";
 import Community from "./pages/BeforeLogin/Community";
 import TermsOfService from "./pages/BeforeLogin/TermsOfService";
 
+
+// ...
+const client = new ApolloClient({
+  uri: 'http://localhost:4000',
+  cache: new InMemoryCache()
+});
+// ...
+
 function App() {
   const isAuthenticated = true; // 실제 인증 상태로 대체
 
   return (
     <div className="root-wrap">
+      <ApolloProvider client={client}>
       <BrowserRouter>
         <div className="header-section">
           {isAuthenticated ? <HeaderA /> : <HeaderB />}
@@ -52,6 +66,7 @@ function App() {
           <Footer />
         </div>
       </BrowserRouter>
+      </ApolloProvider>
     </div>
   );
 }

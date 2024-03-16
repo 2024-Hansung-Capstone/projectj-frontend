@@ -3,6 +3,10 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import './Home.css';
 import Mate_Item from '../../item/Mate_Item';
 
+// ...
+import { useQuery, gql } from '@apollo/client';
+// ...
+
 export const images = [
   "/mainPhoto_1.webp",
   "/mainPhoto_2.webp",
