@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ onLogin }) => { // onLogin prop을 받도록 변경
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +20,7 @@ const Login = () => {
       // 예시로 isAuthenticated라는 가상의 상태를 사용합니다.
       const isAuthenticated = true; // 실제 로그인 로직을 적용할 때는 이 부분을 해당 로직에 맞게 수정해야 합니다.
       if (isAuthenticated) {
+        onLogin(); // 로그인 성공 시 onLogin 함수 호출하여 App 컴포넌트의 상태 업데이트
         navigate('/'); // AfterLogin의 Home 페이지로 이동
       }
     }
