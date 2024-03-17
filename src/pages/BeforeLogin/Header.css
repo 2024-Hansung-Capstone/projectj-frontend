@@ -83,7 +83,13 @@
   font-size: 20px;
   color: black;
 }
-
+.header-login .header-signup {
+  font-family: 'NanumSquareNeo-Variable';
+  text-decoration: none;
+  margin: 20px;
+  font-size: 20px;
+  color: black;
+}
 @font-face {
   font-family: 'JalnanGothic';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff') format('woff');

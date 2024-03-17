@@ -1,6 +1,20 @@
 .Mate-container {
+  max-width: 1200px;
+  padding: 10px;
   margin: 0 auto;
-  padding: 20px;
+}
+
+.Mate-main {
+  display: flex;
+}
+
+.Mate-recommend {
+  border: 1px groove black;
+  margin: 10px;
+  display: flex;
+  width: 90%;
+  overflow-x: scroll; /* Allow horizontal scrolling */
+  white-space: nowrap; /* Prevent items from wrapping to the next line */
 }
 
 .user-image {
@@ -10,12 +24,20 @@
 }
 
 .Mate-filter {
-  gap: 10px; /* 간격 조절 */
+  padding: 10px;
+  position: relative;
 }
 
 .Mate-filter > button {
+  font-family: 'seolleimcool-SemiBold';
   margin-bottom: 20px;
   display: inline-block;
+  background-color: white;
+  color: black; 
+  border: 1px solid black;
+  padding: 10px; 
+  border-radius: 5px; 
+  outline: none; 
 }
 
 .Mate-product-list {
@@ -30,6 +52,7 @@
   border: 1px solid #ddd;
   padding: 10px;
   margin: 10px;
+  width: 30%;
   box-sizing: border-box;
 }
 
@@ -38,19 +61,9 @@
 }
 
 
-.Mate-filter > button {
-  margin-bottom: 20px;
-  display: inline-block;
-}
-
-.filter-options ul {
-  list-style: none;
-  margin-left: 10px;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5개씩 나누어 표시 */
-  gap: 10px;
-}
-.filter-options input {
-  margin: 1px;
+@font-face {
+  font-family: 'seolleimcool-SemiBold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/seolleimcool-SemiBold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Mobile, PC } from "./pages/utils/MediaQueries";
 import { ApolloProvider } from '@apollo/client';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 import Category from "./components/Category";
 import Footer from "./components/Footer"
@@ -17,16 +16,11 @@ import Message from "./pages/AfterLogin/Message";
 // BeforeLogin
 import HeaderB from "./pages/BeforeLogin/Header";
 import HomeB from "./pages/BeforeLogin/Home";
-import MateB from "./pages/BeforeLogin/Mate";
 import Login from "./pages/BeforeLogin/Login";
 import Signup from "./pages/BeforeLogin/Signup";
 import Community from "./pages/BeforeLogin/Community";
 import TermsOfService from "./pages/BeforeLogin/TermsOfService";
 
-const client = new ApolloClient({
-  uri: 'http://localhost:4000',
-  cache: new InMemoryCache()
-});
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // 인증 상태를 관리
@@ -43,7 +37,6 @@ function App() {
 
   return (
     <div className="root-wrap">
-      <ApolloProvider client={client}>
         <BrowserRouter>
           <div className="header-section">
             {isAuthenticated ? <HeaderA /> : <HeaderB onLogin={handleLogin} />}
@@ -54,14 +47,14 @@ function App() {
               <Routes>
                 {/*  */}
                 <Route path="/" element={isAuthenticated ? <HomeA /> : <HomeB />} />
-                <Route path="/Mate" element={isAuthenticated ? <MateA /> : <MateB />} />
+                <Route path="/Mate" element={isAuthenticated ? <MateA /> : <Login onLogin={handleLogin} />} />
                 <Route path="/Community" element={<Community />} />
                 <Route path="/Login" element={<Login onLogin={handleLogin} />} />
                 <Route path="/Signup" element={<Signup />} />
                 <Route path="/Oneroom" element={<Oneroom />} />
                 <Route path="/Cooking" element={<Cooking />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
-                <Route path="/MyPage" element={<MyPage />} />
+                <Route path="/MyPage" element={<MyPage onLogout={handleLogout} />} />
                 <Route path="/Message" element={<Message />} />
               </Routes>
             </PC>
@@ -70,7 +63,6 @@ function App() {
             <Footer />
           </div>
         </BrowserRouter>
-      </ApolloProvider>
     </div>
   );
 }
