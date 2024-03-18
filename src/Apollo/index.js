@@ -17,10 +17,6 @@ root.render(
     <App />
   </ApolloProvider>,
   document.getElementById('root')
-  
-  /*<React.StrictMode>
-    <App />
-  </React.StrictMode>*/
 );
 
 reportWebVitals();
