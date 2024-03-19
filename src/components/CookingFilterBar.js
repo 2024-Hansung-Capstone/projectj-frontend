@@ -1,6 +1,6 @@
 import React from 'react';
 import { Checkbox, Slider, Input, Button } from 'antd';
-import './CookingFilterBar.css';
+import './css/CookingFilterBar.css';
 
 const { Search } = Input;
 

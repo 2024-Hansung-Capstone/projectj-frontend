@@ -1,6 +1,6 @@
 // Cooking_Item.js
 import React from 'react';
-import './Cooking_Item.css';
+import './css/Cooking_Item.css';
 
 const Cooking_Item = ({ dishImage, dishTitle, author }) => {
   return (

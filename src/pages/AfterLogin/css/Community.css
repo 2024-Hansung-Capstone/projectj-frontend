@@ -51,6 +51,19 @@
   margin-bottom: 20px;
 }
 
+.community-addpost button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.community-addpost button:hover {
+  background-color: #0056b3;
+}
+
 
 @font-face {
   font-family: 'LINESeedKR-Bd';

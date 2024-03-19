@@ -1,5 +1,5 @@
 import React from 'react';
-import './Community_Item.css';
+import './css/Community_Item.css';
 
 export default function Community_Item() {
   return (

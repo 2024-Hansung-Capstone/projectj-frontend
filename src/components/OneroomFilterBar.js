@@ -1,6 +1,6 @@
 import React from 'react';
 import { Checkbox, Slider } from 'antd';
-import './OneroomFilterBar.css';
+import './css/OneroomFilterBar.css';
 
 const OneroomFilterBar = ({
   isMonthly,

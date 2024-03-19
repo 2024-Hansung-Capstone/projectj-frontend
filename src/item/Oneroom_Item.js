@@ -1,5 +1,5 @@
 import React from 'react';
-import './Oneroom_Item.css';
+import './css/Oneroom_Item.css';
 
 const Oneroom_Item = ({ roomImage, location }) => {
   return (

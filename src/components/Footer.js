@@ -1,13 +1,12 @@
 import React from 'react';
-import './Footer.css';
 
 const Footer = () => {
   return (
-    <div className="footer-container">
-        <div className="footer-category">
+    <div className="footer-container" style={styles.footerContainer}>
+        <div className="footer-category" style={styles.footerCategory}>
             <p>회사소개 | 채용정보 | 이용약관  | 개인정보 처리방침 | 위치기반 서비스 이용약관  |  중개사 사이트 바로가기</p>
         </div>
-        <div className='footer-detail'>
+        <div className='footer-detail' style={styles.footerDetail}>
             <p>주소: 서울특별시 성북구 삼선교로16길 116</p>
             <p>전화번호: 02-1234-5678</p>
             <p>상호명: (주)자취만렙</p>
@@ -20,3 +19,23 @@ const Footer = () => {
 };
 
 export default Footer;
+
+const styles = {
+  footerContainer: {
+    fontFamily: 'Pretendard-Regular',
+    backgroundColor: '#4aadb1',
+    color: 'white',
+    padding: '10px',
+    paddingLeft: '40px',
+    marginTop: '120px',
+    textAlign: 'left',
+    marginTop: 'auto',
+  },
+  footerCategory: {
+    marginBottom: '40px',
+    borderBottom: '1px solid white',
+  },
+  footerDetail: {
+    fontSize: '13px',
+  }
+};

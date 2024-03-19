@@ -1,5 +1,5 @@
 import React from 'react';
-import './Mate_Item.css';
+import './css/Mate_Item.css';
 
 export default function Mate_Item() {
     return (

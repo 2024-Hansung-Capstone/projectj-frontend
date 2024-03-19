@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Category.css';
+import './css/Category.css';
 
 const Category = () => {
   const categories = ["홈", "요리", "원룸", "자취메이트", "커뮤니티"];

@@ -4,7 +4,6 @@ import { FcHome, FcPaid, FcIdea, FcAdvertising, FcConferenceCall, FcFaq, FcShop 
 import './css/Community.css';
 import Community_Item from '../../item/Community_Item';
 
-
 export default function Community() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedItemData, setSelectedItemData] = useState(null);
@@ -28,35 +27,37 @@ export default function Community() {
   return (
     <div className='community-container-wrapper'>
       <div className='community-container'>
-      <div className='board-list'>
-        <ul>
-          {boardListItems.map((item, index) => (
-            <li
-              key={index}
-              onClick={() => handleListItemClick(index)}
-              className={selectedItem === index ? 'selected-item' : ''}
+        <div className='community-addpost'>
+          <button onClick={() => console.log("글쓰기 버튼 클릭됨")}>글쓰기</button>
+        </div>
+        <div className='board-list'>
+          <ul>
+            {boardListItems.map((item, index) => (
+              <li
+                key={index}
+                onClick={() => handleListItemClick(index)}
+                className={selectedItem === index ? 'selected-item' : ''}
               >
-              {item.icon} {item.title}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className='community-addPost'>
+                {item.icon} {item.title}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className='community-addPost'>
           <div className='community-addPost-button'>
             <button>글작성</button>
           </div>
-
-      </div>
-      <div className='community-scroll'>
-        <div className='scroll-view'>
-          {selectedItemData && <p>{selectedItemData}</p>}
-          {/* 여기에 필요한 데이터를 표시하는 컴포넌트 추가 */}
-          <Community_Item />
-          <Community_Item />
-          <Community_Item />
-          <Community_Item />
         </div>
-      </div>
+        <div className='community-scroll'>
+          <div className='scroll-view'>
+            {selectedItemData && <p>{selectedItemData}</p>}
+            {/* 여기에 필요한 데이터를 표시하는 컴포넌트 추가 */}
+            <Community_Item />
+            <Community_Item />
+            <Community_Item />
+            <Community_Item />
+          </div>
+        </div>
       </div>
     </div>
   );
