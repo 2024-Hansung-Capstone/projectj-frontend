@@ -62,12 +62,24 @@
     padding: 10px;
     margin: 10px;
     font-size: 20px;
+    display: flex; /* 부모 요소를 플렉스 컨테이너로 설정 */
+    flex-direction: column; /* 세로 정렬 설정 */
 }
+
+.mypage-list > a,
 .mypage-list > div {
     padding-bottom: 20px;
     margin: 10px;
     border-bottom: 1px solid rgb(208, 209, 207);
-  }
+    text-decoration: none; /* 밑줄 제거 */
+    color: inherit; /* 부모 요소의 텍스트 색상 상속 */
+}
+
+.mypage-list > a:hover,
+.mypage-list > div:hover {
+    color: inherit; /* 마우스 호버 시 텍스트 색상을 상속하여 변경 없음 */
+}
+
 .mypage-edit {
     margin: 10px;
     padding: 10px;
@@ -91,6 +103,7 @@
     padding: 10px;
     margin: 10px;
 }
+
 .mypage-question {
     padding: 10px;
     margin: 10px;
@@ -102,6 +115,7 @@
 .mypage-service {
     padding: 10px;
     margin: 10px;
+    
 }
 .mypage-logout {
     padding: 10px;

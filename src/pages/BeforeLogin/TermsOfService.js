@@ -1,5 +1,5 @@
 import React from 'react';
-import './TermsOfService.css';
+import './css/TermsOfService.css';
 
 const TermsOfService = ({ onClose }) => {
   const handleAgree = () => {

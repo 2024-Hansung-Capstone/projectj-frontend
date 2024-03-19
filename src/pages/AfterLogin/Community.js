@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaUtensils } from 'react-icons/fa';
 import { FcHome, FcPaid, FcIdea, FcAdvertising, FcConferenceCall, FcFaq, FcShop } from "react-icons/fc";
-import './Community.css';
+import './css/Community.css';
 import Community_Item from '../../item/Community_Item';
 
 
@@ -40,6 +40,12 @@ export default function Community() {
             </li>
           ))}
         </ul>
+      </div>
+      <div className='community-addPost'>
+          <div className='community-addPost-button'>
+            <button>글작성</button>
+          </div>
+
       </div>
       <div className='community-scroll'>
         <div className='scroll-view'>

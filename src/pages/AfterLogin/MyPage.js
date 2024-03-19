@@ -7,17 +7,10 @@ import { RiCustomerService2Line } from "react-icons/ri";
 import { LuMessagesSquare } from "react-icons/lu";
 import { BiParty } from "react-icons/bi";
 import { IoLogOutOutline } from "react-icons/io5";
-import './MyPage.css';
-import { Link, useNavigate } from 'react-router-dom';
+import './css/MyPage.css';
+import { Link } from 'react-router-dom';
 
 export default function MyPage({ onLogout }) {
-
-  const navigate = useNavigate(); // navigate 변수 선언
-
-  
-  const handleLogoutClick = () => {
-    navigate('/');
-  };
 
   return (
     <div className='mypage-container'>
@@ -40,12 +33,12 @@ export default function MyPage({ onLogout }) {
       <div className='mypage-blank'></div>
 
       <div className='mypage-list'>
-        <div className='mypage-edit'><FaEdit /> 내 정보 수정</div>
-        <div className='mypage-event'><BiParty />이벤트</div>
-        <div className='mypage-question'><LuMessagesSquare /> 1:1 문의</div>
-        <div className='mypage-notice'><FaRegBell /> 공지사항</div>
-        <div className='mypage-service'><RiCustomerService2Line /> 고객센터</div>
-        <div className='mypage-logout' onClick={handleLogoutClick}><IoLogOutOutline /> 로그아웃</div>
+        <Link className='mypage-edit' to="/editUserInfo"><FaEdit /> 내 정보 수정</Link>
+        <Link className='mypage-event' to="/event"><BiParty />이벤트</Link>
+        <Link className='mypage-question' to="/question"><LuMessagesSquare /> 1:1 문의</Link>
+        <Link className='mypage-notice' to="/notices"><FaRegBell /> 공지사항</Link>
+        <Link className='mypage-service' to="/customer-service"><RiCustomerService2Line /> 고객센터</Link>
+        <div className='mypage-logout' onClick={onLogout}><IoLogOutOutline /> 로그아웃</div>
       </div>
     </div>
   );

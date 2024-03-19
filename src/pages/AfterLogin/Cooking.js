@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CookingFilterBar from '../../components/CookingFilterBar';
 import Cooking_Item from '../../item/Cooking_Item';
-import './Cooking.css';
+import './css/Cooking.css';
 
 const Cooking = () => {
   const [isFilterBarOpen, setFilterBarOpen] = useState(true);

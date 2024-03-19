@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import './Home.css';
+import './css/Home.css';
 import Mate_Item from '../../item/Mate_Item';
 
 // ...

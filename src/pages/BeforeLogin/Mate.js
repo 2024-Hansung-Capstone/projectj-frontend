@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MateFilterBar from '../../components/MateFilterBar';
 import Mate_Item from '../../item/Mate_Item.js';
-import './Mate.css';
+import './css/Mate.css';
 
 
 export default function Mate() {

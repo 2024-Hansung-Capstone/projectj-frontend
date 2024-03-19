@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import OneroomFilterBar from '../../components/OneroomFilterBar';
 import Map from '../../components/Map';
 import Oneroom_Item from '../../item/Oneroom_Item';
-import './Oneroom.css';
+import './css/Oneroom.css';
 
 const Oneroom = () => {
   const [isMonthly, setMonthly] = useState(false);

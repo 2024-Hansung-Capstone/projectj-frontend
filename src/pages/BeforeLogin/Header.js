@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { IoSearchOutline } from "react-icons/io5";
-import './Header.css';
+import './css/Header.css';
 
 export default function Header() {
   return (

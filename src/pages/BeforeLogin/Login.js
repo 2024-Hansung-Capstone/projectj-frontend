@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Login.css';
+import './css/Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = ({ onLogin }) => { // onLogin prop을 받도록 변경

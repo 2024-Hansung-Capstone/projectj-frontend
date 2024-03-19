@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './Message.css';
+import './css/Message.css';
 
-export default function MyPage() {
+export default function Message() {
 
   return (
     <div className='message-container'>

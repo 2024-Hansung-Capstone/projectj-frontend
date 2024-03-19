@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { IoSearchOutline } from "react-icons/io5";
 import { AiOutlineMessage } from "react-icons/ai";
 import { TbMessage } from "react-icons/tb";
-import './Header.css';
+import './css/Header.css';
 
 export default function Header() {
   return (

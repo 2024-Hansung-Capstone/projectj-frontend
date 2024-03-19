@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaUtensils } from 'react-icons/fa';
 import { FcHome, FcPaid, FcIdea, FcAdvertising, FcConferenceCall, FcFaq, FcShop } from "react-icons/fc";
-import './Community.css';
+import './css/Community.css';
 import Community_Item from '../../item/Community_Item';
 
 

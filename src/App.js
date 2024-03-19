@@ -13,6 +13,12 @@ import Oneroom from "./pages/AfterLogin/Oneroom";
 import Cooking from "./pages/AfterLogin/Cooking";
 import MyPage from "./pages/AfterLogin/MyPage";
 import Message from "./pages/AfterLogin/Message";
+import EditUserInfo from './pages/AfterLogin/EditUserInfo';
+import Event from './pages/AfterLogin/Event';
+import Notices from './pages/AfterLogin/Notices';
+import Question from './pages/AfterLogin/Question';
+import CustomerService from './pages/AfterLogin/CustomerService';
+import Logout from './pages/AfterLogin/Logout';
 // BeforeLogin
 import HeaderB from "./pages/BeforeLogin/Header";
 import HomeB from "./pages/BeforeLogin/Home";
@@ -56,6 +62,12 @@ function App() {
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/MyPage" element={<MyPage onLogout={handleLogout} />} />
                 <Route path="/Message" element={<Message />} />
+
+                <Route path="/editUserInfo" element={<EditUserInfo />} />
+                <Route path="/event" element={<Event />} />
+                <Route path="/notices" element={<Notices />} />
+                <Route path="/question" element={<Question />} />
+                <Route path="/customer-service" element={<CustomerService />} />
               </Routes>
             </PC>
           </div>
