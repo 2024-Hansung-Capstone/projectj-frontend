@@ -23,7 +23,7 @@
 
 .cooking-container {
   display: flex;
-  height: 100vh;
+  height: 105vh;
 }
 
 .filter-section {
@@ -62,9 +62,10 @@
 .best-dishes {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-left: 5px;
   margin-right: 5px;
+  gap: 10px;
 }
 
 .best-dishes img {
@@ -82,24 +83,20 @@
 .dishes-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 15px;
 }
 
 .dish-item img {
   width: 100%;
 }
 
-.dish-info {
-  text-align: center;
-}
-
-.dish-info p {
-  font-size: 16px;
-  margin: 5px 0;
-}
-
 .bold-title {
   font-weight: bold;
+}
+
+.cooking-items-container {
+  overflow-y: auto;
+  max-height: calc(100vh - 200px); /* 필요에 따라 값 조정 */
 }
 
 @media (min-width: 1150px) {

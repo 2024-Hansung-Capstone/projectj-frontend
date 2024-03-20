@@ -39,12 +39,14 @@ const Cooking = () => {
           <Cooking_Item dishImage='/path/to/image3.jpg' dishTitle='요리(글) 제목3' author='글쓴이3' />
         </div>
         <hr className='divider' />
-        <div className='dishes-grid'>
-          {[...Array(40)].map((_, index) => (
-            <div key={index} className='dish-item'>
-              <Cooking_Item dishImage={`/path/to/image${index % 10}.jpg`} dishTitle={`요리(글) 제목${index}`} author={`글쓴이${index}`} />
-            </div>
-          ))}
+        <div className='cooking-items-container'>
+          <div className='dishes-grid'>
+            {[...Array(40)].map((_, index) => (
+              <div key={index} className='dish-item'>
+                <Cooking_Item dishImage={`/path/to/image${index % 10}.jpg`} dishTitle={`요리(글) 제목${index}`} author={`글쓴이${index}`} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

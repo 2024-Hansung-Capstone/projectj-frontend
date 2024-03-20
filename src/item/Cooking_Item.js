@@ -4,14 +4,14 @@ import './css/Cooking_Item.css';
 
 const Cooking_Item = ({ dishImage, dishTitle, author }) => {
   return (
-    <div className='ci-container'>
-      <div className='ci-photo'>
+    <div className='cookingitem-container'>
+      <div className='cookingitem-photo'>
         <img className="dish-image" src={dishImage} alt="dish"/>
       </div>
-      <div className='ci-title'>
+      <div className='cookingitem-title'>
         <h4>{dishTitle}</h4>
       </div>
-      <div className='ci-author'>
+      <div className='cookingitem-author'>
         <h4>{author}</h4>
       </div>
     </div>
