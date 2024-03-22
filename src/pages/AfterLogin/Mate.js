@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MateFilterBar from '../../components/MateFilterBar';
+import MateFilterModal from '../../components/MateFilterModal.js';
 import Mate_Item from '../../item/Mate_Item.js';
 import './css/Mate.css';
 
@@ -27,7 +27,7 @@ export default function Mate() {
       <div className='Mate-main'>
         <div className='Mate-filter'>
           <button onClick={handleFilterClick}>필터링</button>
-          {isFilterVisible && <MateFilterBar onConfirm={handleConfirmButtonClick} />}
+          {isFilterVisible && <MateFilterModal onClose={handleConfirmButtonClick} />}
         </div>
         <div className='Mate-product-list'>
           <div className='product-items'>

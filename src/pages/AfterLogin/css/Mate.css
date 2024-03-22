@@ -26,11 +26,12 @@
 .Mate-filter {
   padding: 10px;
   position: relative;
-  transition: max-height 0.3s ease; /* Apply transition for sliding effect */
+  top: 0;
+  transition: left 0.3s ease; /* Apply transition for sliding effect */
 }
 
 .Mate-container.filter-open .Mate-filter {
-  max-height: 300px; /* Adjust height for opening effect */
+  left: 0;  
 }
 
 .Mate-filter > button {

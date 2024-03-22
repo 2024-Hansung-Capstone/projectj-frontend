@@ -1,0 +1,52 @@
+.ant-modal .ant-modal-content {
+
+  }
+  
+  
+  .Matefilter-bar-container {
+    display: block;
+    flex-wrap: wrap;
+    width: 500px;
+    gap: 10px;
+  }
+  .Matefilter-item {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .Matefilter-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .Matefilter-items button {
+    flex: 0 0 calc(15% - 10px); /* 각 버튼이 동일한 너비를 가지도록 함 */
+    margin-right: 3px; /* 각 버튼 사이의 간격 */
+    margin-bottom: 3px; /* 버튼 행 간의 간격 */
+    padding: 3px 20px; /* 버튼 내부의 여백 설정 */
+    font-size: 16px; /* 버튼 텍스트 크기 설정 */
+  }
+
+  .Matefilter-line {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin: 10px 0;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .Matefilter-bar-container .ant-btn-primary {
+    background-color: #29adb2;
+    border-color: #29adb2;
+  }
+  
+  .filter-bar-container .ant-btn-primary:hover {
+    background-color: #209094 !important;
+    border-color: #209094 !important;
+  }
+  
+  .filter-item:first-child {
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  
