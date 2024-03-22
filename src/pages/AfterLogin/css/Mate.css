@@ -5,16 +5,16 @@
 }
 
 .Mate-main {
-  display: flex;
+  display: block;
 }
 
 .Mate-recommend {
   border: 1px groove black;
-  margin: 10px;
   display: flex;
-  width: 90%;
-  overflow-x: scroll; /* Allow horizontal scrolling */
-  white-space: nowrap; /* Prevent items from wrapping to the next line */
+  width: 100%;
+  margin-bottom: 50px;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 .user-image {
@@ -26,6 +26,11 @@
 .Mate-filter {
   padding: 10px;
   position: relative;
+  transition: max-height 0.3s ease; /* Apply transition for sliding effect */
+}
+
+.Mate-container.filter-open .Mate-filter {
+  max-height: 300px; /* Adjust height for opening effect */
 }
 
 .Mate-filter > button {
@@ -41,25 +46,40 @@
 }
 
 .Mate-product-list {
-  display: flex;
+  display: block; 
   flex-wrap: wrap;
+  justify-content: space-between;
+  border: 1px solid #ddd;
+}
+
+.product-items {
+  display: flex;
+  flex-wrap: wrap; /* 아이템들을 줄 바꿈할 수 있도록 설정합니다. */
+  justify-content: space-around;
 }
 
 .Mate-product-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin: 10px;
-  width: 30%;
+  width: calc(20% - 20px);
+  margin-bottom: 20px;
   box-sizing: border-box;
 }
+
 
 .user-info {
   margin-bottom: 10px;
 }
 
+@media screen and (max-width: 768px) {
+  .Mate-product-item {
+    width: calc(40% - 20px); /* Two items per row on smaller screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .Mate-product-item {
+    width: calc(100% - 20px); /* Single item per row on even smaller screens */
+  }
+}
 
 @font-face {
   font-family: 'seolleimcool-SemiBold';

@@ -27,9 +27,8 @@ const styles = {
     color: 'white',
     padding: '10px',
     paddingLeft: '40px',
-    marginTop: '120px',
     textAlign: 'left',
-    marginTop: 'auto',
+    marginTop: '80px',
   },
   footerCategory: {
     marginBottom: '40px',

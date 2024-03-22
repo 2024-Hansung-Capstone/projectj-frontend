@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Mobile, PC } from "./pages/utils/MediaQueries";
 import { ApolloProvider } from '@apollo/client';
 
 import Category from "./components/Category";
@@ -49,9 +48,7 @@ function App() {
           </div>
           <div className="main-section">
             <Category />
-            <PC>
               <Routes>
-                {/*  */}
                 <Route path="/" element={isAuthenticated ? <HomeA /> : <HomeB />} />
                 <Route path="/Mate" element={isAuthenticated ? <MateA /> : <Login onLogin={handleLogin} />} />
                 <Route path="/Community" element={<Community />} />
@@ -69,7 +66,6 @@ function App() {
                 <Route path="/question" element={<Question />} />
                 <Route path="/customer-service" element={<CustomerService />} />
               </Routes>
-            </PC>
           </div>
           <div className="footer-section">
             <Footer />
