@@ -1,28 +1,46 @@
 import React, { useState } from 'react';
 import './css/Login.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import LOGIN from './gql/LoginGql'; // 수정된 경로로 import
 
-const Login = ({ onLogin }) => { // onLogin prop을 받도록 변경
+const Login = ({ onLogin }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [login] = useMutation(LOGIN);
 
-  const handleLogin = () => {
-    if (!username && !password) {
-      alert('아이디와 비밀번호를 입력해주십시오.');
-    } else if (!username) {
-      alert('아이디를 입력해주십시오.');
-    } else if (!password) {
-      alert('비밀번호를 입력해주십시오.');
-    } else {
-      console.log('로그인 버튼이 클릭되었습니다.');
-      // 실제로는 여기에 로그인 로직을 구현해야 하며, 로그인이 성공했을 때 navigate를 사용하여 AfterLogin의 Home 페이지로 이동합니다.
-      // 예시로 isAuthenticated라는 가상의 상태를 사용합니다.
-      const isAuthenticated = true; // 실제 로그인 로직을 적용할 때는 이 부분을 해당 로직에 맞게 수정해야 합니다.
-      if (isAuthenticated) {
-        onLogin(); // 로그인 성공 시 onLogin 함수 호출하여 App 컴포넌트의 상태 업데이트
-        navigate('/'); // AfterLogin의 Home 페이지로 이동
+  const handleLogin = async () => {
+    if (!username || !password) {
+      if (!username && !password) {
+        alert('아이디와 비밀번호를 입력해주십시오.');
+      } else if (!username) {
+        alert('아이디를 입력해주십시오.');
+      } else if (!password) {
+        alert('비밀번호를 입력해주십시오.');
       }
+      return;
+    }
+
+    try {
+      const { data } = await login({
+        variables: {
+          email: username,
+          password: password
+        }
+      });
+
+      const token = data.login;
+
+      if (token) {
+        onLogin(token);
+        navigate('/');
+      } else {
+        alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
+      }
+    } catch (error) {
+      console.error('로그인 오류:', error);
+      alert('로그인에 실패했습니다. 다시 시도해주세요.');
     }
   };
 

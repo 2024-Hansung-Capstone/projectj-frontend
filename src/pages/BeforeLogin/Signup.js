@@ -91,10 +91,7 @@ const Signup = () => {
     } catch(e){
       console.log(e)
     }
-    
-
     // 결과를 출력
-   
   }
 
   return (
