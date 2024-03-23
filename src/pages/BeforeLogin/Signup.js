@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './css/Signup.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { useQuery, useMutation } from '@apollo/client';
+import SIGN_UP from './gql/Signup';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -8,6 +10,8 @@ const Signup = () => {
   const [isTermsChecked, setTermsChecked] = useState(false);
   const [isPrivacyChecked, setPrivacyChecked] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
+  console.log(SIGN_UP)
+  const [signUp] = useMutation(SIGN_UP)
 
   const handleSignup = () => {
     const newErrorMessages = [];
@@ -20,6 +24,8 @@ const Signup = () => {
     const yearInput = document.getElementById('yearInput');
     const monthInput = document.getElementById('monthInput');
     const dayInput = document.getElementById('dayInput');
+
+   
 
     setErrorMessages([]);
 
@@ -66,10 +72,35 @@ const Signup = () => {
     return options;
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    // Promise -> Node js 비동기 처리
+    // await 비동기가 끝날때까지 기다려줌
+    try {
+      const res= await signUp({variables: {
+        id: document.getElementById('usernameInput').value,
+        name: document.getElementById('nameInput').value,
+        password: document.getElementById('passwordInput').value,
+        email: document.getElementById('emailInput').value,
+        gender: document.getElementById('genderSelect').value,
+        birth_at: `${document.getElementById('yearInput').value}-${document.getElementById('monthInput').value}-${document.getElementById('dayInput').value}`,
+      
+        // ...
+      }})
+      console.log('res', res)
+    } catch(e){
+      console.log(e)
+    }
+    
+
+    // 결과를 출력
+   
+  }
+
   return (
     <div className="signup-form-container">
       <h2 className="signup-form-title">회원가입</h2>
-      <form>
+      <form onSubmit={handleSubmit} >
         <div className="signup-form-item" style={{ borderTopLeftRadius: '6px', borderTopRightRadius: '6px' }}>
           <input
             type="text"
@@ -163,7 +194,7 @@ const Signup = () => {
         </div>
 
         <div className="signup-form-item">
-          <button type="button" onClick={handleSignup} className="signup-form-button">
+          <button type="submit" className="signup-form-button">
             회원가입
           </button>
         </div>
