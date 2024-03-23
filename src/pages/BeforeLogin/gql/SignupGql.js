@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 const SIGN_UP = gql`
-  mutation SignUp($createUserInput: CreateUserInput!) {
+  mutation SignUp($createUserInput: CreateUserInput!, $phone_number: String!, $token: String!) {
     signUp(createUserInput: $createUserInput) {
       id
       dong
@@ -15,6 +15,8 @@ const SIGN_UP = gql`
       point
       create_at
     }
+    createToken(phone_number: $phone_number)
+    authPhone(phone_number: $phone_number, token: $token)
   }
 `;
 

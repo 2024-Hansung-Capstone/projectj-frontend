@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './css/Signup.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
-import SIGN_UP from './gql/Signup';
+import SIGN_UP from './gql/SignupGql';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const Signup = () => {
   console.log(SIGN_UP)
   const [signUp] = useMutation(SIGN_UP)
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     const newErrorMessages = [];
 
     const nameInput = document.getElementById('nameInput');
@@ -58,7 +58,35 @@ const Signup = () => {
 
     if (newErrorMessages.length === 0) {
       console.log('회원가입 버튼이 클릭되었습니다.');
-      navigate('/');
+  
+      const phoneInput = document.getElementById('phoneInput');
+      const phoneTokenInput = document.getElementById('phoneTokenInput');
+  
+      // 휴대폰 번호와 토큰을 가져와서 mutation에 전달
+      const phoneNumber = phoneInput.value;
+      const token = phoneTokenInput.value;
+  
+      try {
+        const res = await signUp({
+          variables: {
+            createUserInput: {
+              id: document.getElementById('usernameInput').value,
+              name: document.getElementById('nameInput').value,
+              password: document.getElementById('passwordInput').value,
+              email: document.getElementById('emailInput').value,
+              gender: document.getElementById('genderSelect').value,
+              birth_at: `${document.getElementById('yearInput').value}-${document.getElementById('monthInput').value}-${document.getElementById('dayInput').value}`,
+            },
+            phone_number: phoneNumber,
+            token: token,
+          },
+        });
+  
+        console.log('회원가입 및 휴대폰 인증 결과:', res);
+        navigate('/');
+      } catch (error) {
+        console.error('회원가입 또는 휴대폰 인증 중 오류 발생:', error);
+      }
     } else {
       alert('입력값을 확인하고 약관에 동의해주십시오.');
     }
