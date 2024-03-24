@@ -1,0 +1,16 @@
+.tip-container {
+    display: flex;
+    width: 30%;
+    margin-right: 5px;
+    padding: 5px;
+    flex: 0 0 auto;
+}
+.tip-container2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex: 0 0 auto;
+}
+.tip-container2 > * {
+    margin-right: 10px;
+}

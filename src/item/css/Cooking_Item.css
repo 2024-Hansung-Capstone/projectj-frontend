@@ -1,0 +1,7 @@
+.cookingitem-container {
+    border: 1px groove black;
+    width: 250px;
+    padding: 5px;
+    margin: 5px;
+    flex: 0 0 auto;  /* 중요 */
+} 

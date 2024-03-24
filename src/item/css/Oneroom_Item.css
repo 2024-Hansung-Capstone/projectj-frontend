@@ -1,14 +1,20 @@
-.room-item {
-    text-align: center;
+.roomitem-container {
+  border: 1px groove black;
+  width: 250px;
+  margin: 5px;
+  padding: 5px;
+  flex: 0 0 auto;
   }
   
-  .room-item img {
+.roomitem-container img {
     width: 100%;
     border-radius: 8px;
     margin-bottom: 10px;
-  }
+}
   
-  .location {
-    font-size: 14px;
-  }
-  
+.roomitem-location {
+    
+}
+.roomitem-price {
+    
+}
