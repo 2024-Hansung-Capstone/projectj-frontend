@@ -15,8 +15,6 @@ const SIGN_UP = gql`
       point
       create_at
     }
-    createToken(phone_number: $phone_number)
-    authPhone(phone_number: $phone_number, token: $token)
   }
 `;
 

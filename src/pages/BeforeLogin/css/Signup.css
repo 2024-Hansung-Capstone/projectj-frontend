@@ -23,6 +23,15 @@
     margin-left: 10px;
 }
 
+.signup-form-item-phonenumber {
+    width: calc(100% - 20px);
+    margin-bottom: 20px;
+    margin-left: 10px;
+    display: flex; /* 요소들을 수평으로 정렬하기 위해 flex 사용 */
+    justify-content: space-between;
+}
+
+.signup-form-item-phonenumber input,
 .signup-form-item input,
 .signup-form-item select,
 .signup-form-item input[type="date"] {
@@ -51,6 +60,37 @@
     font-weight: bold; 
     margin-top: 40px;
     margin-bottom: 5px;
+    background-color: #29ADB2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.phone-token-button {
+    height: 60px;
+    width: 100px;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #29ADB2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.phone-auth-button {
+    height: 40px;
+    width: 80px;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
     background-color: #29ADB2;
     color: white;
     border: none;
