@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import './css/Home.css';
 import Mate_Item from '../../item/Mate_Item';
+import OneRoom_Item from '../../item/Oneroom_Item';
 
 // ...
 import { useQuery, gql } from '@apollo/client';
@@ -61,6 +62,7 @@ const Home = () => {
       </div>
       <h4>원룸 (추천 원룸 / 원룸 검색창)</h4>
       <div className='Home-OneRoom'>
+      
       </div>
       <h4>자취메이트 (추천 메이트)</h4>
       <div className='Home-Mate'>
