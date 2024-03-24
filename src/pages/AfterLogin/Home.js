@@ -89,7 +89,7 @@ const Home = () => {
         <Community_Hot_Item />
         <Community_Hot_Item />
         </div>
-        <h4>생활꿀팁 (청소편) -  유튜브 연결</h4>
+        <h4>생활꿀팁 (청소편)</h4>
       <div className='Home-Tip'>
         <Tip_Item />
        </div>
