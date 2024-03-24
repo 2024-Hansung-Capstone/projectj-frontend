@@ -2,7 +2,6 @@
     background-color: white;
     color: black;
     padding: 5px;
-    margin: 10px;
 }
 .Home-photoList {
     width: 100%;
@@ -13,38 +12,45 @@
 }
 .Home-Cook{
     border: groove 1px black;
+    display: flex;
     width: 100%;
-    height: 250px;
     margin: 10px;
+    overflow-x: scroll;
+    white-space: nowrap; 
 }
 .Home-OneRoom{
     border: groove 1px black;
+    display: flex;
     width: 100%;
-    height: 205px;
     margin: 10px;
+    overflow-x: scroll;
+    white-space: nowrap; 
 }
 .Home-Mate{
     border: groove 1px black;
     display: flex;
     width: 100%;
     margin: 10px;
-    overflow-x: scroll; /* Allow horizontal scrolling */
-    white-space: nowrap; /* Prevent items from wrapping to the next line */
-      
+    overflow-x: scroll;
+    white-space: nowrap; 
 }
 .Home-Community{
     border: groove 1px black;
+    display: flex;
     width: 100%;
-    height: 250px;
     margin: 10px;
+    overflow-x: scroll;
+    white-space: nowrap; 
 }
 .Home-Tip{
+    display: flex;
+    flex: 0 0 auto;
     border: groove 1px black;
-    width: 100%;
-    height: 250px;
-    margin: 10px;
+    width:100%;
+    height: 370px;
+    overflow-x: scroll;
+    white-space: nowrap; 
 }
-
 
 
 @media (min-width: 1150px) {

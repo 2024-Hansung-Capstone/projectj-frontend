@@ -1,0 +1,30 @@
+.communityHot-container {
+    display:flex;
+    flex-direction: column;
+    border: groove 1px #ddd;
+    width: 300px;
+    height: 248px;
+    flex: 0 0 auto;  /* 중요 */
+    margin-right: 15px;
+}
+.communityHot-container-title {
+    display: flex;
+    border: groove 1px #ddd;
+    width: 292px;
+    margin: 3px;
+    text-align: center;
+}
+.communityHot-title {
+    display: flex;
+    width: 70%;
+    padding: 10px;
+}
+.communityHot-date {
+    width: 30%;
+}
+.communityHot-content{
+    border: groove 1px #ddd;
+    height: 140px;
+    padding: 5px;
+    margin: 5px;
+}

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import './css/Home.css';
 import Mate_Item from '../../item/Mate_Item';
-
-// ...
-import { useQuery, gql } from '@apollo/client';
-// ...
+import OneRoom_Item from '../../item/Oneroom_Item';
+import Cooking_Item from '../../item/Cooking_Item';
+import Community_Hot_Item from '../../item/Community_Hot_Item';
+import Tip_Item from '../../item/Tip_Item';
+import YouTube from "react-youtube";
 
 export const images = [
   "/mainPhoto_1.webp",
@@ -58,9 +59,19 @@ const Home = () => {
       </div>
       <h4>요리 (추천 레시피 / 인기 급상승 레시피)</h4>
       <div className='Home-Cook'>
+        <Cooking_Item />
+        <Cooking_Item />
+        <Cooking_Item />
+        <Cooking_Item />
+        <Cooking_Item />
       </div>
       <h4>원룸 (추천 원룸 / 원룸 검색창)</h4>
       <div className='Home-OneRoom'>
+        <OneRoom_Item />
+        <OneRoom_Item />
+        <OneRoom_Item />
+        <OneRoom_Item />
+        <OneRoom_Item />
       </div>
       <h4>자취메이트 (추천 메이트)</h4>
       <div className='Home-Mate'>
@@ -72,10 +83,16 @@ const Home = () => {
       </div>
       <h4>커뮤니티(핫 게시물)</h4>
       <div className='Home-Community'>
+        <Community_Hot_Item />
+        <Community_Hot_Item />
+        <Community_Hot_Item />
+        <Community_Hot_Item />
+        <Community_Hot_Item />
         </div>
-        <h4>생활꿀팁 (청소편) -  유튜브 연결</h4>
+        <h4>생활꿀팁 (청소편)</h4>
       <div className='Home-Tip'>
-        </div>
+        <Tip_Item />
+       </div>
     </div>
   );
 };
