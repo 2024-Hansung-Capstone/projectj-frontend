@@ -24,6 +24,7 @@
 .cooking-container {
   display: flex;
   height: 105vh;
+  overflow-x: hidden; /* 가로 스크롤을 숨김 */
 }
 
 .filter-section {
@@ -33,7 +34,7 @@
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1;
-  margin-right: 40px;
+  transition: width 0.3s ease; /* 너비 변경에 대한 transition 효과 추가 */
 }
 
 .filter-bar {
@@ -54,6 +55,12 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.map-section {
+  flex: 2;
+  padding: 20px;
+  transition: margin-left 0.3s ease; /* 좌우 이동에 대한 transition 효과 추가 */
+}
+
 .header h1 {
   font-size: 24px;
   margin-left: 10px;
@@ -66,6 +73,7 @@
   margin-left: 5px;
   margin-right: 5px;
   gap: 10px;
+  transition: margin-left 0.3s ease; /* 좌우 이동에 대한 transition 효과 추가 */
 }
 
 .best-dishes img {
@@ -82,8 +90,9 @@
 
 .dishes-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 유동적인 그리드 설정 */
   gap: 15px;
+  transition: margin-left 0.3s ease; /* 좌우 이동에 대한 transition 효과 추가 */
 }
 
 .dish-item img {
@@ -96,15 +105,31 @@
 
 .cooking-items-container {
   overflow-y: auto;
-  max-height: calc(100vh - 200px); /* 필요에 따라 값 조정 */
+  max-height: calc(100vh - 350px);
 }
 
 @media (min-width: 1150px) {
   /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
   .cooking-container {
-    width: 100%; /* 요소의 너비를 100%로 설정 */
-    max-width: 1200px; /* 최대 너비를 1200px로 제한 */
-    margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
-    margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .filter-section.open {
+    width: 300px; /* 필터바가 열린 상태에서 너비는 300px 유지 */
+  }
+
+  .map-section.open {
+    margin-left: 40px; /* 필터바가 열린 상태에서 왼쪽 여백 추가 */
+  }
+
+  .best-dishes.open {
+    margin-left: 5px; /* 필터바가 열린 상태에서 왼쪽 여백 추가 */
+  }
+
+  .dishes-grid.open {
+    margin-left: 5px; /* 필터바가 열린 상태에서 왼쪽 여백 추가 */
   }
 }
