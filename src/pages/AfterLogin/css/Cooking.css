@@ -23,7 +23,7 @@
 
 .cooking-container {
   display: flex;
-  height: 105vh;
+  height: 100vh;
   overflow-x: hidden; /* 가로 스크롤을 숨김 */
 }
 
@@ -85,7 +85,7 @@
   height: 1px;
   background-color: #ccc;
   margin: 10px 0;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .dishes-grid {
@@ -105,7 +105,7 @@
 
 .cooking-items-container {
   overflow-y: auto;
-  max-height: calc(100vh - 350px);
+  max-height: calc(100vh - 385px);
 }
 
 @media (min-width: 1150px) {
@@ -132,4 +132,22 @@
   .dishes-grid.open {
     margin-left: 5px; /* 필터바가 열린 상태에서 왼쪽 여백 추가 */
   }
+}
+
+.post-button {
+  font-size: 18px;
+  font-weight: bold;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background-color: #29ADB2;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.post-button:hover {
+  background-color: #209094;
 }

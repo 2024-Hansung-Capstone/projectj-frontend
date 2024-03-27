@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import CookingFilterBar from '../../components/CookingFilterBar';
 import Cooking_Item from '../../item/Cooking_Item';
+import CookingPost from './CookingPost';
+import { useNavigate } from 'react-router-dom';
 import './css/Cooking.css';
 
 const Cooking = () => {
   const [isFilterBarOpen, setFilterBarOpen] = useState(true);
+  const navigate = useNavigate();
 
   const toggleFilterBar = () => {
     setFilterBarOpen(!isFilterBarOpen);
+  };
+
+  const handlePostButtonClick = () => {
+    navigate('/CookingPost');
   };
 
   return (
@@ -49,6 +56,7 @@ const Cooking = () => {
           </div>
         </div>
       </div>
+      <button className='post-button' onClick={handlePostButtonClick}> 요리 글 등록</button>
     </div>
   );
 };

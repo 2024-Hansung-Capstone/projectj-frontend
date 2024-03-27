@@ -242,7 +242,7 @@ const Signup = () => {
         <div className="signup-form-item-phonenumber">
           <input type="text" placeholder="전화번호" id="phoneInput" />
           <button className="phone-token-button" onClick={handleAuthRequest}>
-            인증번호 요청
+            인증 번호 요청
           </button>
         </div>
         {showAuthInput && (
