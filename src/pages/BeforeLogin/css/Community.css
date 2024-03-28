@@ -6,7 +6,7 @@
 .board-list {
   width: 200px;
   padding: 20px;
-  background-color: #eeeeeef8;
+  background-color: #e7e6e6a9;
 }
 
 .board-list ul {
@@ -23,7 +23,7 @@
   font-family: 'SOYOMapleBoldTTF';
 }
 .board-list li.selected-item {
-  color: white;
+  color: #ffffff;
   background: #29adb2;
 }
 

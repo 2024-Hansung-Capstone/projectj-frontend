@@ -5,9 +5,10 @@ export default function Community_Item() {
   return (
     <div className='ci-container'>
         <div className='ci-title'>
-            <div className='ci-userPhoto'>
-                <h4>사진</h4>
-            </div>
+        <div className='ci-userPhoto'>
+            <img src={process.env.PUBLIC_URL + '/user.jpeg'} alt='이미지 설명' />
+        </div>
+
             <div className='ci-userName'>
                 <h4>이름</h4>
             </div>
@@ -19,9 +20,11 @@ export default function Community_Item() {
             <h4>글</h4>
         </div>
         <div className='ci-comment'>
-            <div className='ci-write'>
-                <h4>댓글쓰기</h4>
-            </div>
+            <input
+              type="text"
+              placeholder="댓글쓰기"
+              className="ci-write"
+            />
             <div className='ci-send'>
                 <h4>전송</h4>
             </div>
