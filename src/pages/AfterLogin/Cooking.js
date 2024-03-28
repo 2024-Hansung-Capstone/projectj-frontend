@@ -41,9 +41,9 @@ const Cooking = () => {
           <h1>이달의 BEST 요리</h1>
         </div>
         <div className='best-dishes'>
-          <Cooking_Item dishImage='/path/to/image1.jpg' dishTitle='요리(글) 제목1' author='글쓴이1' />
-          <Cooking_Item dishImage='/path/to/image2.jpg' dishTitle='요리(글) 제목2' author='글쓴이2' />
-          <Cooking_Item dishImage='/path/to/image3.jpg' dishTitle='요리(글) 제목3' author='글쓴이3' />
+          <Cooking_Item dishImage='/cookingImage_1.webp' dishTitle='김치볶음밥' author='김엄마' dishDescription={'맛있는 김치볶음밥 레시피'} />
+          <Cooking_Item dishImage='/cookingImage_2.webp' dishTitle='비빔국수' author='박막례'  dishDescription={'입맛 없을 때 먹으면 딱 좋은 비빔국수'}/>
+          <Cooking_Item dishImage='/cookingImage_3.webp' dishTitle='라볶이' author='백종원'  dishDescription={'간단하게 만드는 라볶이 레시피'}/>
         </div>
         <hr className='divider' />
         <div className='cooking-items-container'>
