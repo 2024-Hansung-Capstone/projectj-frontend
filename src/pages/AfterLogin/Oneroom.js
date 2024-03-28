@@ -69,9 +69,9 @@ const Oneroom = () => {
         <div className='popular-rooms'>
           <h2>인기 원룸 Top 3</h2>
           <div className='popular-room-list'>
-            <Oneroom_Item roomImage='/path/to/room1.jpg' location='서울특별시 강남구 논현동' price='30' />
-            <Oneroom_Item roomImage='/path/to/room2.jpg' location='서울특별시 서초구 방배동' price='30' />
-            <Oneroom_Item roomImage='/path/to/room3.jpg' location='서울특별시 강북구 수유동' price='30' />
+            <Oneroom_Item roomImage='/oneroomImage_1.webp' location='서울특별시 강남구 논현동' price='월세 90 / 2000' />
+            <Oneroom_Item roomImage='/oneroomImage_2.webp' location='서울특별시 서초구 방배동' price='월세 70 / 1000' />
+            <Oneroom_Item roomImage='/oneroomImage_3.webp' location='서울특별시 강북구 수유동' price='월세 30 / 500' />
           </div>
         </div>
         <Map />

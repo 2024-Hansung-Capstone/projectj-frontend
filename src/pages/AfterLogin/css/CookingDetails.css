@@ -1,0 +1,36 @@
+.cooking-details-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .main-image-container {
+    text-align: center;
+  }
+  
+  .main-image {
+    max-width: 800px;
+    height: auto;
+  }
+  
+  .details-content {
+    margin-top: 20px;
+  }
+  
+  .details-content h2 {
+    font-size: 24px;
+  }
+  
+  .recipe-container {
+    margin-top: 20px;
+  }
+  
+  .recipe-item {
+    margin-bottom: 20px;
+  }
+  
+  .recipe-image {
+    max-width: 100%;
+    height: auto;
+  }
+  
