@@ -16,13 +16,13 @@ export default function Header() {
             />
           </Link>
         </div>
-        <div className="search-container">
-            <div className="search-icon">
+        <div className="header-search-container">
+            <div className="header-search-icon">
             <IoSearchOutline />
               <input
                 type="text"
                 placeholder="검색어를 입력하세요."
-                className="search-input"
+                className="header-search-input"
               />
             </div>
           </div>

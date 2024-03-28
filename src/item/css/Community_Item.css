@@ -11,35 +11,38 @@
     padding: 10px;
 }
 .ci-userPhoto {
-    border: groove 1px red;
     width: 17%;
     margin-right: 5px;
     border-radius: 100%;
 }
+.ci-userPhoto img {
+    max-width: 100%; /* 부모 요소에 맞게 이미지 크기를 조절합니다. */
+    height: auto; /* 가로세로 비율을 유지한 채로 이미지 크기를 조절합니다. */
+}
+
 .ci-userName {
-    border: groove 1px red;
+    border: groove 1px #ddd;
     width: 40%;
     margin-right: 5px;
 }
 .ci-date {
-    border: groove 1px red;
+    border: groove 1px #ddd;
     width: 40%;
     margin-right: 5px;
 }
 .ci-post{
-    border: groove 1px red;
+    border: groove 1px #ddd;
     height: 250px;
     margin: 10px; 
 }
 .ci-comment{
     display: flex;
-    border: groove 1px red;
     margin: 10px;
 }
 .ci-write {
     width: 90%;
     margin: 10px;
-    background-color: #edecec;
+    border : 1px groove #ddd;
     border-radius: 10px;
 }
 .ci-send {
@@ -47,4 +50,5 @@
     margin: 10px;
     background-color: #29adb2;
     border-radius: 10px;
+
 }

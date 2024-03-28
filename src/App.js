@@ -19,6 +19,7 @@ import Question from './pages/AfterLogin/Question';
 import CustomerService from './pages/AfterLogin/CustomerService';
 import Logout from './pages/AfterLogin/Logout';
 import CookingPost from './pages/AfterLogin/CookingPost';
+import CommunityPost from './pages/AfterLogin/CommunityPost';
 // BeforeLogin
 import HeaderB from "./pages/BeforeLogin/Header";
 import HomeB from "./pages/BeforeLogin/Home";
@@ -58,6 +59,7 @@ function App() {
                 <Route path="/Oneroom" element={<Oneroom />} />
                 <Route path="/Cooking" element={<Cooking />} />
                 <Route path="/CookingPost" element={<CookingPost />} />
+                <Route path="/CommunityPost" element={<CommunityPost />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/MyPage" element={<MyPage onLogout={handleLogout} />} />
                 <Route path="/Message" element={<Message />} />

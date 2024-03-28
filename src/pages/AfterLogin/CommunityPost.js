@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './css/CookingPost.css';
+import './css/CommunityPost.css';
 
-const CookingPost = () => {
+const CommunityPost = () => {
   const [title, setTitle] = useState('');
   const [mainImage, setMainImage] = useState(null);
   const [content, setContent] = useState('');
@@ -60,19 +60,19 @@ const CookingPost = () => {
       <h2>요리 글 작성</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="title" className="cooking-post-title">제목</label>
+          <label htmlFor="title" className="community-post-title">제목</label>
           <input type="text" id="title" value={title} onChange={handleTitleChange} required />
         </div>
         <div className="form-group">
-          <label htmlFor="mainImage" className="cooking-post-title">대표 사진 첨부</label>
+          <label htmlFor="mainImage" className="community-post-title">대표 사진 첨부</label>
           <input type="file" id="mainImage" accept="image/*" onChange={handleMainImageChange} required />
           {mainImage && <img src={mainImage} alt="Main Preview" className="cooking-main-image-preview" />}
         </div>
         <div className="form-group">
-          <label htmlFor="content" className="cooking-post-title">소개글</label>
+          <label htmlFor="content" className="community-post-title">소개글</label>
           <textarea id="content" value={content} onChange={handleContentChange} required />
         </div>
-        <label className="cooking-post-title">레시피</label>
+        <label className="community-post-title">레시피</label>
         {images.map((image, index) => (
           <div key={index} className="form-group">
             <label> {`${index + 1}번`} </label>
@@ -93,4 +93,4 @@ const CookingPost = () => {
   );
 };
 
-export default CookingPost;
+export default CommunityPost;
