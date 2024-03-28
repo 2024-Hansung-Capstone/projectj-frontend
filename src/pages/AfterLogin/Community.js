@@ -3,6 +3,7 @@ import { FaUtensils } from 'react-icons/fa';
 import { FcHome, FcPaid, FcIdea, FcAdvertising, FcConferenceCall, FcFaq, FcShop } from "react-icons/fc";
 import './css/Community.css';
 import Community_Item from '../../item/Community_Item';
+import CommunityPost from './CommunityPost';
 
 export default function Community() {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -19,17 +20,16 @@ export default function Community() {
     { title: '공지사항', data: '공지사항', icon: <FcAdvertising /> },
   ];
 
-  const handleListItemClick = (index) => {
-    setSelectedItem(index);
-    setSelectedItemData(boardListItems[index].data);
+  const handlePostButtonClick = () => {
+    navigate('/CommunityPost');
   };
 
   return (
     <div className='community-container-wrapper'>
       <div className='community-container'>
         <div className='community-addpost'>
-          <button onClick={() => console.log("글쓰기 버튼 클릭됨")}>글쓰기</button>
-        </div>
+        <button className='post-button' onClick={handlePostButtonClick}> 글쓰기</button>
+     </div>
         <div className='board-list'>
           <ul>
             {boardListItems.map((item, index) => (
@@ -51,7 +51,6 @@ export default function Community() {
         <div className='community-scroll'>
           <div className='scroll-view'>
             {selectedItemData && <p>{selectedItemData}</p>}
-            {/* 여기에 필요한 데이터를 표시하는 컴포넌트 추가 */}
             <Community_Item />
             <Community_Item />
             <Community_Item />
