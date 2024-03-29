@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.14.0",
     "apollo-server": "^3.13.0",
+    "axios": "^1.6.8",
     "convert-csv-to-json": "^2.33.0",
     "graphql": "^16.8.1",
     "leaflet": "^1.9.4",

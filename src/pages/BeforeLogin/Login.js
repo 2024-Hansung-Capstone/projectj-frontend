@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './css/Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import LOGIN from './gql/LoginGql'; // 수정된 경로로 import
+import LOGIN from './gql/LoginGql';
 
 const Login = ({ onLogin }) => {
   const navigate = useNavigate();

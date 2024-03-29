@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './css/Signup.css';
+import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { gql } from '@apollo/client';
@@ -46,9 +47,73 @@ const Signup = () => {
   const [createTokenMutation] = useMutation(CREATE_TOKEN);
   const [authPhoneMutation] = useMutation(AUTH_PHONE);
   const [signUp] = useMutation(SIGN_UP);
+  const [sidoList, setSidoList] = useState([]); // 시/도 목록을 저장하기 위한 상태
+  const [selectedSido, setSelectedSido] = useState(""); // 선택된 시/도를 저장하기 위한 상태
+  const [sigunguList, setSigunguList] = useState([]); // 시/군/구 목록을 저장하기 위한 상태
+  const [selectedSigungu, setSelectedSigungu] = useState(""); // 선택된 시/군/구를 저장하기 위한 상태
+  const [dongList, setDongList] = useState([]); // 읍/면/동 목록을 저장하기 위한 상태
+  const [selectedDong, setSelectedDong] = useState(""); // 선택된 읍/면/동을 저장하기 위한 상태
 
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 시/도 목록을 가져옵니다.
+    fetchSidoList();
+  }, []);
 
+  const fetchSidoList = async () => {
+    try {
+      const response = await axios.get('https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=*00000000');
+      if (response.data && response.data.regcodes) {
+        setSidoList(response.data.regcodes);
+      } else {
+        console.error('API 응답 형식이 올바르지 않습니다.');
+      }
+    } catch (error) {
+      console.error('시/도를 가져오는 중 오류 발생:', error);
+    }
+  };
+  
+  const fetchSigunguList = async (sidoCode) => {
+    try {
+      sidoCode = sidoCode / 100000000;
+      const response = await axios.get(`https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=${sidoCode}*00000`);
+      const regcodes = response.data && response.data.regcodes ? response.data.regcodes : [];
+      if (regcodes.length > 0) {
+            setSigunguList(regcodes.filter(item => item.code !== sidoCode));
+        } else {
+            console.error('API 응답에 시/군/구 목록이 없습니다.');
+        }
+    } catch (error) {
+        console.error('시/군/구를 가져오는 중 오류 발생:', error);
+    }
+  };
+  
+  const fetchDongList = async (sigunguCode) => {
+    try {
+      sigunguCode = parseInt(sigunguCode.toString().replace(/0/g, ''));
+      const response = await axios.get(`https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=${sigunguCode}*&is_ignore_zero=true`);
+      if (response.data && response.data.regcodes) {
+        setDongList(response.data.regcodes);
+      } else {
+        console.error('API 응답에 읍/면/동 목록이 없습니다.');
+      }
+    } catch (error) {
+      console.error('읍/면/동을 가져오는 중 오류 발생:', error);
+    }
+  };
 
+  const handleSidoChange = (e) => {
+    const selectedSidoCode = e.target.value;
+    setSelectedSido(selectedSidoCode);
+    setSelectedSigungu(""); // 시/도가 변경될 때 시/군/구 선택 상태 초기화
+    fetchSigunguList(selectedSidoCode);
+  };
+  
+  const handleSigunguChange = (e) => {
+    const selectedSigunguCode = e.target.value;
+    setSelectedSigungu(selectedSigunguCode);
+    setSelectedDong(""); // 시/군/구가 변경될 때 읍/면/동 선택 상태 초기화
+    fetchDongList(selectedSigunguCode);
+  };
 
   const handleSignup = async () => {
     const newErrorMessages = [];
@@ -214,8 +279,8 @@ const Signup = () => {
         <div className="signup-form-item">
           <input
             type="text"
-            placeholder="아이디"
-            id="usernameInput"
+            placeholder="이메일"
+            id="emailInput"
           />
         </div>
         <div className="signup-form-item">
@@ -230,13 +295,6 @@ const Signup = () => {
             type="password"
             placeholder="비밀번호 확인"
             id="confirmPasswordInput"
-          />
-        </div>
-        <div className="signup-form-item">
-          <input
-            type="text"
-            placeholder="이메일"
-            id="emailInput"
           />
         </div>
         <div className="signup-form-item-phonenumber">
@@ -275,7 +333,51 @@ const Signup = () => {
             </select>
           </div>
         </div>
-
+        <div className="signup-form-item">
+          <select value={selectedSido} onChange={handleSidoChange}>
+            <option value="">시/도 선택</option>
+            {sidoList.map((sido, index) => (
+              <option key={index} value={sido.code}>{sido.name}</option>
+            ))}
+          </select>
+        </div>
+        <div className="signup-form-item">
+          <select value={selectedSigungu} onChange={handleSigunguChange}>
+            <option value="">시/군/구 선택</option>
+            {sigunguList.map((sigungu, index) => (
+              <option key={index} value={sigungu.code}>{sigungu.name}</option>
+            ))}
+          </select>
+        </div>
+        <div className="signup-form-item">
+          <select value={selectedDong.code} onChange={(e) => setSelectedDong(dongList.find(dong => dong.code === e.target.value))}>
+            <option value="">읍/면/동 선택</option>
+            {dongList.map((dong, index) => (
+              <option key={index} value={dong.code}>{dong.name}</option>
+            ))}
+          </select>
+        </div>
+        <div className="signup-form-item">
+          <select id="mbtiSelect">
+            <option value="">MBTI 선택</option>
+            <option value="ISTJ">ISTJ</option>
+            <option value="ISFJ">ISFJ</option>
+            <option value="INFJ">INFJ</option>
+            <option value="INTJ">INTJ</option>
+            <option value="ISTP">ISTP</option>
+            <option value="ISFP">ISFP</option>
+            <option value="INFP">INFP</option>
+            <option value="INTP">INTP</option>
+            <option value="ESTP">ESTP</option>
+            <option value="ESFP">ESFP</option>
+            <option value="ENFP">ENFP</option>
+            <option value="ENTP">ENTP</option>
+            <option value="ESTJ">ESTJ</option>
+            <option value="ESFJ">ESFJ</option>
+            <option value="ENFJ">ENFJ</option>
+            <option value="ENTJ">ENTJ</option>
+          </select>
+        </div>
         <div className="signup-form-item checkbox">
           <input
             type="checkbox"

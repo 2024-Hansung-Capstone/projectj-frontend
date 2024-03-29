@@ -32,7 +32,15 @@
 }
 
 .signup-form-item-phonenumber input,
-.signup-form-item input,
+.signup-form-item input {
+    width: 95%;
+    height: 30px;
+    font-size: 16px;
+    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
 .signup-form-item select,
 .signup-form-item input[type="date"] {
     width: 100%;
@@ -70,7 +78,7 @@
 }
 
 .phone-token-button {
-    height: 60px;
+    height: 52px;
     width: 100px;
     margin-left: 10px;
     padding: 0 10px;
@@ -138,3 +146,6 @@
     margin-bottom: 0;
   }
   
+  .date-picker {
+    margin-bottom: -30px; /* 여백을 조절할 값 */
+  }
