@@ -34,7 +34,7 @@ export default function Header() {
               <Link className="header-mypage" to="/MyPage">
                 마이페이지
               </Link>
-              <Link className="header-message" to="/Message">
+              <Link className="header-message" to="/MessageBox">
                 <TbMessage />
               </Link>
             </li>

@@ -12,6 +12,7 @@ import Oneroom from "./pages/AfterLogin/Oneroom";
 import Cooking from "./pages/AfterLogin/Cooking";
 import MyPage from "./pages/AfterLogin/MyPage";
 import Message from "./pages/AfterLogin/Message";
+import MessageBox from "./pages/AfterLogin/MessageBox";
 import EditUserInfo from './pages/AfterLogin/EditUserInfo';
 import Event from './pages/AfterLogin/Event';
 import Notices from './pages/AfterLogin/Notices';
@@ -63,6 +64,7 @@ function App() {
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/MyPage" element={<MyPage onLogout={handleLogout} />} />
                 <Route path="/Message" element={<Message />} />
+                <Route path="/MessageBox" element={<MessageBox />} />
 
                 <Route path="/editUserInfo" element={<EditUserInfo />} />
                 <Route path="/event" element={<Event />} />

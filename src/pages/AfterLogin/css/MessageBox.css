@@ -1,0 +1,40 @@
+.MessageBox {
+    text-align: center;
+  }
+  
+  .messagebox-container {
+    background-color: white;
+    color: black;
+    padding: 20px;
+  }
+  .messagebox-container h3 {
+    text-align: left;
+  }
+  
+  .Message-list {
+    padding: 20px;
+  }
+  
+  .Message {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  footer button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  
