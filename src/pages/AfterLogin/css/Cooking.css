@@ -105,7 +105,7 @@
 
 .cooking-items-container {
   overflow-y: auto;
-  max-height: calc(100vh - 385px);
+  max-height: calc(100vh - 475px);
 }
 
 @media (min-width: 1150px) {
