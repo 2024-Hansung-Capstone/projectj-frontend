@@ -23,12 +23,11 @@
 
 .cooking-container {
   display: flex;
-  height: 100vh;
+  height: 107vh;
   overflow-x: hidden; /* 가로 스크롤을 숨김 */
 }
 
 .filter-section {
-  width: 300px;
   display: flex;
   flex-direction: column;
   background-color: #fff;

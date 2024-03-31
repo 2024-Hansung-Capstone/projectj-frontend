@@ -1,6 +1,7 @@
-.filter-bar-container {
+.oneroom-filter-bar-container {
     display: flex;
     flex-direction: column;
+    width: 260px;
   }
   
   .filter-item {

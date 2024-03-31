@@ -1,7 +1,7 @@
 .filter-bar-container {
     display: flex;
     flex-direction: column;
-    max-width: 260px;
+    width: 260px;
   }
   
   .filter-item {
@@ -18,6 +18,11 @@
     margin-top: 10px;
     margin-bottom: 20px;
   }
+
+  .filter-bar-container .ant-btn {
+    height: 47.1px;
+    line-height: 47.1px; /* 버튼 내 텍스트의 수직 정렬을 위해 높이와 동일한 값을 지정 */
+  }  
 
   .filter-bar-container .ant-btn-primary {
     background-color: #29adb2;

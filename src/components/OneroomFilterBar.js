@@ -15,7 +15,7 @@ const OneroomFilterBar = ({
   onMonthlyRentChange,
 }) => {
   return (
-    <div className='filter-bar-container'>
+    <div className='oneroom-filter-bar-container'>
       <div className='filter-item'>
         <Checkbox checked={isMonthly} onChange={onMonthlyChange}>
           월세
