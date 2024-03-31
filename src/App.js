@@ -26,6 +26,7 @@ import HeaderB from "./pages/BeforeLogin/Header";
 import HomeB from "./pages/BeforeLogin/Home";
 import Login from "./pages/BeforeLogin/Login";
 import Signup from "./pages/BeforeLogin/Signup";
+import Market from "./pages/BeforeLogin/Market";
 import Community from "./pages/BeforeLogin/Community";
 import TermsOfService from "./pages/BeforeLogin/TermsOfService";
 
@@ -55,6 +56,7 @@ function App() {
                 <Route path="/" element={isAuthenticated ? <HomeA /> : <HomeB />} />
                 <Route path="/Mate" element={isAuthenticated ? <MateA /> : <Login onLogin={handleLogin} />} />
                 <Route path="/Community" element={<Community />} />
+                <Route path="/Market" element={<Market />} />
                 <Route path="/Login" element={<Login onLogin={handleLogin} />} />
                 <Route path="/Signup" element={<Signup />} />
                 <Route path="/Oneroom" element={<Oneroom />} />

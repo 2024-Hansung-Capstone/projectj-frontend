@@ -1,0 +1,30 @@
+.marketitem-container {
+    width: 220px;
+    height: auto;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+.marketitem-main1 {
+    border: 1px groove #ddd;
+}
+.marketitem-main2 {
+    display: flex;
+    border: 1px groove #ddd;
+}
+.marketitem-photo {
+    height: 220px;
+    text-align: center;
+    border: 1px groove #ddd;
+}
+.marketitem-title {
+    border: 1px groove #ddd;
+
+}
+.marketitem-price {
+    width: 50%;
+}
+.marketitem-date {
+    width: 50%;
+}
+

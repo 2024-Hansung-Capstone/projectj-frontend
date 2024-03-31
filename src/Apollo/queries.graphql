@@ -1,5 +1,3 @@
-// 임의로 작성된 것이니까 이거 신경쓰지말고 작업해주세요.
-
 mutation SignUp($createUserInput: CreateUserInput!) {
   signUp(createUserInput: $createUserInput) {
     id

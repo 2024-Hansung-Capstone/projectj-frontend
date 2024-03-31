@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Logout({ onLogout }) {
-  // 로그아웃 함수 호출
-  onLogout();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    onLogout();
+    navigate('/');
+  }, [navigate, onLogout]);
+
+  // 로그아웃 중임을 알리는 메시지 반환
   return (
     <div>
-      <h2>로그아웃 페이지</h2>
-      {/* 로그아웃에 관한 내용 */}
+      <h2>로그아웃 중...</h2>
     </div>
   );
 }

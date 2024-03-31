@@ -15,7 +15,7 @@ function MessageBox() {
   return (
     <div className="MessageBox">
       <header className="messagebox-container">
-        <h3>수신 쪽지함 > 목록보기</h3>
+        <h3>수신 쪽지함 - 목록보기</h3>
         <input type="text" placeholder="쪽지 검색" />
       </header>
       <div className="messagebox-list">

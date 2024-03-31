@@ -38,7 +38,7 @@ export default function MyPage({ onLogout }) {
         <Link className='mypage-question' to="/question"><LuMessagesSquare /> 1:1 문의</Link>
         <Link className='mypage-notice' to="/notices"><FaRegBell /> 공지사항</Link>
         <Link className='mypage-service' to="/customer-service"><RiCustomerService2Line /> 고객센터</Link>
-        <div className='mypage-logout' onClick={onLogout}><IoLogOutOutline /> 로그아웃</div>
+        <Link className='mypage-logout' to="/" onClick={onLogout}><IoLogOutOutline /> 로그아웃</Link>
       </div>
     </div>
   );
