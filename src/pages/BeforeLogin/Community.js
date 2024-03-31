@@ -12,12 +12,10 @@ export default function Community() {
   const boardListItems = [
     { title: '원룸 찾기', data: '원룸', icon: <FcHome /> },
     { title: '인테리어 정보', data: '인테리어 정보', icon: <FcIdea /> },
-    { title: '중고마켓', data: '중고마켓', icon: <FcPaid /> },
     { title: '맛집추천', data: '맛집추천', icon: <FcShop /> },
     { title: '요리자랑', data: '요리자랑', icon: <FaUtensils /> },
     { title: '메이트후기', data: '메이트후기', icon: <FcConferenceCall /> },
     { title: '고민상담', data: '고민상담', icon: <FcFaq /> },
-    { title: '공지사항', data: '공지사항', icon: <FcAdvertising /> },
   ];
 
   const handleListItemClick = (index) => {
