@@ -19,6 +19,9 @@
   .category-item:hover {
     color: #f4e869;
   }
+  .category-item.active {
+    color: #f4e869; /* 클릭된 카테고리의 텍스트 색을 노란색으로 변경 */
+  }
 
   @font-face {
     font-family: 'BMDOHYEON';

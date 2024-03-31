@@ -1,11 +1,46 @@
 .market-container {
-
+    display : block;
+    position: relative;
+}
+.market-header {
+    width: 50%;
+    display : block;
+    padding: 20px;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.market-category {
+    position: absolute; /* 절대 위치로 설정 */
+    top: 60px; 
+    left: 50px;
+    width: 200px;
+    background-color: white;
+    border: 1px solid #b4b2b2; /* 테두리 추가 */
+    z-index: 1; /* 다른 요소들보다 위에 표시되도록 설정 */
+    padding-left: 15px;
 }
 .market-serch {
     text-align: center;
 }
-.market-category {
-
+.market-header {
+    display: flex;
+}
+.market-category-icon {
+    margin-left : 30px;
+}
+.market-search-icon {
+    width: 8%;
+    height: 38px;
+    margin-left: 30px;
+}
+.market-search-input {
+    display: block;  /* 가운데정렬 */
+    margin-left: 20px;
+    height: 30px;
+}
+.custom-icon {
+    font-size: 50px;
 }
 .market-item {
     display: flex;
