@@ -7,6 +7,7 @@ import { RiCustomerService2Line } from "react-icons/ri";
 import { LuMessagesSquare } from "react-icons/lu";
 import { BiParty } from "react-icons/bi";
 import { IoLogOutOutline } from "react-icons/io5";
+import { HiMiniNoSymbol } from "react-icons/hi2";
 import './css/MyPage.css';
 import { Link } from 'react-router-dom';
 
@@ -39,6 +40,7 @@ export default function MyPage({ onLogout }) {
         <Link className='mypage-notice' to="/notices"><FaRegBell /> 공지사항</Link>
         <Link className='mypage-service' to="/customer-service"><RiCustomerService2Line /> 고객센터</Link>
         <Link className='mypage-logout' to="/" onClick={onLogout}><IoLogOutOutline /> 로그아웃</Link>
+        <Link className='mypage-withdraw' to="/"><HiMiniNoSymbol /> 회원탈퇴</Link>
       </div>
     </div>
   );
