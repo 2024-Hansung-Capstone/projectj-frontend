@@ -2,6 +2,7 @@
   background-color: white;
   color: black;
   padding: 5px;
+  overflow-x: auto; /* Enable horizontal scrolling */
 }
 
 .header-wrap {
@@ -32,7 +33,7 @@
 }
 
 .logo-image {
-  width: 100%;
+  width: 250px;
   height: 90px;
   padding: 5%;
 }
@@ -75,30 +76,22 @@
   padding: 0; /* 기본적인 패딩 제거 */
 }
 
-.header-mypage{
-  font-family: 'NanumSquareNeo-Variable';
-  text-decoration: none;
-  margin: 20px;
-  font-size: 20px;
-  color: black;
-}
-.header-login {
-  font-family: 'NanumSquareNeo-Variable';
-  text-decoration: none;
-  margin: 20px;
-  font-size: 20px;
-  color: black;
-}
+.header-login,
 .header-signup {
   font-family: 'NanumSquareNeo-Variable';
   text-decoration: none;
   margin: 20px;
   font-size: 20px;
   color: black;
-  border: 2px groove #29adb2;
   padding: 8px;
+}
+
+.header-signup {
+  border: 2px groove #29adb2;
   border-radius: 10px;
 }
+
+
 @font-face {
   font-family: 'JalnanGothic';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff') format('woff');
@@ -120,3 +113,10 @@
   font-style: normal;
 }
 
+@media screen and (max-width: 900px) {
+  .header-container,
+  .category-container ,
+  .Home-container {
+    width: 845px;
+  }
+}

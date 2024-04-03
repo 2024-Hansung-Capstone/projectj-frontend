@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./css/Market.css";
-import Market_Item from '../../item/Market_Item.js';
+import Market_Item from '../item/Market_Item.js';
+import MarketPost from './MarketPost';
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { IoSearchOutline } from "react-icons/io5";
 
 export default function Market() {
     const [isHovered, setIsHovered] = useState(false);
+    const navigate = useNavigate();
+
+    const handlePostButtonClick = () => {
+        navigate('/MarketPost');
+      };
 
     return (
-        <div className="market-container"
-
-        >
+        <div className="market-container">
             <div className="market-header">
                 <div className="market-category-icon"
                            onMouseEnter={() => setIsHovered(true)}
@@ -47,6 +52,7 @@ export default function Market() {
                 <Market_Item />
                 <Market_Item />
             </div>
+            <button className='post-button' onClick={handlePostButtonClick}> 상품 등록</button>
         </div>
     );
 }

@@ -8,7 +8,7 @@ const TermsOfService = ({ onClose }) => {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-content-Terms" onClick={(e) => e.stopPropagation()}>
         <h2>이용약관</h2>
         <div className="terms-section">
           <h4>제1조 (목적)</h4>

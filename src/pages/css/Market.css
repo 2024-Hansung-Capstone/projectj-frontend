@@ -1,6 +1,7 @@
 .market-container {
     display : block;
     position: relative;
+    overflow-x: auto; /* 가로 스크롤을 숨김 */
 }
 .market-header {
     width: 50%;
@@ -45,10 +46,11 @@
 .market-item {
     display: flex;
     flex-wrap: wrap;
+    overflow-x: auto;
 }
 
 .market-item > * {
-    width: 20%;
+    width: 250px;
     box-sizing: border-box;
     padding: 10px;
 }

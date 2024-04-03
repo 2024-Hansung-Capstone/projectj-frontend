@@ -56,7 +56,7 @@ const CookingPost = () => {
   };
 
   return (
-    <div className="community-post-container">
+    <div className="cook-post-container">
       <h2>요리 글 작성</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">

@@ -17,7 +17,9 @@ import MessageBox from "./pages/MessageBox";
 import Logout from './pages/Logout';
 import CookingPost from './pages/CookingPost';
 import CommunityPost from './pages/CommunityPost';
+import MarketPost from './pages/MarketPost';
 import Community from "./pages/Community";
+
 
 // mypage
 import EditUserInfo from './pages/EditUserInfo';
@@ -30,7 +32,7 @@ import CustomerService from './pages/CustomerService';
 import HeaderB from "./pages/BeforeLogin/Header";
 import Login from "./pages/BeforeLogin/Login";
 import Signup from "./pages/BeforeLogin/Signup";
-import Market from "./pages/BeforeLogin/Market";
+import Market from "./pages/Market";
 import TermsOfService from "./pages/BeforeLogin/TermsOfService";
 
 
@@ -69,6 +71,7 @@ function App() {
                 <Route path="/Cooking" element={<Cooking />} />
                 <Route path="/CookingPost" element={<CookingPost />} />
                 <Route path="/CommunityPost" element={<CommunityPost />} />
+                <Route path="/MarketPost" element={<MarketPost />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/MyPage" element={<MyPage onLogout={handleLogout} />} />
                 <Route path="/Message" element={<Message />} />

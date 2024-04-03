@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaUtensils } from 'react-icons/fa';
 import { FcHome, FcPaid, FcIdea, FcAdvertising, FcConferenceCall, FcFaq, FcShop } from "react-icons/fc";
 import './css/Community.css';
+import CommunityPost from './CommunityPost';
 import Community_Item from '../item/Community_Item';
 
-
-export default function Community() {
+const Community = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedItemData, setSelectedItemData] = useState(null);
+  const navigate = useNavigate();
 
   const boardListItems = [
     { title: '원룸 찾기', data: '원룸', icon: <FcHome /> },
@@ -21,6 +23,10 @@ export default function Community() {
   const handleListItemClick = (index) => {
     setSelectedItem(index);
     setSelectedItemData(boardListItems[index].data);
+  };
+
+  const handlePostButtonClick = () => {
+    navigate('/CommunityPost');
   };
 
   return (
@@ -48,6 +54,9 @@ export default function Community() {
           <Community_Item />
         </div>
       </div>
+      <button className='post-button' onClick={handlePostButtonClick}> 게시물 등록</button>
     </div>
   );
 }
+
+export default Community;

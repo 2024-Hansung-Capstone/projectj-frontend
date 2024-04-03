@@ -1,9 +1,10 @@
 .marketitem-container {
-    width: 220px;
+    width: 250px;
     height: auto;
     padding: 10px;
     margin: 10px;
     text-align: center;
+    flex: 0 0 auto;  /* 슬라이드 적용 시 빼먹지 않기! */
 }
 .marketitem-main1 {
     border: 1px groove #ddd;

@@ -1,0 +1,61 @@
+.market-post-container {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top : 20px;
+    padding: 40px;
+
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.market-post-input {
+    height: 40px;
+    width: 200px;
+    border: 1px groove #ddd;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 10px;
+}
+button.market-post-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3f3f3f;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.market-post-button:hover {
+    background-color: #555;
+}
+
+.reciepe-image-preview {
+    max-width: 400px;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.market-main-image-preview {
+    max-width: 400px;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.market-post-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+}

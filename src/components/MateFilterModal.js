@@ -25,7 +25,6 @@ const MateFilterModal = ({ onClose }) => {
   };
 
   const handleConfirmClick = () => {
-    // 필터 설정을 완료하고 모달을 닫기
     onClose();
   };
 
