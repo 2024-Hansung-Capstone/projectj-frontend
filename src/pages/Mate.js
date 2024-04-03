@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import MateFilterModal from '../../components/MateFilterModal.js';
-import Mate_Item from '../../item/Mate_Item.js';
+import MateFilterModal from '../components/MateFilterModal.js';
+import Mate_Item from '../item/Mate_Item.js';
 import './css/Mate.css';
 
 export default function Mate() {

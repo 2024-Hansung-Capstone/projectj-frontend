@@ -4,30 +4,33 @@ import { ApolloProvider } from '@apollo/client';
 
 import Category from "./components/Category";
 import Footer from "./components/Footer"
-// AfterLogin
-import HeaderA from "./pages/AfterLogin/Header";
-import HomeA from "./pages/AfterLogin/Home";
-import MateA from "./pages/AfterLogin/Mate";
-import Oneroom from "./pages/AfterLogin/Oneroom";
-import Cooking from "./pages/AfterLogin/Cooking";
-import MyPage from "./pages/AfterLogin/MyPage";
-import Message from "./pages/AfterLogin/Message";
-import MessageBox from "./pages/AfterLogin/MessageBox";
-import EditUserInfo from './pages/AfterLogin/EditUserInfo';
-import Event from './pages/AfterLogin/Event';
-import Notices from './pages/AfterLogin/Notices';
-import Question from './pages/AfterLogin/Question';
-import CustomerService from './pages/AfterLogin/CustomerService';
-import Logout from './pages/AfterLogin/Logout';
-import CookingPost from './pages/AfterLogin/CookingPost';
-import CommunityPost from './pages/AfterLogin/CommunityPost';
+
+// main
+import HeaderA from "./pages/Header";
+import Home from "./pages/Home";
+import Mate from "./pages/Mate";
+import Oneroom from "./pages/Oneroom";
+import Cooking from "./pages/Cooking";
+import MyPage from "./pages/MyPage";
+import Message from "./pages/Message";
+import MessageBox from "./pages/MessageBox";
+import Logout from './pages/Logout';
+import CookingPost from './pages/CookingPost';
+import CommunityPost from './pages/CommunityPost';
+import Community from "./pages/Community";
+
+// mypage
+import EditUserInfo from './pages/EditUserInfo';
+import Event from './pages/Event';
+import Notices from './pages/Notices';
+import Question from './pages/Question';
+import CustomerService from './pages/CustomerService';
+
 // BeforeLogin
 import HeaderB from "./pages/BeforeLogin/Header";
-import HomeB from "./pages/BeforeLogin/Home";
 import Login from "./pages/BeforeLogin/Login";
 import Signup from "./pages/BeforeLogin/Signup";
 import Market from "./pages/BeforeLogin/Market";
-import Community from "./pages/BeforeLogin/Community";
 import TermsOfService from "./pages/BeforeLogin/TermsOfService";
 
 
@@ -53,10 +56,13 @@ function App() {
           <div className="main-section">
             <Category />
               <Routes>
-                <Route path="/" element={isAuthenticated ? <HomeA /> : <HomeB />} />
-                <Route path="/Mate" element={isAuthenticated ? <MateA /> : <Login onLogin={handleLogin} />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/Mate" element={isAuthenticated ? <Mate /> : <Login onLogin={handleLogin} />} />
                 <Route path="/Community" element={<Community />} />
                 <Route path="/Market" element={<Market />} />
+                <Route path="/Market" element={isAuthenticated ? <Market /> : <Login onLogin={handleLogin} />} />
+                
+
                 <Route path="/Login" element={<Login onLogin={handleLogin} />} />
                 <Route path="/Signup" element={<Signup />} />
                 <Route path="/Oneroom" element={<Oneroom />} />

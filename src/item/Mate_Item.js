@@ -1,7 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './css/Mate_Item.css';
 
 export default function Mate_Item() {
+    const navigate = useNavigate();
+
+    const handleSendMessage = () => {
+        const isLoggedIn = true;
+
+        if (isLoggedIn) {
+            navigate('../pages/AfterLogin/message');
+        } else {
+            navigate('../pages/AfterLogin/login');
+        }
+    };
+
     return (
         <div className='mi-container'>
             <div className='mi-photo'> 

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import './css/Home.css';
-import Mate_Item from '../../item/Mate_Item';
-import OneRoom_Item from '../../item/Oneroom_Item';
-import Cooking_Item from '../../item/Cooking_Item';
-import Community_Hot_Item from '../../item/Community_Hot_Item';
-import Tip_Item from '../../item/Tip_Item';
+import Mate_Item from '../item/Mate_Item';
+import OneRoom_Item from '../item/Oneroom_Item';
+import Cooking_Item from '../item/Cooking_Item';
+import Community_Hot_Item from '../item/Community_Hot_Item';
+import Tip_Item from '../item/Tip_Item';
 import YouTube from "react-youtube";
 
 export const images = [
