@@ -56,7 +56,7 @@ const CookingPost = () => {
   };
 
   return (
-    <div className="cook-post-container">
+    <div className="cooking-post-container">
       <h2>요리 글 작성</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -78,8 +78,10 @@ const CookingPost = () => {
             <label> {`${index + 1}번`} </label>
             <div>
               <input type="text" value={image.text} onChange={(e) => handleTextChange(index, e)} placeholder="레시피를 작성하세요" />
-              <input type="file" accept="image/*" onChange={(e) => handleImageChange(index, e)} />
-              {image.preview && <img src={image.preview} alt="Preview" className="reciepe-image-preview" />}
+              <div>
+                <input type="file" accept="image/*" onChange={(e) => handleImageChange(index, e)} />
+                {image.preview && <img src={image.preview} alt="Preview" className="reciepe-image-preview" />}
+              </div>
             </div>
           </div>
         ))}

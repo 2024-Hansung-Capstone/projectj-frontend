@@ -1,7 +1,9 @@
-.cooking-post-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
+@media (min-width: 1150px) {
+    .cooking-post-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 }
 
 .form-group {
@@ -13,9 +15,13 @@ label {
     margin-bottom: 5px;
 }
 
+.form-group input[type='file'] {
+    margin-top: 5px;
+  }
+
 input[type='text'],
 textarea {
-    width: 100%;
+    width: calc(100% - 25px);
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;

@@ -23,7 +23,7 @@
 
 .cooking-container {
   display: flex;
-  height: 107vh;
+  height: 100vh;
   overflow-x: hidden; /* 가로 스크롤을 숨김 */
 }
 
