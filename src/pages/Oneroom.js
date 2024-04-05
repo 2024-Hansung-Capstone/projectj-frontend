@@ -11,6 +11,7 @@ const Oneroom = () => {
   const [depositAmount, setDepositAmount] = useState(0);
   const [monthlyRent, setMonthlyRent] = useState(0);
   const [isFilterBarOpen, setFilterBarOpen] = useState(true);
+  const [isMapVisible, setMapVisible] = useState(false);
 
   const toggleFilterBar = () => {
     setFilterBarOpen(!isFilterBarOpen);
@@ -36,11 +37,13 @@ const Oneroom = () => {
     setMonthlyRent(value);
   };
 
+  const handleMapToggleChange = (e) => {
+    setMapVisible(e.target.checked);
+  };
+
   return (
     <div className='oneroom-container'>
-      {/* Toggle 버튼이 전체 영역을 감싸도록 변경 */}
       <div className={`toggle-button ${isFilterBarOpen ? 'open' : 'closed'}`} onClick={toggleFilterBar}>
-        {/* 버튼 아이콘 */}
         {isFilterBarOpen ? (
           <span>&lt;&lt;</span>
         ) : (
@@ -61,6 +64,7 @@ const Oneroom = () => {
               onJeonseAmountChange={handleJeonseAmountChange}
               onDepositAmountChange={handleDepositAmountChange}
               onMonthlyRentChange={handleMonthlyRentChange}
+              onMapToggleChange={handleMapToggleChange}
             />
           </div>
         </div>
@@ -74,7 +78,7 @@ const Oneroom = () => {
             <Oneroom_Item roomImage='/oneroomImage_3.webp' location='서울특별시 강북구 수유동' price='월세 30 / 500' />
           </div>
         </div>
-        <Map />
+        {isMapVisible && <Map />}
       </div>
     </div>
   );

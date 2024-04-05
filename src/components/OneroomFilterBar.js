@@ -13,6 +13,7 @@ const OneroomFilterBar = ({
   onJeonseAmountChange,
   onDepositAmountChange,
   onMonthlyRentChange,
+  onMapToggleChange,
 }) => {
   return (
     <div className='oneroom-filter-bar-container'>
@@ -68,6 +69,10 @@ const OneroomFilterBar = ({
       </div>
       <div className='filter-item'>
         <Checkbox>투룸</Checkbox>
+      </div>
+      <hr className='filter-line' />
+      <div className='filter-item'>
+        <Checkbox onChange={onMapToggleChange}>지도 보기</Checkbox>
       </div>
     </div>
   );
