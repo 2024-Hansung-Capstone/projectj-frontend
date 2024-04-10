@@ -16,6 +16,7 @@ import Message from "./pages/Message";
 import MessageBox from "./pages/MessageBox";
 import Logout from './pages/Logout';
 import CookingPost from './pages/CookingPost';
+import CookingDetails from "./pages/CookingDetails";
 import CommunityPost from './pages/CommunityPost';
 import MarketPost from './pages/MarketPost';
 import Community from "./pages/Community";
@@ -70,6 +71,7 @@ function App() {
                 <Route path="/Oneroom" element={<Oneroom />} />
                 <Route path="/Cooking" element={<Cooking />} />
                 <Route path="/CookingPost" element={<CookingPost />} />
+                <Route path="/CookingDetails" element={<CookingDetails />} />
                 <Route path="/CommunityPost" element={<CommunityPost />} />
                 <Route path="/MarketPost" element={<MarketPost />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />

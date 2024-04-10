@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CookingFilterBar from '../components/CookingFilterBar';
 import Cooking_Item from '../item/Cooking_Item';
 import CookingPost from './CookingPost';
+import CookingDetails from './CookingDetails';
 import { useNavigate } from 'react-router-dom';
 import './css/Cooking.css';
 
@@ -14,7 +15,7 @@ const Cooking = () => {
   };
 
   const handlePostButtonClick = () => {
-    navigate('/CookingPost');
+    navigate('/CookingDetails');
   };
 
   return (
