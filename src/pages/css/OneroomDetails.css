@@ -1,0 +1,53 @@
+@media (min-width: 1150px) {
+    .oneroom-details-container {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+      margin-top: 80px;
+    }
+  }
+  
+  .main-image-container {
+    margin-bottom: 20px;
+  }
+  
+  .main-image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .location {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .price {
+    margin-bottom: 60px;
+  }
+  
+  .description {
+    margin-bottom: 60px;
+  }
+  
+  .details-table {
+    margin: 0 auto;
+  }
+  
+  .details-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .details-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .no-image {
+    width: 600px;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+  }

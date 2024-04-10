@@ -10,6 +10,7 @@ import HeaderA from "./pages/Header";
 import Home from "./pages/Home";
 import Mate from "./pages/Mate";
 import Oneroom from "./pages/Oneroom";
+import OneroomDetails from "./pages/OneroomDetails"
 import Cooking from "./pages/Cooking";
 import MyPage from "./pages/MyPage";
 import Message from "./pages/Message";
@@ -69,6 +70,7 @@ function App() {
                 <Route path="/Login" element={<Login onLogin={handleLogin} />} />
                 <Route path="/Signup" element={<Signup />} />
                 <Route path="/Oneroom" element={<Oneroom />} />
+                <Route path="/OneroomDetails" element={<OneroomDetails />} />
                 <Route path="/Cooking" element={<Cooking />} />
                 <Route path="/CookingPost" element={<CookingPost />} />
                 <Route path="/CookingDetails" element={<CookingDetails />} />
