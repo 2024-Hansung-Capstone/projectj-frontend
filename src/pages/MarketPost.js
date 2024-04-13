@@ -1,6 +1,10 @@
+// MarketPost.js
+
 import React, { useState } from 'react';
 import './css/MarketPost.css';
 import { FaCamera } from "react-icons/fa";
+import { useMutation } from '@apollo/client'; 
+import { useNavigate } from 'react-router-dom';
 
 const MarketPost = () => {
   const [title, setTitle] = useState('');
@@ -9,6 +13,8 @@ const MarketPost = () => {
   const [detail, setDetail] = useState('');
   const [images, setImages] = useState([{ text: '', preview: null }]);
   const [nextId, setNextId] = useState(1);
+  
+  const navigate = useNavigate();
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -27,26 +33,13 @@ const MarketPost = () => {
     setDetail(e.target.value);
   };
 
-
-  const handleAddField = () => {
-    setImages([...images, { text: '', preview: null }]);
-    setNextId(nextId + 1);
-  };
-
-  const handleRemoveField = () => {
-    if (images.length > 1) {
-      const newImages = [...images];
-      newImages.pop();
-      setImages(newImages);
-      setNextId(nextId - 1);
-    }
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // 여기에 게시 버튼이 클릭되었을 때의 동작을 추가하세요
-    console.log('게시되었습니다:', { title, mainImage, price, detail, images });
-    // 게시 후 필요한 작업을 수행하세요 (예: 데이터베이스에 저장, 페이지 이동 등)
+    // ADD_PRODUCT 쿼리를 실행하여 게시물을 저장합니다.
+
+
+    // 게시 후 Market.js 페이지로 이동합니다.
+    navigate('/market');
   };
 
   return (

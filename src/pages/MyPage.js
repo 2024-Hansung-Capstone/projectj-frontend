@@ -34,6 +34,7 @@ export default function MyPage({ onLogout }) {
       <div className='mypage-blank'></div>
 
       <div className='mypage-list'>
+      <Link className='mypage-mypost' to="/mypost">내가 작성한 글</Link>
         <Link className='mypage-edit' to="/editUserInfo"><FaEdit /> 내 정보 수정</Link>
         <Link className='mypage-event' to="/event"><BiParty />이벤트</Link>
         <Link className='mypage-question' to="/question"><LuMessagesSquare /> 1:1 문의</Link>
