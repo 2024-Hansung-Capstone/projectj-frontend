@@ -1,10 +1,30 @@
-// MarketPost.js
-
 import React, { useState } from 'react';
 import './css/MarketPost.css';
 import { FaCamera } from "react-icons/fa";
 import { useMutation } from '@apollo/client'; 
 import { useNavigate } from 'react-router-dom';
+import { gql } from '@apollo/client';
+
+const CREATE_USED_PRODUCT = gql`
+  mutation CreateUsedProduct($createUsedProductInput: CreateUsedProductInput!) {
+    createUsedProduct(createUsedProductInput: $createUsedProductInput) {
+      id
+      user {
+        id
+        name
+        email
+      }
+      title
+      view
+      like
+      price
+      detail
+      category
+      state
+      create_at
+    }
+  }
+`;
 
 const MarketPost = () => {
   const [title, setTitle] = useState('');
@@ -15,6 +35,7 @@ const MarketPost = () => {
   const [nextId, setNextId] = useState(1);
   
   const navigate = useNavigate();
+  const [createUsedProduct] = useMutation(CREATE_USED_PRODUCT);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -35,11 +56,24 @@ const MarketPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // ADD_PRODUCT 쿼리를 실행하여 게시물을 저장합니다.
 
+    try {
+      const { data } = await createUsedProduct({
+        variables: {
+          createUsedProductInput: {
+            title,
+            price: parseInt(price),
+            detail,
+          },
+        },
+      });
 
-    // 게시 후 Market.js 페이지로 이동합니다.
-    navigate('/market');
+      console.log('Newly added used product:', data.createUsedProduct);
+
+      navigate('/market');
+    } catch (error) {
+      console.error('Error adding used product:', error);
+    }
   };
 
   return (

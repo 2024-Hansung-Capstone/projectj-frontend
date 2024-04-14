@@ -1,9 +1,8 @@
-// Market.js
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@apollo/client'; 
+import "./css/Market.css";
 import Market_Item from '../item/Market_Item.js';
+import MarketPost from './MarketPost';
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { IoSearchOutline } from "react-icons/io5";
 
@@ -42,7 +41,16 @@ export default function Market() {
                 </div>
             )}
             <div className="market-item">
-               
+                <Market_Item />
+                <Market_Item />
+                <Market_Item />
+                <Market_Item />
+                <Market_Item />
+                <Market_Item />
+                <Market_Item />
+                <Market_Item />
+                <Market_Item />
+                <Market_Item />
             </div>
             <button className='post-button' onClick={handlePostButtonClick}> 상품 등록</button>
         </div>
