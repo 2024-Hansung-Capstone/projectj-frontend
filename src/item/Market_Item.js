@@ -11,18 +11,18 @@ export default function Market_Item({ product }) {
         <div className="marketitem-container">
             <div className='marketitem-main1'>
                 <div className="marketitem-photo">
-                    <img src={product.mainImage} alt="Product" /> {/* 이미지를 표시합니다. */}
+                    <img src={product.mainImage} alt="Product" /> 
                 </div>
                 <div className="marketitem-title">
-                    <p>{product.title}</p> {/* 제목을 표시합니다. */}
+                    <p>{product.title}</p> 
                 </div>
             </div>
             <div className='marketitem-main2'>
                 <div className="marketitem-price">
-                    <p>{product.price}</p> {/* 가격을 표시합니다. */}
+                    <p>{product.price}</p>
                 </div>
                 <div className="market-date">
-                    <p>{product.create_at}</p> {/* 생성 날짜를 표시합니다. */}
+                    <p>{product.create_at}</p>
                 </div>
             </div>
         </div>

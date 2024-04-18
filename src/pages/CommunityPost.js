@@ -1,4 +1,3 @@
-// CommunityPost.js
 import React, { useState } from 'react';
 import './css/CommunityPost.css';
 import { FaCamera } from "react-icons/fa";
@@ -7,6 +6,7 @@ import { gql } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { BoardList_Item } from '../item/BoardList_Item'; 
 
+// CREATE_BOARD 뮤테이션 수정
 const CREATE_BOARD = gql`
   mutation CreateBoard($createBoardInput: CreateBoardInput!) {
     createBoard(createBoardInput: $createBoardInput) {
@@ -21,11 +21,11 @@ const CREATE_BOARD = gql`
   }
 `;
 
+// CommunityPost 컴포넌트 수정
 const CommunityPost = ({ onPost }) => {
   const [title, setTitle] = useState('');
   const [mainImage, setMainImage] = useState(null);
   const [detail, setDetail] = useState('');
-  const [userId, setUserId] = useState('');
   const [category, setCategory] = useState(''); 
   const [createBoard] = useMutation(CREATE_BOARD);
   const navigate = useNavigate();
@@ -43,14 +43,9 @@ const CommunityPost = ({ onPost }) => {
     setDetail(e.target.value);
   };
 
-  const handleUserIdChange = (e) => {
-    setUserId(e.target.value);
-  };
-
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,7 +56,6 @@ const CommunityPost = ({ onPost }) => {
           createBoardInput: {
             title,
             detail,
-            userId,
             category,
           },
         },
@@ -76,8 +70,6 @@ const CommunityPost = ({ onPost }) => {
     }
   };
 
-  
-
   return (
     <div className="community-post-container">
       <h2>게시물 등록하기</h2>
@@ -90,10 +82,6 @@ const CommunityPost = ({ onPost }) => {
               <option key={item.title} value={item.data}>{item.title}</option>
             ))}
           </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="userId" className="community-post-userId">작성자</label>
-          <input type="text" id="userId" value={userId} onChange={handleUserIdChange}/>
         </div>
         <div className="form-group">
           <label htmlFor="title" className="community-post-title">제목</label>

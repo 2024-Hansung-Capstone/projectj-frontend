@@ -22,13 +22,10 @@ import CommunityPost from './pages/CommunityPost';
 import MarketPost from './pages/MarketPost';
 import Community from "./pages/Community";
 
-
 // mypage
 import EditUserInfo from './pages/EditUserInfo';
-import Event from './pages/Event';
 import Notices from './pages/Notices';
 import Question from './pages/Question';
-import CustomerService from './pages/CustomerService';
 
 // BeforeLogin
 import HeaderB from "./pages/BeforeLogin/Header";
@@ -62,8 +59,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/Mate" element={isAuthenticated ? <Mate /> : <Login onLogin={handleLogin} />} />
-                <Route path="/Community" element={<Community />} />
-                <Route path="/Market" element={<Market />} />
+                <Route path="/Community" element={isAuthenticated ? <Community /> : <Login onLogin={handleLogin} />} />
                 <Route path="/Market" element={isAuthenticated ? <Market /> : <Login onLogin={handleLogin} />} />
                 
 
@@ -75,17 +71,15 @@ function App() {
                 <Route path="/CookingPost" element={<CookingPost />} />
                 <Route path="/CookingDetails" element={<CookingDetails />} />
                 <Route path="/CommunityPost" element={<CommunityPost />} />
-                <Route path="/MarketPost" element={<MarketPost />} />
+                <Route path="/MarketPost" element={isAuthenticated ? <MarketPost /> : <Login onLogin={handleLogin} />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/MyPage" element={<MyPage onLogout={handleLogout} />} />
                 <Route path="/Message" element={<Message />} />
-                <Route path="/MessageBox" element={<MessageBox />} />
+                <Route path="/messageBox" element={<MessageBox />} />
 
                 <Route path="/editUserInfo" element={<EditUserInfo />} />
-                <Route path="/event" element={<Event />} />
                 <Route path="/notices" element={<Notices />} />
                 <Route path="/question" element={<Question />} />
-                <Route path="/customer-service" element={<CustomerService />} />
               </Routes>
           </div>
           <div className="footer-section">

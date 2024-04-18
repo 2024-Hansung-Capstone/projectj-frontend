@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import './css/MarketPost.css';
-import { FaCamera } from "react-icons/fa";
-import { useMutation } from '@apollo/client'; 
 import { useNavigate } from 'react-router-dom';
+import "./css/Market.css";
+import { useMutation } from '@apollo/client'; 
 import { gql } from '@apollo/client';
 
 const CREATE_USED_PRODUCT = gql`
@@ -28,22 +27,13 @@ const CREATE_USED_PRODUCT = gql`
 
 const MarketPost = () => {
   const [title, setTitle] = useState('');
-  const [mainImage, setMainImage] = useState(null);
   const [price, setPrice] = useState('');
   const [detail, setDetail] = useState('');
-  const [images, setImages] = useState([{ text: '', preview: null }]);
-  const [nextId, setNextId] = useState(1);
-  
   const navigate = useNavigate();
   const [createUsedProduct] = useMutation(CREATE_USED_PRODUCT);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
-  };
-
-  const handleMainImageChange = (e) => {
-    const selectedImage = e.target.files[0];
-    setMainImage(URL.createObjectURL(selectedImage));
   };
 
   const handlePriceChange = (e) => {
@@ -57,6 +47,8 @@ const MarketPost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log("Submitting data:", { title, price, detail });
+
     try {
       const { data } = await createUsedProduct({
         variables: {
@@ -64,6 +56,8 @@ const MarketPost = () => {
             title,
             price: parseInt(price),
             detail,
+            category: "default", // 기본값 제공
+            state: "active" // 기본값 제공
           },
         },
       });
@@ -83,11 +77,6 @@ const MarketPost = () => {
         <div className="form-group">
           <label htmlFor="title" className="market-post-title">제목</label>
           <input type="text" className='market-post-input' id="title" value={title} onChange={handleTitleChange} required placeholder='제목'/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="mainImage" className="market-post-photo"><FaCamera /> 대표 사진 첨부 </label>
-          <input type="file" id="mainImage" accept="image/*" onChange={handleMainImageChange} required />
-          {mainImage && <img src={mainImage} alt="Main Preview" className="market-main-image-preview" />}
         </div>
         <div className="form-group">
           <label htmlFor="price" className="market-post-price">판매 가격</label>

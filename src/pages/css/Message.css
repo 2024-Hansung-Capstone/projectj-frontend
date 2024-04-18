@@ -1,3 +1,54 @@
-.message-container {
-
-}
+.message-compose-container {
+    width: 60%;
+    margin: 30px auto;
+    padding: 50px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+  
+  .message-compose-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #000;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .message-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #000;
+  }
+  
+  input[type='text'],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  textarea {
+    height: 150px;
+  }
+  
+  .message-submit-button {
+    padding: 10px 20px;
+    background-color: #209094;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .message-submit-button:hover {
+    background-color: #209094;
+  }
+  

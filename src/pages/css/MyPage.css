@@ -30,12 +30,10 @@
     padding: 10px;
     margin-left: 55px;
     border-right: 1px solid rgb(208, 209, 207);
-  }
-  
+}
 .mypage-user-container3 > div:last-child {
     border-right: none;
-  }
-
+}
 .mypage-blank {
     background-color: rgb(208, 209, 207);
     margin: 10px;
@@ -62,73 +60,31 @@
     padding: 10px;
     margin: 10px;
     font-size: 20px;
-    display: flex; /* 부모 요소를 플렉스 컨테이너로 설정 */
-    flex-direction: column; /* 세로 정렬 설정 */
+    display: flex;
+    flex-direction: column;
 }
-
 .mypage-list > a,
 .mypage-list > div {
     padding-bottom: 20px;
     margin: 10px;
     border-bottom: 1px solid rgb(208, 209, 207);
-    text-decoration: none; /* 밑줄 제거 */
-    color: inherit; /* 부모 요소의 텍스트 색상 상속 */
+    text-decoration: none;
+    color: inherit;
 }
-
 .mypage-list > a:hover,
 .mypage-list > div:hover {
-    color: inherit; /* 마우스 호버 시 텍스트 색상을 상속하여 변경 없음 */
+    color: inherit;
 }
-
-.mypage-edit {
-    margin: 10px;
-    padding: 10px;
-}
-.mypage-point {
-    flex: 1;
-    padding: 10px;
-    margin: 10px;
-}
-.mypage-message {
-    flex: 1;
-    padding: 10px;
-    margin: 10px;
-}
-.mypage-heart {
-    flex: 1;
-    padding: 10px;
-    margin: 10px;
-}   
-.mypage-event {
-    padding: 10px;
-    margin: 10px;
-}
-
-.mypage-question {
-    padding: 10px;
-    margin: 10px;
-}
-.mypage-notice {
-    padding: 10px;
-    margin: 10px;
-}
-.mypage-service {
-    padding: 10px;
-    margin: 10px;
-    
-}
+.mypage-edit,
+.mypage-point,
+.mypage-message,
+.mypage-heart,
+.mypage-event,
+.mypage-question,
+.mypage-notice,
+.mypage-service,
 .mypage-logout {
+    flex: 1;
     padding: 10px;
     margin: 10px;
 }
-
-
-@media (min-width: 1150px) {
-    /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
-    .mypage-container {
-      width: 100%; /* 요소의 너비를 100%로 설정 */
-      max-width: 1200px; /* 최대 너비를 1200px로 제한 */
-      margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
-      margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
-    }
-  }
