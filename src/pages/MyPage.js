@@ -10,6 +10,8 @@ import './css/MyPage.css';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import DELETE_USER_MUTATION from './gql/deleteUserGql';
 /*
 const GET_USER_INFO = gql`
   query FetchUserInfo($userId: String!) {
@@ -30,6 +32,35 @@ export default function MyPage({ onLogout , userId }) {
 
   const userInfo = data.fetchUserById;*/
   export default function MyPage({ onLogout }) {
+    const [deleteUser] = useMutation(DELETE_USER_MUTATION);
+
+  const getToken = () => {
+    return localStorage.getItem('token') || ''; // 토큰이 없을 경우 빈 문자열 반환
+  };
+
+  const handleDeleteUser = async () => {
+    try {
+      // 회원 탈퇴 요청 보내기
+      const { data } = await deleteUser({
+        // 요청 헤더에 JWT 토큰 추가
+        context: {
+          headers: {
+            authorization: `Bearer ${getToken()}` // 로컬 스토리지에서 JWT 토큰을 가져옴
+          }
+        }
+      });
+      if (data.deleteUser) {
+        // 회원 탈퇴 성공 시 로그아웃 수행
+        onLogout();
+      } else {
+        // 회원 탈퇴 실패
+        alert('회원 탈퇴에 실패했습니다.');
+      }
+    } catch (error) {
+      console.error('회원 탈퇴 오류:', error);
+      alert('회원 탈퇴에 실패했습니다.');
+    }
+  };
 
   return (
     <div className='mypage-container'>
@@ -56,7 +87,9 @@ export default function MyPage({ onLogout , userId }) {
         <Link className='mypage-question' to="/question"><LuMessagesSquare /> 1:1 문의</Link>
         <Link className='mypage-notice' to="/notices"><FaRegBell /> 공지사항</Link>
         <Link className='mypage-logout' to="/" onClick={onLogout}><IoLogOutOutline /> 로그아웃</Link>
-        <Link className='mypage-withdraw' to="/"><HiMiniNoSymbol /> 회원탈퇴</Link>
+        <Link className='mypage-withdraw-link' to="/" onClick={handleDeleteUser}>
+          <HiMiniNoSymbol /> 회원탈퇴
+        </Link>
       </div>
     </div>
   );
