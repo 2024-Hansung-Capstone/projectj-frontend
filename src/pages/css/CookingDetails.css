@@ -93,3 +93,86 @@
 .cooking-chat-button:hover {
   background-color: #209094;
 }
+
+/* 채팅창 스타일 */
+.chat-window {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 350px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 500px;
+}
+
+/* 채팅 내용 스타일 */
+.chat-content {
+  padding: 10px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+/* 채팅 메시지 스타일 */
+.message {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+/* 나의 메시지 스타일 */
+.message.me {
+  background-color: #29adb2;
+  color: #fff;
+  border: 1px solid #209094;
+  align-self: flex-end;
+}
+
+/* 상대방 메시지 스타일 */
+.message.them {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  align-self: flex-start;
+}
+
+/* 채팅 입력창 스타일 */
+.chat-input {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.chat-input input {
+  flex: 1;
+  margin-right: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.chat-input button {
+  padding: 8px 16px;
+  background-color: #29ADB2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.chat-input button:hover {
+  background-color: #209094;
+}
+
+/* 채팅창 닫기 버튼 스타일 */
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 4px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #555;
+}

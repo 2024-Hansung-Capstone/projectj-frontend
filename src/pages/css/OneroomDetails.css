@@ -1,61 +1,61 @@
 @media (min-width: 1150px) {
-    .oneroom-details-container {
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
-      margin-top: 80px;
-    }
-  }
-  
-  .or-main-image-container {
-    margin-bottom: 40px;
+  .oneroom-details-container {
     max-width: 800px;
+    margin: auto;
+    text-align: center;
+    margin-top: 80px;
   }
-  
-  .oneroom-main-image {
-    max-height: 600px;
-    width: auto;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .location {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .price {
-    margin-bottom: 60px;
-  }
-  
-  .description {
-    margin-bottom: 60px;
-  }
-  
-  .details-table {
-    margin: 0 auto;
-  }
-  
-  .details-table table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .details-table td {
-    padding: 10px;
-    border: 1px solid #ccc;
-  }
-  
-  .oneroom-no-image {
-    width: 600px;
-    height: 600px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ccc;
-    margin-left: auto;
-    margin-right: auto;
-  }
+}
+
+.or-main-image-container {
+  margin-bottom: 40px;
+  max-width: 800px;
+}
+
+.oneroom-main-image {
+  max-height: 600px;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.location {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.price {
+  margin-bottom: 60px;
+}
+
+.description {
+  margin-bottom: 60px;
+}
+
+.details-table {
+  margin: 0 auto;
+}
+
+.details-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.details-table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.oneroom-no-image {
+  width: 600px;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .oneroom-chat-button {
   font-size: 18px;
@@ -63,7 +63,7 @@
   position: fixed;
   bottom: 40px;
   right: 40px;
-  background-color: #29ADB2;
+  background-color: #29adb2;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -73,4 +73,41 @@
 
 .oneroom-chat-button:hover {
   background-color: #209094;
+}
+
+.message {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+.message-content {
+  word-wrap: break-word;
+}
+
+.message.me {
+  background-color: #29adb2;
+  color: #fff;
+  border: 1px solid #209094;
+  align-self: flex-end;
+}
+
+.message.them {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  align-self: flex-start;
+}
+
+.message-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.message-sender {
+  font-weight: bold;
+}
+
+.message-time {
+  color: #777;
 }
