@@ -1,31 +1,26 @@
-@media (min-width: 1150px) {
+@media (min-width: 1200px) {
   .cooking-details-container {
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
-      margin-top: 80px;
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
   }
 }
 
-.main-image-container {
+.ck-main-image-container {
   margin-bottom: 20px;
-  margin-left: 100px;
-}
-
-.main-image {
-  max-width: 100%;
-  height: auto;
-  max-width: 600px;
-  max-height: 600px;
 }
 
 .title {
-  font-size: 24px;
+  font-size: 30px;
   margin-bottom: 10px;
 }
 
 .content {
   margin-bottom: 20px;
+}
+
+.author {
+  margin-bottom: -10px;
 }
 
 .recipes-container {
@@ -44,21 +39,57 @@
   overflow: hidden;
 }
 
-.recipe-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .recipe-text {
   margin-top: 10px;
 }
 
-.no-image {
+.ck-main-no-image {
+  width: 1208px;
+  height: 400px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  margin-left: -205px;
+}
+
+.cooking-main-image {
+  max-width: 100%;
+  height: auto;
+  width: 1208px;
+  max-height: 600px;
+  margin-left: -205px;
+}
+
+.recipe-no-image {
   width: 600px;
   height: 600px; 
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #ccc;
+}
+
+.recipe-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cooking-chat-button {
+  font-size: 18px;
+  font-weight: bold;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background-color: #29ADB2;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cooking-chat-button:hover {
+  background-color: #209094;
 }

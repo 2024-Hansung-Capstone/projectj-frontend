@@ -4,14 +4,15 @@ import './css/OneroomDetails.css';
 const OneroomDetails = ({ mainImage, location, monthlyRent, jeonsePrice, managementFee, availableDate, building, floor, area, roomCount, bathroomCount, parking, description }) => {
   return (
     <div className="oneroom-details-container">
-      <div className="main-image-container">
+      <div className="or-main-image-container">
         {mainImage ? (
-          <img src={mainImage} alt="Main" className="main-image" />
+          <img src={mainImage} alt="Main" className="oneroom-main-image" />
         ) : (
-          <div className="no-image">No Image</div>
+          <div className="oneroom-no-image">No Image</div>
         )}
       </div>
-      <h2 className="location">{location}</h2>
+      <p className="author">글쓴이</p>
+      <h2 className="location">{location || '위치 미입력'}</h2>
       <div className="price">
         {monthlyRent || jeonsePrice ? (
           <h2>{monthlyRent ? '월세' : '전세'}</h2>
@@ -62,6 +63,7 @@ const OneroomDetails = ({ mainImage, location, monthlyRent, jeonsePrice, managem
           </tbody>
         </table>
       </div>
+      <button className='oneroom-chat-button'> 채팅하기</button>
     </div>
   );
 }

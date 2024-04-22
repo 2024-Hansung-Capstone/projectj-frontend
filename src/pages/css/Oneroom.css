@@ -95,3 +95,22 @@
     margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
   }
 }
+
+
+.oneroom-chat-button {
+  font-size: 18px;
+  font-weight: bold;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background-color: #29ADB2;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.oneroom-chat-button:hover {
+  background-color: #209094;
+}

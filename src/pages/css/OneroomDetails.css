@@ -7,13 +7,16 @@
     }
   }
   
-  .main-image-container {
-    margin-bottom: 20px;
+  .or-main-image-container {
+    margin-bottom: 40px;
+    max-width: 800px;
   }
   
-  .main-image {
-    max-width: 100%;
-    height: auto;
+  .oneroom-main-image {
+    max-height: 600px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .location {
@@ -43,11 +46,13 @@
     border: 1px solid #ccc;
   }
   
-  .no-image {
+  .oneroom-no-image {
     width: 600px;
     height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid #ccc;
+    margin-left: auto;
+    margin-right: auto;
   }
