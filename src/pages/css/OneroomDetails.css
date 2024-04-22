@@ -56,3 +56,21 @@
     margin-left: auto;
     margin-right: auto;
   }
+
+.oneroom-chat-button {
+  font-size: 18px;
+  font-weight: bold;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background-color: #29ADB2;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.oneroom-chat-button:hover {
+  background-color: #209094;
+}
