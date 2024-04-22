@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CookingFilterBar from '../components/CookingFilterBar';
 import Cooking_Item from '../item/Cooking_Item';
-import CookingPost from './OnerCookingPostoomDetails';
+import CookingPost from './CookingPost';
 import { useNavigate } from 'react-router-dom';
 import './css/Cooking.css';
 
