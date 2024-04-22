@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CookingFilterBar from '../components/CookingFilterBar';
 import Cooking_Item from '../item/Cooking_Item';
-import OneroomDetails from './OneroomDetails';
+import CookingPost from './OnerCookingPostoomDetails';
 import { useNavigate } from 'react-router-dom';
 import './css/Cooking.css';
 
@@ -14,7 +14,7 @@ const Cooking = () => {
   };
 
   const handlePostButtonClick = () => {
-    navigate('/OneroomDetails');
+    navigate('/CookingPost');
   };
 
   return (
