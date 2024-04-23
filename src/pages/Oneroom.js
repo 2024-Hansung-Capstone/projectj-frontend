@@ -12,6 +12,7 @@ const Oneroom = () => {
   const [monthlyRent, setMonthlyRent] = useState(0);
   const [isFilterBarOpen, setFilterBarOpen] = useState(true);
   const [isMapVisible, setMapVisible] = useState(false);
+  const [isListVisible, setListVisible] = useState(true);
 
   const toggleFilterBar = () => {
     setFilterBarOpen(!isFilterBarOpen);
@@ -41,6 +42,10 @@ const Oneroom = () => {
     setMapVisible(e.target.checked);
   };
 
+  const handleListToggleChange = (e) => {
+    setListVisible(e.target.checked);
+  };
+
   return (
     <div className='oneroom-container'>
       <div className={`toggle-button ${isFilterBarOpen ? 'open' : 'closed'}`} onClick={toggleFilterBar}>
@@ -65,6 +70,7 @@ const Oneroom = () => {
               onDepositAmountChange={handleDepositAmountChange}
               onMonthlyRentChange={handleMonthlyRentChange}
               onMapToggleChange={handleMapToggleChange}
+              onListToggleChange={handleListToggleChange}
             />
           </div>
         </div>
@@ -77,6 +83,18 @@ const Oneroom = () => {
             <Oneroom_Item roomImage='/oneroomImage_2.webp' location='서울특별시 서초구 방배동' price='월세 70 / 1000' />
             <Oneroom_Item roomImage='/oneroomImage_3.webp' location='서울특별시 강북구 수유동' price='월세 30 / 500' />
           </div>
+        </div>
+        <hr className='divider' />
+        <div className='oneroom-items-container'>
+          {isListVisible && (
+            <div className='dishes-grid'>
+              {[...Array(40)].map((_, index) => (
+                <div key={index} className='dish-item'>
+                  <Oneroom_Item dishImage={`/path/to/image${index % 10}.jpg`} location={`위치${index}`} price={`월세/전세 가격${index}`} />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         {isMapVisible && <Map />}
       </div>
