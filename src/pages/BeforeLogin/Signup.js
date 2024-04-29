@@ -25,7 +25,7 @@ const SIGN_UP = gql`
 
 const CREATE_TOKEN = gql`
   mutation CreateToken($phone_number: String!) {
-    createToken(phone_number: $phone_number)
+    testCreateToken(phone_number: $phone_number)
   }
 `;
 
@@ -115,83 +115,6 @@ const Signup = () => {
     fetchDongList(selectedSigunguCode);
   };
 
-  const handleSignup = async () => {
-    const newErrorMessages = [];
-
-    const nameInput = document.getElementById('nameInput');
-    const usernameInput = document.getElementById('usernameInput');
-    const passwordInput = document.getElementById('passwordInput');
-    const confirmPasswordInput = document.getElementById('confirmPasswordInput');
-    const emailInput = document.getElementById('emailInput');
-    const yearInput = document.getElementById('yearInput');
-    const monthInput = document.getElementById('monthInput');
-    const dayInput = document.getElementById('dayInput');
-
-    setErrorMessages([]);
-
-    if (!nameInput.value) {
-      newErrorMessages.push('이름을 입력해주십시오.');
-    }
-    if (!usernameInput.value) {
-      newErrorMessages.push('아이디를 입력해주십시오.');
-    }
-    if (!passwordInput.value) {
-      newErrorMessages.push('비밀번호를 입력해주십시오.');
-    }
-    if (!confirmPasswordInput.value) {
-      newErrorMessages.push('비밀번호를 다시 입력해주십시오.');
-    }
-    if (!emailInput.value) {
-      newErrorMessages.push('이메일을 입력해주십시오.');
-    }
-    if (!yearInput.value || !monthInput.value || !dayInput.value) {
-      newErrorMessages.push('생년월일을 입력해주십시오.');
-    }
-    if (!isAgeChecked) {
-      newErrorMessages.push('만 14세 이상입니다.');
-    }
-    if (!isTermsChecked || !isPrivacyChecked) {
-      newErrorMessages.push('약관에 동의해주십시오.');
-    }
-
-    setErrorMessages(newErrorMessages);
-
-    if (newErrorMessages.length === 0) {
-      console.log('회원가입 버튼이 클릭되었습니다.');
-  
-      const phoneInput = document.getElementById('phoneInput');
-      const phoneTokenInput = document.getElementById('phoneTokenInput');
-  
-      // 휴대폰 번호와 토큰을 가져와서 mutation에 전달
-      const phoneNumber = phoneInput.value;
-      const token = phoneTokenInput.value;
-  
-      try {
-        const res = await signUp({
-          variables: {
-            createUserInput: {
-              id: document.getElementById('usernameInput').value,
-              name: document.getElementById('nameInput').value,
-              password: document.getElementById('passwordInput').value,
-              email: document.getElementById('emailInput').value,
-              gender: document.getElementById('genderSelect').value,
-              birth_at: `${document.getElementById('yearInput').value}-${document.getElementById('monthInput').value}-${document.getElementById('dayInput').value}`,
-            },
-            phone_number: phoneNumber,
-            token: token,
-          },
-        });
-  
-        console.log('회원가입 및 휴대폰 인증 결과:', res);
-        navigate('/');
-      } catch (error) {
-        console.error('회원가입 또는 휴대폰 인증 중 오류 발생:', error);
-      }
-    } else {
-      alert('입력값을 확인하고 약관에 동의해주십시오.');
-    }
-  };
-
   const generateOptions = (start, end) => {
     const options = [];
     for (let i = start; i <= end; i++) {
@@ -212,7 +135,7 @@ const Signup = () => {
       try {
         // createToken 뮤테이션 호출
         const { data } = await createTokenMutation({ variables: { phone_number: phoneNumberValue } });
-        if (data.createToken) {
+        if (data.testCreateToken) {
           setShowAuthInput(true);
           setPhoneNumber(phoneNumberValue); // 전화번호 상태 설정
         }
@@ -247,12 +170,13 @@ const Signup = () => {
       const res = await signUp({
         variables: {
           createUserInput: {
-            id: document.getElementById('usernameInput').value,
             name: document.getElementById('nameInput').value,
             password: document.getElementById('passwordInput').value,
             email: document.getElementById('emailInput').value,
             gender: document.getElementById('genderSelect').value,
             birth_at: `${document.getElementById('yearInput').value}-${document.getElementById('monthInput').value}-${document.getElementById('dayInput').value}`,
+            dong_nm: selectedDong.code,
+            mbti: document.getElementById('mbtiSelect').value,
           },
           phone_number: phoneNumber, // 휴대폰 번호는 위에서 가져온 값으로 사용
           token: phoneToken, // 토큰
