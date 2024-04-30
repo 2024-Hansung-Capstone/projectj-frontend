@@ -15,7 +15,7 @@ const GET_BOARDS = gql`
       detail
       view
       like
-      createat
+      create_at
     }
   }
 `;

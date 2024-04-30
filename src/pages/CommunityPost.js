@@ -16,7 +16,7 @@ const CREATE_BOARD = gql`
       detail
       view
       like
-      createat
+      create_at
     }
   }
 `;

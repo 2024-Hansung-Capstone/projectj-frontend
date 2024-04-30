@@ -14,20 +14,9 @@ import { gql } from '@apollo/client';
 const GET_USED_PRODUCTS = gql`
   query GetUsedProducts {
     fetchUsedProducts {
-      id
-      user {
-        id
-        name
-        email
-      }
       title
-      view
-      like
       price
       detail
-      category
-      state
-      create_at
     }
   }
 `;
