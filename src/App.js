@@ -61,7 +61,8 @@ function App() {
                 <Route path="/Mate" element={isAuthenticated ? <Mate /> : <Login onLogin={handleLogin} />} />
                 <Route path="/Community" element={isAuthenticated ? <Community /> : <Login onLogin={handleLogin} />} />
                 <Route path="/Market" element={isAuthenticated ? <Market /> : <Login onLogin={handleLogin} />} />
-                
+                <Route path="/MarketPost" element={isAuthenticated ? <MarketPost /> : <Login onLogin={handleLogin} />} />
+                <Route path="/CommunityPost" element={isAuthenticated ? <CommunityPost /> : <Login onLogin={handleLogin} />} />
 
                 <Route path="/Login" element={<Login onLogin={handleLogin} />} />
                 <Route path="/Signup" element={<Signup />} />
@@ -70,13 +71,10 @@ function App() {
                 <Route path="/Cooking" element={<Cooking />} />
                 <Route path="/CookingPost" element={<CookingPost />} />
                 <Route path="/CookingDetails" element={<CookingDetails />} />
-                <Route path="/CommunityPost" element={<CommunityPost />} />
-                <Route path="/MarketPost" element={isAuthenticated ? <MarketPost /> : <Login onLogin={handleLogin} />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/MyPage" element={<MyPage onLogout={handleLogout} />} />
                 <Route path="/Message" element={<Message />} />
                 <Route path="/messageBox" element={<MessageBox />} />
-
                 <Route path="/editUserInfo" element={<EditUserInfo />} />
                 <Route path="/notices" element={<Notices />} />
                 <Route path="/question" element={<Question />} />

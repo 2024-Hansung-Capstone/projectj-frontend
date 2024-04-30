@@ -2,7 +2,7 @@ import React from 'react';
 import "./css/Market_Item.css";
 
 export default function Market_Item({ product }) {
-    // 게시물이 존재하지 않을 경우 빈 상태로 반환합니다.
+    // 게시물이 존재하지 않을 경우 빈 상태로 반환
     if (!product) return null;
 
     return (

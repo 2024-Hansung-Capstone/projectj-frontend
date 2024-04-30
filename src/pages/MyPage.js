@@ -30,7 +30,9 @@ export default function MyPage({ onLogout , userId }) {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const userInfo = data.fetchUserById;*/
+  const userInfo = data.fetchUserById;
+  */
+ 
   export default function MyPage({ onLogout }) {
     const [deleteUser] = useMutation(DELETE_USER_MUTATION);
 

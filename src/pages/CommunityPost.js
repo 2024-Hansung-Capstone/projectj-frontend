@@ -6,7 +6,7 @@ import { gql } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { BoardList_Item } from '../item/BoardList_Item'; 
 
-// CREATE_BOARD 뮤테이션 수정
+// CREATE_BOARD 뮤테이션 정의
 const CREATE_BOARD = gql`
   mutation CreateBoard($createBoardInput: CreateBoardInput!) {
     createBoard(createBoardInput: $createBoardInput) {
@@ -21,14 +21,20 @@ const CREATE_BOARD = gql`
   }
 `;
 
-// CommunityPost 컴포넌트 수정
 const CommunityPost = ({ onPost }) => {
   const [title, setTitle] = useState('');
   const [mainImage, setMainImage] = useState(null);
   const [detail, setDetail] = useState('');
   const [category, setCategory] = useState(''); 
-  const [createBoard] = useMutation(CREATE_BOARD);
   const navigate = useNavigate();
+  
+  const [createBoard] = useMutation(CREATE_BOARD, {
+    context: {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || ''}`
+      }
+    }
+  });
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -66,9 +72,17 @@ const CommunityPost = ({ onPost }) => {
       navigate('/Community'); // 페이지 이동
   
     } catch (error) {
-      console.error('Error creating board:', error);
+      if (error.message.includes('Unauthorized')) {
+        // 인증되지 않았을 때의 처리
+        alert('게시물을 등록할 수 있는 권한이 없습니다. 로그인 후 다시 시도해주세요.');
+      } else {
+        // 그 외의 오류 처리
+        console.error('Error creating board:', error);
+        alert('게시물을 등록하는 중 오류가 발생했습니다. 다시 시도해주세요.');
+      }
     }
   };
+  
 
   return (
     <div className="community-post-container">

@@ -23,6 +23,10 @@ const MarketPost = ({ isLoggedIn }) => {
   const navigate = useNavigate();
   const [createUsedProduct] = useMutation(CREATE_USED_PRODUCT);
 
+  const getToken = () => {
+    return localStorage.getItem('token') || ''; // Retrieve token from local storage
+  };
+
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
@@ -34,6 +38,7 @@ const MarketPost = ({ isLoggedIn }) => {
   const handleDetailChange = (e) => {
     setDetail(e.target.value);
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,10 +52,15 @@ const MarketPost = ({ isLoggedIn }) => {
             title,
             price: parseInt(price),
             detail,
-            category: "default", // 기본값 제공
-            state: "1" // 기본값 제공
+            category: "default", // Providing default value
+            state: "1" // Providing default value
           },
         },
+        context: {
+          headers: {
+            authorization: `Bearer ${getToken()}` // Include JWT token in the request headers
+          }
+        }
       });
   
       console.log('Newly added used product:', data.createUsedProduct);
@@ -60,6 +70,7 @@ const MarketPost = ({ isLoggedIn }) => {
       console.error('Error adding used product:', error);
     }
   };
+  
   
   return (
     <div className="market-post-container">
