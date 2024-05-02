@@ -6,21 +6,24 @@ import { useQuery, useMutation } from '@apollo/client';
 import { gql } from '@apollo/client';
 
 const SIGN_UP = gql`
-  mutation SignUp($createUserInput: CreateUserInput!, $phone_number: String!, $token: String!) {
-    signUp(createUserInput: $createUserInput) {
+mutation SignUp($createUserInput: CreateUserInput!) {
+  signUp(createUserInput: $createUserInput) {
+    id
+    dong {
       id
-      dong
-      email
       name
-      gender
-      birth_at
-      mbti
-      phone_number
-      is_find_mate
-      point
-      create_at
     }
+    email
+    name
+    gender
+    birth_at
+    mbti
+    phone_number
+    is_find_mate
+    point
+    create_at
   }
+}
 `;
 
 const CREATE_TOKEN = gql`
@@ -115,6 +118,100 @@ const Signup = () => {
     fetchDongList(selectedSigunguCode);
   };
 
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+  
+    const nameInput = document.getElementById('nameInput');
+    const passwordInput = document.getElementById('passwordInput');
+    const confirmPasswordInput = document.getElementById('confirmPasswordInput');
+    const emailInput = document.getElementById('emailInput');
+    const yearInput = document.getElementById('yearInput');
+    const monthInput = document.getElementById('monthInput');
+    const dayInput = document.getElementById('dayInput');
+    const phoneInput = document.getElementById('phoneInput');
+    const phoneTokenInput = document.getElementById('phoneTokenInput');
+  
+    const newErrorMessages = [];
+  
+    if (!nameInput.value) {
+      newErrorMessages.push('이름을 입력해주십시오.');
+    }
+    if (!passwordInput.value) {
+      newErrorMessages.push('비밀번호를 입력해주십시오.');
+    }
+    if (!confirmPasswordInput.value) {
+      newErrorMessages.push('비밀번호를 다시 입력해주십시오.');
+    }
+    if (!emailInput.value) {
+      newErrorMessages.push('이메일을 입력해주십시오.');
+    }
+    if (!yearInput.value || !monthInput.value || !dayInput.value) {
+      newErrorMessages.push('생년월일을 입력해주십시오.');
+    }
+    if (!phoneInput.value) {
+      newErrorMessages.push('전화번호를 입력해주세요.');
+    }
+    if (!isAgeChecked) {
+      newErrorMessages.push('만 14세 이상입니다.');
+    }
+    if (!isTermsChecked || !isPrivacyChecked) {
+      newErrorMessages.push('약관에 동의해주십시오.');
+    }
+  
+    setErrorMessages(newErrorMessages);
+  
+    if (newErrorMessages.length === 0) {
+      console.log('회원가입 버튼이 클릭되었습니다.');
+  
+      const phoneNumber = phoneInput.value;
+      const token = phoneTokenInput.value;
+  
+      try {
+        // 여기서 새로운 코드를 추가하여 입력값을 콘솔에 출력합니다.
+        console.log('입력한 정보:', {
+          name: nameInput.value,
+          password: passwordInput.value,
+          email: emailInput.value,
+          gender: document.getElementById('genderSelect').value,
+          birth_year: `${yearInput.value}`,
+          birth_month: `${monthInput.value}`,
+          birth_day: `${dayInput.value}`,
+          phone_number: phoneNumber,
+          dong_nm: selectedDong.code,
+          mbti: document.getElementById('mbtiSelect').value,
+          is_find_mate: true
+        });
+  
+        const res = await signUp({
+          variables: {
+            createUserInput: {
+              name: nameInput.value,
+              password: passwordInput.value,
+              email: emailInput.value,
+              gender: document.getElementById('genderSelect').value,
+              birth_year: `${yearInput.value}`,
+              birth_month: `${monthInput.value}`,
+              birth_day: `${dayInput.value}`,
+              dong_nm: selectedDong.code,
+              mbti: document.getElementById('mbtiSelect').value,
+              phone_number: phoneNumber,
+              is_find_mate: true
+            },
+            token: token,
+          },
+        });
+  
+        console.log('회원가입 및 휴대폰 인증 결과:', res);
+        navigate('/');
+      } catch (error) {
+        console.error('회원가입 또는 휴대폰 인증 중 오류 발생:', error);
+      }
+    } else {
+      alert('입력값을 확인하고 약관에 동의해주십시오.');
+    }
+  };
+  
+
   const generateOptions = (start, end) => {
     const options = [];
     for (let i = start; i <= end; i++) {
@@ -138,6 +235,7 @@ const Signup = () => {
         if (data.testCreateToken) {
           setShowAuthInput(true);
           setPhoneNumber(phoneNumberValue); // 전화번호 상태 설정
+          console.log('토큰:', data.testCreateToken);
         }
       } catch (error) {
         console.error('토큰 생성 중 오류:', error);
@@ -162,37 +260,10 @@ const Signup = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    // Promise -> Node js 비동기 처리
-    // await 비동기가 끝날때까지 기다려줌
-    try {
-      const res = await signUp({
-        variables: {
-          createUserInput: {
-            name: document.getElementById('nameInput').value,
-            password: document.getElementById('passwordInput').value,
-            email: document.getElementById('emailInput').value,
-            gender: document.getElementById('genderSelect').value,
-            birth_at: `${document.getElementById('yearInput').value}-${document.getElementById('monthInput').value}-${document.getElementById('dayInput').value}`,
-            dong_nm: selectedDong.code,
-            mbti: document.getElementById('mbtiSelect').value,
-          },
-          phone_number: phoneNumber, // 휴대폰 번호는 위에서 가져온 값으로 사용
-          token: phoneToken, // 토큰
-        },
-      });
-      console.log('res', res);
-    } catch (error) {
-      console.error('회원가입 또는 휴대폰 인증 중 오류 발생:', error);
-    }
-    // 결과를 출력
-  }
-
   return (
     <div className="signup-form-container">
       <h2 className="signup-form-title">회원가입</h2>
-      <form onSubmit={handleSubmit} >
+      <form onSubmit={handleFormSubmit} >
         <div className="signup-form-item" style={{ borderTopLeftRadius: '6px', borderTopRightRadius: '6px' }}>
           <input
             type="text"
