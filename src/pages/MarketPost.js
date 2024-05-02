@@ -24,7 +24,7 @@ const MarketPost = ({ isLoggedIn }) => {
   const [createUsedProduct] = useMutation(CREATE_USED_PRODUCT);
 
   const getToken = () => {
-    return localStorage.getItem('token') || ''; // Retrieve token from local storage
+    return localStorage.getItem('token') || ''; 
   };
 
   const handleTitleChange = (e) => {
@@ -52,13 +52,13 @@ const MarketPost = ({ isLoggedIn }) => {
             title,
             price: parseInt(price),
             detail,
-            category: "default", // Providing default value
-            state: "1" // Providing default value
+            category: "default",
+            state: "1" 
           },
         },
         context: {
           headers: {
-            authorization: `Bearer ${getToken()}` // Include JWT token in the request headers
+            authorization: `Bearer ${getToken()}`
           }
         }
       });

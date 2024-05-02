@@ -89,8 +89,9 @@ export default function Market() {
         ) : (
           data &&
           data.fetchUsedProducts.map((product) => (
-            <Market_Item key={product.id} product={product} />
+          <Market_Item key={product.id} product={product} />
           ))
+
         )}
       </div>
       <button className="post-button" onClick={handleDeleteUser}>
