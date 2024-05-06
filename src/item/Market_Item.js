@@ -16,7 +16,7 @@ export default function Market_Item({ product }) {
             </div>
             <div className='marketitem-main2'>
                 <div className="marketitem-price">
-                    <p>{product.price}</p>
+                    <p>{product.price} 원</p>
                 </div>
                 <div className="marketitem-id">
                     <p>{product.id}</p>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import "./css/Market.css";
 import { useMutation } from '@apollo/client'; 
 import { gql } from '@apollo/client';
@@ -16,35 +16,30 @@ const CREATE_USED_PRODUCT = gql`
   }
 `;
 
-const MarketPost = ({ isLoggedIn }) => {
+const MarketPost = () => {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [detail, setDetail] = useState('');
+
   const navigate = useNavigate();
+  const location = useLocation(); // useLocation 사용
+  const isLoggedIn = location.state?.isLoggedIn; // Market.js에서 전달된 로그인 상태를 받음
+
   const [createUsedProduct] = useMutation(CREATE_USED_PRODUCT);
-
-  const getToken = () => {
-    return localStorage.getItem('token') || ''; 
-  };
-
-  const handleTitleChange = (e) => {
+  const handleTitleChange = (e) => {  
     setTitle(e.target.value);
   };
 
-  const handlePriceChange = (e) => {
+  const handlePriceChange = (e) => {  
     setPrice(e.target.value);
   };
 
-  const handleDetailChange = (e) => {
+  const handleDetailChange = (e) => {  
     setDetail(e.target.value);
   };
 
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {  
     e.preventDefault();
-  
-    console.log("Submitting data:", { title, price, detail});
-  
     try {
       const { data } = await createUsedProduct({
         variables: {
@@ -58,11 +53,10 @@ const MarketPost = ({ isLoggedIn }) => {
         },
         context: {
           headers: {
-            authorization: `Bearer ${getToken()}`
+            authorization: `Bearer ${localStorage.getItem('token') || ''}`
           }
         }
       });
-  
       console.log('Newly added used product:', data.createUsedProduct);
   
       navigate('/market');
@@ -70,7 +64,6 @@ const MarketPost = ({ isLoggedIn }) => {
       console.error('Error adding used product:', error);
     }
   };
-  
   
   return (
     <div className="market-post-container">
@@ -84,7 +77,7 @@ const MarketPost = ({ isLoggedIn }) => {
     
           <div className="form-group">
             <label htmlFor="price" className="market-post-price">판매 가격</label>
-            <input id="price"className='market-post-input' value={price} onChange={handlePriceChange} required placeholder="₩ 가격을 입력해주세요." />
+            <input id="price" className='market-post-input' value={price} onChange={handlePriceChange} required placeholder="₩ 가격을 입력해주세요." />
           </div>
           <div className="form-group">
             <label htmlFor="detail" className="market-post-detail">상품 설명</label>

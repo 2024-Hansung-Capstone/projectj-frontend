@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import "./css/Market.css";
 import Market_Item from '../item/Market_Item.js';
@@ -22,32 +22,20 @@ export default function Market() {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
   const { loading, error, data } = useQuery(GET_USED_PRODUCTS);
+  
+  // 로그인 상태를 확인하는 상태 추가
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // 컴포넌트가 마운트될 때 로컬 스토리지에서 토큰을 확인하여 로그인 상태 설정
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+  }, []);
 
   const handlePostButtonClick = () => {
-    navigate('/MarketPost');
+    navigate('/MarketPost', { state: { isLoggedIn } }); // 로그인 상태를 navigate의 state로 전달
   };
 
-  const getToken = () => {
-    return localStorage.getItem('token') || ''; // 토큰이 없을 경우 빈 문자열 반환
-  };
-
-  const handleDeleteUser = async () => {
-    try {
-      // 회원 탈퇴 요청 보내기
-      const token = getToken();
-      // Use token to perform user deletion logic
-      if (token) {
-        // Perform user deletion logic here
-        navigate('/MarketPost');
-      } else {
-        // Handle case where token is not available
-        alert('토큰이 유효하지 않습니다.');
-      }
-    } catch (error) {
-      console.error('Error handling delete user:', error);
-      alert('사용자 삭제 중 오류가 발생했습니다.');
-    }
-  };
 
   return (
     <div className="market-container">
@@ -72,7 +60,6 @@ export default function Market() {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {/* 카테고리 목록 */}
           <p>의류</p>
           <p>신발</p>
           <p>가전</p>
@@ -88,13 +75,12 @@ export default function Market() {
           <p>Error: {error.message}</p>
         ) : (
           data &&
-          data.fetchUsedProducts.map((product) => (
-          <Market_Item key={product.id} product={product} />
+          data.fetchUsedProducts.map((product, index) => (
+            <Market_Item key={index} product={product} />
           ))
-
         )}
       </div>
-      <button className="post-button" onClick={handleDeleteUser}>
+      <button className="post-button" onClick={handlePostButtonClick}>
         상품 등록
       </button>
     </div>

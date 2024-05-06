@@ -21,6 +21,22 @@ const CREATE_BOARD = gql`
   }
 `;
 
+/*
+const CREATE_BOARD = gql`
+  mutation CreateBoard($category: String!, $title: String!, $detail: String!) {
+    createBoardWithImage(createBoardInput: {
+      category: $category,
+      title: $title,
+      detail: $detail,
+    }) {
+      category
+      title
+      detail
+    }
+  }
+`;
+*/
+
 const CommunityPost = ({ onPost }) => {
   const [title, setTitle] = useState('');
   const [mainImage, setMainImage] = useState(null);

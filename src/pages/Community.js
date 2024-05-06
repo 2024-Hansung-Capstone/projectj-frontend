@@ -1,27 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import './css/Community.css';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client'; 
 import { gql } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import Community_Item from '../item/Community_Item';
 import { BoardList_Item } from '../item/BoardList_Item'; 
 
-const GET_BOARDS = gql`
-  query FetchBoards {
-    fetchBoards(category: "") {
-      id
+const GET_BOARD = gql`
+  query GetBoard {
+    fetchBoards {
       category
       title
       detail
-      view
-      like
-      create_at
+    }
+  }
+`;
+
+const CREATE_BOARD = gql`
+  mutation CreateBoard($category: String!, $title: String!, $detail: String!) {
+    createBoardWithImage(createBoardInput: {
+      category: $category,
+      title: $title,
+      detail: $detail,
+    }) {
+      category
+      title
+      detail
     }
   }
 `;
 
 const Community = () => {
-  const { loading, error, data } = useQuery(GET_BOARDS);
+  const { loading, error, data } = useQuery(GET_BOARD);
+  const [createBoard] = useMutation(CREATE_BOARD); // 수정된 부분
   const navigate = useNavigate();
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedItemData, setSelectedItemData] = useState(null);
@@ -39,6 +50,21 @@ const Community = () => {
 
   const handlePostButtonClick = () => {
     navigate('/CommunityPost');
+  };
+
+  const handleCreateBoard = async () => {
+    try {
+      await createBoard({
+        variables: {
+          category: "원룸찾기",
+          title: "새로운 게시물 제목",
+          detail: "새로운 게시물 내용",
+        },
+        refetchQueries: [{ query: GET_BOARD }],
+      });
+    } catch (error) {
+      console.error('Error creating board:', error);
+    }
   };
 
   return (
@@ -75,6 +101,7 @@ const Community = () => {
         </div>
       </div>
       <button className='post-button' onClick={handlePostButtonClick}>게시물 등록</button>
+      <button className='post-button' onClick={handleCreateBoard}>게시물 생성</button>
     </div>
   );
 }
