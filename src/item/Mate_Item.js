@@ -5,9 +5,8 @@ import './css/Mate_Item.css';
 export default function Mate_Item({ user }) {
     const navigate = useNavigate();
 
-    // Handle when user or user properties are undefined
     if (!user) {
-        return <p>Loading user data...</p>; // or some other placeholder content
+        return <p>Loading user data...</p>;
     }
 
     // Extracting and calculating data with fallbacks
@@ -19,9 +18,10 @@ export default function Mate_Item({ user }) {
     const handleSendMessage = () => {
         const isLoggedIn = true; // Assuming the user is logged in
         if (isLoggedIn) {
-            navigate('../pages/AfterLogin/message');
+            navigate('../Message');
         } else {
-            navigate('../pages/AfterLogin/login');
+            navigate('../pages/Before/Login');
+            
         }
     };
 

@@ -21,6 +21,7 @@ const FETCH_ALL_USERS = gql`
   }
 `;
 
+
 export default function Mate() {
   const [isFilterVisible, setFilterVisible] = useState(false);
   const { data, loading, error } = useQuery(FETCH_ALL_USERS);

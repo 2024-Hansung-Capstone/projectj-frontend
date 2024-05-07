@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { useQuery } from '@apollo/client';
 import './css/Home.css';
 import Mate_Item from '../item/Mate_Item';
 import OneRoom_Item from '../item/Oneroom_Item';
@@ -8,6 +8,31 @@ import Community_Hot_Item from '../item/Community_Hot_Item';
 import Tip_Item from '../item/Tip_Item';
 import YouTube from "react-youtube";
 import Market_Item from '../item/Market_Item';
+import { gql } from '@apollo/client';
+
+// 기존 쿼리
+const GET_USED_PRODUCTS = gql`
+  query GetUsedProducts {
+    fetchUsedProducts {
+      title
+      price
+      detail
+    }
+  }
+`;
+
+// Mate_Item에 필요한 쿼리 추가
+const GET_MATES = gql`
+  query GetMates {
+    fetchMates {
+      id
+      name
+      age
+      gender
+      interests
+    }
+  }
+`;
 
 export const images = [
   "/mainPhoto_1.webp",
@@ -19,6 +44,10 @@ export const images = [
 
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // 쿼리를 사용하여 데이터 가져오기
+  const { data: matesData } = useQuery(GET_MATES);
+  const { data: productsData } = useQuery(GET_USED_PRODUCTS);
 
   const nextSlide = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -67,13 +96,18 @@ const Home = () => {
         <OneRoom_Item />
       </div>
       <h4>자취메이트</h4>
-      <div className='Home-section Home-Mate'>
-        <Mate_Item />
+      <div className="market-item">
+        {matesData && matesData.fetchMates.map((user, index) => (
+          <Mate_Item key={user.id} user={index} />
+        ))}
       </div>
       <h4>중고마켓</h4>
-      <div className='Home-section Home-Market'>
-        <Market_Item />
+      <div className="market-item">
+        {productsData && productsData.fetchUsedProducts.map((product, index) => (
+        <Market_Item key={index} product={product} />
+        ))}
       </div>
+
       <h4>커뮤니티(핫 게시물)</h4>
       <div className='Home-section Home-Community'>
         <Community_Hot_Item />

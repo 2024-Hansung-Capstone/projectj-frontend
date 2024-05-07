@@ -11,6 +11,7 @@ import { gql } from '@apollo/client';
 const GET_USED_PRODUCTS = gql`
   query GetUsedProducts {
     fetchUsedProducts {
+      id
       title
       price
       detail
@@ -36,6 +37,9 @@ export default function Market() {
     navigate('/MarketPost', { state: { isLoggedIn } }); // 로그인 상태를 navigate의 state로 전달
   };
 
+  const handleItemClick = (product) => {
+    navigate('/MarketDetail', {state: { product }});
+  };
 
   return (
     <div className="market-container">
@@ -74,9 +78,10 @@ export default function Market() {
         ) : error ? (
           <p>Error: {error.message}</p>
         ) : (
+          // Market_Item 컴포넌트 렌더링 부분
           data &&
           data.fetchUsedProducts.map((product, index) => (
-            <Market_Item key={index} product={product} />
+            <Market_Item key={index} product={product} onClick={handleItemClick} />
           ))
         )}
       </div>

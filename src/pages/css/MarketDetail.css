@@ -1,0 +1,28 @@
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .header {
+    color: #333;
+  }
+  
+  .productTitle {
+    margin: 10px 0;
+    color: #007bff;
+  }
+  
+  .productPrice {
+    margin: 5px 0;
+    color: #28a745;
+  }
+  
+  .productDetail {
+    margin: 15px 0;
+    color: #6c757d;
+  }
+  

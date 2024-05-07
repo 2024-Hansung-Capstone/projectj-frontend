@@ -20,6 +20,7 @@ import CookingPost from './pages/CookingPost';
 import CookingDetails from "./pages/CookingDetails";
 import CommunityPost from './pages/CommunityPost';
 import MarketPost from './pages/MarketPost';
+import MarketDetail from './pages/MarketDetail';
 import Community from "./pages/Community";
 
 // mypage
@@ -62,6 +63,7 @@ function App() {
                 <Route path="/Community" element={isAuthenticated ? <Community /> : <Login onLogin={handleLogin} />} />
                 <Route path="/Market" element={isAuthenticated ? <Market /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MarketPost" element={isAuthenticated ? <MarketPost /> : <Login onLogin={handleLogin} />} />
+                <Route path="/MarketDetail" element={isAuthenticated ? <MarketDetail /> : <Login onLogin={handleLogin} />} />
                 <Route path="/CommunityPost" element={isAuthenticated ? <CommunityPost /> : <Login onLogin={handleLogin} />} />
 
                 <Route path="/Login" element={<Login onLogin={handleLogin} />} />
