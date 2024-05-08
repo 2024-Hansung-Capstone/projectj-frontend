@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const FETCH_ALL_ONE_ROOMS = gql`
-  query FetchAllOneRooms {
-    fetchOneRooms {
+export const FETCH_TOP_THREE_POPULAR_ROOMS = gql`
+  query FetchTopThreePopularRooms($rank: Float!) {
+    fetchOneRoomsByViewRank(rank: $rank) {
       id
       jibun
       monthly_rent

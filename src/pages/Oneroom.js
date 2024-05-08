@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import { useQuery } from '@apollo/client';
 import OneroomFilterBar from '../components/OneroomFilterBar';
 import Map from '../components/Map';
 import Oneroom_Item from '../item/Oneroom_Item';
 import './css/Oneroom.css';
+import { FETCH_ALL_ONE_ROOMS } from './gql/fetchAllOneRooms';
+import { FETCH_TOP_THREE_POPULAR_ROOMS } from './gql/fetchOneRoomsByViewRank';
 
 const Oneroom = () => {
+  const { loading, error, data } = useQuery(FETCH_ALL_ONE_ROOMS);
+  const { data: topThreeRoomsData } = useQuery(FETCH_TOP_THREE_POPULAR_ROOMS, { variables: { rank: 3 } });
   const [isMonthly, setMonthly] = useState(false);
   const [isJeonse, setJeonse] = useState(false);
   const [jeonseAmount, setJeonseAmount] = useState(0);
@@ -79,18 +84,27 @@ const Oneroom = () => {
         <div className='popular-rooms'>
           <h2>인기 원룸 Top 3</h2>
           <div className='popular-room-list'>
-            <Oneroom_Item roomImage='/oneroomImage_1.webp' location='서울특별시 강남구 논현동' price='월세 90 / 2000' />
-            <Oneroom_Item roomImage='/oneroomImage_2.webp' location='서울특별시 서초구 방배동' price='월세 70 / 1000' />
-            <Oneroom_Item roomImage='/oneroomImage_3.webp' location='서울특별시 강북구 수유동' price='월세 30 / 500' />
+          {topThreeRoomsData && topThreeRoomsData.fetchOneRoomsByViewRank.map((room) => (
+              <Oneroom_Item
+                key={room.id}
+                roomImage={`/path/to/image${room.id}.jpg`} // 실제 데이터 구조에 맞게 수정하세요
+                location={`${room.dong}, ${room.jibun}`} // 실제 데이터 구조에 맞게 수정하세요
+                price={room.is_monthly_rent ? `월세 ${room.monthly_rent} / ${room.deposit}` : `전세 ${room.deposit}`} // 실제 데이터 구조에 맞게 수정하세요
+              />
+            ))}
           </div>
         </div>
         <hr className='divider' />
         <div className='oneroom-items-container'>
           {isListVisible && (
             <div className='dishes-grid'>
-              {[...Array(40)].map((_, index) => (
-                <div key={index} className='dish-item'>
-                  <Oneroom_Item dishImage={`/path/to/image${index % 10}.jpg`} location={`위치${index}`} price={`월세/전세 가격${index}`} />
+              {data && data.fetchOneRooms.map((room) => (
+                <div key={room.id} className='dish-item'>
+                  <Oneroom_Item
+                    roomImage={`/path/to/image${room.id % 10}.jpg`} // 실제 데이터 구조에 맞게 수정하세요
+                    location={`${room.dong}, ${room.jibun}`} // 실제 데이터 구조에 맞게 수정하세요
+                    price={room.is_monthly_rent ? `월세 ${room.monthly_rent} / ${room.deposit}` : `전세 ${room.deposit}`} // 실제 데이터 구조에 맞게 수정하세요
+                  />
                 </div>
               ))}
             </div>
