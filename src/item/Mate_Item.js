@@ -9,14 +9,13 @@ export default function Mate_Item({ user }) {
         return <p>Loading user data...</p>;
     }
 
-    // Extracting and calculating data with fallbacks
     const userName = user.name ? user.name : 'Unknown User';
     const birthYear = user.birth_at ? new Date(user.birth_at).getFullYear() : 'Unknown Year';
     const currentYear = new Date().getFullYear();
-    const userAge = user.birth_at ? `${birthYear - currentYear} years old` : 'Age unknown';
+    const userAge = user.birth_at ? `${currentYear - birthYear} 세` : 'Age unknown';
 
     const handleSendMessage = () => {
-        const isLoggedIn = true; // Assuming the user is logged in
+        const isLoggedIn = true; 
         if (isLoggedIn) {
             navigate('../Message');
         } else {

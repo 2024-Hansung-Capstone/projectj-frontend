@@ -46,14 +46,14 @@
   outline: none; 
 }
 
-.Mate-product-list {
+.Mate-list {
   display: block; 
   flex-wrap: wrap;
   justify-content: space-between;
   border: 1px solid #ddd;
 }
 
-.product-items {
+.Mate-items {
   display: flex;
   flex-wrap: wrap; /* 아이템들을 줄 바꿈할 수 있도록 설정합니다. */
   justify-content: space-around;

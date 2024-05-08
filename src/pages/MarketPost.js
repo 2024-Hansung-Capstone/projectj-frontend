@@ -20,6 +20,7 @@ const MarketPost = () => {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [detail, setDetail] = useState('');
+  const [category, setCategory] = useState('');
 
   const navigate = useNavigate();
   const location = useLocation(); // useLocation 사용
@@ -38,6 +39,10 @@ const MarketPost = () => {
     setDetail(e.target.value);
   };
 
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+  };
+
   const handleSubmit = async (e) => {  
     e.preventDefault();
     try {
@@ -47,7 +52,7 @@ const MarketPost = () => {
             title,
             price: parseInt(price),
             detail,
-            category: "default",
+            category,
             state: "1" 
           },
         },
@@ -58,8 +63,8 @@ const MarketPost = () => {
         }
       });
       console.log('Newly added used product:', data.createUsedProduct);
-  
-      navigate('/market');
+      // 상품 등록 후 상품 상세 페이지로 이동
+      navigate(`/MarketDetail/${data.createUsedProduct.id}`);
     } catch (error) {
       console.error('Error adding used product:', error);
     }
@@ -70,6 +75,23 @@ const MarketPost = () => {
       <h2>상품 등록하기</h2>
       {isLoggedIn && (
         <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="category" className="market-label">카테고리를</label>
+            <select 
+            id="category" 
+            className="form-control" 
+            value={category} 
+            onChange={handleCategoryChange}
+          >
+            <option value="">선택해주세요</option>
+            <option value="clothing">전자제품</option>
+            <option value="shoes">신발</option>
+            <option value="electronic">전자기기</option>
+            <option value="furniture">가구</option>
+            <option value="food">식품</option>
+            <option value="book">도서</option>
+            </select>
+            </div>
           <div className="form-group">
             <label htmlFor="title" className="market-post-title">제목</label>
             <input type="text" className='market-post-input' id="title" value={title} onChange={handleTitleChange} required placeholder='제목'/>

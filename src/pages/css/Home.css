@@ -40,6 +40,9 @@
     width: 100%;
     height: 370px;
 }
+.mate-item {
+    display: flex;
+}
 
 
 @media (min-width: 1150px) {

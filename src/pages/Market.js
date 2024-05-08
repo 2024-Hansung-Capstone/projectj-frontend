@@ -15,6 +15,7 @@ const GET_USED_PRODUCTS = gql`
       title
       price
       detail
+      category
     }
   }
 `;
@@ -23,6 +24,7 @@ export default function Market() {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
   const { loading, error, data } = useQuery(GET_USED_PRODUCTS);
+  const [selectedCategory, setSelectedCategory] = useState('전체');
   
   // 로그인 상태를 확인하는 상태 추가
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,6 +42,11 @@ export default function Market() {
   const handleItemClick = (product) => {
     navigate('/MarketDetail', {state: { product }});
   };
+
+  const handleCategoryClick = (category) => {
+    const selected = category === 'all' ? '전체' : category;
+    setSelectedCategory(selected);
+  }
 
   return (
     <div className="market-container">
@@ -60,17 +67,19 @@ export default function Market() {
       </div>
       {isHovered && (
         <div
-          className="market-category"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <p>의류</p>
-          <p>신발</p>
-          <p>가전</p>
-          <p>가구/인테리어</p>
-          <p>식품</p>
-          <p>도서</p>
-        </div>
+        className="market-category"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* 카테고리 선택 부분 수정 */}
+        <p onClick={() => handleCategoryClick('all')}>전체</p>
+        <p onClick={() => handleCategoryClick('clothing')}>의류</p>
+        <p onClick={() => handleCategoryClick('shoes')}>신발</p>
+        <p onClick={() => handleCategoryClick('electronic')}>가전</p>
+        <p onClick={() => handleCategoryClick('furniture')}>가구</p>
+        <p onClick={() => handleCategoryClick('food')}>식품</p>
+        <p onClick={() => handleCategoryClick('book')}>도서</p>
+      </div>
       )}
       <div className="market-item">
         {loading ? (
@@ -78,11 +87,15 @@ export default function Market() {
         ) : error ? (
           <p>Error: {error.message}</p>
         ) : (
-          // Market_Item 컴포넌트 렌더링 부분
-          data &&
-          data.fetchUsedProducts.map((product, index) => (
-            <Market_Item key={index} product={product} onClick={handleItemClick} />
-          ))
+          data && data.fetchUsedProducts.filter((product) => selectedCategory === '전체' || product.category === selectedCategory).length > 0 ? (
+            data.fetchUsedProducts
+              .filter((product) => selectedCategory === '전체' || product.category === selectedCategory) // 카테고리 필터링
+              .map((product, index) => (
+                <Market_Item key={index} product={product} onClick={() => handleItemClick(product)} />
+              ))
+          ) : (
+            <p className='nodata'>등록된 상품이 없습니다.</p>
+          )
         )}
       </div>
       <button className="post-button" onClick={handlePostButtonClick}>

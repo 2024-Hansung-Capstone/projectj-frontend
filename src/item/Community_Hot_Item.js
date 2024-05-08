@@ -18,5 +18,3 @@ export default function Community_Hot_Item() {
     </div>
   );
 }
-
-/* 좋아요 상의 후 추가 */

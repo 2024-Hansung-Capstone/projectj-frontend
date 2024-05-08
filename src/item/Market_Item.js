@@ -12,20 +12,20 @@ export default function Market_Item({ product, onClick }) {
             <div className='marketitem-main1'>
                 <div className="marketitem-photo">
                 </div>
+                <div className="marketitem-id">
+                    <p>id : {product.id}</p>
+                </div>
                 <div className="marketitem-title">
-                    <p>{product.title}</p> 
+                    <p>제목 : {product.title}</p> 
                 </div>
             </div>
             <div className='marketitem-main2'>
                 <div className="marketitem-price">
                     <p>{product.price} 원</p>
                 </div>
-                <div className="marketitem-id">
-                    <p>{product.id}</p>
-                </div>
             </div>
         </div>
-        
+
         </div>
     );
 }

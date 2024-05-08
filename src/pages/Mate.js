@@ -9,13 +9,10 @@ const FETCH_ALL_USERS = gql`
     fetchUsers {
       id
       name
-      email
       gender
       birth_at
       mbti
-      phone_number
       is_find_mate
-      point
       create_at
     }
   }
@@ -41,7 +38,7 @@ export default function Mate() {
     <div className={`Mate-container ${isFilterVisible ? 'filter-open' : ''}`}>
       <h4>추천 메이트</h4>
       <div className='Mate-recommend'>
-        {data.fetchUsers.map((user, index) => (
+        {data.fetchUsers.map((user) => (
           <Mate_Item key={user.id} user={user} />
         ))}
       </div>
@@ -50,9 +47,9 @@ export default function Mate() {
           <button onClick={handleFilterClick}>필터링</button>
           {isFilterVisible && <MateFilterModal onClose={handleConfirmButtonClick} />}
         </div>
-        <div className='Mate-product-list'>
-          <div className='product-items'>
-            {data.fetchUsers.map((user, index) => (
+        <div className='Mate-list'>
+          <div className='Mate-items'>
+            {data.fetchUsers.map((user) => (
               <Mate_Item key={user.id} user={user} />
             ))}
           </div>
