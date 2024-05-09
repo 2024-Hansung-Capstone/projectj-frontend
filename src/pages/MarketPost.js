@@ -1,8 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import "./css/Market.css";
-import { useMutation } from '@apollo/client'; 
-import { gql } from '@apollo/client';
+import { useMutation, useQuery, gql } from '@apollo/client'; 
+
+const GET_USED_PRODUCTS = gql`
+  query GetUsedProducts {
+    fetchUsedProducts {
+      id
+      title
+      price
+      detail
+      category
+      state
+    }
+  }
+`;
 
 const CREATE_USED_PRODUCT = gql`
   mutation CreateUsedProduct($createUsedProductInput: CreateUsedProductInput!) {
@@ -26,6 +38,7 @@ const MarketPost = () => {
   const location = useLocation(); // useLocation 사용
   const isLoggedIn = location.state?.isLoggedIn; // Market.js에서 전달된 로그인 상태를 받음
 
+  const { loading, error, data } = useQuery(GET_USED_PRODUCTS);
   const [createUsedProduct] = useMutation(CREATE_USED_PRODUCT);
   const handleTitleChange = (e) => {  
     setTitle(e.target.value);
@@ -53,20 +66,20 @@ const MarketPost = () => {
             price: parseInt(price),
             detail,
             category,
-            state: "1" 
+            state: "판매중" 
           },
         },
         context: {
           headers: {
             authorization: `Bearer ${localStorage.getItem('token') || ''}`
           }
-        }
+        },
+        refetchQueries: [{ query: GET_USED_PRODUCTS }] // 수정완료 버튼 클릭 시 바로 Market에서 업데이트되도록 할 때 필수 입력!!!
       });
-      console.log('Newly added used product:', data.createUsedProduct);
-      // 상품 등록 후 상품 상세 페이지로 이동
-      navigate(`/MarketDetail/${data.createUsedProduct.id}`);
+      console.log('새로 추가된 상품:', data.createUsedProduct);
+      navigate("/Market");
     } catch (error) {
-      console.error('Error adding used product:', error);
+      console.error('상품 추가 중 오류:', error);
     }
   };
   
@@ -76,7 +89,7 @@ const MarketPost = () => {
       {isLoggedIn && (
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="category" className="market-label">카테고리를</label>
+            <label htmlFor="category" className="market-label">카테고리</label>
             <select 
             id="category" 
             className="form-control" 
@@ -84,11 +97,10 @@ const MarketPost = () => {
             onChange={handleCategoryChange}
           >
             <option value="">선택해주세요</option>
-            <option value="clothing">전자제품</option>
+            <option value="clothing">의류</option>
             <option value="shoes">신발</option>
             <option value="electronic">전자기기</option>
             <option value="furniture">가구</option>
-            <option value="food">식품</option>
             <option value="book">도서</option>
             </select>
             </div>

@@ -19,11 +19,17 @@ export default function Market_Item({ product, onClick }) {
                     <p>제목 : {product.title}</p> 
                 </div>
             </div>
+            <div className="marketitem-title">
+                    <p>카테고리 : {product.category}</p> 
+                </div>
             <div className='marketitem-main2'>
                 <div className="marketitem-price">
                     <p>{product.price} 원</p>
                 </div>
             </div>
+            <div className="marketitem-title">
+                    <p>{product.state}</p> 
+                </div>
         </div>
 
         </div>

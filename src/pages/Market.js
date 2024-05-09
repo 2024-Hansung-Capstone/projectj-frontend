@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'; 
 import { useNavigate } from 'react-router-dom';
-import "./css/Market.css";
 import Market_Item from '../item/Market_Item.js';
-import MarketPost from './MarketPost';
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { IoSearchOutline } from "react-icons/io5";
-import { useQuery } from '@apollo/client';
-import { gql } from '@apollo/client';
+import { useQuery, gql } from '@apollo/client';
+import "./css/Market.css";
 
 const GET_USED_PRODUCTS = gql`
   query GetUsedProducts {
@@ -16,6 +14,7 @@ const GET_USED_PRODUCTS = gql`
       price
       detail
       category
+      state
     }
   }
 `;
@@ -71,7 +70,6 @@ export default function Market() {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* 카테고리 선택 부분 수정 */}
         <p onClick={() => handleCategoryClick('all')}>전체</p>
         <p onClick={() => handleCategoryClick('clothing')}>의류</p>
         <p onClick={() => handleCategoryClick('shoes')}>신발</p>
@@ -98,9 +96,7 @@ export default function Market() {
           )
         )}
       </div>
-      <button className="post-button" onClick={handlePostButtonClick}>
-        상품 등록
-      </button>
+      <button className="post-button" onClick={handlePostButtonClick}>상품 등록</button>
     </div>
   );
 }

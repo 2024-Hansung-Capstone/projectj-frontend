@@ -21,6 +21,7 @@ import CookingDetails from "./pages/CookingDetails";
 import CommunityPost from './pages/CommunityPost';
 import MarketPost from './pages/MarketPost';
 import MarketDetail from './pages/MarketDetail';
+import MarketUpdate from './pages/MarketUpdate';
 import Community from "./pages/Community";
 
 // mypage
@@ -64,6 +65,7 @@ function App() {
                 <Route path="/Market" element={isAuthenticated ? <Market /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MarketPost" element={isAuthenticated ? <MarketPost /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MarketDetail" element={isAuthenticated ? <MarketDetail /> : <Login onLogin={handleLogin} />} />
+                <Route path="/MarketUpdate" element={isAuthenticated ? <MarketUpdate /> : <Login onLogin={handleLogin} />} />
                 <Route path="/CommunityPost" element={isAuthenticated ? <CommunityPost /> : <Login onLogin={handleLogin} />} />
 
                 <Route path="/Login" element={<Login onLogin={handleLogin} />} />
