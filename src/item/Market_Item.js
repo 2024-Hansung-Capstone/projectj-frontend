@@ -13,7 +13,7 @@ export default function Market_Item({ product, onClick }) {
                 <div className="marketitem-photo">
                 </div>
                 <div className="marketitem-id">
-                    <p>id : {product.id}</p>
+                    <p>상품ID : {product.user?.name}</p>
                 </div>
                 <div className="marketitem-title">
                     <p>제목 : {product.title}</p> 

@@ -12,6 +12,10 @@ const GET_USED_PRODUCTS = gql`
       detail
       category
       state
+      user {
+        id
+        name
+      }
     }
   }
 `;
@@ -33,6 +37,7 @@ const MarketPost = () => {
   const [price, setPrice] = useState('');
   const [detail, setDetail] = useState('');
   const [category, setCategory] = useState('');
+  
 
   const navigate = useNavigate();
   const location = useLocation(); // useLocation 사용
@@ -40,6 +45,7 @@ const MarketPost = () => {
 
   const { loading, error, data } = useQuery(GET_USED_PRODUCTS);
   const [createUsedProduct] = useMutation(CREATE_USED_PRODUCT);
+
   const handleTitleChange = (e) => {  
     setTitle(e.target.value);
   };
@@ -66,7 +72,7 @@ const MarketPost = () => {
             price: parseInt(price),
             detail,
             category,
-            state: "판매중" 
+            state: "판매중",
           },
         },
         context: {
@@ -108,7 +114,6 @@ const MarketPost = () => {
             <label htmlFor="title" className="market-post-title">제목</label>
             <input type="text" className='market-post-input' id="title" value={title} onChange={handleTitleChange} required placeholder='제목'/>
           </div>
-    
           <div className="form-group">
             <label htmlFor="price" className="market-post-price">판매 가격</label>
             <input id="price" className='market-post-input' value={price} onChange={handlePriceChange} required placeholder="₩ 가격을 입력해주세요." />

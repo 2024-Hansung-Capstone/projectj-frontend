@@ -61,6 +61,7 @@ export default function MessageCompose({ onSendMessage }) {
             <option value="mate">자취메이트</option>
             <option value="community">커뮤니티</option>
             <option value="market">중고마켓</option>
+            <option value="oneroom">원룸</option>
           </select>
         </div>
         <div className='form-group'>

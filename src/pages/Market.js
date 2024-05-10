@@ -15,6 +15,10 @@ const GET_USED_PRODUCTS = gql`
       detail
       category
       state
+      user {
+        id
+        name
+      }
     }
   }
 `;
@@ -27,6 +31,7 @@ export default function Market() {
   
   // 로그인 상태를 확인하는 상태 추가
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedInUserName, setLoggedInUserName] = useState('');  // 현재 로그인된 사용자의 이름
 
   // 컴포넌트가 마운트될 때 로컬 스토리지에서 토큰을 확인하여 로그인 상태 설정
   useEffect(() => {
@@ -34,18 +39,36 @@ export default function Market() {
     setIsLoggedIn(!!token);
   }, []);
 
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('loggedInUserName');
+    if (loggedInUser) {
+      setLoggedInUserName(loggedInUser);
+    }
+  }, []);
+  
+
   const handlePostButtonClick = () => {
     navigate('/MarketPost', { state: { isLoggedIn } }); // 로그인 상태를 navigate의 state로 전달
   };
 
   const handleItemClick = (product) => {
-    navigate('/MarketDetail', {state: { product }});
+    navigate('/MarketDetail', { state: { product, loggedInUserName } }); // 현재 사용자의 이름 추가
   };
 
+  /* */
   const handleCategoryClick = (category) => {
     const selected = category === 'all' ? '전체' : category;
     setSelectedCategory(selected);
   }
+
+  // 로그인 상태에 따라 상품 등록 버튼을 표시
+  const renderPostButton = () => {
+    if (isLoggedIn) {
+      return <button className="post-button" onClick={handlePostButtonClick}>상품 등록</button>;
+    } else {
+      return null; // 로그인되지 않은 상태에서는 버튼을 표시하지 않음
+    }
+  };
 
   return (
     <div className="market-container">
@@ -96,7 +119,7 @@ export default function Market() {
           )
         )}
       </div>
-      <button className="post-button" onClick={handlePostButtonClick}>상품 등록</button>
+      {renderPostButton()}
     </div>
   );
 }
