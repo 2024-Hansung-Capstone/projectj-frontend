@@ -15,6 +15,7 @@ const GET_USED_PRODUCTS = gql`
       detail
       category
       state
+      create_at
       user {
         id
         name
@@ -37,14 +38,15 @@ export default function Market() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
-  }, []);
-
-  useEffect(() => {
+  
     const loggedInUser = localStorage.getItem('loggedInUserName');
     if (loggedInUser) {
       setLoggedInUserName(loggedInUser);
+    } else {
+      setLoggedInUserName(''); // 로그아웃 시 또는 사용자 이름이 없을 때 상태를 비워줌
     }
-  }, []);
+  }, []); // 의존성 배열이 비어있으므로, 컴포넌트 마운트 시 한 번만 실행됩니다.
+  
   
 
   const handlePostButtonClick = () => {
@@ -55,7 +57,6 @@ export default function Market() {
     navigate('/MarketDetail', { state: { product, loggedInUserName } }); // 현재 사용자의 이름 추가
   };
 
-  /* */
   const handleCategoryClick = (category) => {
     const selected = category === 'all' ? '전체' : category;
     setSelectedCategory(selected);
@@ -69,6 +70,10 @@ export default function Market() {
       return null; // 로그인되지 않은 상태에서는 버튼을 표시하지 않음
     }
   };
+
+  console.log('로그인 성공:', isLoggedIn);
+  console.log('로그인 사용자:', loggedInUserName);
+
 
   return (
     <div className="market-container">
@@ -89,18 +94,17 @@ export default function Market() {
       </div>
       {isHovered && (
         <div
-        className="market-category"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <p onClick={() => handleCategoryClick('all')}>전체</p>
-        <p onClick={() => handleCategoryClick('clothing')}>의류</p>
-        <p onClick={() => handleCategoryClick('shoes')}>신발</p>
-        <p onClick={() => handleCategoryClick('electronic')}>가전</p>
-        <p onClick={() => handleCategoryClick('furniture')}>가구</p>
-        <p onClick={() => handleCategoryClick('food')}>식품</p>
-        <p onClick={() => handleCategoryClick('book')}>도서</p>
-      </div>
+          className="market-category"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <p onClick={() => handleCategoryClick('전체')}>전체</p>
+          <p onClick={() => handleCategoryClick('의류')}>의류</p>
+          <p onClick={() => handleCategoryClick('신발')}>신발</p>
+          <p onClick={() => handleCategoryClick('전자기기')}>전자기기</p>
+          <p onClick={() => handleCategoryClick('가구')}>가구/인테리어</p>
+          <p onClick={() => handleCategoryClick('도서')}>도서</p>
+        </div>
       )}
       <div className="market-item">
         {loading ? (

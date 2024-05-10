@@ -28,6 +28,10 @@ const CREATE_USED_PRODUCT = gql`
       detail
       category
       state
+      user {
+        id
+        name
+      }
     }
   }
 `;
@@ -106,7 +110,7 @@ const MarketPost = () => {
             <option value="clothing">의류</option>
             <option value="shoes">신발</option>
             <option value="electronic">전자기기</option>
-            <option value="furniture">가구</option>
+            <option value="furniture">가구/인테리어</option>
             <option value="book">도서</option>
             </select>
             </div>

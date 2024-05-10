@@ -22,8 +22,12 @@
     border: 1px groove #ddd;
 
 }
+.marketitem-state {
+    width: 50%;
+}
 .marketitem-price {
     width: 50%;
+    text-align: center;
 }
 .marketitem-date {
     width: 50%;

@@ -6,94 +6,107 @@ import 'react-toastify/dist/ReactToastify.css';
 import './css/MarketDetail.css';
 
 const DELETE_USED_PRODUCT = gql`
-mutation DeleteUsedProduct($product_id: ID!) {
-  deleteUsedProduct(product_id: $product_id) {
-    id
-  }
-}
-`;
-
-const DELETE_USER_MUTATION = gql`
-  mutation DeleteUser {
-    deleteUser
-  }
-`;
-
-
-// UpdateUsedProduct 뮤테이션 정의
-const UPDATE_USED_PRODUCT = gql`
-mutation UpdateUsedProduct($product_id: ID!, $title: String!, $price: Float!, $state: String!, $detail: String!) {
-  updateUsedProduct(product_id: $product_id, title: $title, price: $price, state: $state, detail: $detail) {
-    id
-    title
-    price
-    state
-    detail
-    category
-    user {
-        id
-        name
+  mutation DeleteUsedProduct($product_id: ID!) {
+    deleteUsedProduct(product_id: $product_id) {
+      id
     }
   }
-}
+`;
+
+const UPDATE_USED_PRODUCT = gql`
+  mutation UpdateUsedProduct($product_id: ID!, $title: String!, $price: Float!, $state: String!, $detail: String!) {
+    updateUsedProduct(product_id: $product_id, title: $title, price: $price, state: $state, detail: $detail) {
+      id
+      title
+      price
+      state
+      detail
+      category
+      user {
+        id
+        name
+      }
+    }
+  }
 `;
 
 export default function MarketDetail() {
-    const location = useLocation();
-    const navigate = useNavigate();
-    //const [loggedInUserName, setLoggedInUserName] = useState('');
-    const [loggedInUserId, setLoggedInUserId] = useState('');
-    const [deleteUsedProduct] = useMutation(DELETE_USED_PRODUCT);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [product, setProduct] = useState(location.state?.product);
+  const [deleteUsedProduct] = useMutation(DELETE_USED_PRODUCT);
+  const [updateUsedProduct] = useMutation(UPDATE_USED_PRODUCT);
+  const [sellerName, setSellerName] = useState('');
 
-    // 로그인된 사용자의 정보를 받아옴
-    const isLoggedIn = location.state?.isLoggedIn;
-    const loggedInUserName = location.state?.loggedInUserName;
-    const { product } = location.state;
 
-    const getToken = () => {
-        return localStorage.getItem('token') || ''; // 토큰이 없을 경우 빈 문자열 반환
-      };
+  // 로그인 상태를 확인하는 상태 추가
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedInUserName, setLoggedInUserName] = useState('');  // 현재 로그인된 사용자의 이름
 
-    const [canEditDelete, setCanEditDelete] = useState(false);
 
-    useEffect(() => {
-        // 로그인 상태이며, 로그인한 사용자의 ID가 상품 소유자의 ID와 일치하는 경우
-        if (isLoggedIn && loggedInUserId === product.user.id) {
-            setCanEditDelete(true);
-        } else {
-            setCanEditDelete(false);
+  const getToken = () => {
+    return localStorage.getItem('token') || '';
+  };
+
+  
+  const handleSendMessage = () => {
+    if (isLoggedIn) { // 수정된 부분
+      navigate('/Message', { state: { recipientId: product.user.name } });
+    } else {
+      navigate('/pages/Before/Login');
+    }
+  };
+
+  // 컴포넌트가 마운트될 때 로컬 스토리지에서 토큰을 확인하여 로그인 상태 설정
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+  }, []);
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('loggedInUserName');
+    if (loggedInUser) {
+      setLoggedInUserName(loggedInUser);
+    }
+  }, []);
+  
+
+  useEffect(() => {  // 판매자 정보 
+    if (product && product.user) {
+      const sellerName = product.user.name;
+      setSellerName(sellerName);
+    }
+  }, [product]);
+
+  const handleEditProduct = () => {
+    navigate('/MarketUpdate', { state: { product, loggedInUserName } });
+  };
+
+  const handleDeleteProduct = async () => {
+    console.log(`로그인한 사용자: ${loggedInUserName}, 판매자: ${sellerName}`); // 디버깅을 위한 로그 추가
+
+    if (loggedInUserName.trim().toLowerCase() !== sellerName.trim().toLowerCase()) {
+      toast.error('상품을 삭제할 수 있는 권한이 없습니다.');
+      return;
+    }
+
+    if (product?.id) {
+      try {
+        const token = getToken();
+        if (!token) {
+          toast.error('인증 토큰이 없습니다. 다시 로그인해 주세요.');
+          navigate('/login');
+          return;
         }
-    }, [isLoggedIn, loggedInUserId, product.user.id]);
-    
-    const handleSendMessage = () => {
-        const isLoggedIn = true;
-        if (isLoggedIn) {
-            navigate('/Message', { state: { recipientId: product.id } });
-        } else {
-            navigate('/pages/Before/Login');
-        }
-    };
 
-    // 수정
-    const handleEditProduct = () => {
-        navigate('/MarketUpdate', { state: { product } });
-    };
-
-    // 삭제
-    const handleDeleteProduct = async () => {
-        if (product?.id) {
-            try {
-            // 현재 로그인된 사용자의 토큰을 가져옴
-                const token = getToken();
-
-                const response = await deleteUsedProduct({
-                    variables: { product_id: product.id },
-                    context: {
-                        headers: {
-                          authorization: `Bearer ${getToken()}` // 로컬 스토리지에서 JWT 토큰을 가져옴
-                        }
-                      }
-                    });
+        const response = await deleteUsedProduct({
+          variables: { product_id: product.id },
+          context: {
+            headers: {
+              authorization: `Bearer ${token}`
+            }
+          }
+        });
 
         console.log("상품 삭제 성공: ", response);
         toast.success('상품이 성공적으로 삭제되었습니다.');
@@ -103,30 +116,35 @@ export default function MarketDetail() {
         toast.error('상품 삭제 중 문제가 발생했습니다.');
       }
     }
-};
+  }
 
-  
-    return (
-        <div className="container">
-            <ToastContainer />
-            <h2 className="header">상품 상세 정보</h2>
-            {product ? (
-                <div>
-                    <h3 className="productTitle">제목: {product.title}</h3>
-                    <p className="productUser">판매자: {product.user.name}</p>
-                    <p className="productCategory">카테고리: {product.category}</p>
-                    <p className="productPrice">가격: {product.price} 원</p>
-                    <p className="productState">상태: {product.state}</p>
-                    <p className="productDetail">상세 설명: {product.detail}</p>
-                    <button onClick={handleSendMessage}>쪽지보내기</button>
+  console.log('판매자:', sellerName);
+  console.log('로그인 사용자:', loggedInUserName);
+
+
+  return (
+    <div className="container">
+      <ToastContainer />
+      <h2 className="header">상품 상세 정보</h2>
+      {product ? (
+        <div>
+          <h3 className="productTitle">제목: {product.title}</h3>
+          <p className="productUser">판매자: {product.user?.name}</p>
+          <p className="productCategory">카테고리: {product.category}</p>
+          <p className="productPrice">가격: {product.price} 원</p>
+          <p className="productState">상태: {product.state}</p>
+          <p className="productDetail">상세 설명: {product.detail}</p>
+          <div className='productDetailBtn'>
+            <button onClick={handleSendMessage}>쪽지보내기</button>
             <div>
-                <button onClick={handleEditProduct}>수정</button>
-                <button onClick={handleDeleteProduct}>삭제</button>
+              <button onClick={handleEditProduct}>수정</button>
+              <button onClick={handleDeleteProduct}>삭제</button>
             </div>
-                </div>
-            ) : (
-                <p>상품 정보를 불러오는 중...</p>
-            )}
+          </div>
         </div>
-    );
+      ) : (
+        <p>상품 정보를 불러오는 중...</p>
+      )}
+    </div>
+  );
 }

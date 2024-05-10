@@ -1,0 +1,74 @@
+/* 전체 컨테이너 스타일링 */
+.market-post-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+  
+  /* 제목 스타일링 */
+  h2 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* 폼 그룹 스타일링 */
+  .form-group {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  /* 라벨 스타일링 */
+  .market-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-weight: bold;
+  }
+  
+  /* 입력 필드 기본 스타일 */
+  .market-post-input, .market-post-textarea, .form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-sizing: border-box; /* 박스 크기 결정 방법 변경 */
+  }
+  
+  /* 텍스트 에어리어 높이 조정 */
+  .market-post-textarea {
+    height: 120px;
+  }
+  
+  /* 버튼 스타일링 */
+  .btn.market-post-btn {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #29adb2;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  /* 버튼 호버 효과 */
+  .btn.market-post-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* 판매자 정보 스타일 */
+  p {
+    color: #555;
+  }
+  
+  /* 선택 박스 스타일 */
+  .form-control {
+    cursor: pointer;
+  }
+  
