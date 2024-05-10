@@ -10,18 +10,14 @@ export default function Mate_Item({ user }) {
     }
 
     const userName = user.name ? user.name : 'Unknown User';
+    const gender = user.gender ? user.gender : 'Unknown Gender';
+    const mbti = user.mbti ? user.mbti : 'Unknown mbti';
     const birthYear = user.birth_at ? new Date(user.birth_at).getFullYear() : 'Unknown Year';
     const currentYear = new Date().getFullYear();
     const userAge = user.birth_at ? `${currentYear - birthYear} 세` : 'Age unknown';
 
     const handleSendMessage = () => {
-        const isLoggedIn = true; 
-        if (isLoggedIn) {
-            navigate('../Message');
-        } else {
-            navigate('../pages/Before/Login');
-            
-        }
+        navigate('../Message', { state: { recipientId: userName } });
     };
 
     return (
@@ -32,10 +28,18 @@ export default function Mate_Item({ user }) {
             <div className='mi-name'>
                 <h4>{userName}</h4>
             </div>
-            <div className='mi-age'>
-                <h4>{userAge}</h4>
+            <div className='mi-container2'>
+                <div className='mi-age'>
+                    <h4>{userAge}</h4>
+                </div>
+                <div className='mi-gender'>
+                    <h4>{gender}</h4>
+                </div>
             </div>
-            <div className='mi-button'>
+            <div className='mi-mbti'>
+                <h4>{mbti}</h4>
+            </div>
+            <div className='mi-btn'>
                 <button onClick={handleSendMessage}>쪽지보내기</button>
             </div>
         </div>

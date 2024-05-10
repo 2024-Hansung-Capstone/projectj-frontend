@@ -9,8 +9,7 @@ export default function MessageCompose({ onSendMessage }) {
   const navigate = useNavigate(); 
   const location = useLocation();
 
-  useEffect(() => {
-    // location.state.recipientId가 존재하면 수신자 상태를 업데이트
+  useEffect(() => { // location.state.recipientId가 존재하면 수신자 상태를 업데이트
     if (location.state?.recipientId) {
       setRecipient(location.state.recipientId);
     }

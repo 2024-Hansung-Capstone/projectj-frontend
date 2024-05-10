@@ -24,6 +24,7 @@ const GET_USED_PRODUCTS = gql`
   }
 `;
 
+
 export default function Market() {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();

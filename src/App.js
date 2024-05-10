@@ -23,6 +23,7 @@ import MarketPost from './pages/MarketPost';
 import MarketDetail from './pages/MarketDetail';
 import MarketUpdate from './pages/MarketUpdate';
 import Community from "./pages/Community";
+import MateDetail from "./pages/MateDetail";
 
 // mypage
 import EditUserInfo from './pages/EditUserInfo';
@@ -67,6 +68,7 @@ function App() {
                 <Route path="/MarketDetail" element={isAuthenticated ? <MarketDetail /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MarketUpdate" element={isAuthenticated ? <MarketUpdate /> : <Login onLogin={handleLogin} />} />
                 <Route path="/CommunityPost" element={isAuthenticated ? <CommunityPost /> : <Login onLogin={handleLogin} />} />
+                <Route path="/MateDetail" element={isAuthenticated ? <MateDetail /> : <Login onLogin={handleLogin} />} />
 
                 <Route path="/Login" element={<Login onLogin={handleLogin} />} />
                 <Route path="/Signup" element={<Signup />} />

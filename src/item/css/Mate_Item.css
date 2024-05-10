@@ -5,14 +5,52 @@
     padding: 10px;
     flex: 0 0 auto;
     width: 220px;
-    height: 320px;
+    height: 400px;
+    text-align: center;
+    justify-content: center;
+}
+.mi-container2 {
+    display: flex;
+
 }
 .mi-photo {
 
 }
+.mi-age {
+    border: groove 1px #ddd;
+    width: 50%;
+}
+.mi-gender {
+    border: groove 1px #ddd;
+    width: 50%;
+    }
 .mi-name {
+    border: groove 1px #ddd;
 
 }
-.mi-button {
+.mi-mbti {
+    border: groove 1px #ddd;
 
 }
+/* 버튼 스타일링 */
+.mi-btn {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #29adb2 !important;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: 0;
+    outline: 0;
+  }
+  
+  button {  /* 버튼 기본 css 제거 */
+    all: unset;
+  }
+  /* 버튼 호버 효과 */
+  .mi-btn:hover {
+    background-color: #0056b3 !important;
+  }
+  

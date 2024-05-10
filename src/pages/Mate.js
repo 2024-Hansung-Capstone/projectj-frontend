@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useQuery, gql } from '@apollo/client';
 import MateFilterModal from '../components/MateFilterModal.js';
 import Mate_Item from '../item/Mate_Item.js';
 import './css/Mate.css';
-import { gql, useQuery } from '@apollo/client';
 
 const FETCH_ALL_USERS = gql`
   query {
@@ -20,6 +21,7 @@ const FETCH_ALL_USERS = gql`
 
 
 export default function Mate() {
+  const navigate = useNavigate();
   const [isFilterVisible, setFilterVisible] = useState(false);
   const { data, loading, error } = useQuery(FETCH_ALL_USERS);
 
@@ -30,6 +32,10 @@ export default function Mate() {
   const handleConfirmButtonClick = () => {
     setFilterVisible(false);
   };
+
+  //const handleItemClick = (userId) => {
+  //  navigate('/MateDetail', { state: { userId } }); 
+  //};
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -50,7 +56,7 @@ export default function Mate() {
         <div className='Mate-list'>
           <div className='Mate-items'>
             {data.fetchUsers.map((user) => (
-              <Mate_Item key={user.id} user={user} />
+              <Mate_Item  key={user.id} user={user} />
             ))}
           </div>
         </div>
