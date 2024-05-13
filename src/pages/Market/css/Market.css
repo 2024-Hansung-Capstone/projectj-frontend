@@ -65,6 +65,35 @@
     align-items: center;
 }
 
+.pagination {
+    display: flex;
+    list-style: none; /* 기본 목록 스타일 제거 */
+    justify-content: center; /* 중앙 정렬 */
+    padding: 0; /* 기본 패딩 제거 */
+  }
+  
+  .pagination li {
+    margin: 0 5px; /* 각 페이지 번호 사이의 여백 */
+  }
+  
+  .pagination li a {
+    text-decoration: none; /* 링크 밑줄 제거 */
+    color: #333; /* 글자 색상 */
+    background-color: #f2f2f2; /* 배경 색상 */
+    padding: 8px 12px; /* 상하, 좌우 패딩 */
+    border-radius: 5px; /* 둥근 모서리 */
+    transition: all 0.3s; /* 부드러운 전환 효과 */
+  }
+  
+  .pagination li a:hover {
+    background-color: #ddd; /* 마우스 오버 시 배경 색상 변경 */
+  }
+  
+  .pagination li a.active {
+    background-color: #007bff; /* 활성 페이지 배경 색상 */
+    color: #fff; /* 활성 페이지 글자 색상 */
+  }
+  
 @media (min-width: 1150px) {
     /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
     .market-container {

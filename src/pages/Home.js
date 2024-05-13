@@ -82,38 +82,8 @@ const Home = () => {
           alt="로고"
         />
       </div>
-      <h4>요리 (추천 레시피 / 인기 급상승 레시피)</h4>
-      <div className='Home-section Home-Cook'>
-        <Cooking_Item />
-      </div>
-      <h4>원룸 (추천 원룸 / 원룸 검색창)</h4>
-      <div className='Home-section Home-OneRoom'>
-        <OneRoom_Item />
-      </div>
-      <h4>자취메이트</h4>
-      <div className="mate-item">
-        {matesData?.fetchUsers.map((user) => (
-          <Mate_Item key={user.id} user={user} />
-        ))}
-      </div>
-      <h4>중고마켓</h4>
-      <div className="Home-section-market-item">
-        {productsData?.fetchUsedProducts .map((product, index) => (
-                <Market_Item key={index} product={product} />
-        ))}
-        
-      </div>
-
-      <h4>커뮤니티(핫 게시물)</h4>
-      <div className='Home-section Home-Community'>
-        <Community_Hot_Item />
       </div>
       
-      <h4>생활꿀팁 (청소편)</h4>
-      <div className='Home-section Home-Tip'>
-        <Tip_Item />
-      </div>
-    </div>
   );
 };
 

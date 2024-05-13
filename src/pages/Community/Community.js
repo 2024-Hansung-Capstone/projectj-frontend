@@ -3,8 +3,8 @@ import './css/Community.css';
 import { useQuery, useMutation } from '@apollo/client'; 
 import { gql } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import Community_Item from '../item/Community_Item';
-import { BoardList_Item } from '../item/BoardList_Item'; 
+import Community_Item from '../../item/Community_Item';
+import { BoardList_Item } from '../../item/BoardList_Item'; 
 
 const GET_BOARD = gql`
   query GetBoard {
@@ -100,8 +100,8 @@ const Community = () => {
           )}
         </div>
       </div>
-      <button className='post-button' onClick={handlePostButtonClick}>게시물 등록</button>
-      <button className='post-button' onClick={handleCreateBoard}>게시물 생성</button>
+      <button className='post-button2' onClick={handlePostButtonClick}> 상품 등록</button>
+   
     </div>
   );
 }

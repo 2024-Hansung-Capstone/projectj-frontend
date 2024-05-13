@@ -2,6 +2,7 @@
     background-color: white;
     color: black;
     padding: 5px;
+    margin-bottom: 300px;
 }
 .Home-section {
     border: groove 1px black;
@@ -10,6 +11,7 @@
     margin: 10px;
     overflow-x: scroll;
     white-space: nowrap;
+
 }
 
 .Home-photoList {

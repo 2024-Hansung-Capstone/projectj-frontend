@@ -68,7 +68,6 @@ footer button {
 
 /* 추가: 입력 필드 스타일링 */
 input[type="text"] {
-  padding: 8px;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 4px; /* 둥근 모서리 */

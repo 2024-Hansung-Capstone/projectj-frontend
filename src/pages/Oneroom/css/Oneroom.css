@@ -1,6 +1,7 @@
 .oneroom-container {
   display: flex;
   height: 100vh;
+  font-family: 'KCC-Hanbit';
 }
 
 .filter-section {
@@ -10,13 +11,6 @@
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1;
-}
-
-.filter-bar {
-  padding: 20px;
-  border-right: 1px solid #eee;
-  flex: 1;
-  overflow-y: auto;
 }
 
 .filter-bar::after {
@@ -57,20 +51,6 @@
   margin-right: 0;
 }
 
-.toggle-button {
-  width: 1%; /* 전체 영역을 버튼으로 만듦 */
-  background-color: #3f3f3f; /* 버튼 배경색 */
-  padding: 5px; /* 버튼 여백 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.toggle-button span {
-  font-size: 12px;
-}
-
 .toggle-button.open {
   border-bottom: 1px solid #ccc; /* 열려있는 경우 밑에 구분선 추가 */
 }
@@ -99,4 +79,11 @@
     margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
     margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
   }
+}
+
+@font-face {
+  font-family: 'KCC-Hanbit';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }

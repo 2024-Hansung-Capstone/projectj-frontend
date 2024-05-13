@@ -5,7 +5,7 @@ import './css/Category.css';
 const Category = () => {
   const [selectedCategory, setSelectedCategory] = useState(null); // 선택된 카테고리 상태 초기화
 
-  const categories = ["홈", "요리", "원룸", "자취메이트", "중고마켓", "커뮤니티"];
+  const categories = ["홈", "AI 요리", "원룸", "자취메이트", "중고마켓", "커뮤니티"];
 
   const handleCategoryClick = (index) => {
     setSelectedCategory(index); // 클릭된 카테고리의 인덱스를 선택된 카테고리 상태로 설정
@@ -17,7 +17,7 @@ const Category = () => {
         <Link
           key={index}
           to={category === "홈" ? '/' : 
-          category === "요리" ? '/Cooking' : 
+          category === "AI 요리" ? '/Cooking' : 
           category === "원룸" ? '/Oneroom' : 
           category === "자취메이트" ? '/Mate' : 
           category === "중고마켓" ? '/Market' : 

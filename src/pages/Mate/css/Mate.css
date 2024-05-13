@@ -1,4 +1,5 @@
 .Mate-container {
+  font-family: 'KCC-Hanbit';
   max-width: 1200px;
   padding: 10px;
   margin: 0 auto;
@@ -9,10 +10,10 @@
 }
 
 .Mate-recommend {
-  border: 1px groove black;
+  border: 2px double #29adb2;
   display: flex;
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   overflow-x: auto;
   white-space: nowrap;
 }
@@ -34,16 +35,23 @@
   left: 0;  
 }
 
+.Mate-filter {
+  display: flex;
+}
 .Mate-filter > button {
   font-family: 'seolleimcool-SemiBold';
-  margin-bottom: 20px;
   display: inline-block;
   background-color: white;
   color: black; 
-  border: 1px solid black;
+  font-size: 50px;
   padding: 10px; 
   border-radius: 5px; 
   outline: none; 
+}
+.Mate-filter > h4 {
+  color: gray;
+  margin-left: 9px;
+  margin-top: 40px;
 }
 
 .Mate-list {
@@ -80,6 +88,13 @@
   .Mate-product-item {
     width: calc(100% - 20px); /* Single item per row on even smaller screens */
   }
+}
+
+@font-face {
+  font-family: 'KCC-Hanbit';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {

@@ -4,7 +4,7 @@ import { FaCamera } from "react-icons/fa";
 import { useMutation } from '@apollo/client'; 
 import { gql } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import { BoardList_Item } from '../item/BoardList_Item'; 
+import { BoardList_Item } from '../../item/BoardList_Item'; 
 
 // CREATE_BOARD 뮤테이션 정의
 const CREATE_BOARD = gql`

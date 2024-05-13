@@ -18,11 +18,11 @@ export default function EditUserInfo() {
         <div className="edit-group">
           <div className="edit-name">
             <label htmlFor="username">이름</label>
-            <input type="text" id="username" name="username" />
+            <input type="edit-text" id="username" name="username" />
           </div>
           <div className="edit-id">
             <label htmlFor="id">아이디</label>
-            <input type="text" id="id" name="id" />
+            <input type="edit-text" id="id" name="id" />
           </div>
           <div className="edit-password">
             <label htmlFor="password">비밀번호</label>
@@ -35,18 +35,18 @@ export default function EditUserInfo() {
           <div className="edit-phonenumber">
             <label htmlFor="phoneNumber">연락처</label>
             <div className="phone-inputs">
-              <input type="text" id="phoneNumber1" name="phoneNumber1" className="phone-input" maxLength="3" />
+              <input type="edit-text" id="phoneNumber1" name="phoneNumber1" className="phone-input" maxLength="3" />
               <span className="phone-separator">-</span>
-              <input type="text" id="phoneNumber2" name="phoneNumber2" className="phone-input" maxLength="4" />
+              <input type="edit-text" id="phoneNumber2" name="phoneNumber2" className="phone-input" maxLength="4" />
               <span className="phone-separator">-</span>
-              <input type="text" id="phoneNumber3" name="phoneNumber3" className="phone-input" maxLength="4" />
+              <input type="edit-text" id="phoneNumber3" name="phoneNumber3" className="phone-input" maxLength="4" />
           </div>
         </div>
           <div className="edit-address">
             <label htmlFor="address">주소</label>
             <div className="address-inputs">
-              <input type="text" id="address1" name="address1" className="address-input"/>
-              <input type="text" id="address2" name="address2" className="address-input"/>
+              <input type="edit-text" id="address1" name="address1" className="address-input"/>
+              <input type="edit-text" id="address2" name="address2" className="address-input"/>
             </div>
           </div>
           <button type="submit" className="edit-submit">수정하기</button>

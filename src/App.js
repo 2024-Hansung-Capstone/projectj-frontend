@@ -9,34 +9,32 @@ import Footer from "./components/Footer"
 // main
 import HeaderA from "./pages/Header";
 import Home from "./pages/Home";
-import Mate from "./pages/Mate";
-import Oneroom from "./pages/Oneroom";
-import OneroomDetails from "./pages/OneroomDetails"
-import Cooking from "./pages/Cooking";
+import Mate from "./pages/Mate/Mate";
+import Oneroom from "./pages/Oneroom/Oneroom";
+import OneroomDetails from "./pages/Oneroom/OneroomDetails"
+import Cooking from "./pages/Cooking/Cooking";
 import MyPage from "./pages/MyPage";
-import MessageSendBox from "./pages/MessageSendBox";
-import MessageReciveBox from "./pages/MessageReciveBox";
-import MessageCompose from "./pages/MessageCompose"; 
+import MessageSendBox from "./pages/Message/MessageSendBox";
+import MessageReciveBox from "./pages/Message/MessageReciveBox";
+import MessageCompose from "./pages/Message/MessageCompose"; 
 
 import Logout from './pages/Logout';
-import CookingPost from './pages/CookingPost';
-import CookingDetails from "./pages/CookingDetails";
-import CommunityPost from './pages/CommunityPost';
-import MarketPost from './pages/MarketPost';
-import MarketDetail from './pages/MarketDetail';
-import MarketUpdate from './pages/MarketUpdate';
-import Community from "./pages/Community";
+import CookingPost from './pages/Cooking/CookingPost';
+import CookingDetails from "./pages/Cooking/CookingDetails";
+import CommunityPost from './pages/Community/CommunityPost';
+import MarketPost from './pages/Market/MarketPost';
+import MarketDetail from './pages/Market/MarketDetail';
+import MarketUpdate from './pages/Market/MarketUpdate';
+import Community from "./pages/Community/Community";
 
 // mypage
 import EditUserInfo from './pages/EditUserInfo';
-import Notices from './pages/Notices';
-import Question from './pages/Question';
 
 // BeforeLogin
 import HeaderB from "./pages/BeforeLogin/Header";
 import Login from "./pages/BeforeLogin/Login";
 import Signup from "./pages/BeforeLogin/Signup";
-import Market from "./pages/Market";
+import Market from "./pages/Market/Market";
 import TermsOfService from "./pages/BeforeLogin/TermsOfService";
 
 
@@ -87,8 +85,6 @@ function App() {
                 <Route path="/MessageCompose"  element={isAuthenticated ? <MessageCompose /> : <Login onLogin={handleLogin} />} />
 
                 <Route path="/editUserInfo" element={<EditUserInfo />} />
-                <Route path="/notices" element={<Notices />} />
-                <Route path="/question" element={<Question />} />
               </Routes>
           </div>
           <div className="footer-section">

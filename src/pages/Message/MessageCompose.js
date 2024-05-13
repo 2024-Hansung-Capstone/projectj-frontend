@@ -85,7 +85,7 @@ const MessageCompose = () => {
         },
       });
       console.log('작성된 쪽지:', data.writeLetter);
-      navigate("/MessageSendBox");
+      navigate("/MessageSuccess");
     } catch (error) {
       console.error('쪽지 작성 중 오류:', error);
       setErrorMessage('쪽지 작성 중 오류가 발생했습니다.'); // 오류 메시지 설정
@@ -106,7 +106,7 @@ const MessageCompose = () => {
           <input id="receiverId" type="text" value={receiverId} onChange={handleReceiverIdChange} />
         </div>
         <div className='form-group'>
-          <label htmlFor='category' className='message-label'>카테고리:</label>
+          <label htmlFor='category' className='message-category'>카테고리:</label>
           <select id='category' value={category} onChange={handleCategoryChange} required>
             <option value="">카테고리를 선택하세요.</option>
             <option value="mate">자취메이트</option>

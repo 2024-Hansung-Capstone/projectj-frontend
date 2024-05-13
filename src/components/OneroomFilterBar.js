@@ -63,16 +63,6 @@ const OneroomFilterBar = ({
       )}
       <hr className='filter-line' />
       <div className='filter-item'>
-        <Checkbox>오피스텔만 보기</Checkbox>
-      </div>
-      <div className='filter-item'>
-        <Checkbox>원룸</Checkbox>
-      </div>
-      <div className='filter-item'>
-        <Checkbox>투룸</Checkbox>
-      </div>
-      <hr className='filter-line' />
-      <div className='filter-item'>
       <Checkbox defaultChecked="true" onChange={onListToggleChange}>목록 보기</Checkbox>
         <Checkbox onChange={onMapToggleChange}>지도 보기</Checkbox>
       </div>

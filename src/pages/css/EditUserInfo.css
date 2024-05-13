@@ -70,7 +70,7 @@ label {
   flex: 1;
 }
 
-input[type="text"],
+input[type="edit-text"],
 input[type="id"],
 input[type="password"] {
   flex: 2;
