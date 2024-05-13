@@ -77,7 +77,7 @@ export default function MyPage({ onLogout , userId }) {
         </div>
         <div className='mypage-user-container3'>
           <div className='mypage-point'><TbSquareRoundedLetterP /> 포인트</div>
-          <Link className='mypage-message' to="/Message"><SlEnvolopeLetter /> 메시지</Link>
+          <Link className='mypage-message' to="/MessageCompose"><SlEnvolopeLetter /> 메시지</Link>
         </div>
       </div>
 

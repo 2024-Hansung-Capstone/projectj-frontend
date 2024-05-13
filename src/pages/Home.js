@@ -97,10 +97,11 @@ const Home = () => {
         ))}
       </div>
       <h4>중고마켓</h4>
-      <div className="market-item">
-        {productsData?.fetchUsedProducts.map((product, index) => (
-          <Market_Item key={index} product={product} />
+      <div className="Home-section-market-item">
+        {productsData?.fetchUsedProducts .map((product, index) => (
+                <Market_Item key={index} product={product} />
         ))}
+        
       </div>
 
       <h4>커뮤니티(핫 게시물)</h4>

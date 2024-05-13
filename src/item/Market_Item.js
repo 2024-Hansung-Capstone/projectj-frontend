@@ -2,7 +2,6 @@ import React from 'react';
 import "./css/Market_Item.css";
 
 export default function Market_Item({ product, onClick }) {
-    // 게시물이 존재하지 않을 경우 빈 상태로 반환
     if (!product || !product.user) return null; // 사용자 정보가 없는 경우 처리
 
     return (

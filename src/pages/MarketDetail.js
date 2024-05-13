@@ -49,13 +49,17 @@ export default function MarketDetail() {
   };
 
   
-  const handleSendMessage = () => {
-    if (isLoggedIn) { // 수정된 부분
-      navigate('/Message', { state: { recipientId: product.user.name } });
+  const handleSendMessage = async () => {
+    console.log('쪽지 보내기 버튼 클릭됨'); // 버튼 클릭 확인
+    if (isLoggedIn) {
+      console.log('메시지 작성 페이지로 이동'); // 로그인 상태 확인 로그
+      navigate('/MessageCompose', { state: { writingId: product.id, reciverId: product.user.name, category: "market" }});
     } else {
+      console.log('로그인 페이지로 이동'); // 로그인 상태가 아닌 경우 로그
       navigate('/pages/Before/Login');
     }
   };
+  
 
   // 컴포넌트가 마운트될 때 로컬 스토리지에서 토큰을 확인하여 로그인 상태 설정
   useEffect(() => {
@@ -128,6 +132,7 @@ export default function MarketDetail() {
       <h2 className="header">상품 상세 정보</h2>
       {product ? (
         <div>
+          <h3 className="productTitle">상품ID: {product.id}</h3>
           <h3 className="productTitle">제목: {product.title}</h3>
           <p className="productUser">판매자: {product.user?.name}</p>
           <p className="productCategory">카테고리: {product.category}</p>

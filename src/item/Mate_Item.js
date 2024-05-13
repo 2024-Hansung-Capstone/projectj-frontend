@@ -8,7 +8,7 @@ export default function Mate_Item({ user }) {
     if (!user) {
         return <p>Loading user data...</p>;
     }
-
+    const userId = user.id ? user.id : 'Unknown User';
     const userName = user.name ? user.name : 'Unknown User';
     const gender = user.gender ? user.gender : 'Unknown Gender';
     const mbti = user.mbti ? user.mbti : 'Unknown mbti';
@@ -17,13 +17,16 @@ export default function Mate_Item({ user }) {
     const userAge = user.birth_at ? `${currentYear - birthYear} 세` : 'Age unknown';
 
     const handleSendMessage = () => {
-        navigate('../Message', { state: { recipientId: userName } });
+        navigate('../MessageCompose', { state: { writingId: userName, category: "mate" } });
     };
 
     return (
         <div className='mi-container'>
             <div className='mi-photo'> 
                 <img className="user-image" src="/user.jpeg" alt="user"/>
+            </div>
+            <div className='mi-name'>
+                <h4>{userId}</h4>
             </div>
             <div className='mi-name'>
                 <h4>{userName}</h4>

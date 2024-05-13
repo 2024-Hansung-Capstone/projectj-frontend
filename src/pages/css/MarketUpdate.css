@@ -2,7 +2,6 @@
 .market-post-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin: 20px;
     padding: 20px;
     border-radius: 8px;
@@ -55,16 +54,12 @@
     color: white;
     cursor: pointer;
     transition: background-color 0.2s;
+    text-align: center;
   }
   
   /* 버튼 호버 효과 */
   .btn.market-post-btn:hover {
     background-color: #0056b3;
-  }
-  
-  /* 판매자 정보 스타일 */
-  p {
-    color: #555;
   }
   
   /* 선택 박스 스타일 */

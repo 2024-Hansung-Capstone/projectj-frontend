@@ -10,7 +10,7 @@ const database = require('./database')
 console.log(database)*/
 
 const client = new ApolloClient({
-  uri: 'http://13.209.72.136:5000/graphql',
+  uri: 'http://54.180.182.40:5000/graphql',
   cache: new InMemoryCache()  // 캐시 저장
 });
 

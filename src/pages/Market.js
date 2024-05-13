@@ -46,7 +46,7 @@ export default function Market() {
     } else {
       setLoggedInUserName(''); // 로그아웃 시 또는 사용자 이름이 없을 때 상태를 비워줌
     }
-  }, []); // 의존성 배열이 비어있으므로, 컴포넌트 마운트 시 한 번만 실행됩니다.
+  }, []);
   
   
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import { ApolloProvider } from '@apollo/client';
 
 import Category from "./components/Category";
@@ -13,8 +14,10 @@ import Oneroom from "./pages/Oneroom";
 import OneroomDetails from "./pages/OneroomDetails"
 import Cooking from "./pages/Cooking";
 import MyPage from "./pages/MyPage";
-import Message from "./pages/Message";
-import MessageBox from "./pages/MessageBox";
+import MessageSendBox from "./pages/MessageSendBox";
+import MessageReciveBox from "./pages/MessageReciveBox";
+import MessageCompose from "./pages/MessageCompose"; 
+
 import Logout from './pages/Logout';
 import CookingPost from './pages/CookingPost';
 import CookingDetails from "./pages/CookingDetails";
@@ -23,7 +26,6 @@ import MarketPost from './pages/MarketPost';
 import MarketDetail from './pages/MarketDetail';
 import MarketUpdate from './pages/MarketUpdate';
 import Community from "./pages/Community";
-import MateDetail from "./pages/MateDetail";
 
 // mypage
 import EditUserInfo from './pages/EditUserInfo';
@@ -41,6 +43,7 @@ import TermsOfService from "./pages/BeforeLogin/TermsOfService";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // 인증 상태를 관리
 
+
   // 사용자가 로그인하면 호출되는 함수
   const handleLogin = () => {
     setIsAuthenticated(true);
@@ -50,6 +53,7 @@ function App() {
   const handleLogout = () => {
     setIsAuthenticated(false);
   };
+
 
   return (
     <div className="root-wrap">
@@ -68,8 +72,6 @@ function App() {
                 <Route path="/MarketDetail" element={isAuthenticated ? <MarketDetail /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MarketUpdate" element={isAuthenticated ? <MarketUpdate /> : <Login onLogin={handleLogin} />} />
                 <Route path="/CommunityPost" element={isAuthenticated ? <CommunityPost /> : <Login onLogin={handleLogin} />} />
-                <Route path="/MateDetail" element={isAuthenticated ? <MateDetail /> : <Login onLogin={handleLogin} />} />
-
                 <Route path="/Login" element={<Login onLogin={handleLogin} />} />
                 <Route path="/Signup" element={<Signup />} />
                 <Route path="/Oneroom" element={<Oneroom />} />
@@ -79,8 +81,11 @@ function App() {
                 <Route path="/CookingDetails" element={<CookingDetails />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/MyPage" element={<MyPage onLogout={handleLogout} />} />
-                <Route path="/Message" element={<Message />} />
-                <Route path="/messageBox" element={<MessageBox />} />
+                
+                <Route path="/MessageSendBox"  element={isAuthenticated ? <MessageSendBox /> : <Login onLogin={handleLogin} />} />
+                <Route path="/MessageReciveBox"  element={isAuthenticated ? <MessageReciveBox /> : <Login onLogin={handleLogin} />} />
+                <Route path="/MessageCompose"  element={isAuthenticated ? <MessageCompose /> : <Login onLogin={handleLogin} />} />
+
                 <Route path="/editUserInfo" element={<EditUserInfo />} />
                 <Route path="/notices" element={<Notices />} />
                 <Route path="/question" element={<Question />} />
