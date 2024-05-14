@@ -11,10 +11,10 @@
 
 # 실행 및 설치 방법
 ### ﻿Clone the repository
-﻿https://github.com/2024-Hansung-Capstone/projectj-frontend.git     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;﻿﻿https://github.com/2024-Hansung-Capstone/projectj-frontend.git     
 ### ﻿Install NPM packages and run
-﻿$ npm install
-$ npm start
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;﻿﻿$ npm install
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;﻿$ npm start
 
 # ﻿기술 스택
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;﻿﻿Language : JavaScript, css
