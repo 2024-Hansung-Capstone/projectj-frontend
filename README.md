@@ -26,8 +26,11 @@ $ npm start
 
 # ﻿4. 기술 스택
 Language : JavaScript, css
+
 ﻿Framework: React
+ 
 Tool: VSCode
+
 ﻿Target: Web Browser
 
 ---
