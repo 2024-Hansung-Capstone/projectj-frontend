@@ -34,7 +34,7 @@
   margin-bottom: 20px;
 }
 
-.dishes-grid {
+.cooking-dishes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 유동적인 그리드 설정 */
   gap: 15px;
@@ -54,32 +54,22 @@
   max-height: calc(100vh - 475px);
 }
 
-
 .filter-bar-container {
   display: flex;
   flex-direction: column;
-  width: 260px;
+  width: 500px;
+  margin-top: 20px;
 }
 
 .filter-bar-container .ant-btn {
   height: 47.1px;
   line-height: 47.1px; 
-  margin-top: 10px;
 }  
 
 .filter-bar-container .ant-btn-primary {
   background-color: #29adb2;
   border-color: #29adb2;
 }
-
-@media (min-width: 1150px) {
-  /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
-  .cooking-container {
-    width: 100%;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-  }
 
   .filter-section.open {
     width: 300px; /* 필터바가 열린 상태에서 너비는 300px 유지 */
@@ -96,10 +86,9 @@
   .dishes-grid.open {
     margin-left: 5px; /* 필터바가 열린 상태에서 왼쪽 여백 추가 */
   }
-}
 
 .post-button1 {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
   position: fixed;
   bottom: 150px;
@@ -131,27 +120,13 @@
 }
 .cook-ai {
   width: 90%;
-  border: 2px solid #29ADB2;
-  border-radius: 16px;
-  padding: 20px;
+  border: 2.5px solid black;
+  border-radius: 14px;
+  padding: 10px;
 }
-.cook-ai-input > input {
-    display: flex;
-    flex-direction: column;
-    padding: 16px 20px;
-    padding-top: 16px;
-    padding-right: 20px;
-    padding-bottom: 16px;
-    padding-left: 30px;
-    border: none;
-    width: 80%;
-    max-width: 650px;
-    border-radius: 16px;
-    min-height: 50px;
-    background-color: rgb(255, 255, 255);
-    font-size: 20px;
-    outline: none;
-    
+.cook-ai-input {
+  width: 60%;
+  margin-left: 40px;
 }
 .cook-ai-input > button {
   display: flex;
@@ -168,11 +143,75 @@
   transition: padding 0.2s ease-in-out 0s;
   color: white;
   margin-left: auto; 
+  margin-top: 155px;
 }
+.ingredient-result > button {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  background-color: #209094;
+  border-radius: 16px;
+  padding: 10px;
+  width: 28px;
+  height: 28px;
+  transition: padding 0.2s ease-in-out 0s;
+  color: white;
+  margin-left: auto; 
+}
+
+.ingredient {
+  display: flex;
+}
+.ingredient-inputs {
+  width: 50%;
+  margin: 2px;
+  font-size: 14px;
+  color: gray;
+}
+.ingredient-inputs > input {
+  margin: 5px;
+  padding: 10px;
+  width: 93%;
+}
+.ingredient-inputs > button {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+  display: flex;
+  margin-left: auto; 
+  
+}
+.ingredient-result {
+  width: 55%;
+  padding: 15px;
+  margin-left: 20px;
+}
+
+
+
+
+
+
 
 @font-face {
   font-family: 'KCC-Hanbit';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
+}
+
+
+@media (min-width: 1150px) {
+  /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
+  .cooking-container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

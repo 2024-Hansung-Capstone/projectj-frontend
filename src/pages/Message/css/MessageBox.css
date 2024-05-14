@@ -67,7 +67,7 @@ footer button {
 }
 
 /* 추가: 입력 필드 스타일링 */
-input[type="text"] {
+input[type="messagebox-text"] {
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 4px; /* 둥근 모서리 */

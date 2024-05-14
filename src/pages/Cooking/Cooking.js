@@ -22,6 +22,7 @@ const Cooking = () => {
   };
   const handleAISearch = (e) => {
     e.preventDefault();
+    navigate("./CookingAI.js");
     // 사용자가 입력한 검색어를 가져와서 처리하는 로직을 여기에 추가합니다.
   };
   return (
@@ -35,6 +36,25 @@ const Cooking = () => {
         </div>
       )}
       <div className='map-section'>
+      <h2>AI 레시피</h2>
+      <div className='cook-ai'>
+        <div className='ingredient'>
+        <div className='ingredient-inputs'>
+          <p>AI에게 레시피를 추천받을 수 있어요</p>
+          <input type="text" placeholder="재료" />
+          <input type="text" placeholder="양" />
+          <input type="text" placeholder="단위"/>
+          <button>재료 추가</button>
+        </div>
+
+        <div className='cook-ai-input'>
+          <p>추가된 재료</p>
+          {/* 추가된 재료 위치 */}
+          <button onClick={handleAISearch}>➔</button>
+        </div>
+      </div>
+      </div>
+
       <div className='filter-bar-container'>
       <div className='filter-item'>
         <Input.Group compact>
@@ -42,15 +62,8 @@ const Cooking = () => {
         </Input.Group>
       </div>
       </div>
-      <h2>AI 레시피</h2>
-      <div className='cook-ai'>
-        <div className='cook-ai-input'>
-          <input type="cook-text" className='cook-ai-search' placeholder="AI 에게 레시피를 물어보세요" />
-          <button onClick={handleAISearch}>➔</button>
-        </div>
-      </div>
         <div className='header'>
-          <h1>BEST 요리</h1>
+          <h1>BEST 레시피</h1>
         </div>
         <div className='best-dishes'>
           <Cooking_Item dishImage='/cookingImage_1.webp' dishTitle='김치볶음밥' author='김엄마' dishDescription={'맛있는 김치볶음밥 레시피'} />
@@ -60,7 +73,7 @@ const Cooking = () => {
 
         <hr className='divider' />
         <div className='cooking-items-container'>
-          <div className='dishes-grid'>
+          <div className='cooking-dishes-grid'>
             {[...Array(40)].map((_, index) => (
               <div key={index} className='dish-item'>
                 <Cooking_Item dishImage={`/path/to/image${index % 10}.jpg`} dishTitle={`요리(글) 제목${index}`} author={`글쓴이${index}`} />

@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IoSearchOutline } from "react-icons/io5";
-import { AiOutlineMessage } from "react-icons/ai";
 import { TbMessage } from "react-icons/tb";
 import './css/Header.css';
 
@@ -17,16 +15,6 @@ export default function Header() {
               alt="로고"
             />
           </Link>
-        </div>
-        <div className="search-container">
-          <div className="search-icon">
-            <IoSearchOutline />
-            <input
-              type="text"
-              placeholder="검색어를 입력하세요."
-              className="search-input"
-            />
-          </div>
         </div>
         <div className="header-right-wrap">
           <ul className="nav-list">

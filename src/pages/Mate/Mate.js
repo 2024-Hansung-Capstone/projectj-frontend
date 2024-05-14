@@ -5,7 +5,7 @@ import MateFilterModal from '../../components/MateFilterModal.js';
 import { BiCategory } from "react-icons/bi";
 import { RiMenu2Line } from "react-icons/ri";
 import Mate_Item from '../../item/Mate_Item.js';
-import './css/Mate.css';
+import './Mate.css';
 
 const FETCH_ALL_USERS = gql`
   query {

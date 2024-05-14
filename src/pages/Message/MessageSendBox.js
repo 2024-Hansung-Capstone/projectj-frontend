@@ -54,7 +54,7 @@ export default function MessageSendBox() {
         </div>
         <IoSearchOutline className="market-search-icon" />
         <input
-          type="text"
+          type="messagebox-text"
           className="market-search-input"
         />
       </div>
