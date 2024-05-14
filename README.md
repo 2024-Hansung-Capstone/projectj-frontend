@@ -1,70 +1,115 @@
-# Getting Started with Create React App
+![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=10&height=200&text=ProjectJ-frontend&fontSize=50&animation=twinkling&fontAlign=68&fontAlignY=36)
+# ﻿정의
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;﻿원룸 : 딱 1인가구를 위한 자취생 맞춤 원룸! 자취생들에게 제공하는 원룸 찾기     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;﻿﻿요리 : 매일 메뉴고민에 빠진 자취생에게 제공하는 AI 요리 레시피     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;﻿커뮤니티: 자취생들의 공감대를 형성하는 자취 커뮤니티     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;﻿중고마켓 : 버리는 것도 고민되는 자취생에게 제공하는 중고마켓    
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ﻿﻿프로젝트 배경
+### 환경변수 설정    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가. .env 설정
+                                                        <pre><code>JWT_ACCESS_SECRET = (사용자 관리 중 JWT의 Access키 생성을 위한 암호)
+JWT_REFRESH_SECRET = (사용자 관리 중 JWT의 Refresh키 생성을 위한 암호)
 
-## Available Scripts
+SMS_KEY = (CoolSMS API 인증키)
+SMS_SECRET = (CoolSMS API 암호키)
+SMS_SENDER = (문자 메시지 전달할 휴대폰 번호)
 
-In the project directory, you can run:
+SERVER_INTERNAL_PORT = (서버 포트포워딩에서 내부 포트)
+SERVER_EXTERNAL_PORT = (서버 포트포워딩에서 외부 포트)
 
-### `npm start`
+DATABASE_TYPE = (메인으로 사용할 데이터베이스의 종류 ex)mysql)
+DATABASE_HOST = (데이터베이스 host 주소)
+DATABASE_INTERNAL_PORT = (데이터베이스 포트포워딩에서 내부 포트)
+DATABASE_EXTERNAL_PORT = (데이터베이스 포트포워딩에서 외부 포트)
+DATABASE_USERNAME = (데이터베이스 사용자명)
+DATABASE_PASSWORD = (데이터베이스 암호)
+DATABASE_DATABASE = (데이터베이스 스키마명)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+OPENAI_SECRET = (OPENAI API 비밀 키)
+</code></pre>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;나. .env.docker 설정
+<pre><code>DATABASE_TYPE = (메인으로 사용할 데이터베이스의 종류 ex)mysql)
+DATABASE_HOST = (데이터베이스 host 주소)
+DATABASE_PORT= (데이터베이스 포트)
+DATABASE_USERNAME = (데이터베이스 사용자명)
+DATABASE_PASSWORD = (데이터베이스 암호)
+DATABASE_DATABASE = (데이터베이스 스키마명)</code></pre>
+### 프로젝트 파일 설치
+<pre><code>git clone https://github.com/2024-Hansung-Capstone/ProjectJ-Backend.git
+</code></pre>
+### Docker
+<pre><code>docker-compose build
+docker-compose up
+-백그라운드에서 실행: docker-compose up -d
+-로그 출력: docker-compose logs 
+</code></pre>
 
-### `npm test`
+# ﻿Database 구조 (ERD)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![image](https://github.com/2024-Hansung-Capstone/ProjectJ-Backend/assets/157611169/60601345-f122-4f14-967e-64a9d3ae6594)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# ﻿Release Link
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+﻿http://13.209.72.136:5000/graphql
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# ﻿Apollo GraphQL Playground UI
+__<UI 설명>__    
+![image](https://github.com/2024-Hansung-Capstone/ProjectJ-Backend/assets/157611169/4263d561-427e-4869-a452-114762befe22)   
+<br>      
 
-### `npm run eject`
+__<documentation 화면 설명>__    
+![image](https://github.com/2024-Hansung-Capstone/ProjectJ-Backend/assets/157611169/6b6b72fc-7ca8-4ef5-986d-ac5d9b7c49e6)
+ 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# ﻿API 설명
+### 사용자 관리   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가. JWT 적용   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사용자의 인증과 인가를 위해 JWT 기술 적용한다.   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JWT 토큰에 사용자의 ID 값을 넣어서 사용자의 회원정보 일치 여부를 확인한다.   
+__<사용 예시 화면>__   
+![image](https://github.com/2024-Hansung-Capstone/ProjectJ-Backend/assets/157611169/dd86e155-2bf9-4088-aa17-b4953d26ba38)   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;나. ﻿휴대폰 본인인증 적용 (CoolSMS)   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;﻿CoolSMS의 API를 사용하여 사용자가 입력한 전화번호에 인증 메시지를 전송한다.   
+__<인증 메시지 전송 예>__   
+![image](https://github.com/2024-Hansung-Capstone/ProjectJ-Backend/assets/157611169/1e7e21fe-ae00-42d7-893d-24b0a7b6cd81)   
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 행정지역
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;행정안전부에서 지정한 2024년 2월 1일 기준인 시도, 시군구, 행정동 코드를 사용한다.    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__<출처>__     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;﻿https://www.mois.go.kr/frt/bbs/type001/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000052&nttId=106692
 
-### Code Splitting
+### 포인트
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가. 사용자 역할 관리    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 별로 사용자의 역할을 분류한다.   
+![image](https://github.com/2024-Hansung-Capstone/ProjectJ-Backend/assets/157611169/7da4224c-f98b-44ee-9ba3-5c9da523ad76)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 원룸    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;국토교통부에서 제공하는 연립 다세대 전월세 데이터를 사용하여 원룸 정보를 전달한다.   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__<출처>__   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;﻿https://www.data.go.kr/data/15058016/openapi.do   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상세주소를 이용하여 Geocoding 기술을 사용하여 좌표를 전달한다.
 
-### Analyzing the Bundle Size
+### ﻿요리 추천 AI 기능    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OpenAI에 API 기능 중 Assistants를 생성해서 요리 추천 봇을 구현한다.   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사용자가 갖고 있는 식재료를 Json 형태로 전달하면, Assistants는 Json 형태로 요리의 상세 정보와 레시피를 리턴한다.   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;﻿사용자의 요청 별로 각각 Thread를 만들고, 생성해 놓은 Assistants를 Run하여 결과를 도출한다.      
+__<OpenAI에서 생성한 요리 추천 Assistants>__   
+![image](https://github.com/2024-Hansung-Capstone/ProjectJ-Backend/assets/157611169/cf1bba84-121c-483a-bbf6-41fa152e3bde)   
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+__<요리 추천 AI API 실행 결과>__     
+![image](https://github.com/2024-Hansung-Capstone/ProjectJ-Backend/assets/157611169/6f96c4e1-2880-49b4-9944-9b1a108777ad)    
 
-### Making a Progressive Web App
+### 기타 API 기능 설명
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;배포된 링크(http://13.209.72.136:5000/graphql)의 Docs를 참고하여 사용 가능하다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
