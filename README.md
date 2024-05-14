@@ -31,6 +31,7 @@
   + 중고마켓 : 사용자와 같은 지역에 거주하는 유저가 올린 중고 상품을 띄워 쪽지를 통해 거래를 한다. 
   + 커뮤니티 : 자취생들에게 필요한 정보들을 같은 자취생들과 공유하고, 소통한다. 
 # ﻿웹페이지 구조
-![image](https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/157611169/7f8ac5d6-c2e7-4a1c-a0c1-634543a0e4da)
+<img width="803" alt="image" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/fdc45325-40e0-4ba3-b107-4264205cbf81">
+
 
 
