@@ -1,5 +1,6 @@
 import React from 'react';
 import { GoHeartFill } from 'react-icons/go';
+import { LiaEyeSolid } from "react-icons/lia";
 import { useMutation, gql } from '@apollo/client';
 import './css/Market_Item.css';
 
@@ -35,6 +36,9 @@ export default function Market_Item({ product, onClick }) {
           <div className="marketitem-photo"></div>
           <div className="marketitem-id"></div>
           <div className="marketitem-title">
+            <p>제목 : {product.id}</p>
+          </div>
+          <div className="marketitem-title">
             <p>제목 : {product.title}</p>
           </div>
           <div className="marketitem-seller">
@@ -54,11 +58,10 @@ export default function Market_Item({ product, onClick }) {
         </div>
         <div className="marketitem-likeview">
           <div className="marketitem-like" onClick={handleLikeClick}>
-            <GoHeartFill />
-            <p>{product.like}</p>
+            <p><GoHeartFill /> {product.like}</p>
           </div>
           <div className="marketitem-view">
-            <p>{product.view}</p>
+            <p><LiaEyeSolid/> {product.view}</p>
           </div>
         </div>
       </div>

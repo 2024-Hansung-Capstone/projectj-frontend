@@ -22,7 +22,7 @@ const Cooking = () => {
   };
   const handleAISearch = (e) => {
     e.preventDefault();
-    navigate("/CookingAI.js");
+    navigate("/CookingAI");
     // 사용자가 입력한 검색어를 가져와서 처리하는 로직을 여기에 추가합니다.
   };
   return (

@@ -4,30 +4,24 @@ import { useMutation, gql } from '@apollo/client';
 
 // 쪽지 작성
 const WRITE_LETTER = gql`
-  mutation WriteLetter($writing_id: String!, $createLetterInput: CreateLetterInput!) {
-    writeLetter(writing_id: $writing_id, createLetterInput: $createLetterInput) {
+  mutation WriteLetter($writing_id: String!, $receiverId: String!, $createLetterInput: CreateLetterInput!) {
+    writeLetter(writing_id: $writing_id, receiver_id: $receiverId, createLetterInput: $createLetterInput) {
       id
       sender {
-        id
         name
       }
       receiver {
-        id
         name
       }
       product {
-        id
         title
       }
       board {
-        id
         title
       }
       category
       title
       detail
-      is_read
-      create_at
     }
   }
 `;
@@ -47,22 +41,23 @@ const MessageCompose = () => {
   useEffect(() => {
     if (location.state && location.state.writingId) {
       setWritingId(location.state.writingId);
-      setReceiverId(location.state.receiverId);
       setCategory(location.state.category);
     }
   }, [location]);
+
+  // 로그인한 사용자의 ID 가져오기
+  useEffect(() => {
+    const loggedInUserId = localStorage.getItem('userId');
+    if (loggedInUserId) {
+      setReceiverId(loggedInUserId);
+    }
+  }, []);
 
   const handleDetailChange = (e) => {
     setDetail(e.target.value);
   };
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
-  };
-  const handleReceiverIdChange = (e) => {
-    setReceiverId(e.target.value);
-  };
-  const handleWritingIdChange = (e) => {
-    setWritingId(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -71,11 +66,11 @@ const MessageCompose = () => {
       const { data } = await writeLetter({
         variables: {
           writing_id: writingId,
+          receiverId: receiverId,
           createLetterInput: {
             title,
             detail,
             category,
-            receiver: receiverId,
           },
         },
         context: {
@@ -85,11 +80,14 @@ const MessageCompose = () => {
         },
       });
       console.log('작성된 쪽지:', data.writeLetter);
-      navigate("/MessageSuccess");
+      navigate("/MessageSendBox");
     } catch (error) {
       console.error('쪽지 작성 중 오류:', error);
-      setErrorMessage('쪽지 작성 중 오류가 발생했습니다.'); // 오류 메시지 설정
-    }
+      const errorMessage = error.message.includes("쪽지를 허용하지 않는 카테고리입니다.") 
+        ? "선택하신 카테고리는 쪽지를 작성할 수 없습니다. 다른 카테고리를 선택해 주세요." 
+        : "쪽지 작성 중 오류가 발생했습니다.";
+      setErrorMessage(errorMessage);
+    }    
   };
 
   return (
@@ -99,11 +97,7 @@ const MessageCompose = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="writingId">글 ID:</label>
-          <input id="writingId" type="text" value={writingId} onChange={handleWritingIdChange} />
-        </div>
-        <div>
-          <label htmlFor="receiverId">수신자 ID:</label>
-          <input id="receiverId" type="text" value={receiverId} onChange={handleReceiverIdChange} />
+          <input id="writingId" type="text" value={writingId} readOnly />
         </div>
         <div className='form-group'>
           <label htmlFor='category' className='message-category'>카테고리:</label>

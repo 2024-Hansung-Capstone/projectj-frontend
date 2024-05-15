@@ -33,6 +33,16 @@ export default function MyPage({ onLogout , userId }) {
   const userInfo = data.fetchUserById;
   */
  
+  const GET_USER_INFO = gql`
+  query FetchUserInfo($userId: String!) {
+    fetchUserById(user_id: $userId) {
+      id
+      name
+      point
+    }
+  }
+`
+
   export default function MyPage({ onLogout }) {
     const [deleteUser] = useMutation(DELETE_USER_MUTATION);
     
