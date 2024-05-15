@@ -70,17 +70,11 @@ export default function MarketDetail() {
     return localStorage.getItem('token') || '';
   };
 
-  
   const handleSendMessage = async () => {
     console.log('쪽지 보내기 버튼 클릭됨'); // 버튼 클릭 확인
-    if (isLoggedIn) {
       console.log('메시지 작성 페이지로 이동'); // 로그인 상태 확인 로그
-      navigate('/MessageCompose', { state: { writingId: product.id, reciverId: product.user.name, category: "market" }});
-    } else {
-      console.log('로그인 페이지로 이동'); // 로그인 상태가 아닌 경우 로그
-      navigate('/pages/Before/Login');
-    }
-  };
+      navigate('/MessageCompose', { state: { writingId: product.id, receiverId: product.user.name, category: "market" }});
+  };  
   
 
 
@@ -100,8 +94,8 @@ export default function MarketDetail() {
   }, []);
   
   
-
-  useEffect(() => {  // 판매자 정보 
+ // 판매자 정보 
+  useEffect(() => {
     if (product && product.user) {
       const sellerName = product.user.name;
       setSellerName(sellerName);
@@ -112,8 +106,9 @@ export default function MarketDetail() {
     navigate('/MarketUpdate', { state: { product, loggedInUserName } });
   };
 
+  // 디버깅을 위한 로그 추가
   const handleDeleteProduct = async () => {
-    console.log(`로그인한 사용자: ${loggedInUserName}, 판매자: ${sellerName}`); // 디버깅을 위한 로그 추가
+    console.log(`로그인한 사용자: ${loggedInUserName}, 판매자: ${sellerName}`);
   
     // 로그인한 사용자와 판매자가 동일한지 확인
     if (loggedInUserName === sellerName) {
@@ -128,7 +123,6 @@ export default function MarketDetail() {
             },
             refetchQueries: [{ query: GET_USED_PRODUCTS }] // 상품 삭제 후 목록 새로고침
           });
-  
           console.log("상품 삭제 성공: ", response);
           toast.success('상품이 성공적으로 삭제되었습니다.');
           navigate('/Market');
@@ -144,6 +138,7 @@ export default function MarketDetail() {
     }
   }
   
+  // 현재 로그인 서버와 연결 되었는지 확인하는 로그 (f12 누르고 network에 가보면 맨 아래에 뜹니다. )
   console.log('판매자:', sellerName);
   console.log('로그인 유무:', isLoggedIn);
   console.log('로그인 사용자:', loggedInUserName);
@@ -159,6 +154,7 @@ export default function MarketDetail() {
               <h3 className="productImage">이미지</h3>
             </div>
             <div className='marketdetail-container4'>
+              <p>{product.id}</p>  {/* 상품 정보에 대한 gql 정보는 모두 'product. ' 으로 시작됩니다.  */}
               <h2 className="productTitle">{product.title}</h2>
               <p className="productPrice">{product.price}  원</p>
               <hr></hr>
@@ -174,7 +170,7 @@ export default function MarketDetail() {
               <button onClick={handleDeleteProduct}>삭제</button>
             </div>
                 <p className="productUser">판매자</p>
-                <p className="productUser">{product.user?.name}</p>
+                <p className="productUser">{product.user?.name}</p>  {/* product의 user 정보는 product.user.name 이런 식으로 작성합니다.  */}
                 <p className="productCategory">카테고리</p>
                 <p className="productCategory">{product.category}</p>
                 <p className="productState">판매상태</p>
@@ -182,7 +178,6 @@ export default function MarketDetail() {
               </div>
           <div className='productDetailBtn'>
             <button onClick={handleSendMessage}>쪽지보내기</button>
-
             <button>찜하기</button>
             </div>
         </div>

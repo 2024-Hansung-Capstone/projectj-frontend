@@ -11,14 +11,14 @@ export default function Community_Item({ board }) { // props로 board를 받도�
         </div>
 
         <div className='ci-userName'>
-          <h4>{board.userId}</h4> {/* board.userId로 변경 */}
+          <h4>{board.userId}</h4>
         </div>
         <div className='ci-date'>
-          <h4>{board.createat}</h4> {/* board.createat로 변경 */}
+          <h4>{board.createat}</h4> 
         </div>
       </div>
       <div className='ci-post'>
-        <h4>{board.title}</h4> {/* board.title로 변경 */}
+        <h4>{board.title}</h4>
       </div>
       <div className='ci-comment'>
         <input

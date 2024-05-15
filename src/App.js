@@ -22,6 +22,7 @@ import MessageCompose from "./pages/Message/MessageCompose";
 import CookingPost from './pages/Cooking/CookingPost';
 import CookingDetails from "./pages/Cooking/CookingDetails";
 import CommunityPost from './pages/Community/CommunityPost';
+import CommunityDetail from './pages/Community/CommunityDetail';
 import MarketPost from './pages/Market/MarketPost';
 import MarketDetail from './pages/Market/MarketDetail';
 import MarketUpdate from './pages/Market/MarketUpdate';
@@ -70,6 +71,8 @@ function App() {
                 <Route path="/MarketDetail" element={isAuthenticated ? <MarketDetail /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MarketUpdate" element={isAuthenticated ? <MarketUpdate /> : <Login onLogin={handleLogin} />} />
                 <Route path="/CommunityPost" element={isAuthenticated ? <CommunityPost /> : <Login onLogin={handleLogin} />} />
+                <Route path="/CommunityDetail" element={isAuthenticated ? <CommunityDetail /> : <Login onLogin={handleLogin} />} />
+                
                 <Route path="/Login" element={<Login onLogin={handleLogin} />} />
                 <Route path="/Signup" element={<Signup />} />
                 <Route path="/Oneroom" element={<Oneroom />} />

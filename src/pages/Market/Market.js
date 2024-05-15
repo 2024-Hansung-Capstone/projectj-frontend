@@ -6,7 +6,9 @@ import { IoSearchOutline } from "react-icons/io5";
 import { useQuery, useMutation, gql } from '@apollo/client';
 import "./css/Market.css";
 
-const GET_USED_PRODUCTS = gql`
+// 전체 상품 데이터 가져오기
+// 전체 상품 가져오는 gql을 "GET_USED_PRODUCTS"로 별칭 지정. 
+const GET_USED_PRODUCTS = gql`   
   query GetUsedProducts {
     fetchUsedProducts {
       id
@@ -46,7 +48,7 @@ const INCREASE_USED_PRODUCT_LIKE = gql`
 `;
 
 export default function Market() {
-  const { loading, error, data } = useQuery(GET_USED_PRODUCTS);
+  const { loading, error, data } = useQuery(GET_USED_PRODUCTS);  // 위에서 지정한 전체상품 gql 변수 선언
   const [increaseView] = useMutation(INCREASE_USED_PRODUCT_VIEW); 
   const [increaseLike] = useMutation(INCREASE_USED_PRODUCT_LIKE);
   const [isHovered, setIsHovered] = useState(false);
@@ -54,13 +56,15 @@ export default function Market() {
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loggedInUserName, setLoggedInUserName] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  // 현재 로그인 유무
+  const [loggedInUserName, setLoggedInUserName] = useState('');  // 로그인 사용자 이름 
 
-  useEffect(() => {
+  useEffect(() => {  // 토큰 가져오기
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
   
+
+    // 현재 로그인 유저 확인
     const loggedInUser = localStorage.getItem('loggedInUserName');
     if (loggedInUser) {
       setLoggedInUserName(loggedInUser);
@@ -69,33 +73,34 @@ export default function Market() {
     }
   }, []);
   
-  const handlePostButtonClick = () => {
+   // 상품등록 버튼 클릭 -> 등록 시 로그인 유무 확인
+  const handlePostButtonClick = () => { 
     navigate('/MarketPost', { state: { isLoggedIn } });
   };
 
+  // 카테고리 버튼 클릭
   const handleCategoryClick = (category) => {
     const selected = category === 'all' ? '전체' : category;
     setSelectedCategory(selected);
   };
 
-  // 조회수
+  // 상품 클릭 시 조회수 증가
   const handleItemClick = (product) => {
-  
-    increaseView({ variables: { product_id: product.id }}) // 조회수 증가
+    increaseView({ variables: { product_id: product.id }})
       .then(response => {
         console.log('조회수가 증가되었습니다.', response.data);
       })
       .catch(err => {
         console.error('조회수 증가 에러:', err);
       });
-
+      // 상품 상세 설명으로 이동 (상품, 현재 로그인 중인 유저 이름도 함께 이동)
     navigate('/MarketDetail', { state: { product, loggedInUserName } });
   };
 
-  // 좋아요
+
+  // 좋아요 클릭 리스너
   const handleLikeClick = (product) => {
-  
-    increaseLike({ variables: { product_id: product.id }}) // 조회수 증가
+    increaseLike({ variables: { product_id: product.id }}) // 1 증가
       .then(response => {
         console.log('좋아요가 증가되었습니다.', response.data);
       })
@@ -103,16 +108,17 @@ export default function Market() {
         console.error('좋아요 증가 에러:', err);
       });
 
+    // 상품 상세 설명으로 이동 (상품, 현재 로그인 중인 유저 이름도 함께 이동)
     navigate('/MarketDetail', { state: { product, loggedInUserName } });
   };
 
-  // 페이지네이션 로직
+
+  // !!! 안봐도 됩니다!!! 페이지네이션 로직 (한 페이지 당 12개 표시, 그 이상은 2번째 페이지로. )
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data && data.fetchUsedProducts.filter((product) => 
     selectedCategory === '전체' || product.category === selectedCategory
   ).slice(indexOfFirstItem, indexOfLastItem);
-
   const pageNumbers = [];
   if (data && data.fetchUsedProducts.length > 0) {
     for (let i = 1; i <= Math.ceil(data.fetchUsedProducts.length / itemsPerPage); i++) {
@@ -120,8 +126,11 @@ export default function Market() {
     }
   }
 
+  // 여기서부터 페이지 디자인
+  // 배치는 거의 대부분 해놨습니다. 추가로 필요하면 css로 수정해주세요.
   return (
     <div className="market-container">
+       {/* 카테고리 */}
       <div className="market-header">
         <div
           className="market-category-icon"
@@ -151,6 +160,9 @@ export default function Market() {
           <p onClick={() => handleCategoryClick('도서')}>도서</p>
         </div>
       )}
+
+       {/* 상품 */}
+        {/* 각각의 상품은 Market_Item에 하나씩 담겨있습니다. 상품 1개당 Market_Item 1개씩 입니다. */}
       <div className="market-item">
         {loading ? (
           <p>Loading...</p>
@@ -167,6 +179,7 @@ export default function Market() {
         )}
       </div>
 
+      {/* 등록된 상품 전체 불러오기 */}
       <div className="market-item">
         {loading ? (
           <p>Loading...</p>
@@ -182,6 +195,8 @@ export default function Market() {
           )
         )}
       </div>
+
+      {/* 페이지 나누기 (안봐도 됨) */}
       <ul className="pagination">
         {pageNumbers.map(number => (
           <li key={number} onClick={() => setCurrentPage(number)} style={{ cursor: 'pointer' }}>
@@ -189,6 +204,8 @@ export default function Market() {
           </li>
         ))}
       </ul>
+
+      {/* 상품등록 버튼  */}
       <button className='post-button2' onClick={handlePostButtonClick}>상품 등록</button>
     </div>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom'; // useHistory 추가
 import './css/EditUserInfo.css'; 
 
+
 export default function EditUserInfo() {
   const navigate = useNavigate(); 
 
