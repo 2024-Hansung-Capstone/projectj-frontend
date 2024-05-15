@@ -6,24 +6,24 @@ import { useQuery, useMutation } from '@apollo/client';
 import { gql } from '@apollo/client';
 
 const SIGN_UP = gql`
-mutation SignUp($createUserInput: CreateUserInput!) {
-  signUp(createUserInput: $createUserInput) {
-    id
-    dong {
+  mutation SignUp($createUserInput: CreateUserInput!) {
+    signUp(createUserInput: $createUserInput) {
       id
+      dong {
+        id
+        name
+      }
+      email
       name
+      gender
+      birth_at
+      mbti
+      phone_number
+      is_find_mate
+      point
+      create_at
     }
-    email
-    name
-    gender
-    birth_at
-    mbti
-    phone_number
-    is_find_mate
-    point
-    create_at
   }
-}
 `;
 
 const CREATE_TOKEN = gql`
@@ -58,8 +58,7 @@ const Signup = () => {
   const [selectedDong, setSelectedDong] = useState(""); // 선택된 읍/면/동을 저장하기 위한 상태
 
   useEffect(() => {
-    // 컴포넌트가 마운트될 때 시/도 목록을 가져옵니다.
-    fetchSidoList();
+    fetchSigunguList('1100000000'); // 서울특별시 (서울특별시 코드: 1100000000)
   }, []);
 
   const fetchSidoList = async () => {
@@ -165,7 +164,7 @@ const Signup = () => {
   
       const phoneNumber = phoneInput.value;
       const token = phoneTokenInput.value;
-  
+      
       try {
         // 여기서 새로운 코드를 추가하여 입력값을 콘솔에 출력합니다.
         console.log('입력한 정보:', {
@@ -329,11 +328,8 @@ const Signup = () => {
           </div>
         </div>
         <div className="signup-form-item">
-          <select value={selectedSido} onChange={handleSidoChange}>
-            <option value="">시/도 선택</option>
-            {sidoList.map((sido, index) => (
-              <option key={index} value={sido.code}>{sido.name}</option>
-            ))}
+          <select value="1100000000" disabled>
+            <option value="1100000000">서울특별시</option>
           </select>
         </div>
         <div className="signup-form-item">

@@ -88,3 +88,13 @@
     padding: 10px;
     margin: 10px;
 }
+
+@media (min-width: 1150px) {
+    /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
+    .mypage-container {
+      width: 100%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }

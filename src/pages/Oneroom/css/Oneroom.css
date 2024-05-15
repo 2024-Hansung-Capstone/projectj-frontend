@@ -1,21 +1,19 @@
 .oneroom-container1 {
   width: 95%;
-  font-family: 'KCC-Hanbit';
 }
 .oneroom-container2 {
   display: flex;
   width: 95%;
   height: 1000px;
-  font-family: 'KCC-Hanbit';
 }
 
 .map-section1 {
-  height: 70.5%;
+  height: 85%;
   flex: 2;
   padding: 20px;
 }
 .map-section2 {
-  height: 70.5%;
+  height: 85%;
   flex: 2;
   padding: 20px;
   display: flex;
@@ -43,7 +41,7 @@
 
 .oneroom-items-container {
   overflow-y: auto;
-  max-height: calc(100vh - 475px);
+  max-height: calc(100vh - 550px);
 }
 
 @media (min-width: 1150px) {
@@ -61,4 +59,15 @@
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
+}
+
+@media (min-width: 1150px) {
+  /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
+  .oneroom-container1, .oneroom-container2 {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'KCC-Hanbit';
+  }
 }

@@ -25,7 +25,9 @@
 .edit-id,
 .edit-password,
 .edit-phonenumber,
-.edit-address {
+.edit-address,
+.edit-mbti,
+.edit-birth {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -89,6 +91,7 @@ input[type="password"] {
   cursor: pointer;
   text-align: center;
   margin: 0 auto;
+  margin-top: 40px;
 }
 
 .edit-submit:hover {
