@@ -13,12 +13,12 @@ import Mate from "./pages/Mate/Mate";
 import Oneroom from "./pages/Oneroom/Oneroom";
 import OneroomDetails from "./pages/Oneroom/OneroomDetails"
 import Cooking from "./pages/Cooking/Cooking";
+import CookingAI from "./pages/Cooking/CookingAI";
 import MyPage from "./pages/MyPage";
 import MessageSendBox from "./pages/Message/MessageSendBox";
 import MessageReciveBox from "./pages/Message/MessageReciveBox";
 import MessageCompose from "./pages/Message/MessageCompose"; 
 
-import Logout from './pages/Logout';
 import CookingPost from './pages/Cooking/CookingPost';
 import CookingDetails from "./pages/Cooking/CookingDetails";
 import CommunityPost from './pages/Community/CommunityPost';
@@ -75,6 +75,7 @@ function App() {
                 <Route path="/Oneroom" element={<Oneroom />} />
                 <Route path="/OneroomDetails" element={<OneroomDetails />} />
                 <Route path="/Cooking" element={<Cooking />} />
+                <Route path="/CookingAI" element={<CookingAI />} />
                 <Route path="/CookingPost" element={<CookingPost />} />
                 <Route path="/CookingDetails" element={<CookingDetails />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />

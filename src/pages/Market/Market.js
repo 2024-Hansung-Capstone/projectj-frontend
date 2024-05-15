@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Market_Item from '../../item/Market_Item.js';
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { IoSearchOutline } from "react-icons/io5";
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, useMutation, gql } from '@apollo/client';
 import "./css/Market.css";
 
 const GET_USED_PRODUCTS = gql`
@@ -16,6 +16,8 @@ const GET_USED_PRODUCTS = gql`
       category
       state
       create_at
+      view
+      like
       user {
         id
         name
@@ -23,11 +25,32 @@ const GET_USED_PRODUCTS = gql`
     }
   }
 `;
+// 조회수
+const INCREASE_USED_PRODUCT_VIEW = gql`
+  mutation IncreaseUsedProductView($product_id: String!) {
+    increaseUsedProductView(product_id: $product_id) {
+      id
+      view
+    }
+  }
+`;
+
+// 좋아요
+const INCREASE_USED_PRODUCT_LIKE = gql`
+  mutation IncreaseUsedProductLike($product_id: String!) {
+    increaseUsedProductLike(product_id: $product_id) {
+      id
+      like
+    }
+  }
+`;
 
 export default function Market() {
+  const { loading, error, data } = useQuery(GET_USED_PRODUCTS);
+  const [increaseView] = useMutation(INCREASE_USED_PRODUCT_VIEW); 
+  const [increaseLike] = useMutation(INCREASE_USED_PRODUCT_LIKE);
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
-  const { loading, error, data } = useQuery(GET_USED_PRODUCTS);
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
@@ -50,21 +73,37 @@ export default function Market() {
     navigate('/MarketPost', { state: { isLoggedIn } });
   };
 
-  const handleItemClick = (product) => {
-    navigate('/MarketDetail', { state: { product, loggedInUserName } });
-  };
-
   const handleCategoryClick = (category) => {
     const selected = category === 'all' ? '전체' : category;
     setSelectedCategory(selected);
   };
 
-  const renderPostButton = () => {
-    if (isLoggedIn) {
-      return <button className="post-button" onClick={handlePostButtonClick}>상품 등록</button>;
-    } else {
-      return null;
-    }
+  // 조회수
+  const handleItemClick = (product) => {
+  
+    increaseView({ variables: { product_id: product.id }}) // 조회수 증가
+      .then(response => {
+        console.log('조회수가 증가되었습니다.', response.data);
+      })
+      .catch(err => {
+        console.error('조회수 증가 에러:', err);
+      });
+
+    navigate('/MarketDetail', { state: { product, loggedInUserName } });
+  };
+
+  // 좋아요
+  const handleLikeClick = (product) => {
+  
+    increaseLike({ variables: { product_id: product.id }}) // 조회수 증가
+      .then(response => {
+        console.log('좋아요가 증가되었습니다.', response.data);
+      })
+      .catch(err => {
+        console.error('좋아요 증가 에러:', err);
+      });
+
+    navigate('/MarketDetail', { state: { product, loggedInUserName } });
   };
 
   // 페이지네이션 로직
@@ -121,6 +160,22 @@ export default function Market() {
           currentItems && currentItems.length > 0 ? (
             currentItems.map((product, index) => (
               <Market_Item key={index} product={product} onClick={() => handleItemClick(product)} />
+            ))
+          ) : (
+            <p className='nodata'>등록된 상품이 없습니다.</p>
+          )
+        )}
+      </div>
+
+      <div className="market-item">
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>Error: {error.message}</p>
+        ) : (
+          currentItems && currentItems.length > 0 ? (
+            currentItems.map((product, index) => (
+              <Market_Item key={index} product={product} onClick={() => handleLikeClick(product)} />
             ))
           ) : (
             <p className='nodata'>등록된 상품이 없습니다.</p>

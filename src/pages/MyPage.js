@@ -35,6 +35,7 @@ export default function MyPage({ onLogout , userId }) {
  
   export default function MyPage({ onLogout }) {
     const [deleteUser] = useMutation(DELETE_USER_MUTATION);
+    
 
   const getToken = () => {
     return localStorage.getItem('token') || ''; // 토큰이 없을 경우 빈 문자열 반환
@@ -86,8 +87,6 @@ export default function MyPage({ onLogout , userId }) {
       <div className='mypage-list'>
       <Link className='mypage-mypost' to="/mypost">내가 작성한 글</Link>
         <Link className='mypage-edit' to="/editUserInfo"><FaEdit /> 내 정보 수정</Link>
-        <Link className='mypage-question' to="/question"><LuMessagesSquare /> 1:1 문의</Link>
-        <Link className='mypage-notice' to="/notices"><FaRegBell /> 공지사항</Link>
         <Link className='mypage-logout' to="/" onClick={onLogout}><IoLogOutOutline /> 로그아웃</Link>
         <Link className='mypage-withdraw-link' to="/" onClick={handleDeleteUser}>
           <HiMiniNoSymbol /> 회원탈퇴

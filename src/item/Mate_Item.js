@@ -10,7 +10,7 @@ export default function Mate_Item({ user }) {
     }
     const userId = user.id ? user.id : 'Unknown User';
     const userName = user.name ? user.name : 'Unknown User';
-    const gender = user.gender ? user.gender : 'Unknown Gender';
+    const gender = user.gender === 'female' ? '여성' : user.gender === 'male' ? '남성' : 'Unknown Gender';
     const mbti = user.mbti ? user.mbti : 'Unknown mbti';
     const birthYear = user.birth_at ? new Date(user.birth_at).getFullYear() : 'Unknown Year';
     const currentYear = new Date().getFullYear();

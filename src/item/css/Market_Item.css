@@ -20,7 +20,27 @@
 }
 .marketitem-title {
     border: 1px groove #ddd;
-
+}
+.marketitem-category {
+    display: flex;
+    border: 1px groove #ddd;
+}
+.marketitem-category > p {
+    width: 50%;
+}
+.marketitem-likeview {
+    display: flex;
+    border: 1px groove #ddd;
+}
+.marketitem-like {
+    width: 50%;
+    display: flex;
+    padding: 10px;
+    border: 1px groove #ddd;
+}
+.marketitem-view {
+    width: 50%;
+    border: 1px groove #ddd;
 }
 .marketitem-state {
     width: 50%;
