@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import "./css/MessageBox.css";
 
-// 송신 메시지 정보
+// 수신 메시지 정보 (받는 사람 (나))
 const FETCH_MY_RECEIVE_LETTERS = gql`
   query FetchMyReceiveLetters {
     fetchMyReceiveLetters {
@@ -21,21 +21,35 @@ const FETCH_MY_RECEIVE_LETTERS = gql`
   }
 `;
 
+export const WHO_AM_I_QUERY = gql`
+  query WhoAmI {
+    whoAmI {
+      id
+      name
+    }
+  }
+`;
+
 const MessageReceiveBox = () => {
-  const [selectedCategory, setSelectedCategory] = useState('송신');
   const navigate = useNavigate();
-  const { loading, error, data, refetch } = useQuery(FETCH_MY_RECEIVE_LETTERS, {
-    variables: {
-      receiverName: localStorage.getItem('username') // 로그인한 사용자 이름을 변수로 전달
-    },
+  const token = localStorage.getItem('token');
+  
+  const { loading: loadingLetters, error: errorLetters, data: dataLetters, refetch } = useQuery(FETCH_MY_RECEIVE_LETTERS, {
     context: {
       headers: {
-        authorization: `Bearer ${localStorage.getItem('token') || ''}`
+        authorization: `Bearer ${token || ''}`
       }
     },
     notifyOnNetworkStatusChange: true,
   });
-  
+
+  const { loading: loadingWhoAmI, error: errorWhoAmI, data: dataWhoAmI } = useQuery(WHO_AM_I_QUERY, {
+    context: {
+      headers: {
+        authorization: `Bearer ${token || ''}`
+      }
+    },
+  });
 
   useEffect(() => {
     // 컴포넌트가 마운트될 때 데이터를 불러옴
@@ -44,10 +58,6 @@ const MessageReceiveBox = () => {
 
   const handleItemClick = (messagedata) => {
     navigate('/MessageDetail', { state: { messagedata } });
-  };
-
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
   };
 
   const handleRefreshClick = () => {
@@ -60,27 +70,35 @@ const MessageReceiveBox = () => {
       <div className="message-header">
         <h2>수신함</h2>
         <Link to="/MessageSendBox">쪽지 송신함 바로가기</Link>
-        <button onClick={handleRefreshClick}>새로고침</button> {/* 새로고침 버튼 추가 */}
+        <button onClick={handleRefreshClick}>새로고침</button>
       </div>
       <table className='message-table'>
         <thead>
           <tr>
-            <th>받는 사람 (나)</th>
+            <th>보낸 사람</th>
+            <th>받는 사람(나)</th>
             <th>카테고리</th>
             <th>제목</th>
             <th>내용</th>
           </tr>
         </thead>
         <tbody>
-          {loading ? (
+          {loadingLetters || loadingWhoAmI ? (
             <tr><td colSpan="4">Loading...</td></tr>
-          ) : error ? (
-            <tr><td colSpan="4">Error: {error.message}</td></tr>
+          ) : errorLetters || errorWhoAmI ? (
+            <tr>
+              <td colSpan="4">
+                Error: {errorLetters ? errorLetters.message : errorWhoAmI.message}
+                {errorLetters?.message === 'Unauthorized' && ' - Please check your login status.'}
+                {errorWhoAmI?.message === 'Unauthorized' && ' - Please check your login status.'}
+              </td>
+            </tr>
           ) : (
-            data && data.fetchMyReceiveLetters.filter((messagedata) => selectedCategory === '송신' || messagedata.category === selectedCategory).length > 0 ? (
-              data.fetchMyReceiveLetters.map((messagedata, index) => (
+            dataLetters && dataWhoAmI && dataWhoAmI.whoAmI && dataLetters.fetchMyReceiveLetters.filter((messagedata) => messagedata.receiver.name === dataWhoAmI.whoAmI.name).length > 0 ? (
+              dataLetters.fetchMyReceiveLetters.map((messagedata, index) => (
                 <tr key={index} onClick={() => handleItemClick(messagedata)}>
                   <td>{messagedata.sender.name}</td>
+                  <td>{messagedata.receiver.name}</td>
                   <td>{messagedata.category}</td>
                   <td>{messagedata.title}</td>
                   <td>{messagedata.detail}</td>
@@ -92,7 +110,6 @@ const MessageReceiveBox = () => {
           )}
         </tbody>
       </table>
-      
     </div>
   );
 };
