@@ -26,9 +26,6 @@ export default function Mate_Item({ user }) {
                 <img className="user-image" src="/user.jpeg" alt="user"/>
             </div>
             <div className='mi-name'>
-                <h4>{userId}</h4>
-            </div>
-            <div className='mi-name'>
                 <h4>{userName}</h4>
             </div>
             <div className='mi-container2'>

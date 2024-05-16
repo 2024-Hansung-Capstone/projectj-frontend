@@ -109,10 +109,10 @@ export default function MarketDetail() {
   // 판매자 정보 
   useEffect(() => {
     if (product && product.user) {
-      const sellerName = product.user.name;
-      setSellerName(sellerName);
+      setSellerName(product.user.name);
     }
   }, [product]);
+  
 
   const handleEditProduct = () => {
     navigate('/MarketUpdate', { state: { product, loggedInUserName: whoAmI.name } });
@@ -148,13 +148,6 @@ export default function MarketDetail() {
       console.log('상품을 삭제할 권한이 없습니다.');
     }
   };
-  
-
-  
-  // 현재 로그인 서버와 연결 되었는지 확인하는 로그 (f12 누르고 network에 가보면 맨 아래에 뜹니다. )
-  console.log('판매자:', sellerName);
-  console.log('로그인 유무:', isLoggedIn);
-  console.log('로그인 사용자:', loggedInUserName);
 
   return (
     <div className="marketdetail-container">
@@ -179,7 +172,7 @@ export default function MarketDetail() {
               <div className='marketdetail-container6'>
                 <div className='productDetail-userbutton'>
                   {/* 판매자와 로그인한 사용자가 동일한 경우에만 수정 및 삭제 버튼을 표시 */}
-                  {whoAmI.name === product.user?.name && (
+                  {whoAmI?.name === product.user?.name && (
                     <>
                       <button onClick={handleEditProduct}>수정</button>
                       <button onClick={handleDeleteProduct}>삭제</button>
@@ -187,7 +180,10 @@ export default function MarketDetail() {
                   )}
                 </div>
                 <p className="productUser">판매자</p>
-                <p className="productUser">{product.user?.name}</p>
+                <p className="productUser">판매자</p>
+              {product.user && (
+                <p className="productUser">{product.user.name}</p>
+              )}
                 <p className="productCategory">카테고리</p>
                 <p className="productCategory">{product.category}</p>
                 <p className="productState">판매상태</p>

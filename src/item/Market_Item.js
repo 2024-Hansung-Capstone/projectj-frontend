@@ -35,11 +35,11 @@ export default function Market_Item({ product, onClick }) {
     <div className="market-item" onClick={() => onClick(product)}>
       <div className="marketitem-container">
         <div className="marketitem-main1">
-          <div className="marketitem-photo"></div>
-          <div className="marketitem-id"></div>
-          <div className="marketitem-title">
-            <p>제목 : {product.id}</p>
+          <div className="marketitem-photo">
+            {/* 상품 이미지 표시 */}
+            <img src={product.imageBase64} alt="Product" />
           </div>
+          <div className="marketitem-id"></div>
           <div className="marketitem-title">
             <p>제목 : {product.title}</p>
           </div>
