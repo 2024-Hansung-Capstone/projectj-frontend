@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import gql from 'graphql-tag';
 import './css/CookingPost.css';
+
+// GraphQL mutation 쿼리 정의
+const CREATE_COOK = gql`
+  mutation CreateCook($input: CreateCookInput!) {
+    createCook(createCookInput: $input) {
+      id
+      name
+      detail
+      view
+      create_at
+    }
+  }
+`;
 
 const CookingPost = () => {
   const [title, setTitle] = useState('');
   const [mainImage, setMainImage] = useState(null);
   const [content, setContent] = useState('');
   const [images, setImages] = useState([{ text: '', preview: null }]);
-  const [nextId, setNextId] = useState(1);
+  const [createCook] = useMutation(CREATE_COOK);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -18,7 +33,7 @@ const CookingPost = () => {
 
   const handleMainImageChange = (e) => {
     const selectedImage = e.target.files[0];
-    setMainImage(URL.createObjectURL(selectedImage));
+    setMainImage(selectedImage);
   };
 
   const handleTextChange = (index, e) => {
@@ -36,7 +51,6 @@ const CookingPost = () => {
 
   const handleAddField = () => {
     setImages([...images, { text: '', preview: null }]);
-    setNextId(nextId + 1);
   };
 
   const handleRemoveField = () => {
@@ -44,15 +58,32 @@ const CookingPost = () => {
       const newImages = [...images];
       newImages.pop();
       setImages(newImages);
-      setNextId(nextId - 1);
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // 여기에 게시 버튼이 클릭되었을 때의 동작을 추가하세요
-    console.log('게시되었습니다:', { title, mainImage, content, images });
-    // 게시 후 필요한 작업을 수행하세요 (예: 데이터베이스에 저장, 페이지 이동 등)
+  
+    try {
+      const formData = new FormData();
+      formData.append('name', title); // 요리 이름 추가
+      formData.append('detail', content); // 요리 설명 추가
+      formData.append('post_images', mainImage); // 대표 이미지 추가
+  
+      images.forEach((image) => {
+        if (image.preview) {
+          formData.append('post_images', image.preview); // 이미지 파일 직접 추가
+        }
+      });
+  
+      await createCook({
+        variables: { input: formData }
+      });
+  
+      console.log('게시되었습니다:', { title, mainImage, content, images });
+    } catch (error) {
+      console.error('게시 중 오류가 발생했습니다:', error);
+    }
   };
 
   return (

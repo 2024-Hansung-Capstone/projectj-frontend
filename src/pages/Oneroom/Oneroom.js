@@ -20,6 +20,7 @@ const Oneroom = () => {
             {topThreeRoomsData && topThreeRoomsData.fetchOneRoomsByViewRank.map((room) => (
               <Oneroom_Item
                 key={room.id}
+                roomId={room.id}
                 location={`${room.dong}, ${room.jibun}`}
                 price={room.is_monthly_rent ? `월세 ${room.monthly_rent} / ${room.deposit}` : `전세 ${room.deposit}`} // 실제 데이터 구조에 맞게 수정하세요
               />
@@ -37,6 +38,8 @@ const Oneroom = () => {
               {data && data.fetchOneRooms.map((room) => (
                 <div key={room.id} className='oneroom-dish-item'>
                   <Oneroom_Item
+                    key={room.id}
+                    roomId={room.id}
                     location={`${room.dong}, ${room.jibun}`}
                     price={room.is_monthly_rent ? `월세 ${room.monthly_rent} / ${room.deposit}` : `전세 ${room.deposit}`} // 실제 데이터 구조에 맞게 수정하세요
                   />

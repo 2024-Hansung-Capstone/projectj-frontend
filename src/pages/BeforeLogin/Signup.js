@@ -176,7 +176,7 @@ const Signup = () => {
           birth_month: `${monthInput.value}`,
           birth_day: `${dayInput.value}`,
           phone_number: phoneNumber,
-          dong_nm: selectedDong.code,
+          dong_nm: selectedDong.name,
           mbti: document.getElementById('mbtiSelect').value,
           is_find_mate: true
         });
@@ -191,7 +191,7 @@ const Signup = () => {
               birth_year: `${yearInput.value}`,
               birth_month: `${monthInput.value}`,
               birth_day: `${dayInput.value}`,
-              dong_nm: selectedDong.code,
+              dong_nm: selectedDong.name,
               mbti: document.getElementById('mbtiSelect').value,
               phone_number: phoneNumber,
               is_find_mate: true
