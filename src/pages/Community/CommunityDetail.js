@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import Community_Item from '../../item/Community_Item';
 
 
-
+// 커뮤니티 데이터 클릭 시 보여지는 상세페이지 + 댓글도 함께 볼 수 있도록 제작. 
+// 데이터 연결 후 페이지 확인해보면서 제작할 생각입니다. 
 const CommunityDetail = () => {
 
   return (

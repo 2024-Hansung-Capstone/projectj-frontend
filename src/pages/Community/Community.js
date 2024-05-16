@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import Community_Item from '../../item/Community_Item';
 import { BoardList_Item } from '../../item/BoardList_Item'; 
 
+
+// 게시물 가져오기
 const GET_BOARD = gql`
   query GetBoard {
     fetchBoards {
@@ -16,25 +18,10 @@ const GET_BOARD = gql`
   }
 `;
 
-const CREATE_BOARD = gql`
-  mutation CreateBoard($category: String!, $title: String!, $detail: String!) {
-    createBoardWithImage(createBoardInput: {
-      category: $category,
-      title: $title,
-      detail: $detail,
-    }) {
-      category
-      title
-      detail
-    }
-  }
-`;
-
 const Community = () => {
   const { loading, error, data } = useQuery(GET_BOARD);
-  const [createBoard] = useMutation(CREATE_BOARD); // 수정된 부분
-  const navigate = useNavigate();
-  const [selectedItem, setSelectedItem] = useState(null);
+  const navigate = useNavigate();  // 페이지 이동할 때는 useNavigate()를 사용합니다. 
+  const [selectedItem, setSelectedItem] = useState(null); 
   const [selectedItemData, setSelectedItemData] = useState(null);
 
   useEffect(() => {
@@ -43,34 +30,24 @@ const Community = () => {
     }
   }, [data]);
 
+  // 카테고리 버튼 클릭
   const handleListItemClick = (index) => {
     setSelectedItem(index);
     setSelectedItemData(BoardList_Item[index].title);
   };
 
+  // 상품등록 버튼 클릭
   const handlePostButtonClick = () => {
     navigate('/CommunityPost');
   };
 
-  const handleCreateBoard = async () => {
-    try {
-      await createBoard({
-        variables: {
-          category: "원룸찾기",
-          title: "새로운 게시물 제목",
-          detail: "새로운 게시물 내용",
-        },
-        refetchQueries: [{ query: GET_BOARD }],
-      });
-    } catch (error) {
-      console.error('Error creating board:', error);
-    }
-  };
-
-  return (
+  return (  
     <div className='community-container'>
+      {/* 카테고리 클릭 시 해당 카테고리 페이지 보여지도록 설정합니다.
+      gql 아직 연결 안되어있어서 데이터 적용은 아직입니다. */}
       <div className='board-list'>
         <ul>
+          {}
           {BoardList_Item.map((item, index) => (
             <li
               key={index}
@@ -84,6 +61,7 @@ const Community = () => {
       </div>
       <div className='community-scroll'>
         <div className='scroll-view'>
+          {/* 데이터 항목들이 Community_Item에 감싸져서 화면에 표시됩니다. */}
           {selectedItemData && <p>{selectedItemData}</p>}
           {loading ? (
             <p>Loading...</p>
@@ -91,17 +69,16 @@ const Community = () => {
             <p>Error: {error.message}</p>
           ) : (
             data && data.fetchBoards ? (
-              data.fetchBoards.map((board) => (
+              data.fetchBoards.map((board) => (  // Community_Item으로 전달하는 방식
                 <Community_Item key={board.id} board={board} />
               ))
             ) : (
-              <p>No boards available</p>
+              <p>No boards available</p> // 데이터 없을 때
             )
           )}
         </div>
       </div>
       <button className='post-button2' onClick={handlePostButtonClick}> 상품 등록</button>
-   
     </div>
   );
 }

@@ -6,7 +6,7 @@ import { gql } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { BoardList_Item } from '../../item/BoardList_Item'; 
 
-// CREATE_BOARD 뮤테이션 정의
+// 게시물 생성
 const CREATE_BOARD = gql`
   mutation CreateBoard($createBoardInput: CreateBoardInput!) {
     createBoard(createBoardInput: $createBoardInput) {

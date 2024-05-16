@@ -25,13 +25,17 @@ const MessageReceiveBox = () => {
   const [selectedCategory, setSelectedCategory] = useState('송신');
   const navigate = useNavigate();
   const { loading, error, data, refetch } = useQuery(FETCH_MY_RECEIVE_LETTERS, {
+    variables: {
+      receiverName: localStorage.getItem('username') // 로그인한 사용자 이름을 변수로 전달
+    },
     context: {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token') || ''}`
       }
     },
-    notifyOnNetworkStatusChange: true, // 네트워크 상태 변경 시 업데이트
+    notifyOnNetworkStatusChange: true,
   });
+  
 
   useEffect(() => {
     // 컴포넌트가 마운트될 때 데이터를 불러옴
