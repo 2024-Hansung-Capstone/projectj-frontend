@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import "./css/MessageBox.css";
 
-// 수신 메시지 정보
+// 송신 메시지 정보
 const FETCH_MY_RECEIVE_LETTERS = gql`
   query FetchMyReceiveLetters {
     fetchMyReceiveLetters {
@@ -22,16 +22,21 @@ const FETCH_MY_RECEIVE_LETTERS = gql`
 `;
 
 const MessageReceiveBox = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('송신');
   const navigate = useNavigate();
-  const { loading, error, data } = useQuery(FETCH_MY_RECEIVE_LETTERS, {
+  const { loading, error, data, refetch } = useQuery(FETCH_MY_RECEIVE_LETTERS, {
     context: {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token') || ''}`
       }
-    }
+    },
+    notifyOnNetworkStatusChange: true, // 네트워크 상태 변경 시 업데이트
   });
-  const [selectedCategory, setSelectedCategory] = useState('수신');
+
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 데이터를 불러옴
+    refetch();
+  }, [refetch]);
 
   const handleItemClick = (messagedata) => {
     navigate('/MessageDetail', { state: { messagedata } });
@@ -41,16 +46,22 @@ const MessageReceiveBox = () => {
     setSelectedCategory(category);
   };
 
+  const handleRefreshClick = () => {
+    // 데이터 새로고침 버튼 클릭 이벤트
+    refetch();
+  };
+
   return (
     <div className="message-container">
       <div className="message-header">
-      <h2>수신함</h2>
+        <h2>수신함</h2>
         <Link to="/MessageSendBox">쪽지 송신함 바로가기</Link>
+        <button onClick={handleRefreshClick}>새로고침</button> {/* 새로고침 버튼 추가 */}
       </div>
       <table className='message-table'>
         <thead>
           <tr>
-            <th>송신자</th>
+            <th>받는 사람 (나)</th>
             <th>카테고리</th>
             <th>제목</th>
             <th>내용</th>
@@ -62,8 +73,8 @@ const MessageReceiveBox = () => {
           ) : error ? (
             <tr><td colSpan="4">Error: {error.message}</td></tr>
           ) : (
-            data && data.fetchMyReceiveLetters.length > 0 ? (
-              data.fetchMyReceiveLetters.filter((messagedata) => selectedCategory === '수신' || messagedata.category === selectedCategory).map((messagedata, index) => (
+            data && data.fetchMyReceiveLetters.filter((messagedata) => selectedCategory === '송신' || messagedata.category === selectedCategory).length > 0 ? (
+              data.fetchMyReceiveLetters.map((messagedata, index) => (
                 <tr key={index} onClick={() => handleItemClick(messagedata)}>
                   <td>{messagedata.sender.name}</td>
                   <td>{messagedata.category}</td>
@@ -77,6 +88,7 @@ const MessageReceiveBox = () => {
           )}
         </tbody>
       </table>
+      
     </div>
   );
 };

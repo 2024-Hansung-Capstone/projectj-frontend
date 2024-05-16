@@ -205,7 +205,7 @@ export default function Market() {
         ))}
       </ul>
 
-      {/* 상품등록 버튼  */}
+      {/* 상품등록 버튼 : handlePostButtonClick 실행 */}
       <button className='post-button2' onClick={handlePostButtonClick}>상품 등록</button>
     </div>
   );

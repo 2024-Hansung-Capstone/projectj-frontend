@@ -11,6 +11,9 @@ const MessageDetail = () => {
   const handleReply = () => {
     navigate('/MessageReply', { state: { writingId: messagedata.id } });
   };
+  const handleDelete = () => {
+    
+  };
   
 
   return (
@@ -40,6 +43,7 @@ const MessageDetail = () => {
 
         </table>
         <button className="reply-button" onClick={handleReply}>답장 보내기</button>
+        <button className="reply-button" onClick={handleDelete}>삭제</button>
     </div>
   );
 };

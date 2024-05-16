@@ -22,7 +22,7 @@ export default function Header() {
               <Link className="header-mypage" to="/MyPage">
                 마이페이지
               </Link>
-              <Link className="header-message" to="/MessageReciveBox">
+              <Link className="header-message" to="/MessageReceiveBox">
                 <TbMessage />
               </Link>
             </li>

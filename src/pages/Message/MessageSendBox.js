@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import Message_Item from '../../item/Message_Item.js';
-import { HiOutlineBars3 } from "react-icons/hi2";
-import { IoSearchOutline } from "react-icons/io5";
 import { useQuery, gql } from '@apollo/client';
 import "./css/MessageBox.css";
 
@@ -25,16 +22,21 @@ const FETCH_MY_SEND_LETTERS = gql`
 `;
 
 const MessageSendBox = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('송신');
   const navigate = useNavigate();
-  const { loading, error, data } = useQuery(FETCH_MY_SEND_LETTERS, {
+  const { loading, error, data, refetch } = useQuery(FETCH_MY_SEND_LETTERS, {
     context: {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token') || ''}`
       }
-    }
+    },
+    notifyOnNetworkStatusChange: true, // 네트워크 상태 변경 시 업데이트
   });
-  const [selectedCategory, setSelectedCategory] = useState('송신');
+
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 데이터를 불러옴
+    refetch();
+  }, [refetch]);
 
   const handleItemClick = (messagedata) => {
     navigate('/MessageDetail', { state: { messagedata } });
@@ -44,16 +46,22 @@ const MessageSendBox = () => {
     setSelectedCategory(category);
   };
 
+  const handleRefreshClick = () => {
+    // 데이터 새로고침 버튼 클릭 이벤트
+    refetch();
+  };
+
   return (
     <div className="message-container">
       <div className="message-header">
         <h2>송신함</h2>
         <Link to="/MessageReceiveBox">쪽지 수신함 바로가기</Link>
+        <button onClick={handleRefreshClick}>새로고침</button> {/* 새로고침 버튼 추가 */}
       </div>
       <table className='message-table'>
         <thead>
           <tr>
-            <th>수신자</th>
+            <th>보낸 사람</th>
             <th>카테고리</th>
             <th>제목</th>
             <th>내용</th>
@@ -80,11 +88,9 @@ const MessageSendBox = () => {
           )}
         </tbody>
       </table>
+      
     </div>
   );
-
 };
 
 export default MessageSendBox;
-
-
