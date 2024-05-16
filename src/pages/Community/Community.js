@@ -5,6 +5,9 @@ import { gql } from '@apollo/client';
 import { useNavigate,useLocation } from 'react-router-dom';
 import Community_Item from '../../item/Community_Item';
 import { BoardList_Item } from '../../item/BoardList_Item'; 
+
+
+// 게시물 가져오기
 const GET_BOARD = gql`
 query GetBoard($category: String!) {
   fetchBoards(category: $category) {
@@ -109,25 +112,13 @@ const Community = () => {
     navigate('/CommunityPost', { state: { isLoggedIn, loggedInUserName,useLocation} });
   };
 
-  const handleCreateBoard = async () => {
-    try {
-      await createBoard({
-        variables: {
-          category: "원룸찾기",
-          title: "새로운 게시물 제목",
-          detail: "새로운 게시물 내용",
-        },
-        refetchQueries: [{ query: GET_BOARD }],
-      });
-    } catch (error) {
-      console.error('Error creating board:', error);
-    }
-  };
-
-  return (
+  return (  
     <div className='community-container'>
+      {/* 카테고리 클릭 시 해당 카테고리 페이지 보여지도록 설정합니다.
+      gql 아직 연결 안되어있어서 데이터 적용은 아직입니다. */}
       <div className='board-list'>
         <ul>
+          {}
           {BoardList_Item.map((item, index) => (
             <li
               key={index}
@@ -142,6 +133,7 @@ const Community = () => {
     
       <div className='community-scroll'>
         <div className='scroll-view'>
+          {/* 데이터 항목들이 Community_Item에 감싸져서 화면에 표시됩니다. */}
           {selectedItemData && <p>{selectedItemData}</p>}
           {loading ? (
             <p>Loading...</p>
@@ -153,7 +145,7 @@ const Community = () => {
                 <Community_Item key={board.id} board={board} onClick={() => handleListItemClick(board)}  />
               ))
             ) : (
-              <p>No boards available</p>
+              <p>No boards available</p> // 데이터 없을 때
             )
           )}
         </div>
