@@ -80,12 +80,12 @@ export const WHO_AM_I_QUERY = gql`
         <div className='mypage-user'>
           <div className='mypage-userImage'><PiUserCircleLight /></div>
           <div className='mypage-user-container2'>
-            <div className='mypage-userName'>{whoAmI.name}</div>
+          <div className='mypage-userName'>{whoAmI?.name}</div>
             <div className='mypage-membership'>멤버십</div>
           </div>
         </div>
         <div className='mypage-user-container3'>
-          <div className='mypage-point'><TbSquareRoundedLetterP />{whoAmI.point}</div>
+          <div className='mypage-point'><TbSquareRoundedLetterP />{whoAmI?.point}</div>
           <Link className='mypage-message' to="/MessageCompose"><SlEnvolopeLetter /> 메시지</Link>
         </div>
       </div>
