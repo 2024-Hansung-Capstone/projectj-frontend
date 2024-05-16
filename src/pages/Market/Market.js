@@ -179,23 +179,6 @@ export default function Market() {
         )}
       </div>
 
-      {/* 등록된 상품 전체 불러오기 */}
-      <div className="market-item">
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>Error: {error.message}</p>
-        ) : (
-          currentItems && currentItems.length > 0 ? (
-            currentItems.map((product, index) => (
-              <Market_Item key={index} product={product} onClick={() => handleLikeClick(product)} />
-            ))
-          ) : (
-            <p className='nodata'>등록된 상품이 없습니다.</p>
-          )
-        )}
-      </div>
-
       {/* 페이지 나누기 (안봐도 됨) */}
       <ul className="pagination">
         {pageNumbers.map(number => (
@@ -205,7 +188,7 @@ export default function Market() {
         ))}
       </ul>
 
-      {/* 상품등록 버튼  */}
+      {/* 상품등록 버튼 : handlePostButtonClick 실행 */}
       <button className='post-button2' onClick={handlePostButtonClick}>상품 등록</button>
     </div>
   );

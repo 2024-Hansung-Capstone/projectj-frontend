@@ -107,11 +107,11 @@ const MarketPost = () => {
             onChange={handleCategoryChange}
           >
             <option value="">선택해주세요</option>
-            <option value="clothing">의류</option>
-            <option value="shoes">신발</option>
-            <option value="electronic">전자기기</option>
-            <option value="furniture">가구/인테리어</option>
-            <option value="book">도서</option>
+            <option value="의류">의류</option>
+            <option value="신발">신발</option>
+            <option value="전자기기">전자기기</option>
+            <option value="가구">가구/인테리어</option>
+            <option value="도서">도서</option>
             </select>
             </div>
           <div className="form-group">

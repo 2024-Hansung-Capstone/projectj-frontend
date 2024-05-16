@@ -16,7 +16,7 @@ import Cooking from "./pages/Cooking/Cooking";
 import CookingAI from "./pages/Cooking/CookingAI";
 import MyPage from "./pages/MyPage";
 import MessageSendBox from "./pages/Message/MessageSendBox";
-import MessageReciveBox from "./pages/Message/MessageReciveBox";
+import MessageReceiveBox from "./pages/Message/MessageReceiveBox";
 import MessageCompose from "./pages/Message/MessageCompose"; 
 import MessageSuccess from "./pages/Message/MessageSuccess"; 
 import MessageDetail from "./pages/Message/MessageDetail"; 
@@ -89,7 +89,7 @@ function App() {
                 <Route path="/MyPage" element={<MyPage onLogout={handleLogout} />} />
                 
                 <Route path="/MessageSendBox"  element={isAuthenticated ? <MessageSendBox /> : <Login onLogin={handleLogin} />} />
-                <Route path="/MessageReciveBox"  element={isAuthenticated ? <MessageReciveBox /> : <Login onLogin={handleLogin} />} />
+                <Route path="/MessageReceiveBox"  element={isAuthenticated ? <MessageReceiveBox /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MessageCompose"  element={isAuthenticated ? <MessageCompose /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MessageSuccess"  element={isAuthenticated ? <MessageSuccess /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MessageDetail"  element={isAuthenticated ? <MessageDetail /> : <Login onLogin={handleLogin} />} />

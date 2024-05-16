@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import "./css/MessageBox.css";
-import "../gql/whoAmI";
 
-// 송신 메시지 정보(보낸 사람 (나))
-const FETCH_MY_SEND_LETTERS = gql`
-  query FetchMySendLetters {
-    fetchMySendLetters {
+// 수신 메시지 정보 (받는 사람 (나))
+const FETCH_MY_RECEIVE_LETTERS = gql`
+  query FetchMyReceiveLetters {
+    fetchMyReceiveLetters {
       id
       sender {
         name
@@ -31,11 +30,11 @@ export const WHO_AM_I_QUERY = gql`
   }
 `;
 
-const MessageSendBox = () => {
+const MessageReceiveBox = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   
-  const { loading: loadingLetters, error: errorLetters, data: dataLetters, refetch } = useQuery(FETCH_MY_SEND_LETTERS, {
+  const { loading: loadingLetters, error: errorLetters, data: dataLetters, refetch } = useQuery(FETCH_MY_RECEIVE_LETTERS, {
     context: {
       headers: {
         authorization: `Bearer ${token || ''}`
@@ -69,15 +68,15 @@ const MessageSendBox = () => {
   return (
     <div className="message-container">
       <div className="message-header">
-        <h2>송신함</h2>
-        <Link to="/MessageReceiveBox">쪽지 수신함 바로가기</Link>
+        <h2>수신함</h2>
+        <Link to="/MessageSendBox">쪽지 송신함 바로가기</Link>
         <button onClick={handleRefreshClick}>새로고침</button>
       </div>
       <table className='message-table'>
         <thead>
           <tr>
-          <th>받는 사람(나)</th>
             <th>보낸 사람</th>
+            <th>받는 사람(나)</th>
             <th>카테고리</th>
             <th>제목</th>
             <th>내용</th>
@@ -95,8 +94,8 @@ const MessageSendBox = () => {
               </td>
             </tr>
           ) : (
-            dataLetters && dataWhoAmI && dataWhoAmI.whoAmI && dataLetters.fetchMySendLetters.filter((messagedata) => messagedata.sender.name === dataWhoAmI.whoAmI.name).length > 0 ? (
-              dataLetters.fetchMySendLetters.map((messagedata, index) => (
+            dataLetters && dataWhoAmI && dataWhoAmI.whoAmI && dataLetters.fetchMyReceiveLetters.filter((messagedata) => messagedata.receiver.name === dataWhoAmI.whoAmI.name).length > 0 ? (
+              dataLetters.fetchMyReceiveLetters.map((messagedata, index) => (
                 <tr key={index} onClick={() => handleItemClick(messagedata)}>
                   <td>{messagedata.sender.name}</td>
                   <td>{messagedata.receiver.name}</td>
@@ -115,4 +114,4 @@ const MessageSendBox = () => {
   );
 };
 
-export default MessageSendBox;
+export default MessageReceiveBox;
