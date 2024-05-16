@@ -3,9 +3,8 @@ import './css/CommunityPost.css';
 import { FaCamera } from "react-icons/fa";
 import { useMutation } from '@apollo/client'; 
 import { gql } from '@apollo/client';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import { BoardList_Item } from '../../item/BoardList_Item'; 
-
 // CREATE_BOARD 뮤테이션 정의
 const CREATE_BOARD = gql`
   mutation CreateBoard($createBoardInput: CreateBoardInput!) {
@@ -42,8 +41,9 @@ const CommunityPost = ({ onPost }) => {
   const [mainImage, setMainImage] = useState(null);
   const [detail, setDetail] = useState('');
   const [category, setCategory] = useState(''); 
+  const { isLoggedIn,  loggedInUserName,selectedItem } = location.state || {};
   const navigate = useNavigate();
-  
+  const location =useLocation();
   const [createBoard] = useMutation(CREATE_BOARD, {
     context: {
       headers: {
@@ -85,7 +85,7 @@ const CommunityPost = ({ onPost }) => {
   
       console.log('게시되었습니다:', data.createBoard);
       onPost(data.createBoard); // 게시된 데이터 전달
-      navigate('/Community'); // 페이지 이동
+      navigate('/Community',{state:selectedItem}); // 페이지 이동 이동시 해당 카테고리로 이동하기 위해 selectedItem전달
   
     } catch (error) {
       if (error.message.includes('Unauthorized')) {
