@@ -7,6 +7,7 @@ import { RiMenu2Line } from "react-icons/ri";
 import Mate_Item from '../../item/Mate_Item.js';
 import './Mate.css';
 
+// 모든 유저 정보 가져오기
 const FETCH_ALL_USERS = gql`
   query {
     fetchUsers {
@@ -24,20 +25,18 @@ const FETCH_ALL_USERS = gql`
 
 export default function Mate() {
   const navigate = useNavigate();
-  const [isFilterVisible, setFilterVisible] = useState(false);
-  const { data, loading, error } = useQuery(FETCH_ALL_USERS);
+  const [isFilterVisible, setFilterVisible] = useState(false);  // 필터 기능
+  const { data, loading, error } = useQuery(FETCH_ALL_USERS);  // gql
 
+  // 필터 클릭 리스너
   const handleFilterClick = () => {
     setFilterVisible(prev => !prev);
   };
 
+  // 필터에서 확인 버튼 클릭 리스너
   const handleConfirmButtonClick = () => {
     setFilterVisible(false);
   };
-
-  //const handleItemClick = (userId) => {
-  //  navigate('/MateDetail', { state: { userId } }); 
-  //};
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -45,7 +44,7 @@ export default function Mate() {
   
   return (
     <div className={`Mate-container ${isFilterVisible ? 'filter-open' : ''}`}>
-      <h2>Hansung님, 추천 메이트 </h2>
+      <h2>님, 추천 메이트 </h2>
       <div className='Mate-recommend'>
         {data.fetchUsers.map((user) => (
           <Mate_Item key={user.id} user={user} />
