@@ -73,7 +73,7 @@ export default function MarketDetail() {
   const handleSendMessage = async () => {
     console.log('쪽지 보내기 버튼 클릭됨'); // 버튼 클릭 확인
       console.log('메시지 작성 페이지로 이동'); // 로그인 상태 확인 로그
-      navigate('/MessageCompose', { state: { writingId: product.id, receiverId: product.user.name, category: "market" }});
+      navigate('/MessageCompose', { state: { writingId: product.id, category: "중고마켓" }});
   };  
   
 

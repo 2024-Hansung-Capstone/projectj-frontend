@@ -1,0 +1,47 @@
+.message-item {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eaeaea;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .message-item:hover {
+    background-color: #f5f5f7;
+  }
+  
+  .message-item-sender,
+  .message-item-category,
+  .message-item-title,
+  .message-item-detail {
+    flex: 1;
+    padding: 0 10px;
+  }
+  
+  .message-item-sender {
+    flex: 0 0 100px; /* 발신자 이름을 고정된 폭으로 설정 */
+    font-weight: bold;
+  }
+  
+  .message-item-category {
+    flex: 0 0 120px; /* 카테고리를 고정된 폭으로 설정 */
+    text-align: center;
+    color: #707070;
+  }
+  
+  .message-item-title {
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .message-item-detail {
+    color: #707070;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  

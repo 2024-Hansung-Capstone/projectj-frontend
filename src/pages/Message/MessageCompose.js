@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation, useQuery, gql } from '@apollo/client';
+import './css/MessageCompose.css';
 
 // 쪽지 작성
 const WRITE_LETTER = gql`
-  mutation WriteLetter($writing_id: String!, $receiverId: String!, $createLetterInput: CreateLetterInput!) {
-    writeLetter(writing_id: $writing_id, receiver_id: $receiverId, createLetterInput: $createLetterInput) {
+  mutation WriteLetter($writing_id: String!, $createLetterInput: CreateLetterInput!) {
+    writeLetter(writing_id: $writing_id, createLetterInput: $createLetterInput) {
       id
       sender {
         name
@@ -15,9 +16,27 @@ const WRITE_LETTER = gql`
       }
       product {
         title
-      }
+      } 
       board {
         title
+      }
+      category
+      title
+      detail
+    }
+  }
+`;
+
+// 송신 메시지 정보
+const FETCH_MY_SEND_LETTERS = gql`
+  query FetchMySendLetters {
+    fetchMySendLetters {
+      id
+      sender {
+        name
+      }
+      receiver {
+        name
       }
       category
       title
@@ -33,9 +52,10 @@ const MessageCompose = () => {
   const [receiverId, setReceiverId] = useState('');
   const [writingId, setWritingId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const { loading, error, data } = useQuery(FETCH_MY_SEND_LETTERS);
   const [writeLetter] = useMutation(WRITE_LETTER);
   const navigate = useNavigate();
-  const location = useLocation(); // useLocation을 사용하여 location 객체를 가져옴
+  const location = useLocation();
 
   // writingId, category 값 가져오기
   useEffect(() => {
@@ -53,9 +73,14 @@ const MessageCompose = () => {
     }
   }, []);
 
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
   const handleDetailChange = (e) => {
     setDetail(e.target.value);
   };
+
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   };
@@ -66,7 +91,6 @@ const MessageCompose = () => {
       const { data } = await writeLetter({
         variables: {
           writing_id: writingId,
-          receiverId: receiverId,
           createLetterInput: {
             title,
             detail,
@@ -78,16 +102,17 @@ const MessageCompose = () => {
             authorization: `Bearer ${localStorage.getItem('token') || ''}`
           }
         },
+        refetchQueries: [{ query: FETCH_MY_SEND_LETTERS }]
       });
       console.log('작성된 쪽지:', data.writeLetter);
-      navigate("/MessageSendBox");
+      navigate("/MessageSuccess");
     } catch (error) {
       console.error('쪽지 작성 중 오류:', error);
       const errorMessage = error.message.includes("쪽지를 허용하지 않는 카테고리입니다.") 
         ? "선택하신 카테고리는 쪽지를 작성할 수 없습니다. 다른 카테고리를 선택해 주세요." 
         : "쪽지 작성 중 오류가 발생했습니다.";
       setErrorMessage(errorMessage);
-    }    
+    }
   };
 
   return (
@@ -100,20 +125,23 @@ const MessageCompose = () => {
           <input id="writingId" type="text" value={writingId} readOnly />
         </div>
         <div className='form-group'>
+          <label htmlFor='title' className='title-label'>제목:</label>
+          <textarea id='title' value={title} onChange={handleTitleChange} required />
+        </div>
+        <div className='form-group'>
           <label htmlFor='category' className='message-category'>카테고리:</label>
           <select id='category' value={category} onChange={handleCategoryChange} required>
             <option value="">카테고리를 선택하세요.</option>
-            <option value="mate">자취메이트</option>
-            <option value="community">커뮤니티</option>
-            <option value="market">중고마켓</option>
-            <option value="oneroom">원룸</option>
+            <option value="자취생메이트">자취생메이트</option>
+            <option value="커뮤니티">커뮤니티</option>
+            <option value="중고마켓">중고마켓</option>
           </select>
         </div>
         <div className='form-group'>
-          <label htmlFor='message' className='message-label'>내용:</label>
-          <textarea id='message' value={detail} onChange={handleDetailChange} required />
+          <label htmlFor='detail' className='detail-label'>내용:</label>
+          <textarea id='detail' value={detail} onChange={handleDetailChange} required />
         </div>
-        <button type="submit" className="market-post-button">작성 완료</button>
+        <button type="submit" className="reply-button">작성 완료</button>
       </form>
     </div>
   );

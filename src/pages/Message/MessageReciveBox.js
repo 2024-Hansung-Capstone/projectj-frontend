@@ -1,24 +1,17 @@
-import React, { useState, useEffect } from 'react'; 
-import { useNavigate } from 'react-router-dom';
-import Message_Item from '../../item/Message_Item.js';
-import { Link } from 'react-router-dom';
-import { HiOutlineBars3 } from "react-icons/hi2";
-import { IoSearchOutline } from "react-icons/io5";
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import "./css/MessageBox.css";
-import { message } from 'antd';
 
 // 수신 메시지 정보
 const FETCH_MY_RECEIVE_LETTERS = gql`
-  query FetchMyReciveLetters {
-    fetchMyReciveLetters {
+  query FetchMyReceiveLetters {
+    fetchMyReceiveLetters {
       id
       sender {
-        id
         name
       }
       receiver {
-        id
         name
       }
       category
@@ -28,95 +21,64 @@ const FETCH_MY_RECEIVE_LETTERS = gql`
   }
 `;
 
-export default function MessageReciveBox() {
+const MessageReceiveBox = () => {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
-  const { loading, error, data } = useQuery(FETCH_MY_RECEIVE_LETTERS);
-  const [selectedCategory, setSelectedCategory] = useState('수신');
-  
-  // 로그인 상태를 확인하는 상태 추가
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loggedInUserName, setLoggedInUserName] = useState('');
-
-  // 컴포넌트가 마운트될 때 로컬 스토리지에서 토큰을 확인하여 로그인 상태 설정
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    setIsLoggedIn(!!token);
-  
-    const loggedInUser = localStorage.getItem('loggedInUserName');
-    if (loggedInUser) {
-      setLoggedInUserName(loggedInUser);
-    } else {
-      setLoggedInUserName('');
+  const { loading, error, data } = useQuery(FETCH_MY_RECEIVE_LETTERS, {
+    context: {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || ''}`
+      }
     }
-  }, []);
-  
-  const handleMessageButtonClick = () => {
-    navigate('/MessageCompose', { state: { isLoggedIn } }); 
-  };
+  });
+  const [selectedCategory, setSelectedCategory] = useState('수신');
 
   const handleItemClick = (messagedata) => {
-    navigate('/MessageDetail', { state: { messagedata, loggedInUserName } }); // 현재 사용자의 이름 추가
+    navigate('/MessageDetail', { state: { messagedata } });
   };
 
   const handleCategoryClick = (category) => {
-    const selected = category === '수신' ? '수신' : category;
-    setSelectedCategory(selected);
-  }
-
-  const renderPostButton = () => {
-    if (isLoggedIn) {
-      return <button className="post-button" onClick={handleMessageButtonClick}>쪽지 쓰기</button>;
-    } else {
-      return null;
-    }
+    setSelectedCategory(category);
   };
 
   return (
-    <div className="market-container">
-      <div className="market-header">
-      <Link to="/MessageSendBox">쪽지 송신함 바로가기</Link>
-        <div
-          className="market-category-icon"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <HiOutlineBars3 style={{ fontSize: '40px' }} />
-        </div>
-        <IoSearchOutline className="market-search-icon" />
-        <input
-          type="messagebox-text"
-          className="market-search-input"
-        />
+    <div className="message-container">
+      <div className="message-header">
+      <h2>수신함</h2>
+        <Link to="/MessageSendBox">쪽지 송신함 바로가기</Link>
       </div>
-      {isHovered && (
-        <div
-          className="market-category"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <p onClick={() => handleCategoryClick('수신')}>수신</p>
-          <p onClick={() => handleCategoryClick('송신')}>송신</p>
-        </div>
-      )}
-      <div className="market-item">
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>Error: {error.message}</p>
-        ) : (
-          data && data.fetchMyReciveLetters.filter((messagedata) => selectedCategory === '수신' || messagedata.category === selectedCategory).length > 0 ? (
-            data.fetchMyReciveLetters
-              .filter((messagedata) => selectedCategory === '수신' || messagedata.category === selectedCategory) 
-              .map((messagedata, index) => (
-                <Message_Item key={index} messagedata={messagedata} onClick={() => handleItemClick(messagedata)} />
-              ))
+      <table className='message-table'>
+        <thead>
+          <tr>
+            <th>송신자</th>
+            <th>카테고리</th>
+            <th>제목</th>
+            <th>내용</th>
+          </tr>
+        </thead>
+        <tbody>
+          {loading ? (
+            <tr><td colSpan="4">Loading...</td></tr>
+          ) : error ? (
+            <tr><td colSpan="4">Error: {error.message}</td></tr>
           ) : (
-            <p className='nodata'>등록된 상품이 없습니다.</p>
-          )
-        )}
-      </div>
-      {renderPostButton()}
+            data && data.fetchMyReceiveLetters.length > 0 ? (
+              data.fetchMyReceiveLetters.filter((messagedata) => selectedCategory === '수신' || messagedata.category === selectedCategory).map((messagedata, index) => (
+                <tr key={index} onClick={() => handleItemClick(messagedata)}>
+                  <td>{messagedata.sender.name}</td>
+                  <td>{messagedata.category}</td>
+                  <td>{messagedata.title}</td>
+                  <td>{messagedata.detail}</td>
+                </tr>
+              ))
+            ) : (
+              <tr><td colSpan="4" className='nodata'>등록된 쪽지가 없습니다.</td></tr>
+            )
+          )}
+        </tbody>
+      </table>
     </div>
   );
-}
+};
+
+export default MessageReceiveBox;

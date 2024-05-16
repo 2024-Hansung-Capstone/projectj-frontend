@@ -17,7 +17,7 @@ export default function Mate_Item({ user }) {
     const userAge = user.birth_at ? `${currentYear - birthYear} 세` : 'Age unknown';
 
     const handleSendMessage = () => {
-        navigate('../MessageCompose', { state: { writingId: userName, category: "mate" } });
+        navigate('../MessageCompose', { state: { writingId: userName, category: "자취생메이트" } });
     };
 
     return (

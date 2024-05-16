@@ -1,117 +1,103 @@
-.MessageBox {
+.message-container {
+  display : block;
+  position: relative;
+  overflow-x: auto; /* 가로 스크롤을 숨김 */
+}
+.message-header {
+  width: 50%;
+  display : block;
+  padding: 20px;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.message-header {
+  display: flex;
+}
+.message-item-container {
+  display: flex;
+}
+.message-item {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.message-item > * {
+  width: 250px;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.message-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.message-table th, .message-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.message-table th {
+  background-color: #f2f2f2;
+}
+
+.message-table tr:hover {
+  background-color: #f5f5f7;
+}
+
+.nodata {
   text-align: center;
 }
 
-.messagebox-container {
-  background-color: #f5f5f5; /* 배경색 변경 */
-  color: #333; /* 글자색 변경 */
-  padding: 20px;
-  border-bottom: 1px solid #ddd; /* 하단 테두리 추가 */
-}
-
-.messagebox-container h3 {
-  text-align: left;
-}
-
-.tabs {
-  display: flex;
+.nodata {
+  height: 400px;
+  color: gray;
+  font-size: 30px;
+  width: 1000px;
+  margin: 30px;
+  padding: 30px;
   justify-content: center;
-  margin-bottom: 20px;
+  align-items: center;
 }
 
-.tab {
-  padding: 10px 20px;
-  margin: 0 5px;
-  cursor: pointer;
-  border: 1px solid #ccc; /* 테두리 추가 */
-  background-color: #f0f0f0; /* 기본 배경색 */
-  color: #333; /* 글자색 */
-}
-
-.tab.active {
-  border-bottom: 2px solid #007bff; /* 활성 탭 하단 테두리 */
-  background-color: #007bff; /* 활성 탭 배경색 */
-  color: white; /* 활성 탭 글자색 */
-}
-
-.messagebox-list {
-  padding: 20px;
-  text-align: left;
-}
-
-.Message {
+.pagination {
   display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+  list-style: none; /* 기본 목록 스타일 제거 */
+  justify-content: center; /* 중앙 정렬 */
+  padding: 0; /* 기본 패딩 제거 */
 }
 
-footer {
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+.pagination li {
+  margin: 0 5px; /* 각 페이지 번호 사이의 여백 */
 }
 
-footer button {
-  padding: 10px 20px;
-  margin: 0 10px;
-  cursor: pointer;
-  background-color: #007bff; /* 버튼 배경색 */
-  border: none; /* 테두리 제거 */
-  color: white; /* 글자색 */
-  font-weight: bold; /* 글자 굵기 */
+.pagination li a {
+  text-decoration: none; /* 링크 밑줄 제거 */
+  color: #333; /* 글자 색상 */
+  background-color: #f2f2f2; /* 배경 색상 */
+  padding: 8px 12px; /* 상하, 좌우 패딩 */
+  border-radius: 5px; /* 둥근 모서리 */
+  transition: all 0.3s; /* 부드러운 전환 효과 */
 }
 
-/* 추가: 입력 필드 스타일링 */
-input[type="messagebox-text"] {
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px; /* 둥근 모서리 */
+.pagination li a:hover {
+  background-color: #ddd; /* 마우스 오버 시 배경 색상 변경 */
 }
 
-
-/* 이전 페이지와 다음 페이지 버튼 스타일링 */
-.messagebox-buttons button {
-  padding: 8px 16px; /* 버튼의 안쪽 여백 */
-  margin: 10px 5px; /* 버튼 간의 외부 여백 */
-  color: gray; /* 버튼의 글자색 */
-  border: none; /* 버튼의 테두리 제거 */
-  cursor: pointer; /* 마우스 오버 시 커서 모양 변경 */
-  border-radius: 4px; /* 버튼의 모서리를 둥글게 */
-  font-weight: bold; /* 글자 굵기 */
-  transition: background-color 0.3s ease; /* 배경색 변경 애니메이션 */
+.pagination li a.active {
+  background-color: #007bff; /* 활성 페이지 배경 색상 */
+  color: #fff; /* 활성 페이지 글자 색상 */
 }
 
-.messagebox-buttons button:hover {
-  background-color: #0056b3; /* 마우스 오버 시 버튼의 배경색 변경 */
+@media (min-width: 1150px) {
+  /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
+  .market-container {
+    width: 100%; /* 요소의 너비를 100%로 설정 */
+    max-width: 1200px; /* 최대 너비를 1200px로 제한 */
+    margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
+    margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
+  }
 }
 
-
-/* MessageItem 컴포넌트 스타일링 */
-.MessageItem {
-  display: flex; /* flexbox 레이아웃 적용 */
-  align-items: center; /* 항목들을 세로 중앙에 정렬 */
-  padding: 10px; /* 안쪽 여백 추가 */
-  border-bottom: 1px solid #ccc; /* 하단 테두리 추가 */
-}
-
-.MessageTitle, .MessageSender, .MessageCategory {
-  margin-right: 20px; /* 오른쪽 마진 추가 */
-}
-
-.MessageTitle {
-  flex-grow: 1; /* 제목이 더 많은 공간을 차지하도록 설정 */
-  font-weight: bold; /* 글자 굵기 */
-}
-
-.MessageSender {
-  white-space: nowrap; /* 송신자 이름이 줄바꿈되지 않도록 설정 */
-}
-
-.MessageCategory {
-  white-space: nowrap; /* 카테고리 이름이 줄바꿈되지 않도록 설정 */
-}

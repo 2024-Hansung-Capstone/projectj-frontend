@@ -18,6 +18,9 @@ import MyPage from "./pages/MyPage";
 import MessageSendBox from "./pages/Message/MessageSendBox";
 import MessageReciveBox from "./pages/Message/MessageReciveBox";
 import MessageCompose from "./pages/Message/MessageCompose"; 
+import MessageSuccess from "./pages/Message/MessageSuccess"; 
+import MessageDetail from "./pages/Message/MessageDetail"; 
+import MessageReply from "./pages/Message/MessageReply"; 
 
 import CookingPost from './pages/Cooking/CookingPost';
 import CookingDetails from "./pages/Cooking/CookingDetails";
@@ -87,7 +90,9 @@ function App() {
                 <Route path="/MessageSendBox"  element={isAuthenticated ? <MessageSendBox /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MessageReciveBox"  element={isAuthenticated ? <MessageReciveBox /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MessageCompose"  element={isAuthenticated ? <MessageCompose /> : <Login onLogin={handleLogin} />} />
-
+                <Route path="/MessageSuccess"  element={isAuthenticated ? <MessageSuccess /> : <Login onLogin={handleLogin} />} />
+                <Route path="/MessageDetail"  element={isAuthenticated ? <MessageDetail /> : <Login onLogin={handleLogin} />} />
+                <Route path="/MessageReply"  element={isAuthenticated ? <MessageReply /> : <Login onLogin={handleLogin} />} />
                 <Route path="/editUserInfo" element={<EditUserInfo />} />
               </Routes>
           </div>
