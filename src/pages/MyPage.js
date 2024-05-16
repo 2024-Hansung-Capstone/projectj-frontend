@@ -12,26 +12,7 @@ import { useQuery } from '@apollo/client';
 import { gql } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 import DELETE_USER_MUTATION from './gql/deleteUserGql';
-/*
-const GET_USER_INFO = gql`
-  query FetchUserInfo($userId: String!) {
-    fetchUserById(user_id: $userId) {
-      id
-      name
-      point
-    }
-  }
-`
-export default function MyPage({ onLogout , userId }) {
-  const { loading, error, data } = useQuery(GET_USER_INFO, {
-    variables: { userId },
-  });
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
-  const userInfo = data.fetchUserById;
-  */
  
   const GET_USER_INFO = gql`
   query FetchUserInfo($userId: String!) {
@@ -42,6 +23,14 @@ export default function MyPage({ onLogout , userId }) {
     }
   }
 `
+export const WHO_AM_I_QUERY = gql`
+  query WhoAmI {
+    whoAmI {
+      id
+      name
+    }
+  }
+`;
 
   export default function MyPage({ onLogout }) {
     const [deleteUser] = useMutation(DELETE_USER_MUTATION);
@@ -50,6 +39,15 @@ export default function MyPage({ onLogout , userId }) {
   const getToken = () => {
     return localStorage.getItem('token') || ''; // 토큰이 없을 경우 빈 문자열 반환
   };
+
+  const { loading: loadingWhoAmI, error: errorWhoAmI, data: dataWhoAmI } = useQuery(WHO_AM_I_QUERY, {
+    context: {
+      headers: {
+        authorization: `Bearer ${getToken()}`
+      }
+    },
+  });
+  const whoAmI = dataWhoAmI?.whoAmI;
 
   const handleDeleteUser = async () => {
     try {
@@ -82,12 +80,12 @@ export default function MyPage({ onLogout , userId }) {
         <div className='mypage-user'>
           <div className='mypage-userImage'><PiUserCircleLight /></div>
           <div className='mypage-user-container2'>
-            <div className='mypage-userName'>이름</div>
+          <div className='mypage-userName'>{whoAmI?.name}</div>
             <div className='mypage-membership'>멤버십</div>
           </div>
         </div>
         <div className='mypage-user-container3'>
-          <div className='mypage-point'><TbSquareRoundedLetterP /> 포인트</div>
+          <div className='mypage-point'><TbSquareRoundedLetterP />{whoAmI?.point}</div>
           <Link className='mypage-message' to="/MessageCompose"><SlEnvolopeLetter /> 메시지</Link>
         </div>
       </div>

@@ -4,7 +4,10 @@ const SIGN_UP = gql`
   mutation SignUp($createUserInput: CreateUserInput!, $phone_number: String!, $token: String!) {
     signUp(createUserInput: $createUserInput) {
       id
-      dong
+      dong {
+        id
+        name
+      }
       email
       name
       gender

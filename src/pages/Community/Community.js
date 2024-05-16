@@ -1,29 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import './css/Community.css';
+import { Checkbox, Slider, Input, Button } from 'antd';
 import { useQuery, useMutation } from '@apollo/client'; 
 import { gql } from '@apollo/client';
-import { useNavigate,useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Community_Item from '../../item/Community_Item';
 import { BoardList_Item } from '../../item/BoardList_Item'; 
 
-
 // 게시물 가져오기
 const GET_BOARD = gql`
-query GetBoard($category: String!) {
-  fetchBoards(category: $category) {
-    id
-    title
-    detail
-    category
-    view
-    user {
+  query GetBoard($category: String!) {
+    fetchBoards(category: $category) {
       id
-      name
+      title
+      detail
+      category
+      view
+      user {
+        id
+        name
+      }
     }
   }
-}
 `;
 
+// 게시물 생성하기
 const CREATE_BOARD = gql`
   mutation CreateBoard($category: String!, $title: String!, $detail: String!) {
     createBoardWithImage(createBoardInput: {
@@ -37,8 +38,9 @@ const CREATE_BOARD = gql`
     }
   }
 `;
-// 조회수
-const INCREASE_Board_VIEW = gql`
+
+// 조회수 증가
+const INCREASE_BOARD_VIEW = gql`
   mutation IncreaseBoardView($board_id: String!) {
     increaseBoardView(board_id: $board_id) {
       id
@@ -48,32 +50,30 @@ const INCREASE_Board_VIEW = gql`
 `;
 
 const Community = () => {
-  //GET_BOARD는 카테고리를 지정해야 함 카테고리는 selectedItem에서 받아옴
-  const { loading, error, data, refetch } =useQuery(GET_BOARD, {
-    variables: { category: category }, // 카테고리 값은 적절히 변경해야 합니다.
-  }) 
-  //selectedItem이 null일 때 보여지는 컴포넌트가 필요해 보임
-  const category = selectedItem !== null ? BoardList_Item[selectedItem]?.category : 'default_category';
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItemData, setSelectedItemData] = useState(null); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  // 로그인 유무 확인
+  const [loggedInUserName, setLoggedInUserName] = useState('');  // 로그인 유저 이름 
+  const { Search } = Input; // 검색
   
-  
-  
-  const [createBoard] = useMutation(CREATE_BOARD); 
-  const navigate = useNavigate();
-  const [increaseView] = useMutation(INCREASE_Board_VIEW);
-  // initialSelectedItem이거는 CommunityDeatil에서 온 Board_List 인덱스임
-  const [selectedItem, setSelectedItem] = useState(initialSelectedItem);
-  const [selectedItemData, setSelectedItemData] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);  // 현재 로그인 유무
-
   const location = useLocation();
   const initialSelectedItem = location.state?.selectedItem || null;
+
+  const { loading, error, data, refetch } = useQuery(GET_BOARD, {
+    variables: { category: selectedItem !== null ? BoardList_Item[selectedItem]?.category : 'default_category' },
+  });
+
+  const [createBoard] = useMutation(CREATE_BOARD); 
+  const navigate = useNavigate();
+  const [increaseView] = useMutation(INCREASE_BOARD_VIEW);
+
   useEffect(() => {
     if (data && data.fetchBoards && data.fetchBoards.length > 0) {
       setSelectedItemData(data.fetchBoards[0]?.title);
     }
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
-    // 현재 로그인 유저 확인
+
     const loggedInUser = localStorage.getItem('loggedInUserName');
     if (loggedInUser) {
       setLoggedInUserName(loggedInUser);
@@ -82,22 +82,19 @@ const Community = () => {
     }
   }, [data]);
 
-  //selectedItem이 바뀔시 실행되는 GET_BOARD임
   useEffect(() => {
-    if (selectedItem !== null) {
-      refetch({ category: BoardList_Item[selectedItem]?.category });
+    if (initialSelectedItem !== null) {
+      setSelectedItem(initialSelectedItem);
+      setSelectedItemData(BoardList_Item[initialSelectedItem]?.title);
     }
-  }, [selectedItem, refetch]);
+  }, [initialSelectedItem]);
 
-
-  //BoardList에 해당되는 category로 이동
-  const handleCategoryClick =(index)=>{
+  const handleCategoryClick = (index) => {
     setSelectedItem(index);
-    setSelectedItemData(BoardList_Item[index].title);
+    setSelectedItemData(BoardList_Item[index]?.title);
   }
 
-  //  클릭 시 조회수 증가 및 상세보기
-  const handleListItemClick =(board) => {
+  const handleListItemClick = (board) => {
     increaseView({ variables: { board_id: board.id }})
       .then(response => {
         console.log('조회수가 증가되었습니다.', response.data);
@@ -105,20 +102,22 @@ const Community = () => {
       .catch(err => {
         console.error('조회수 증가 에러:', err);
       });
-      navigate('/CommunitDetail', { state: { board, loggedInUserName,selectedItem} });
+    navigate('/CommunitDetail', { state: { board, loggedInUserName, selectedItem } });
   };
-  //게시글 등록하기
+
   const handlePostButtonClick = () => {
-    navigate('/CommunityPost', { state: { isLoggedIn, loggedInUserName,useLocation} });
+    navigate('/CommunityPost', { state: { isLoggedIn, loggedInUserName, location } });
+  };
+
+  // 검색창
+  const handleSearch = (value) => { 
+    console.log('검색어:', value);
   };
 
   return (  
     <div className='community-container'>
-      {/* 카테고리 클릭 시 해당 카테고리 페이지 보여지도록 설정합니다.
-      gql 아직 연결 안되어있어서 데이터 적용은 아직입니다. */}
       <div className='board-list'>
         <ul>
-          {}
           {BoardList_Item.map((item, index) => (
             <li
               key={index}
@@ -130,10 +129,16 @@ const Community = () => {
           ))}
         </ul>
       </div>
-    
+      {/* 검색창 */}
       <div className='community-scroll'>
+      <div className='filter-bar-container'>
+        <Input.Group compact>
+          <Search placeholder="검색하세요" onSearch={handleSearch}/>
+        </Input.Group>
+      </div>
+
+        {/* 게시물 컴포넌트 위치  */}
         <div className='scroll-view'>
-          {/* 데이터 항목들이 Community_Item에 감싸져서 화면에 표시됩니다. */}
           {selectedItemData && <p>{selectedItemData}</p>}
           {loading ? (
             <p>Loading...</p>
@@ -145,12 +150,13 @@ const Community = () => {
                 <Community_Item key={board.id} board={board} onClick={() => handleListItemClick(board)}  />
               ))
             ) : (
-              <p>No boards available</p> // 데이터 없을 때
+              <p>No boards available</p>
             )
           )}
         </div>
       </div>
       <button className='post-button2' onClick={handlePostButtonClick}> 게시물 등록</button>
+   
    
     </div>
   );

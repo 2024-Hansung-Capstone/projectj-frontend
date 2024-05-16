@@ -38,6 +38,7 @@ const Oneroom = () =>{
             {topThreeRoomsData && topThreeRoomsData.fetchOneRoomsByViewRank.map((room) => (
               <Oneroom_Item
                 key={room.id}
+                roomId={room.id}
                 location={`${room.dong}, ${room.jibun}`}
                 price={room.is_monthly_rent ? `월세 ${room.monthly_rent} / ${room.deposit}` : `전세 ${room.deposit}`}
               />

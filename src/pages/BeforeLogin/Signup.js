@@ -6,24 +6,23 @@ import { useQuery, useMutation } from '@apollo/client';
 import { gql } from '@apollo/client';
 
 const SIGN_UP = gql`
-  mutation SignUp($createUserInput: CreateUserInput!) {
-    signUp(createUserInput: $createUserInput) {
-      id
-      dong {
-        id
-        name
-      }
-      email
-      name
-      gender
-      birth_at
-      mbti
-      phone_number
-      is_find_mate
-      point
-      create_at
+mutation signUp($createUserInput: CreateUserInput!) {
+  signUp(createUserInput: $createUserInput) {
+    id
+    dong {
+	    name
     }
+    email
+    name
+    gender
+    birth_at
+    mbti
+    phone_number
+    is_find_mate
+    point
+    create_at
   }
+}
 `;
 
 const CREATE_TOKEN = gql`
@@ -176,7 +175,7 @@ const Signup = () => {
           birth_month: `${monthInput.value}`,
           birth_day: `${dayInput.value}`,
           phone_number: phoneNumber,
-          dong_nm: selectedDong.code,
+          dong_code: selectedDong.code,
           mbti: document.getElementById('mbtiSelect').value,
           is_find_mate: true
         });
@@ -191,7 +190,7 @@ const Signup = () => {
               birth_year: `${yearInput.value}`,
               birth_month: `${monthInput.value}`,
               birth_day: `${dayInput.value}`,
-              dong_nm: selectedDong.code,
+              dong_code: selectedDong.code,
               mbti: document.getElementById('mbtiSelect').value,
               phone_number: phoneNumber,
               is_find_mate: true

@@ -80,6 +80,7 @@ function App() {
                 <Route path="/Signup" element={<Signup />} />
                 <Route path="/Oneroom" element={<Oneroom />} />
                 <Route path="/OneroomDetails" element={<OneroomDetails />} />
+                <Route path="/Oneroom/:roomId" element={<OneroomDetails />} />
                 <Route path="/Cooking" element={<Cooking />} />
                 <Route path="/CookingAI" element={<CookingAI />} />
                 <Route path="/CookingPost" element={<CookingPost />} />

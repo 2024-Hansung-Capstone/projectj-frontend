@@ -6,12 +6,6 @@
   flex: 0 0 auto;
   }
   
-.roomitem-container img {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-  
 .roomitem-location {
   font-size: 18px;
   font-weight: bold;

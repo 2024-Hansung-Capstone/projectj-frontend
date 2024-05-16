@@ -57,8 +57,8 @@
 .filter-bar-container {
   display: flex;
   flex-direction: column;
-  width: 500px;
-  margin-top: 20px;
+  width: 400px;
+  margin-bottom: 8px;
 }
 
 .filter-bar-container .ant-btn {
@@ -123,6 +123,7 @@
   border: 2.5px solid black;
   border-radius: 14px;
   padding: 10px;
+  margin-bottom: 20px;
 }
 .cook-ai-input {
   width: 60%;

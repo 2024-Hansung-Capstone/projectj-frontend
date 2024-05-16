@@ -51,32 +51,45 @@ const GET_USED_PRODUCTS = gql`
   }
 `;
 
+export const WHO_AM_I_QUERY = gql`
+  query WhoAmI {
+    whoAmI {
+      id
+      name
+    }
+  }
+`;
+
 export default function MarketDetail() {
+  const getToken = () => {
+    return localStorage.getItem('token') || '';
+  };
   const location = useLocation();
   const navigate = useNavigate();
   const [product, setProduct] = useState(location.state?.product);
   const [deleteUsedProduct] = useMutation(DELETE_USED_PRODUCT);
   const [updateUsedProduct] = useMutation(UPDATE_USED_PRODUCT);
-  const { loading, error, data } = useQuery(GET_USED_PRODUCTS);
   const [sellerName, setSellerName] = useState('');
 
+  const { loading: loadingWhoAmI, error: errorWhoAmI, data: dataWhoAmI } = useQuery(WHO_AM_I_QUERY, {
+    context: {
+      headers: {
+        authorization: `Bearer ${getToken()}`
+      }
+    },
+  });
+
+  const whoAmI = dataWhoAmI?.whoAmI;
 
   // 로그인 상태를 확인하는 상태 추가
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loggedInUserName, setLoggedInUserName] = useState('');  // 현재 로그인된 사용자의 이름
 
-
-  const getToken = () => {
-    return localStorage.getItem('token') || '';
-  };
-
   const handleSendMessage = async () => {
     console.log('쪽지 보내기 버튼 클릭됨'); // 버튼 클릭 확인
-      console.log('메시지 작성 페이지로 이동'); // 로그인 상태 확인 로그
-      navigate('/MessageCompose', { state: { writingId: product.id, category: "중고마켓" }});
+    console.log('메시지 작성 페이지로 이동'); // 로그인 상태 확인 로그
+    navigate('/MessageCompose', { state: { writingId: product.id, category: "중고마켓" }});
   };  
-  
-
 
   // 컴포넌트가 마운트될 때 로컬 스토리지에서 토큰을 확인하여 로그인 상태 설정
   useEffect(() => {
@@ -93,25 +106,23 @@ export default function MarketDetail() {
     }
   }, []);
   
-  
- // 판매자 정보 
+  // 판매자 정보 
   useEffect(() => {
     if (product && product.user) {
-      const sellerName = product.user.name;
-      setSellerName(sellerName);
+      setSellerName(product.user.name);
     }
   }, [product]);
+  
 
   const handleEditProduct = () => {
-    navigate('/MarketUpdate', { state: { product, loggedInUserName } });
+    navigate('/MarketUpdate', { state: { product, loggedInUserName: whoAmI.name } });
   };
 
-  // 디버깅을 위한 로그 추가
   const handleDeleteProduct = async () => {
-    console.log(`로그인한 사용자: ${loggedInUserName}, 판매자: ${sellerName}`);
+    console.log(`로그인한 사용자: ${whoAmI.name}, 판매자: ${sellerName}`);
   
     // 로그인한 사용자와 판매자가 동일한지 확인
-    if (loggedInUserName === sellerName) {
+    if (whoAmI && whoAmI.name === sellerName) {
       if (product.id) {
         try {
           const response = await deleteUsedProduct({
@@ -136,13 +147,7 @@ export default function MarketDetail() {
       toast.error('상품을 삭제할 권한이 없습니다.');
       console.log('상품을 삭제할 권한이 없습니다.');
     }
-  }
-  
-  // 현재 로그인 서버와 연결 되었는지 확인하는 로그 (f12 누르고 network에 가보면 맨 아래에 뜹니다. )
-  console.log('판매자:', sellerName);
-  console.log('로그인 유무:', isLoggedIn);
-  console.log('로그인 사용자:', loggedInUserName);
-
+  };
 
   return (
     <div className="marketdetail-container">
@@ -154,38 +159,46 @@ export default function MarketDetail() {
               <h3 className="productImage">이미지</h3>
             </div>
             <div className='marketdetail-container4'>
-              <p>{product.id}</p>  {/* 상품 정보에 대한 gql 정보는 모두 'product. ' 으로 시작됩니다.  */}
+              <p>{product.id}</p>
               <h2 className="productTitle">{product.title}</h2>
-              <p className="productPrice">{product.price}  원</p>
+              <p className="productPrice">{product.price} 원</p>
               <hr></hr>
-            <div className='marketdetail-container5'>
-              <p className="productUser"><GoHeartFill /></p>
+              <div className='marketdetail-container5'>
+                <p className="productUser"><GoHeartFill /></p>
                 <p className="productUser">{product.like}</p>
                 <p className="productUser"><LiaEyeSolid /></p>
                 <p className="productUser">{product.view}</p>
-            </div>
+              </div>
               <div className='marketdetail-container6'>
-              <div className='productDetail-userbutton'>
-              <button onClick={handleEditProduct}>수정</button>
-              <button onClick={handleDeleteProduct}>삭제</button>
-            </div>
+                <div className='productDetail-userbutton'>
+                  {/* 판매자와 로그인한 사용자가 동일한 경우에만 수정 및 삭제 버튼을 표시 */}
+                  {whoAmI?.name === product.user?.name && (
+                    <>
+                      <button onClick={handleEditProduct}>수정</button>
+                      <button onClick={handleDeleteProduct}>삭제</button>
+                    </>
+                  )}
+                </div>
                 <p className="productUser">판매자</p>
-                <p className="productUser">{product.user?.name}</p>  {/* product의 user 정보는 product.user.name 이런 식으로 작성합니다.  */}
+                <p className="productUser">판매자</p>
+              {product.user && (
+                <p className="productUser">{product.user.name}</p>
+              )}
                 <p className="productCategory">카테고리</p>
                 <p className="productCategory">{product.category}</p>
                 <p className="productState">판매상태</p>
                 <p className="productState">{product.state}</p>
               </div>
-          <div className='productDetailBtn'>
-            <button onClick={handleSendMessage}>쪽지보내기</button>
-            <button>찜하기</button>
+              <div className='productDetailBtn'>
+                <button onClick={handleSendMessage}>쪽지보내기</button>
+                <button>찜하기</button>
+              </div>
             </div>
-        </div>
-        </div>
-        <div className="productDetail">
-          <h4>상품정보</h4>
-          <hr></hr>
-          {product.detail}
+          </div>
+          <div className="productDetail">
+            <h4>상품정보</h4>
+            <hr></hr>
+            {product.detail}
           </div>
         </div>
       ) : (
@@ -194,3 +207,6 @@ export default function MarketDetail() {
     </div>
   );
 }
+
+          
+       
