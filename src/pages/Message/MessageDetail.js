@@ -1,20 +1,12 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { gql } from '@apollo/client';
 import "./css/MessageDetail.css";
-
-const DELETE_LETTER_MUTATION = gql`
-  mutation DeleteLetter($letterId: String!) {
-    deleteLetter(letter_id: $letterId)
-  }
-`;
 
 const MessageDetail = () => {
   const location = useLocation();
   const { messagedata } = location.state;
   const navigate = useNavigate();
-  const [deleteLetter] = useMutation(DELETE_LETTER_MUTATION);
-
+  
   // MessageDetail 컴포넌트 내 handleReply 함수 수정
   const handleReply = () => {
     navigate('/MessageReply', { state: { writingId: messagedata.id } });
