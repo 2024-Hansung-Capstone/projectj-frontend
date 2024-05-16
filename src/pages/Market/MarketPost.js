@@ -23,15 +23,7 @@ const GET_USED_PRODUCTS = gql`
 const CREATE_USED_PRODUCT = gql`
   mutation CreateUsedProduct($createUsedProductInput: CreateUsedProductInput!) {
     createUsedProduct(createUsedProductInput: $createUsedProductInput) {
-      title
-      price
-      detail
-      category
-      state
-      user {
-        id
-        name
-      }
+      id
     }
   }
 `;
@@ -41,11 +33,11 @@ const MarketPost = () => {
   const [price, setPrice] = useState('');
   const [detail, setDetail] = useState('');
   const [category, setCategory] = useState('');
-  
+  const [file, setFile] = useState(null); 
 
   const navigate = useNavigate();
-  const location = useLocation(); // useLocation 사용
-  const isLoggedIn = location.state?.isLoggedIn; // Market.js에서 전달된 로그인 상태를 받음
+  const location = useLocation(); 
+  const isLoggedIn = location.state?.isLoggedIn; 
 
   const { loading, error, data } = useQuery(GET_USED_PRODUCTS);
   const [createUsedProduct] = useMutation(CREATE_USED_PRODUCT);
@@ -66,9 +58,28 @@ const MarketPost = () => {
     setCategory(e.target.value);
   };
 
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+  };
+
   const handleSubmit = async (e) => {  
     e.preventDefault();
     try {
+      let uploadedFilePath = '';
+      if (file) {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await fetch('http://54.180.182.40:5000/upload', {  // 서버에서 파일을 처리하는 엔드포인트 설정
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+        uploadedFilePath = result.filePath; // 서버에서 반환된 파일 경로
+      }
+
       const { data } = await createUsedProduct({
         variables: {
           createUsedProductInput: {
@@ -77,14 +88,15 @@ const MarketPost = () => {
             detail,
             category,
             state: "판매중",
-          },
+            image: uploadedFilePath  // 업로드된 파일 경로를 전달
+          }
         },
         context: {
           headers: {
             authorization: `Bearer ${localStorage.getItem('token') || ''}`
           }
         },
-        refetchQueries: [{ query: GET_USED_PRODUCTS }] // 수정완료 버튼 클릭 시 바로 Market에서 업데이트되도록 할 때 필수 입력!!!
+        refetchQueries: [{ query: GET_USED_PRODUCTS }]
       });
       console.log('새로 추가된 상품:', data.createUsedProduct);
       navigate("/Market");
@@ -123,10 +135,13 @@ const MarketPost = () => {
             <input id="price" className='market-post-input' value={price} onChange={handlePriceChange} required placeholder="₩ 가격을 입력해주세요." />
           </div>
           <div className="form-group">
+            <label htmlFor="image" className="market-post-photo">사진 첨부</label>
+            <input type="file" id="image" accept="image/*" onChange={handleFileChange} required />
+          </div>
+          <div className="form-group">
             <label htmlFor="detail" className="market-post-detail">상품 설명</label>
             <textarea id="detail" value={detail} onChange={handleDetailChange} required placeholder="신뢰할 수 있는 거래를 위해 자세한 상품 설명을 작성해주세요." />
           </div>
-    
           <button type="submit" className="market-post-button">작성 완료</button>
         </form>
       )}
