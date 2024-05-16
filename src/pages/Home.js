@@ -1,34 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of navigate
 import './css/Home.css';
-import { gql } from '@apollo/client';
-
-// Mate_Item
-const FETCH_ALL_USERS = gql`
-  query {
-    fetchUsers {
-      id
-      name
-      gender
-      birth_at
-      mbti
-      is_find_mate
-      create_at
-    }
-  }
-`;
-
-// Market_Item
-const GET_USED_PRODUCTS = gql`
-  query GetUsedProducts {
-    fetchUsedProducts {
-      id
-      title
-      price
-      detail
-    }
-  }
-`;
 
 export const images = [
   "/mainPhoto_1.webp",
@@ -40,10 +13,11 @@ export const images = [
 
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const navigate = useNavigate(); // Get the navigate function using useNavigate
 
-  // 쿼리를 사용하여 데이터 가져오기
-  const { loading: loadingMates, data: matesData } = useQuery(FETCH_ALL_USERS);
-  const { loading: loadingProducts, data: productsData } = useQuery(GET_USED_PRODUCTS);
+  const handleClick = () => {
+    navigate('/CommunityDetail');
+  };
 
   useEffect(() => {
     const setScrollableStyle = () => {
@@ -63,9 +37,6 @@ const Home = () => {
     return () => clearInterval(intervalId);
   }, [currentImageIndex]);
 
-  if (loadingMates || loadingProducts) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className='Home-container'>
@@ -76,8 +47,8 @@ const Home = () => {
           alt="로고"
         />
       </div>
-      </div>
-      
+      <button onClick={handleClick}>커뮤니티 상세페이지</button>
+    </div>
   );
 };
 

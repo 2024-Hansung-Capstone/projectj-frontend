@@ -5,6 +5,7 @@ import { useMutation } from '@apollo/client';
 import { gql } from '@apollo/client';
 import { useNavigate,useLocation } from 'react-router-dom';
 import { BoardList_Item } from '../../item/BoardList_Item'; 
+
 // CREATE_BOARD 뮤테이션 정의
 const CREATE_BOARD = gql`
   mutation CreateBoard($createBoardInput: CreateBoardInput!) {
@@ -16,6 +17,7 @@ const CREATE_BOARD = gql`
       view
       like
       create_at
+      post_images
     }
   }
 `;
@@ -41,9 +43,9 @@ const CommunityPost = ({ onPost }) => {
   const [mainImage, setMainImage] = useState(null);
   const [detail, setDetail] = useState('');
   const [category, setCategory] = useState(''); 
+  const location =useLocation();
   const { isLoggedIn,  loggedInUserName,selectedItem } = location.state || {};
   const navigate = useNavigate();
-  const location =useLocation();
   const [createBoard] = useMutation(CREATE_BOARD, {
     context: {
       headers: {
@@ -58,7 +60,7 @@ const CommunityPost = ({ onPost }) => {
 
   const handleMainImageChange = (e) => {
     const selectedImage = e.target.files[0];
-    setMainImage(URL.createObjectURL(selectedImage));
+    setMainImage(selectedImage);
   };
 
   const handleDetailChange = (e) => {
@@ -73,13 +75,15 @@ const CommunityPost = ({ onPost }) => {
     e.preventDefault();
   
     try {
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('detail', detail);
+      formData.append('category', category);
+      formData.append('post_images', mainImage);
+  
       const { data } = await createBoard({
         variables: {
-          createBoardInput: {
-            title,
-            detail,
-            category,
-          },
+          createBoardInput: formData,
         },
       });
   
@@ -115,7 +119,7 @@ const CommunityPost = ({ onPost }) => {
         </div>
         <div className="form-group">
           <label htmlFor="title" className="community-post-title">제목</label>
-          <input type="text" className='community-post-input' id="title" value={title} onChange={handleTitleChange} required placeholder='제목'/>
+          <input type="cooking_text" className='community-post-input' id="title" value={title} onChange={handleTitleChange} required placeholder='제목'/>
         </div>
         <div className="form-group">
           <label htmlFor="mainImage" className="community-post-photo"><FaCamera /> 사진 첨부 </label>

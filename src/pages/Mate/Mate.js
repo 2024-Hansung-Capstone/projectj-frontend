@@ -22,12 +22,28 @@ const FETCH_ALL_USERS = gql`
   }
 `;
 
+export const WHO_AM_I_QUERY = gql`
+  query WhoAmI {
+    whoAmI {
+      id
+      name
+    }
+  }
+`;
 
 export default function Mate() {
   const navigate = useNavigate();
   const [isFilterVisible, setFilterVisible] = useState(false);  // 필터 기능
   const { data, loading, error } = useQuery(FETCH_ALL_USERS);  // gql
+  const token = localStorage.getItem('token');
 
+  const { loading: loadingWhoAmI, error: errorWhoAmI, data: dataWhoAmI } = useQuery(WHO_AM_I_QUERY, {
+    context: {
+      headers: {
+        authorization: `Bearer ${token || ''}`
+      }
+    },
+  });
   // 필터 클릭 리스너
   const handleFilterClick = () => {
     setFilterVisible(prev => !prev);
@@ -41,10 +57,11 @@ export default function Mate() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
+  const whoAmI = dataWhoAmI?.whoAmI;
   
   return (
     <div className={`Mate-container ${isFilterVisible ? 'filter-open' : ''}`}>
-      <h2>님, 추천 메이트 </h2>
+      <h2>{whoAmI.name}님, 추천 메이트 </h2>
       <div className='Mate-recommend'>
         {data.fetchUsers.map((user) => (
           <Mate_Item key={user.id} user={user} />

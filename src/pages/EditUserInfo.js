@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { useQuery } from '@apollo/client';
+import { gql } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './css/EditUserInfo.css';
 
+
+export const WHO_AM_I_QUERY = gql`
+  query WhoAmI {
+    whoAmI {
+      id
+      name
+    }
+  }
+`;
 
 export default function EditUserInfo() {
   const navigate = useNavigate();
@@ -14,6 +25,17 @@ export default function EditUserInfo() {
   const [monthOptions, setMonthOptions] = useState([]);
   const [dayOptions, setDayOptions] = useState([]);
   const [user, setUser] = useState(null);
+  const getToken = () => {
+    return localStorage.getItem('token') || ''; // 토큰이 없을 경우 빈 문자열 반환
+  };
+  const { loading: loadingWhoAmI, error: errorWhoAmI, data: dataWhoAmI } = useQuery(WHO_AM_I_QUERY, {
+    context: {
+      headers: {
+        authorization: `Bearer ${getToken()}`
+      }
+    },
+  });
+  const whoAmI = dataWhoAmI?.whoAmI;
 
   useEffect(() => {
     fetchUserInfo();
