@@ -11,10 +11,6 @@ export const WHO_AM_I_QUERY = gql`
   query{
     whoAmI{
       id
-      dong {
-        id
-        name
-      }
       email
       name
       birth_at
@@ -26,10 +22,6 @@ export const WHO_AM_I_QUERY = gql`
 
 export default function EditUserInfo() {
   const navigate = useNavigate();
-  const [sigunguList, setSigunguList] = useState([]);
-  const [selectedSigungu, setSelectedSigungu] = useState("");
-  const [dongList, setDongList] = useState([]);
-  const [selectedDong, setSelectedDong] = useState("");
   const [yearOptions, setYearOptions] = useState([]);
   const [monthOptions, setMonthOptions] = useState([]);
   const [dayOptions, setDayOptions] = useState([]);
@@ -82,7 +74,6 @@ export default function EditUserInfo() {
         birthDay: new Date(whoAmI.birth_at).getDate() < 10 ? new Date(whoAmI.birth_at).getDate().toString() : ('0' + new Date(whoAmI.birth_at).getDate()).slice(-2).toString()
       });
     }
-    fetchSigunguList('1100000000');
     setYearOptions(generateOptions(1930, 2024)); // 생년월일 옵션 설정
     setMonthOptions(generateOptions(1, 12));
     setDayOptions(generateOptions(1, 31));
@@ -97,10 +88,6 @@ export default function EditUserInfo() {
           query FetchUser($userId: String!) {
             fetchUserById(user_id: $userId) {
               id
-              dong {
-                id
-                name
-              }
               email
               name
               birth_at
@@ -120,53 +107,6 @@ export default function EditUserInfo() {
     }
   };
 
-  const fetchSigunguList = async (sidoCode) => {
-    try {
-      sidoCode = 11; // 서울특별시 코드
-      const response = await axios.get(`https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=${sidoCode}*00000`);
-      const regcodes = response.data && response.data.regcodes ? response.data.regcodes : [];
-      if (regcodes.length > 0) {
-        setSigunguList(regcodes.filter(item => item.code !== `1100000000`)); // '서울특별시'를 제외한 목록 설정
-      } else {
-        console.error('API 응답에 시/군/구 목록이 없습니다.');
-      }
-    } catch (error) {
-      console.error('시/군/구를 가져오는 중 오류 발생:', error);
-    }
-  };
-
-  const fetchDongList = async (sigunguCode) => {
-    try {
-      sigunguCode = parseInt(sigunguCode.toString().replace(/0/g, ''));
-      const response = await axios.get(`https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=${sigunguCode}*&is_ignore_zero=true`);
-      if (response.data && response.data.regcodes) {
-        setDongList(response.data.regcodes);
-      } else {
-        console.error('API 응답에 읍/면/동 목록이 없습니다.');
-      }
-    } catch (error) {
-      console.error('읍/면/동을 가져오는 중 오류 발생:', error);
-    }
-  };
-
-  const handleSigunguChange = async (e) => {
-    const selectedSigunguCode = e.target.value;
-    setSelectedSigungu(selectedSigunguCode);
-    setSelectedDong(""); // 시/군/구가 변경될 때 읍/면/동 선택 상태 초기화
-  
-    try {
-      const response = await axios.get(`https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=${selectedSigunguCode}*&is_ignore_zero=true`);
-      if (response.data && response.data.regcodes) {
-        setDongList(response.data.regcodes);
-        fetchDongList(selectedSigunguCode);
-      } else {
-        console.error('API 응답에 읍/면/동 목록이 없습니다.');
-      }
-    } catch (error) {
-      console.error('읍/면/동을 가져오는 중 오류 발생:', error);
-    }
-  };
-
   const handleEditSubmit = async (event) => {
     event.preventDefault();
     if (!user.password || !user.confirmPassword) {
@@ -178,7 +118,6 @@ export default function EditUserInfo() {
       return;
     }
     try {
-      console.log('dong: ', selectedDong.code)
       await updateUser({
         variables: {
           updateUserInput: {
@@ -189,7 +128,6 @@ export default function EditUserInfo() {
             birth_day: user.birthDay,
             mbti: user.mbti,
             password: user.password,
-            dong_code: selectedDong.code
           }
         }
       });
@@ -237,23 +175,6 @@ export default function EditUserInfo() {
               <input type="edit-text" id="phoneNumber2" name="phoneNumber2" className="phone-input" maxLength="4" value={user.phoneNumber2} onChange={(e) => setUser({ ...user, phoneNumber2: e.target.value })} />
               <span className="phone-separator">-</span>
               <input type="edit-text" id="phoneNumber3" name="phoneNumber3" className="phone-input" maxLength="4" value={user.phoneNumber3} onChange={(e) => setUser({ ...user, phoneNumber3: e.target.value })} />
-            </div>
-          </div>
-          <div className="edit-address">
-            <label htmlFor="address">주소</label>
-            <div className="address-inputs">
-              <select value={selectedSigungu} onChange={handleSigunguChange}>
-                <option value="">시/군/구 선택</option>
-                {sigunguList.map((sigungu, index) => (
-                  <option key={index} value={sigungu.code}>{sigungu.name}</option>
-                ))}
-              </select>
-              <select value={selectedDong.code} onChange={(e) => setSelectedDong(dongList.find(dong => dong.code === e.target.value))}>
-                <option value="">읍/면/동 선택</option>
-                {dongList.map((dong, index) => (
-                  <option key={index} value={dong.code}>{dong.name}</option>
-                ))}
-              </select>
             </div>
           </div>
           <div className="edit-mbti">

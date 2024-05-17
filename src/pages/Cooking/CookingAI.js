@@ -1,19 +1,41 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './css/CookingAI.css';
 
 const CookingAI = () => {
+  const location = useLocation();
+  const { ingredients } = location.state || { ingredients: [] };
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    if (ingredients.length > 0) {
+      // AI API 호출 예시 (임의의 API를 사용하는 경우)
+      fetch('https://api.example.com/recipes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ingredients }),
+      })
+        .then((response) => response.json())
+        .then((data) => setRecipes(data.recipes))
+        .catch((error) => console.error('Error fetching recipes:', error));
+    }
+  }, [ingredients]);
+
   return (
     <div className='ai-container'>
-        <div className='ai-recipe1'>
-            <p>레시피1</p>
-        </div>
-        <div className='ai-recipe2'>
-          <p>레시피2</p>
-        </div>
-        <div className='ai-recipe3'>
-          <p>레시피3</p>
-        </div>
+      {recipes.length === 0 ? (
+        <p>레시피를 불러오는 중...</p>
+      ) : (
+        <>
+          {recipes.map((recipe, index) => (
+            <div key={index} className={`ai-recipe${index + 1}`}>
+              <p>{recipe}</p>
+            </div>
+          ))}
+        </>
+      )}
     </div>
   );
 };
