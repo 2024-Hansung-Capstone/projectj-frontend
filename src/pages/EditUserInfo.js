@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
+import { UPDATE_USER_MUTATION } from './gql/UpdateUserGql';
 import { gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './css/EditUserInfo.css';
@@ -9,6 +11,10 @@ export const WHO_AM_I_QUERY = gql`
   query{
     whoAmI{
       id
+      dong {
+        id
+        name
+      }
       email
       name
       birth_at
@@ -54,9 +60,13 @@ export default function EditUserInfo() {
     },
   });
 
+  const [updateUser] = useMutation(UPDATE_USER_MUTATION);
+
   useEffect(() => {
     if (dataWhoAmI && dataWhoAmI.whoAmI) {
       const { whoAmI } = dataWhoAmI;
+      const birthDate = new Date(whoAmI.birth_at);
+
       setUser({
         username: whoAmI.name,
         email: whoAmI.email,
@@ -67,9 +77,9 @@ export default function EditUserInfo() {
         phoneNumber3: whoAmI.phone_number.substring(7),
         address: "",
         mbti: whoAmI.mbti,
-        birthYear: whoAmI.birth_at.split("-")[0],
-        birthMonth: whoAmI.birth_at.split("-")[1],
-        birthDay: whoAmI.birth_at.split("-")[2]
+        birthYear: birthDate.getFullYear().toString(),
+        birthMonth: new Date(whoAmI.birth_at).getMonth() + 1 < 10 ? (new Date(whoAmI.birth_at).getMonth() + 1).toString() : ('0' + (birthDate.getMonth() + 1)).slice(-2).toString(),
+        birthDay: new Date(whoAmI.birth_at).getDate() < 10 ? new Date(whoAmI.birth_at).getDate().toString() : ('0' + new Date(whoAmI.birth_at).getDate()).slice(-2).toString()
       });
     }
     fetchSigunguList('1100000000');
@@ -87,7 +97,10 @@ export default function EditUserInfo() {
           query FetchUser($userId: String!) {
             fetchUserById(user_id: $userId) {
               id
-              dong
+              dong {
+                id
+                name
+              }
               email
               name
               birth_at
@@ -136,19 +149,56 @@ export default function EditUserInfo() {
     }
   };
 
-  const handleSigunguChange = (e) => {
+  const handleSigunguChange = async (e) => {
     const selectedSigunguCode = e.target.value;
     setSelectedSigungu(selectedSigunguCode);
     setSelectedDong(""); // 시/군/구가 변경될 때 읍/면/동 선택 상태 초기화
-    fetchDongList(selectedSigunguCode);
+  
+    try {
+      const response = await axios.get(`https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=${selectedSigunguCode}*&is_ignore_zero=true`);
+      if (response.data && response.data.regcodes) {
+        setDongList(response.data.regcodes);
+        fetchDongList(selectedSigunguCode);
+      } else {
+        console.error('API 응답에 읍/면/동 목록이 없습니다.');
+      }
+    } catch (error) {
+      console.error('읍/면/동을 가져오는 중 오류 발생:', error);
+    }
   };
 
-  const handleEditSubmit = (event) => {
-    event.preventDefault(); // 기본 이벤트 방지
-    // 수정하기 버튼 클릭 시 MyPage.js로 이동
-    navigate('/mypage'); // 이동할 페이지 경로 지정
-    // 수정된 정보를 서버로 전송하는 코드 작성
+  const handleEditSubmit = async (event) => {
+    event.preventDefault();
+    if (!user.password || !user.confirmPassword) {
+      alert('비밀번호를 입력하세요');
+      return;
+    }
+    if (user.password !== user.confirmPassword) {
+      alert('비밀번호를 확인하세요');
+      return;
+    }
+    try {
+      console.log('dong: ', selectedDong.code)
+      await updateUser({
+        variables: {
+          updateUserInput: {
+            email: user.email,
+            name: user.username,
+            birth_year: user.birthYear,
+            birth_month: user.birthMonth,
+            birth_day: user.birthDay,
+            mbti: user.mbti,
+            password: user.password,
+            dong_code: selectedDong.code
+          }
+        }
+      });
+      navigate('/mypage');
+    } catch (error) {
+      console.error('사용자 정보를 업데이트하는 중 오류 발생:', error);
+    }
   };
+  
 
   const generateOptions = (start, end) => {
     const options = [];
