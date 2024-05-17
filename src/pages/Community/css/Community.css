@@ -34,7 +34,20 @@
   padding: 10px;
   
 }
-
+.community-hot-board {
+  display: flex;
+  border: 1px solid black;
+  font-size: 40px;
+  align-items: center;
+}
+.community-hot-context {
+  font-size: 20px;
+  margin-left: 10px;
+}
+.community-hot-view {
+  font-size: 20px;
+  margin-left: 10px;
+}
 .scroll-view {
   border: groove 1px black;
   flex: 1;

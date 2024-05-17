@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './css/Community.css';
 import { Checkbox, Slider, Input, Button } from 'antd';
 import { useQuery, useMutation } from '@apollo/client'; 
+import { FaFire } from "react-icons/fa6";
 import { gql } from '@apollo/client';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Community_Item from '../../item/Community_Item';
@@ -139,6 +140,16 @@ const Community = () => {
 
         {/* 게시물 컴포넌트 위치  */}
         <div className='scroll-view'>
+          {/* 인기 게시물  */}
+          <div className='community-hot-board'>
+            <FaFire style={{color: '#b22b29'}} />
+            <div className='community-hot-context'>
+              <p>내용</p>
+            </div>
+            <div className='community-hot-view'>
+              <p>조회수</p>
+            </div>
+          </div>
           {selectedItemData && <p>{selectedItemData}</p>}
           {loading ? (
             <p>Loading...</p>

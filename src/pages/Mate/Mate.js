@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import MateFilterModal from '../../components/MateFilterModal.js';
@@ -44,6 +44,7 @@ export default function Mate() {
       }
     },
   });
+
   // 필터 클릭 리스너
   const handleFilterClick = () => {
     setFilterVisible(prev => !prev);
@@ -54,8 +55,8 @@ export default function Mate() {
     setFilterVisible(false);
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (loading || loadingWhoAmI) return <p>Loading...</p>;
+  if (error || errorWhoAmI) return <p>Error: {error?.message || errorWhoAmI?.message}</p>;
 
   const whoAmI = dataWhoAmI?.whoAmI;
   
