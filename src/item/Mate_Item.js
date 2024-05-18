@@ -10,11 +10,11 @@ export default function Mate_Item({ user }) {
     }
     const userId = user.id ? user.id : 'Unknown User';
     const userName = user.name ? user.name : 'Unknown User';
-    const gender = user.gender === 'female' ? '여성' : user.gender === 'male' ? '남성' : 'Unknown Gender';
-    const mbti = user.mbti ? user.mbti : 'Unknown mbti';
+    const gender = user.gender === 'female' ? '여성' : user.gender === 'male' ? '남성' : '성별 비공개';
+    const mbti = user.mbti ? user.mbti : 'mbti 비공개';
     const birthYear = user.birth_at ? new Date(user.birth_at).getFullYear() : 'Unknown Year';
     const currentYear = new Date().getFullYear();
-    const userAge = user.birth_at ? `${currentYear - birthYear} 세` : 'Age unknown';
+    const userAge = user.birth_at ? `${currentYear - birthYear} 세` : '나이 비공개';
 
     const handleSendMessage = () => {
         navigate('../MessageCompose', { state: { writingId: userName, category: "자취생메이트" } });

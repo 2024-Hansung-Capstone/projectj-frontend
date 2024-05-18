@@ -34,6 +34,12 @@ export const WHO_AM_I_QUERY = gql`
 export default function Mate() {
   const navigate = useNavigate();
   const [isFilterVisible, setFilterVisible] = useState(false);  // 필터 기능
+  const [filters, setFilters] = useState({
+    region: null,
+    gender: null,
+    age: null,
+    mbti: null
+  });
   const { data, loading, error } = useQuery(FETCH_ALL_USERS);  // gql
   const token = localStorage.getItem('token');
 
@@ -51,7 +57,8 @@ export default function Mate() {
   };
 
   // 필터에서 확인 버튼 클릭 리스너
-  const handleConfirmButtonClick = () => {
+  const handleConfirmButtonClick = (selectedFilters) => {
+    setFilters(selectedFilters);
     setFilterVisible(false);
   };
 
@@ -60,6 +67,44 @@ export default function Mate() {
 
   const whoAmI = dataWhoAmI?.whoAmI;
   
+  // 사용자 필터링 함수
+  const filteredUsers = data.fetchUsers.filter(user => {
+    // 지역 필터링
+    if (filters.region && user.dong_id.split(' ')[1] !== filters.region) return false;
+    // 성별 필터링
+    if (filters.gender) {
+      const genderValue = filters.gender === '남성' ? 'male' : 'female';
+      if (user.gender !== genderValue) return false;
+    }
+    // 나이 필터링
+    if (filters.age) {
+      const age = new Date().getFullYear() - new Date(user.birth_at).getFullYear();
+      switch (filters.age) {
+        case '10대':
+          if (age >= 20) return false;
+          break;
+        case '20대':
+          if (age < 20 || age >= 30) return false;
+          break;
+        case '30대':
+          if (age < 30 || age >= 40) return false;
+          break;
+        case '40대':
+          if (age < 40 || age >= 50) return false;
+          break;
+        case '50대 이상':
+          if (age < 50) return false;
+          break;
+        default:
+          break;
+      }
+    }
+    // MBTI 필터링
+    if (filters.mbti && user.mbti !== filters.mbti) return false;
+
+    return true;
+  });
+
   return (
     <div className={`Mate-container ${isFilterVisible ? 'filter-open' : ''}`}>
       <h2>{whoAmI.name}님, 추천 메이트 </h2>
@@ -76,7 +121,7 @@ export default function Mate() {
         </div>
         <div className='Mate-list'>
           <div className='Mate-items'>
-            {data.fetchUsers.map((user) => (
+            {filteredUsers.map((user) => (
               <Mate_Item  key={user.id} user={user} />
             ))}
           </div>
