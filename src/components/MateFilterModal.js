@@ -25,7 +25,13 @@ const MateFilterModal = ({ onClose }) => {
   };
 
   const handleConfirmClick = () => {
-    onClose();
+    const selectedFilters = {
+      region: selectedRegion,
+      gender: selectedGender,
+      age: selectedAge,
+      mbti: selectedMbti
+    };
+    onClose(selectedFilters);
   };
 
   return (
@@ -46,7 +52,7 @@ const MateFilterModal = ({ onClose }) => {
           <h3>지역</h3>
         </div>
         <div className='Matefilter-items'>
-          {['서울', '경기', '인천', '부산', '대구', '광주', '대전', '울산', '세종', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주'].map(region => (
+          {['종로구', '중구', '용산구', '성동구', '광진구', '동대문구', '중랑구', '성북구', '강북구', '도봉구', '노원구', '은평구', '서대문구', '마포구', '양천구', '강서구', '구로구', '금천구', '영등포구', '동작구', '관악구', '서초구', '강남구', '송파구', '강동구'].map(region => (
             <Button
               key={region}
               type={selectedRegion === region ? 'primary' : 'default'}

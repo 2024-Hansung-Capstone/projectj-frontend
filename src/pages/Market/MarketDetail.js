@@ -8,10 +8,8 @@ import { LiaEyeSolid } from "react-icons/lia";
 import { GoHeartFill } from "react-icons/go";
 
 const DELETE_USED_PRODUCT = gql`
-  mutation DeleteUsedProduct($product_id: ID!) {
-    deleteUsedProduct(product_id: $product_id) {
-      id
-    }
+  mutation DeleteUsedProduct($product_id: String!) {
+    deleteUsedProduct(product_id: $product_id)
   }
 `;
 
@@ -121,31 +119,22 @@ export default function MarketDetail() {
   const handleDeleteProduct = async () => {
     console.log(`로그인한 사용자: ${whoAmI.name}, 판매자: ${sellerName}`);
   
-    // 로그인한 사용자와 판매자가 동일한지 확인
-    if (whoAmI && whoAmI.name === sellerName) {
-      if (product.id) {
-        try {
-          const response = await deleteUsedProduct({
-            variables: { product_id: product.id },
-            context: {
-              headers: {
-                authorization: `Bearer ${getToken()}`
-              }
-            },
-            refetchQueries: [{ query: GET_USED_PRODUCTS }] // 상품 삭제 후 목록 새로고침
-          });
-          console.log("상품 삭제 성공: ", response);
-          toast.success('상품이 성공적으로 삭제되었습니다.');
-          navigate('/Market');
-        } catch (error) {
-          console.log("상품 삭제 에러: ", error);
-          toast.error('상품 삭제 중 문제가 발생했습니다.');
-        }
-      }
-    } else {
-      // 로그인한 사용자와 판매자가 다른 경우
-      toast.error('상품을 삭제할 권한이 없습니다.');
-      console.log('상품을 삭제할 권한이 없습니다.');
+    try {
+      const response = await deleteUsedProduct({
+        variables: { product_id: product.id },
+        context: {
+          headers: {
+            authorization: `Bearer ${getToken()}`
+          }
+        },
+        refetchQueries: [{ query: GET_USED_PRODUCTS }] // 상품 삭제 후 목록 새로고침
+      });
+      console.log("상품 삭제 성공: ", response);
+      toast.success('상품이 성공적으로 삭제되었습니다.');
+      navigate('/Market');
+    } catch (error) {
+      console.log("상품 삭제 에러: ", error);
+      toast.error('상품 삭제 중 문제가 발생했습니다.');
     }
   };
 
@@ -208,5 +197,3 @@ export default function MarketDetail() {
   );
 }
 
-          
-       

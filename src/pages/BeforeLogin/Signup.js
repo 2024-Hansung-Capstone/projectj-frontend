@@ -6,23 +6,27 @@ import { useQuery, useMutation } from '@apollo/client';
 import { gql } from '@apollo/client';
 
 const SIGN_UP = gql`
-mutation signUp($createUserInput: CreateUserInput!) {
-  signUp(createUserInput: $createUserInput) {
-    id
-    dong {
-	    name
+  mutation signUp($createUserInput: CreateUserInput!) {
+    signUp(createUserInput: $createUserInput) {
+      id
+      profile_image {
+        imagePath
+      }
+      dong {
+        id
+        name
+      }
+      email
+      name
+      gender
+      birth_at
+      mbti
+      phone_number
+      is_find_mate
+      point
+      create_at
     }
-    email
-    name
-    gender
-    birth_at
-    mbti
-    phone_number
-    is_find_mate
-    point
-    create_at
   }
-}
 `;
 
 const CREATE_TOKEN = gql`
@@ -48,13 +52,13 @@ const Signup = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [createTokenMutation] = useMutation(CREATE_TOKEN);
   const [authPhoneMutation] = useMutation(AUTH_PHONE);
-  const [signUp] = useMutation(SIGN_UP);
   const [sidoList, setSidoList] = useState([]); // 시/도 목록을 저장하기 위한 상태
   const [selectedSido, setSelectedSido] = useState(""); // 선택된 시/도를 저장하기 위한 상태
   const [sigunguList, setSigunguList] = useState([]); // 시/군/구 목록을 저장하기 위한 상태
   const [selectedSigungu, setSelectedSigungu] = useState(""); // 선택된 시/군/구를 저장하기 위한 상태
   const [dongList, setDongList] = useState([]); // 읍/면/동 목록을 저장하기 위한 상태
   const [selectedDong, setSelectedDong] = useState(""); // 선택된 읍/면/동을 저장하기 위한 상태
+  const [profileImage, setProfileImage] = useState(null); // 프로필 이미지 상태
 
   useEffect(() => {
     fetchSigunguList('1100000000'); // 서울특별시 (서울특별시 코드: 1100000000)
@@ -128,7 +132,7 @@ const Signup = () => {
     const dayInput = document.getElementById('dayInput');
     const phoneInput = document.getElementById('phoneInput');
     const phoneTokenInput = document.getElementById('phoneTokenInput');
-  
+    
     const newErrorMessages = [];
   
     if (!nameInput.value) {
@@ -163,9 +167,23 @@ const Signup = () => {
   
       const phoneNumber = phoneInput.value;
       const token = phoneTokenInput.value;
-      
+
       try {
-        // 여기서 새로운 코드를 추가하여 입력값을 콘솔에 출력합니다.
+        const createUserInput = {
+          name: nameInput.value,
+          password: passwordInput.value,
+          email: emailInput.value,
+          gender: document.getElementById('genderSelect').value,
+          birth_year: `${yearInput.value}`,
+          birth_month: `${monthInput.value}`,
+          birth_day: `${dayInput.value}`,
+          dong_code: selectedDong.code,
+          mbti: document.getElementById('mbtiSelect').value,
+          phone_number: phoneNumber,
+          is_find_mate: true,
+          profile_image: profileImage
+        };
+
         console.log('입력한 정보:', {
           name: nameInput.value,
           password: passwordInput.value,
@@ -179,36 +197,63 @@ const Signup = () => {
           mbti: document.getElementById('mbtiSelect').value,
           is_find_mate: true
         });
-  
-        const res = await signUp({
+
+        const formData = new FormData();
+        formData.append('operations', JSON.stringify({
+          query: `
+            mutation signUp($createUserInput: CreateUserInput!) {
+              signUp(createUserInput: $createUserInput) {
+                id
+                profile_image {
+                  imagePath
+                }
+                dong {
+                  id
+                  name
+                }
+                email
+                name
+                gender
+                birth_at
+                mbti
+                phone_number
+                is_find_mate
+                point
+                create_at
+              }
+            }
+          `,
           variables: {
-            createUserInput: {
-              name: nameInput.value,
-              password: passwordInput.value,
-              email: emailInput.value,
-              gender: document.getElementById('genderSelect').value,
-              birth_year: `${yearInput.value}`,
-              birth_month: `${monthInput.value}`,
-              birth_day: `${dayInput.value}`,
-              dong_code: selectedDong.code,
-              mbti: document.getElementById('mbtiSelect').value,
-              phone_number: phoneNumber,
-              is_find_mate: true
-            },
-            token: token,
-          },
+            createUserInput
+          }
+        }));
+        formData.append('map', JSON.stringify({
+          0: ['variables.createUserInput.profile_image']
+        }));
+        formData.append('0', profileImage);
+  
+        const response = await fetch('http://54.180.182.40:5000/graphql', {
+          method: 'POST',
+          body: formData
         });
   
-        console.log('회원가입 및 휴대폰 인증 결과:', res);
-        navigate('/');
+        const result = await response.json();
+  
+        console.log('회원가입 결과:', result);
+        if (!result.errors) { // 회원가입 성공 시에만 페이지 이동
+          navigate('/');
+        }
       } catch (error) {
-        console.error('회원가입 또는 휴대폰 인증 중 오류 발생:', error);
+        console.error('회원가입 중 오류 발생:', error);
       }
     } else {
-      alert('입력값을 확인하고 약관에 동의해주십시오.');
+      alert('입력한 정보를 다시 확인해주십시오.');
     }
   };
-  
+
+  const handleProfileImageChange = (e) => {
+    setProfileImage(e.target.files[0]);
+  };
 
   const generateOptions = (start, end) => {
     const options = [];
@@ -314,7 +359,7 @@ const Signup = () => {
           <div className="date-picker">
             <select className="date-input" name="year" id="yearInput">
               <option value="">연도</option>
-              {generateOptions(1930, 2024)}
+              {generateOptions(1970, 2024)}
             </select>
             <select className="date-input" name="month" id="monthInput">
               <option value="">월</option>
@@ -368,6 +413,10 @@ const Signup = () => {
             <option value="ENTJ">ENTJ</option>
           </select>
         </div>
+        <div className="form-group">
+            <label htmlFor="profileImage">프로필 이미지</label>
+            <input type="file" className="form-control" id="profileImage" accept="image/*" onChange={handleProfileImageChange} />
+          </div>
         <div className="signup-form-item checkbox">
           <input
             type="checkbox"
