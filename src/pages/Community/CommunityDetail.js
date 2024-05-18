@@ -22,7 +22,12 @@ const CommunityDetail =  () => {
     setBoard(location.state?.board);
     setSelectedItem(location.state?.selectedItem);
   }, [location.state]);
+  
+  console.log('location.state:', location.state); // 디버그 용도
 
+  if (!board) {
+    return <div>No board</div>;
+  }
   return (
     <div className='communitydetail-container'>
       {/* 게시물 정보 */}

@@ -8,18 +8,19 @@ import { BoardList_Item } from '../../item/BoardList_Item';
 
 // CREATE_BOARD 뮤테이션 정의
 const CREATE_BOARD = gql`
-  mutation CreateBoard($createBoardInput: CreateBoardInput!) {
-    createBoard(createBoardInput: $createBoardInput) {
+mutation CreateBoard($createBoardInput: CreateBoardInput!) {
+  createBoard(createBoardInput: $createBoardInput) {
+    id
+    category
+    title
+    detail
+    post_images {
       id
-      category
-      title
-      detail
-      view
-      like
-      create_at
-      post_images
+      imagePath
+      
     }
   }
+}
 `;
 
 /*
@@ -73,23 +74,20 @@ const CommunityPost = ({ onPost }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
     try {
-      const formData = new FormData();
-      formData.append('title', title);
-      formData.append('detail', detail);
-      formData.append('category', category);
-      formData.append('post_images', mainImage);
-  
       const { data } = await createBoard({
         variables: {
-          createBoardInput: formData,
-        },
+          createBoardInput: {
+            title,
+            detail,
+            category,
+            post_images: mainImage ? [mainImage] : []
+          }
+        }
       });
-  
+
       console.log('게시되었습니다:', data.createBoard);
-      onPost(data.createBoard); // 게시된 데이터 전달
-      navigate('/Community',{state:selectedItem}); // 페이지 이동 이동시 해당 카테고리로 이동하기 위해 selectedItem전달
+      navigate('/Community',{state:{selectedItem}}); // 페이지 이동 이동시 해당 카테고리로 이동하기 위해 selectedItem전달
   
     } catch (error) {
       if (error.message.includes('Unauthorized')) {
@@ -98,7 +96,7 @@ const CommunityPost = ({ onPost }) => {
       } else {
         // 그 외의 오류 처리
         console.error('Error creating board:', error);
-        alert('게시물을 등록하는 중 오류가 발생했습니다. 다시 시도해주세요.');
+        alert('게시물을 등록하는 중 오류가 발생했습니다. 다시 시도해주세요.'+error);
       }
     }
   };
@@ -124,7 +122,7 @@ const CommunityPost = ({ onPost }) => {
         <div className="form-group">
           <label htmlFor="mainImage" className="community-post-photo"><FaCamera /> 사진 첨부 </label>
           <input type="file" id="mainImage" accept="image/*" onChange={handleMainImageChange} required />
-          {mainImage && <img src={mainImage} alt="Main Preview" className="community-main-image-preview" />}
+          {mainImage && <img src={URL.createObjectURL(mainImage)} alt="Main Preview" className="community-main-image-preview" />}
         </div>
         <div className="form-group">
           <label htmlFor="detail" className="community-post-detail">내용</label>

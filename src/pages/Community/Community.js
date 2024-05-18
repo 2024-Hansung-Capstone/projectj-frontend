@@ -121,7 +121,7 @@ const Community = () => {
       .catch(err => {
         console.error('조회수 증가 에러:', err);
       });
-    navigate('/CommunitDetail', { state: { board,  selectedItem } });
+    navigate('/CommunityDetail', { state: { board,  selectedItem } });
   };
 
   const handlePostButtonClick = () => {
