@@ -7,6 +7,7 @@ import './css/Oneroom.css';
 import { FETCH_TOP_THREE_POPULAR_ROOMS } from '../gql/fetchOneRoomsByViewRank';
 import { FETCH_ALL_ONE_ROOMS } from '../gql/fetchAllOneRooms';
 import { FETCH_ONE_ROOM_BY_XY } from '../gql/fetchOneRoomByXY';
+import {FETCH_ONE_ROOM_FROM_OPEN_API} from '../gql/FetchOneRoomFromOpenAPI'
 const Oneroom = () =>{
   const { data: topThreeRoomsData } = useQuery(FETCH_TOP_THREE_POPULAR_ROOMS, { variables: { rank: 3 } });
   const [mapBounds, setMapBounds] = useState(null);
@@ -20,14 +21,14 @@ const Oneroom = () =>{
     // mapBounds가 변경되면 해당 쿼리 실행
     const { loading: roomsLoading, error: roomsError, data: roomsData ,refetch} = useQuery(FETCH_ONE_ROOM_BY_XY, {
       variables: {
-        StartX: mapBounds?.start?.lat,
-        StartY: mapBounds?.start?.lng,
-        EndX: mapBounds?.end?.lat,
-        EndY: mapBounds?.end?.lng,
+        StartX:parseFloat(mapBounds?.start?.lat),
+        StartY: parseFloat(mapBounds?.start?.lng),
+        EndX: parseFloat(mapBounds?.end?.lat),
+        EndY: parseFloat(mapBounds?.end?.lng),
       },
       skip: !mapBounds, // mapBounds가 없는 경우 쿼리 스킵
     });
-
+   
   return (
  
     <div className='oneroom-container1'>
@@ -57,8 +58,8 @@ const Oneroom = () =>{
           <Map onBoundsChange={handleBoundsChange} />
         </div>
         <div className='oneroom-items-container'>
-            <div className='oneroom-dishes-grid'>
-            {roomsData && roomsData.fetchOneRoomByXY.length === 0 && <p>No rooms found in the specified area.</p>}
+            <div className='oneroom-dishes-grid'>                                             
+            {roomsData && roomsData.fetchOneRoomByXY.length === 0 && <p>No rooms found in the specified area.</p>} 
             {roomsData &&
               roomsData.fetchOneRoomByXY.map((room) => (
                <div key={room.id} className='oneroom-dish-item'>
@@ -77,14 +78,7 @@ const Oneroom = () =>{
             </div>
         </div>
       </div>
-      <div>
-  {mapBounds && (
-    <div>
-      <p>Start: {`Lat: ${mapBounds.start.lat}, Lng: ${mapBounds.start.lng}`}</p>
-      <p>End: {`Lat: ${mapBounds.end.lat}, Lng: ${mapBounds.end.lng}`}</p>
-    </div>
-  )}
-</div>
+     
     </div>
   );
 };

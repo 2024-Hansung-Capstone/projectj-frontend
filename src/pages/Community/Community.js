@@ -50,8 +50,20 @@ const INCREASE_BOARD_VIEW = gql`
   }
 `;
 
+const FETCH_BOARDS_BY_VIEW_RANK = gql`
+  query FetchBoardsByViewRank($category: String!, $rank: Int!) {
+    fetchBoardsByViewRank(category: $category, rank: $rank) {
+      id
+      category
+      title
+      detail
+      viewCount
+    }
+  }
+`;
+
 const Community = () => {
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);//인덱스
   const [selectedItemData, setSelectedItemData] = useState(null); 
   const [isLoggedIn, setIsLoggedIn] = useState(false);  // 로그인 유무 확인
   const [loggedInUserName, setLoggedInUserName] = useState('');  // 로그인 유저 이름 
@@ -60,18 +72,21 @@ const Community = () => {
   const location = useLocation();
   const initialSelectedItem = location.state?.selectedItem || null;
 
-  const { loading, error, data, refetch } = useQuery(GET_BOARD, {
-    variables: { category: selectedItem !== null ? BoardList_Item[selectedItem]?.category : 'default_category' },
+  const { loading, error, data,refetch } = useQuery(GET_BOARD, {
+    variables: { category: selectedItem !== null ? BoardList_Item[selectedItem]?.title : 'default_category' },
   });
+  const { loading:toploading, error:toperror, data :topdata,refetch:toprefetch } = useQuery(FETCH_BOARDS_BY_VIEW_RANK, {
+    variables: { category: selectedItem !== null ? BoardList_Item[selectedItem]?.title : 'default_category', rank: 1 },
+  });
+
 
   const [createBoard] = useMutation(CREATE_BOARD); 
   const navigate = useNavigate();
   const [increaseView] = useMutation(INCREASE_BOARD_VIEW);
 
   useEffect(() => {
-    if (data && data.fetchBoards && data.fetchBoards.length > 0) {
-      setSelectedItemData(data.fetchBoards[0]?.title);
-    }
+    // 카테고리 선택창
+    
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
 
@@ -90,9 +105,12 @@ const Community = () => {
     }
   }, [initialSelectedItem]);
 
+  //카테고리로 변경
   const handleCategoryClick = (index) => {
     setSelectedItem(index);
     setSelectedItemData(BoardList_Item[index]?.title);
+    toprefetch();
+    refetch();
   }
 
   const handleListItemClick = (board) => {
@@ -103,7 +121,7 @@ const Community = () => {
       .catch(err => {
         console.error('조회수 증가 에러:', err);
       });
-    navigate('/CommunitDetail', { state: { board, loggedInUserName, selectedItem } });
+    navigate('/CommunitDetail', { state: { board,  selectedItem } });
   };
 
   const handlePostButtonClick = () => {
@@ -141,15 +159,18 @@ const Community = () => {
         {/* 게시물 컴포넌트 위치  */}
         <div className='scroll-view'>
           {/* 인기 게시물  */}
-          <div className='community-hot-board'>
+          {topdata&&topdata.fetchBoardsByViewRank.map((board) => (
+          <div className='community-hot-board' key={board.id}>
             <FaFire style={{color: '#b22b29'}} />
             <div className='community-hot-context'>
-              <p>내용</p>
+              <p>내용</p>  <p>{board.detail}</p>
             </div>
             <div className='community-hot-view'>
-              <p>조회수</p>
+              <p>조회수</p> <p>{board.viewCount}</p>
             </div>
           </div>
+           ))}
+
           {selectedItemData && <p>{selectedItemData}</p>}
           {loading ? (
             <p>Loading...</p>
@@ -158,7 +179,7 @@ const Community = () => {
           ) : (
             data && data.fetchBoards ? (
               data.fetchBoards.map((board) => (
-                <Community_Item key={board.id} board={board} onClick={() => handleListItemClick(board)}  />
+                <div onClick={() => handleListItemClick(board)}>{board.title}</div>
               ))
             ) : (
               <p>No boards available</p>
