@@ -21,10 +21,10 @@ const Oneroom = () =>{
     // mapBounds가 변경되면 해당 쿼리 실행
     const { loading: roomsLoading, error: roomsError, data: roomsData ,refetch} = useQuery(FETCH_ONE_ROOM_BY_XY, {
       variables: {
-        StartX:parseFloat(mapBounds?.start?.lat),
-        StartY: parseFloat(mapBounds?.start?.lng),
-        EndX: parseFloat(mapBounds?.end?.lat),
-        EndY: parseFloat(mapBounds?.end?.lng),
+        StartX:parseFloat(mapBounds?.start?.lng),//parseFloat(mapBounds?.start?.lat),
+        StartY: parseFloat(mapBounds?.start?.lat),//parseFloat(mapBounds?.start?.lng),
+        EndX:parseFloat(mapBounds?.end?.lng), //parseFloat(mapBounds?.end?.lat),
+        EndY:parseFloat(mapBounds?.end?.lat),// parseFloat(mapBounds?.end?.lng),
       },
       skip: !mapBounds, // mapBounds가 없는 경우 쿼리 스킵
     });
