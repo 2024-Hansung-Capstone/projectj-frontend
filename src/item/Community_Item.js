@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import './css/Community_Item.css';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
@@ -8,10 +8,30 @@ const DELETE_BOARD = gql`
   }
 `;
 
+const INCREASE_BOARD_LIKE = gql`
+  mutation IncreaseBoardLike($board_id: String!) {
+    increaseBoardLike(board_id: $board_id) {
+      id
+      like
+    }
+  }
+`;
+
+const DECREASE_BOARD_LIKE = gql`
+  mutation DecreaseBoardLike($board_id: String!) {
+    decreaseBoardLike(board_id: $board_id) {
+      id
+      like
+    }
+  }
+`;
+
 // 커뮤니티 게시물 컴포넌트
 export default function Community_Item({ board,selectedItem }) { 
   // props로 board를 받도록 수정
   const navigate = useNavigate();
+  const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(board.like);
   const [deleteBoard] = useMutation(DELETE_BOARD, {
     variables: { board_id: board.id },
     onCompleted: () => {
@@ -22,7 +42,26 @@ export default function Community_Item({ board,selectedItem }) {
       console.error('게시글 삭제 중 오류 발생:', error);
     },
   });
+  const [increaseBoardLike] = useMutation(INCREASE_BOARD_LIKE, {
+    onCompleted: (data) => {
+      setLikeCount(data.increaseBoardLike.like);
+    },
+  });
 
+  const [decreaseBoardLike] = useMutation(DECREASE_BOARD_LIKE, {
+    onCompleted: (data) => {
+      setLikeCount(data.decreaseBoardLike.like);
+    },
+  });
+
+  const handleLikeClick = () => {
+    if (liked) {
+      decreaseBoardLike({ variables: { board_id: board.id } });
+    } else {
+      increaseBoardLike({ variables: { board_id: board.id } });
+    }
+    setLiked(!liked);
+  };
   const handleDelete = () => {
     if (window.confirm('정말로 이 게시글을 삭제하시겠습니까?')) {
       deleteBoard();
@@ -43,7 +82,8 @@ export default function Community_Item({ board,selectedItem }) {
             <h4>유저</h4>{board.user.name}
           </div>
           <div className='ci-date'>
-            <h4>시간</h4> 
+            <h4>시간 {board.create_at} </h4>
+           
           </div>
           <button onClick={handleDelete} className='delete-button'>
             삭제
@@ -56,6 +96,10 @@ export default function Community_Item({ board,selectedItem }) {
           <div className='ci-text'>
             <h4>글</h4> {board.detail}
           </div>
+          <button onClick={handleLikeClick} className='like-button'>
+          {liked ? '좋아요 취소' : '좋아요'}
+          </button>
+          <h6>좋아요수: {likeCount} </h6>
         </div>
     </div>
   </div>

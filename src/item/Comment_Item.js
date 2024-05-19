@@ -77,7 +77,7 @@ export default function Comment_Item({comment}) {
       <div className='comment-title'>
         <div className='comment-container1'>
           <div className='comment-name'>
-            <p>이름</p>
+            <p>이름: {comment.user.name}</p>
           </div>
           <div className='comment-more' onClick={handleOptionsClick}>
             <MdMoreVert />

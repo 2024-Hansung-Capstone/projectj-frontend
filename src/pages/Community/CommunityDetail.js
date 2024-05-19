@@ -54,6 +54,13 @@ const CommunityDetail =  () => {
       });
       console.log('댓글 작성 완료되었습니다.');
       setNewComment('');
+
+      // 새로운 댓글을 게시판에 반영
+      const updatedBoard = {
+        ...board,
+        reply: [...board.reply, data.createReply] // 새로운 댓글을 추가
+      };
+      setBoard(updatedBoard);
     } catch (error) {
       console.error('Error creating comment:', error);
       alert('댓글을 작성하는 중 오류가 발생했습니다.'+error);

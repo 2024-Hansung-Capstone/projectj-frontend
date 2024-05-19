@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TbMessage } from "react-icons/tb";
+import { IoNotifications } from "react-icons/io5";
 import './css/Header.css';
 
 export default function Header() {
@@ -24,6 +25,9 @@ export default function Header() {
               </Link>
               <Link className="header-message" to="/MessageReceiveBox">
                 <TbMessage />
+              </Link>
+              <Link className="header-message" to="/Notification">
+                <IoNotifications />
               </Link>
             </li>
           </ul>
