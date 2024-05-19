@@ -8,32 +8,53 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import Community_Item from '../../item/Community_Item';
 import { BoardList_Item } from '../../item/BoardList_Item'; 
 
-// 게시물 가져오기
+// 게시물 가져오기 수정 필요
 const GET_BOARD = gql`
-query GetBoard($category: String!) {
-  fetchBoards(category: $category) {
-    id
-    title
-    detail
-    category
-    view
-    user {
+  query GetBoard($category: String!) {
+    fetchBoards(category: $category) {
       id
-      name
-    }
-    like
-    create_at
-    reply {
-      id
+      title
       detail
-      
-    }
-    post_images {
-      id
-      imagePath
+      category
+      view
+      user {
+        id
+        name
+      }
+      like
+      create_at
+      reply {
+        id
+        detail
+        user {
+          id
+          name
+        }
+        like_user {
+          id
+          user {
+            id
+            name
+          }
+        }
+        comment_reply{
+          id
+          detail
+        }
+      }
+      post_images {
+        id
+        imagePath
+      }
+      like_user {
+        id
+        user {
+          id
+          name
+        }
+      }
     }
   }
-}
 `;
 
 
@@ -164,16 +185,21 @@ const Community = () => {
 //
   const renderBoardList = () => {
     if (searchloading || loading) return <p>Loading...</p>;
-
+    console.log(JSON.stringify(error, null, 2))
     let boards;
     if (searchInput.title || searchInput.detail) {
       boards = searchdata?.fetchBoardsBySerach;
+      if (!boards || boards.length === 0) {
+        return <p>검색 결과가 없습니다.</p>;
+      }
     } else {
       boards = data?.fetchBoards;
-    }
-    if (!boards || boards.length === 0) {
+      if (!boards || boards.length === 0) {
       return <p>No boards available</p>;
     }
+
+    }
+   
 
     return boards.map((board) => (
       <div key={board.id} onClick={() => handleListItemClick(board)}>
