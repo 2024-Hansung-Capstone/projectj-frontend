@@ -1,84 +1,125 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import gql from 'graphql-tag';
 import { useNavigate } from 'react-router-dom';
+import { useMutation, gql } from '@apollo/client'; 
+import { Form, Upload, Button, Input } from 'antd'; 
+import { UploadOutlined } from '@ant-design/icons';
 import './css/CookingPost.css';
 
-// GraphQL mutation 쿼리 정의
+// 요리 생성하는 GraphQL Mutation
 const CREATE_COOK = gql`
   mutation CreateCook($input: CreateCookInput!) {
     createCook(createCookInput: $input) {
       id
       name
       detail
-      view
-      create_at
+      post_images {
+        id
+        imagePath
+      }
     }
   }
 `;
 
-const CookingPost = () => {
-  const [title, setTitle] = useState('');
-  const [mainImage, setMainImage] = useState(null);
-  const [content, setContent] = useState('');
-  const navigate = useNavigate();
+// 요리 글 목록을 가져오는 GraphQL 쿼리
+const FETCH_ALL_COOKS = gql`
+  query FetchAllCooks {
+    fetchAllCooks {
+      id
+      name
+      detail
+      post_images {
+        id
+        imagePath
+      }
+    }
+  }
+`;
+
+export default function CookingPost() {
   const [createCook] = useMutation(CREATE_COOK);
+  const navigate = useNavigate();
+  const [image, setImage] = useState(null);
+  const [form] = Form.useForm();
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
+  const handleCancel = () => {
+    navigate('/cooking');
+    form.resetFields();
   };
 
-  const handleContentChange = (e) => {
-    setContent(e.target.value);
-  };
-
-  const handleMainImageChange = (e) => {
-    const selectedImage = e.target.files[0];
-    setMainImage(selectedImage);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
+  const handleOk = async () => {
     try {
-      const formData = new FormData();
-      formData.append('input[name]', title); // 요리 이름 추가
-      formData.append('input[detail]', content); // 요리 설명 추가
-      formData.append('input[post_images]', mainImage); // 대표 이미지 추가
+      const values = await form.validateFields();
+      const { name, detail, images } = values;
   
-      // GraphQL mutation 호출
-      const { data } = await createCook({
-        variables: { input: formData }
+      // images.fileList에서 File 객체만 추출
+      const files = images?.fileList?.map(file => file.originFileObj) ?? [];
+  
+      await createCook({
+        variables: {
+          input: {
+            name,
+            detail,
+            post_images: files, // 파일을 직접 전달
+          },
+        },
       });
   
-      // 작성된 요리 글의 ID를 가져와서 이동
-      navigate(`/Cooking/${data.createCook.id}`);
+      navigate('/cooking');
+      form.resetFields();
     } catch (error) {
-      console.error('게시 중 오류가 발생했습니다:', error);
+      console.error('레시피 생성 중 오류:', error);
     }
   };
-
+  
+  
+  
   return (
     <div className="cooking-post-container">
-      <h2>요리 글 작성</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="title" className="cooking-post-title">제목</label>
-          <input type="text" id="title" value={title} onChange={handleTitleChange} required />
-        </div>
-        <div className="form-group">
-          <label htmlFor="mainImage" className="cooking-post-title">대표 사진 첨부</label>
-          <input type="file" id="mainImage" accept="image/*" onChange={handleMainImageChange} required />
-          {mainImage && <img src={URL.createObjectURL(mainImage)} alt="Main Preview" className="cooking-main-image-preview" />}
-        </div>
-        <div className="form-group">
-          <label htmlFor="content" className="cooking-post-title">소개글</label>
-          <textarea id="content" value={content} onChange={handleContentChange} required />
-        </div>
-        <button type="submit" className="cooking-post-button">게시</button>
-      </form>
+      <h2>요리 등록</h2>
+      <Form form={form} layout="vertical">
+        <Form.Item
+          name="name"
+          label="요리 이름"
+          rules={[{ required: true, message: '요리 이름을 입력하세요' }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="detail"
+          label="요리 설명"
+          rules={[{ required: true, message: '요리 설명을 입력하세요' }]}
+        >
+          <Input.TextArea />
+        </Form.Item>
+        <Form.Item
+  name="images"
+  label="요리 이미지"
+  valuePropName="fileList"
+  getValueFromEvent={(e) => {
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
+  }}
+  rules={[{ required: true, message: '요리 이미지를 업로드하세요' }]}
+>
+
+          <Upload
+            listType="picture"
+            beforeUpload={() => false}
+            multiple
+          >
+            <Button icon={<UploadOutlined />}>이미지 업로드</Button>
+          </Upload>
+        </Form.Item>
+        
+        <Form.Item>
+          <Button type="primary" onClick={handleOk}>등록</Button>
+          <Button onClick={handleCancel} style={{ marginLeft: '8px' }}>취소</Button>
+        </Form.Item>
+      </Form>
     </div>
   );
-};
+}
 
-export default CookingPost;
+

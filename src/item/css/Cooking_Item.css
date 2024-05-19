@@ -1,40 +1,47 @@
 .cookingitem-container {
-    border: 1px groove black;
-    width: calc((100% - 20px));
+    border: groove 1px black;
+    text-align: center;
+    margin: 10px;
     padding: 5px;
-    margin: 5px;
     flex: 0 0 auto;
-} 
+    width: 220px;
+    height: 300px;
+    text-align: center;
+    justify-content: center;
+    border: 1px solid black;
+    
+}
 
-.best-dishes .cookingitem-container {
-    width: 250px;
-  }
   
-  
-.dish-image {
-    width: 250px;
-    height: 250px;
+.cookingitem-photo {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    width: 100%;
+    height: 200px;
     object-fit: cover;
+    border: 1px solid black;
   }
+  
 
-.cookingitem-title {
+.cookingitem-name {
     font-size: 18px;
     font-weight: bold;
     margin-top: 7px;
 }
 
-.cookingitem-author {
+.cookingitem-user {
     font-size: 15px;
     font-weight: bold;
 }
 
-.cookingitem-content {
+.cookingitem-detail {
     font-size: 14px;
     font-weight: normal;
 }
 
-.cookingitem-title p,
-.cookingitem-author p,
-.cookingitem-content p {
+.cookingitem-nane p,
+.cookingitem-user p,
+.cookingitem-detail p {
     margin: 5px;
 }
