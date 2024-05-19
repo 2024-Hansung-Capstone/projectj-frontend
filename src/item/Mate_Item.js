@@ -1,9 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { gql, useQuery } from '@apollo/client';
 import './css/Mate_Item.css';
 
+export const WHO_AM_I_QUERY = gql`
+  query WhoAmI {
+    whoAmI {
+      id
+      name
+    }
+  }
+`;
+
 export default function Mate_Item({ user }) {
+    const getToken = () => {
+        return localStorage.getItem('token') || '';
+      };
+      const { loading: loadingWhoAmI, error: errorWhoAmI, data: dataWhoAmI } = useQuery(WHO_AM_I_QUERY, {
+        context: {
+          headers: {
+            authorization: `Bearer ${getToken()}`
+          }
+        },
+      });
+      const whoAmI = dataWhoAmI?.whoAmI;
+      const [isLoggedIn, setIsLoggedIn] = useState(false);
+      const [loggedInUserName, setLoggedInUserName] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        setIsLoggedIn(!!token);
+        
+        // 로그인한 사용자의 이름을 로컬 스토리지에서 불러오기
+        const loggedInUser = localStorage.getItem('loggedInUserName');
+        if (loggedInUser) {
+          setLoggedInUserName(loggedInUser);
+        } else {
+          // 로그인한 사용자 이름이 없는 경우, 로그인 상태를 false로 설정
+          setIsLoggedIn(false);
+        }
+      }, []);
+
+    useEffect(() => {
+        if (dataWhoAmI && dataWhoAmI.whoAmI) {
+            setLoggedInUserName(dataWhoAmI.whoAmI.name);
+        }
+    }, [dataWhoAmI]);
 
     if (!user) {
         return <p>Loading user data...</p>;
@@ -17,13 +60,20 @@ export default function Mate_Item({ user }) {
     const userAge = user.birth_at ? `${currentYear - birthYear} 세` : '나이 비공개';
 
     const handleSendMessage = () => {
+        console.log('쪽지 보내기 버튼 클릭됨');
+        console.log('메시지 작성 페이지로 이동');
         navigate('../MessageCompose', { state: { writingId: userName, category: "자취생메이트" } });
+        console.log('로그인?', whoAmI.name, whoAmI.id);
     };
 
     return (
         <div className='mi-container'>
-            <div className='mi-photo'> 
-                <img className="user-image" src="/user.jpeg" alt="user"/>
+            <div className='mi-photo'>
+              {user.profile_image && user.profile_image.imagePath ? (
+                <img className="user-image" src={user.profile_image.imagePath} alt={userName} />
+              ) : (
+                <img className="user-image" src="/user.jpeg" alt="user" />
+              )}
             </div>
             <div className='mi-name'>
                 <h4>{userName}</h4>

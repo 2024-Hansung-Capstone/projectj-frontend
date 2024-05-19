@@ -118,6 +118,22 @@ export default function EditUserInfo() {
       return;
     }
     try {
+      const formData = new FormData();
+      formData.append('map', JSON.stringify({
+        0: ['variables.createUserInput.profile_image']
+      }));
+      formData.append('0', user.profileImage);
+      
+      // 프로필 이미지 업로드
+      const uploadResponse = await axios.post('http://54.180.182.40:5000/graphql', formData, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('token') || ''}`
+        }
+      });
+      
+      // 프로필 이미지의 URL을 변수에 저장
+      const profileImageUrl = uploadResponse.data.imageUrl;
+
       await updateUser({
         variables: {
           updateUserInput: {
@@ -128,6 +144,7 @@ export default function EditUserInfo() {
             birth_day: user.birthDay,
             mbti: user.mbti,
             password: user.password,
+            profile_image: profileImageUrl
           }
         }
       });
@@ -137,6 +154,10 @@ export default function EditUserInfo() {
     }
   };
   
+  const handleProfileImageChange = (event) => {
+    const file = event.target.files[0];
+    setUser({ ...user, profileImage: file });
+  };
 
   const generateOptions = (start, end) => {
     const options = [];
@@ -215,6 +236,10 @@ export default function EditUserInfo() {
                 {dayOptions}
               </select>
             </div>
+          </div>
+          <div className="edit-image">
+            <label htmlFor="profileImage">프로필 사진</label>
+            <input type="file" id="profileImage" name="profileImage" accept="image/*" onChange={handleProfileImageChange} />
           </div>
           <button type="submit" className="edit-submit">수정하기</button>
         </div>

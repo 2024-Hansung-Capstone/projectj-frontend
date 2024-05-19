@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
+import { gql, useQuery } from '@apollo/client';
 import './css/MateFilterModal.css';
+
+const FETCH_ALL_SGNG = gql`
+  query FetchAllSgng {
+    fetchAllSgng {
+      id
+      name
+    }
+  }
+`;
 
 const MateFilterModal = ({ onClose }) => {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedGender, setSelectedGender] = useState(null);
   const [selectedAge, setSelectedAge] = useState(null);
   const [selectedMbti, setSelectedMbti] = useState(null);
+
+  const { loading, error, data } = useQuery(FETCH_ALL_SGNG);
 
   const handleRegionClick = (region) => {
     setSelectedRegion(region === selectedRegion ? null : region);
@@ -34,6 +46,10 @@ const MateFilterModal = ({ onClose }) => {
     onClose(selectedFilters);
   };
 
+  if (loading || !data) return <p>Loading...</p>; 
+  
+  const regions = data.fetchAllSgng.filter(region => region.id.startsWith("11"));
+
   return (
     <Modal
       title="필터 설정"
@@ -52,13 +68,13 @@ const MateFilterModal = ({ onClose }) => {
           <h3>지역</h3>
         </div>
         <div className='Matefilter-items'>
-          {['종로구', '중구', '용산구', '성동구', '광진구', '동대문구', '중랑구', '성북구', '강북구', '도봉구', '노원구', '은평구', '서대문구', '마포구', '양천구', '강서구', '구로구', '금천구', '영등포구', '동작구', '관악구', '서초구', '강남구', '송파구', '강동구'].map(region => (
+          {regions.map(region => (
             <Button
-              key={region}
-              type={selectedRegion === region ? 'primary' : 'default'}
-              onClick={() => handleRegionClick(region)}
+              key={region.id}
+              type={selectedRegion === region.name ? 'primary' : 'default'}
+              onClick={() => handleRegionClick(region.name)}
             >
-              {region}
+              {region.name}
             </Button>
           ))}
         </div>

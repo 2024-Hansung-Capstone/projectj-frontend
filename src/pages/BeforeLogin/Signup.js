@@ -41,6 +41,24 @@ const AUTH_PHONE = gql`
   }
 `;
 
+const FETCH_ALL_SGNG = gql`
+  query FetchAllSgng {
+    fetchAllSgng {
+      id
+      name
+    }
+  }
+`;
+
+const FETCH_ALL_DONG = gql`
+  query FetchAllDong {
+    fetchAllDong {
+      id
+      name
+    }
+  }
+`;
+
 const Signup = () => {
   const navigate = useNavigate();
   const [isAgeChecked, setAgeChecked] = useState(false);
@@ -52,72 +70,31 @@ const Signup = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [createTokenMutation] = useMutation(CREATE_TOKEN);
   const [authPhoneMutation] = useMutation(AUTH_PHONE);
-  const [sidoList, setSidoList] = useState([]); // 시/도 목록을 저장하기 위한 상태
-  const [selectedSido, setSelectedSido] = useState(""); // 선택된 시/도를 저장하기 위한 상태
-  const [sigunguList, setSigunguList] = useState([]); // 시/군/구 목록을 저장하기 위한 상태
   const [selectedSigungu, setSelectedSigungu] = useState(""); // 선택된 시/군/구를 저장하기 위한 상태
-  const [dongList, setDongList] = useState([]); // 읍/면/동 목록을 저장하기 위한 상태
+  const [filteredDongList, setFilteredDongList] = useState([]); // 필터링된 읍/면/동 목록을 저장하기 위한 상태
   const [selectedDong, setSelectedDong] = useState(""); // 선택된 읍/면/동을 저장하기 위한 상태
   const [profileImage, setProfileImage] = useState(null); // 프로필 이미지 상태
 
+  const { data: sgngData, loading: sgngLoading, error: sgngError } = useQuery(FETCH_ALL_SGNG);
+  const { data: dongData, loading: dongLoading, error: dongError } = useQuery(FETCH_ALL_DONG);
+
   useEffect(() => {
-    fetchSigunguList('1100000000'); // 서울특별시 (서울특별시 코드: 1100000000)
-  }, []);
+    if (dongData && selectedSigungu) {
+      const filteredDongs = dongData.fetchAllDong.filter(dong => dong.id.startsWith(selectedSigungu));
+      setFilteredDongList(filteredDongs);
+    }
+  }, [dongData, selectedSigungu]);
 
-  const fetchSidoList = async () => {
-    try {
-      const response = await axios.get('https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=*00000000');
-      if (response.data && response.data.regcodes) {
-        setSidoList(response.data.regcodes);
-      } else {
-        console.error('API 응답 형식이 올바르지 않습니다.');
-      }
-    } catch (error) {
-      console.error('시/도를 가져오는 중 오류 발생:', error);
-    }
-  };
-  
-  const fetchSigunguList = async (sidoCode) => {
-    try {
-      sidoCode = sidoCode / 100000000;
-      const response = await axios.get(`https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=${sidoCode}*00000`);
-      const regcodes = response.data && response.data.regcodes ? response.data.regcodes : [];
-      if (regcodes.length > 0) {
-            setSigunguList(regcodes.filter(item => item.code !== sidoCode));
-        } else {
-            console.error('API 응답에 시/군/구 목록이 없습니다.');
-        }
-    } catch (error) {
-        console.error('시/군/구를 가져오는 중 오류 발생:', error);
-    }
-  };
-  
-  const fetchDongList = async (sigunguCode) => {
-    try {
-      sigunguCode = parseInt(sigunguCode.toString().replace(/0/g, ''));
-      const response = await axios.get(`https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=${sigunguCode}*&is_ignore_zero=true`);
-      if (response.data && response.data.regcodes) {
-        setDongList(response.data.regcodes);
-      } else {
-        console.error('API 응답에 읍/면/동 목록이 없습니다.');
-      }
-    } catch (error) {
-      console.error('읍/면/동을 가져오는 중 오류 발생:', error);
-    }
-  };
-
-  const handleSidoChange = (e) => {
-    const selectedSidoCode = e.target.value;
-    setSelectedSido(selectedSidoCode);
-    setSelectedSigungu(""); // 시/도가 변경될 때 시/군/구 선택 상태 초기화
-    fetchSigunguList(selectedSidoCode);
-  };
-  
   const handleSigunguChange = (e) => {
     const selectedSigunguCode = e.target.value;
     setSelectedSigungu(selectedSigunguCode);
     setSelectedDong(""); // 시/군/구가 변경될 때 읍/면/동 선택 상태 초기화
-    fetchDongList(selectedSigunguCode);
+  };
+
+  const handleDongChange = (e) => {
+    const selectedDongId = e.target.value;
+    const selectedDongObj = filteredDongList.find(dong => dong.id === selectedDongId);
+    setSelectedDong(selectedDongObj);
   };
 
   const handleFormSubmit = async (e) => {
@@ -177,7 +154,7 @@ const Signup = () => {
           birth_year: `${yearInput.value}`,
           birth_month: `${monthInput.value}`,
           birth_day: `${dayInput.value}`,
-          dong_code: selectedDong.code,
+          dong_code: selectedDong.id,
           mbti: document.getElementById('mbtiSelect').value,
           phone_number: phoneNumber,
           is_find_mate: true,
@@ -193,7 +170,7 @@ const Signup = () => {
           birth_month: `${monthInput.value}`,
           birth_day: `${dayInput.value}`,
           phone_number: phoneNumber,
-          dong_code: selectedDong.code,
+          dong_code: selectedDong.id,
           mbti: document.getElementById('mbtiSelect').value,
           is_find_mate: true
         });
@@ -377,20 +354,34 @@ const Signup = () => {
           </select>
         </div>
         <div className="signup-form-item">
-          <select value={selectedSigungu} onChange={handleSigunguChange}>
-            <option value="">시/군/구 선택</option>
-            {sigunguList.map((sigungu, index) => (
-              <option key={index} value={sigungu.code}>{sigungu.name}</option>
-            ))}
-          </select>
+          {sgngLoading ? (
+            <p>로딩 중...</p>
+          ) : sgngError ? (
+            <p>에러 발생: {sgngError.message}</p>
+          ) : (
+            <select value={selectedSigungu} onChange={handleSigunguChange}>
+              <option value="">시/군/구 선택</option>
+              {sgngData.fetchAllSgng
+                .filter(sgng => sgng.id.startsWith('11'))
+                .map(sgng => (
+                  <option key={sgng.id} value={sgng.id}>{sgng.name}</option>
+                ))}
+            </select>
+          )}
         </div>
         <div className="signup-form-item">
-          <select value={selectedDong.code} onChange={(e) => setSelectedDong(dongList.find(dong => dong.code === e.target.value))}>
-            <option value="">읍/면/동 선택</option>
-            {dongList.map((dong, index) => (
-              <option key={index} value={dong.code}>{dong.name}</option>
-            ))}
-          </select>
+          {dongLoading ? (
+            <p>로딩 중...</p>
+          ) : dongError ? (
+            <p>에러 발생: {dongError.message}</p>
+          ) : (
+            <select value={selectedDong.id || ''} onChange={handleDongChange}>
+              <option value="">읍/면/동 선택</option>
+              {filteredDongList.map(dong => (
+                <option key={dong.id} value={dong.id}>{dong.name}</option>
+              ))}
+            </select>
+          )}
         </div>
         <div className="signup-form-item">
           <select id="mbtiSelect">

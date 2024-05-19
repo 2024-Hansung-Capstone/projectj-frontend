@@ -18,6 +18,22 @@ const FETCH_ALL_USERS = gql`
       mbti
       is_find_mate
       create_at
+      profile_image{
+        imagePath
+      }
+      dong {
+        id
+        name
+      }
+    }
+  }
+`;
+
+const FETCH_ALL_SGNG = gql`
+  query FetchAllSgng {
+    fetchAllSgng {
+      id
+      name
     }
   }
 `;
@@ -41,6 +57,7 @@ export default function Mate() {
     mbti: null
   });
   const { data, loading, error } = useQuery(FETCH_ALL_USERS);  // gql
+  const { data: sgngData, loading: sgngLoading, error: sgngError } = useQuery(FETCH_ALL_SGNG);  // gql
   const token = localStorage.getItem('token');
 
   const { loading: loadingWhoAmI, error: errorWhoAmI, data: dataWhoAmI } = useQuery(WHO_AM_I_QUERY, {
@@ -70,7 +87,11 @@ export default function Mate() {
   // 사용자 필터링 함수
   const filteredUsers = data.fetchUsers.filter(user => {
     // 지역 필터링
-    if (filters.region && user.dong_id.split(' ')[1] !== filters.region) return false;
+    if (filters.region) {
+      const regionId = sgngData.fetchAllSgng.find(region => region.name === filters.region)?.id;
+      const userSgngId = user.dong.id.substring(0, 5); // 사용자의 동 id의 앞 다섯 자리 추출
+      if (regionId !== userSgngId) return false;
+    }
     // 성별 필터링
     if (filters.gender) {
       const genderValue = filters.gender === '남성' ? 'male' : 'female';

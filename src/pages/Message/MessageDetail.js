@@ -1,18 +1,40 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { gql } from '@apollo/client';
 import "./css/MessageDetail.css";
+
+const DELETE_LETTER = gql`
+  mutation DeleteLetter($letter_id: String!) {
+    deleteLetter(letter_id: $letter_id)
+  }
+`;
 
 const MessageDetail = () => {
   const location = useLocation();
   const { messagedata } = location.state;
   const navigate = useNavigate();
+
+  const [deleteLetter] = useMutation(DELETE_LETTER);
+
+   // 삭제 버튼 클릭 시 호출되는 함수
+   const handleDelete = async () => {
+    try {
+      await deleteLetter({
+        variables: { letter_id: messagedata.id },
+      });
+      alert('메시지가 성공적으로 삭제되었습니다.');
+      navigate('/Messages');
+    } catch (error) {
+      console.error('메시지 삭제 중 오류가 발생했습니다:', error);
+      alert('메시지 삭제 중 오류가 발생했습니다.');
+    }
+  };
   
   // MessageDetail 컴포넌트 내 handleReply 함수 수정
+  // 답장 버튼 클릭 시 호출되는 함수
   const handleReply = () => {
     navigate('/MessageReply', { state: { writingId: messagedata.id } });
-  };
-  const handleDelete = () => {
-    
   };
   
 
