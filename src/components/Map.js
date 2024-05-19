@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const Map = ({ isVisible = true, onBoundsChange }) => {
+const Map = ({ isVisible = true, onBoundsChange , roomsData}) => {
   const mapRef = useRef(null);
   const [bounds, setBounds] = useState(null);
-
+  const [geocoder, setGeocoder] = useState(null);
   // 맵 초기 좌표 상태
   const [initialCoords] = useState([37.5828, 127.0106]);
   const [initialZoom] = useState(16);
@@ -38,7 +38,7 @@ const Map = ({ isVisible = true, onBoundsChange }) => {
         onBoundsChange(newBounds);
       }
     });
-
+   
     mapRef.current = newMap;
 
     return () => {
