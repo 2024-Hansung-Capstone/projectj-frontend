@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Market_Item from '../../item/Market_Item.js';
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { IoSearchOutline } from "react-icons/io5";
-import { useQuery, useMutation, gql } from '@apollo/client';
+import { useQuery, useMutation, useLazyQuery, gql } from '@apollo/client';
 import "./css/Market.css";
 
 // 전체 상품 데이터 가져오기
@@ -47,7 +47,29 @@ const INCREASE_USED_PRODUCT_LIKE = gql`
   }
 `;
 
+const SEARCH_USED_PRODUCTS = gql`
+  query SearchUsedProducts($input: SearchProductInput!) {
+    fetchUsedProductsBySearch(SerachUsedProductInput: $input) {
+      id
+      user {
+        id
+        name
+      }
+      title
+      view
+      like
+      price
+      detail
+      category
+      state
+      create_at
+    }
+  }
+`;
+
 export default function Market() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchProducts, { loading: searchLoading, data: searchData }] = useLazyQuery(SEARCH_USED_PRODUCTS);
   const { loading, error, data } = useQuery(GET_USED_PRODUCTS);  // 위에서 지정한 전체상품 gql 변수 선언
   const [increaseView] = useMutation(INCREASE_USED_PRODUCT_VIEW); 
   const [increaseLike] = useMutation(INCREASE_USED_PRODUCT_LIKE);
@@ -62,7 +84,6 @@ export default function Market() {
   useEffect(() => {  // 토큰 가져오기
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
-  
 
     // 현재 로그인 유저 확인
     const loggedInUser = localStorage.getItem('loggedInUserName');
@@ -111,17 +132,28 @@ export default function Market() {
     // 상품 상세 설명으로 이동 (상품, 현재 로그인 중인 유저 이름도 함께 이동)
     navigate('/MarketDetail', { state: { product, loggedInUserName } });
   };
-
+  
+// 검색 함수
+const handleSearch = () => {
+  // 검색 쿼리 실행
+  searchProducts({
+    variables: {
+      input: {
+        title: searchTerm // 검색어를 변수에 전달
+      }
+    }
+  });
+};
 
   // !!! 안봐도 됩니다!!! 페이지네이션 로직 (한 페이지 당 12개 표시, 그 이상은 2번째 페이지로. )
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data && data.fetchUsedProducts.filter((product) => 
-    selectedCategory === '전체' || product.category === selectedCategory
-  ).slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = (searchData && searchData.fetchUsedProductsBySearch) || (data && data.fetchUsedProducts);
+  const filteredItems = currentItems && currentItems.filter((product) => selectedCategory === '전체' || product.category === selectedCategory);
+  const itemsToDisplay = filteredItems && filteredItems.slice(indexOfFirstItem, indexOfLastItem);
   const pageNumbers = [];
-  if (data && data.fetchUsedProducts.length > 0) {
-    for (let i = 1; i <= Math.ceil(data.fetchUsedProducts.length / itemsPerPage); i++) {
+  if (filteredItems && filteredItems.length > 0) {
+    for (let i = 1; i <= Math.ceil(filteredItems.length / itemsPerPage); i++) {
       pageNumbers.push(i);
     }
   }
@@ -139,11 +171,18 @@ export default function Market() {
         >
           <HiOutlineBars3 style={{ fontSize: '40px' }} />
         </div>
-        <IoSearchOutline className="market-search-icon" />
+        <IoSearchOutline className="market-search-icon" onClick={handleSearch} />
         <input
           type="text"
           className="market-search-input"
           placeholder="상품명을 입력하세요."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              handleSearch(); // 엔터키 누를 때 검색 실행
+            }
+          }}
         />
       </div>
       {isHovered && (
@@ -161,23 +200,21 @@ export default function Market() {
         </div>
       )}
 
-       {/* 상품 */}
-        {/* 각각의 상품은 Market_Item에 하나씩 담겨있습니다. 상품 1개당 Market_Item 1개씩 입니다. */}
-      <div className="market-item">
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>Error: {error.message}</p>
-        ) : (
-          currentItems && currentItems.length > 0 ? (
-            currentItems.map((product, index) => (
-              <Market_Item key={index} product={product} onClick={() => handleItemClick(product)} />
-            ))
-          ) : (
-            <p className='nodata'>등록된 상품이 없습니다.</p>
-          )
-        )}
-      </div>
+<div className="market-item">
+    {loading ? (
+      <p>Loading...</p>
+    ) : error ? (
+      <p>Error: {error.message}</p>
+    ) : (
+      itemsToDisplay && itemsToDisplay.length > 0 ? (
+        itemsToDisplay.map((product, index) => (
+          <Market_Item key={index} product={product} onClick={() => handleItemClick(product)} />
+        ))
+      ) : (
+        <p className='nodata'>등록된 상품이 없습니다.</p>
+      )
+    )}
+  </div>
 
       {/* 페이지 나누기 (안봐도 됨) */}
       <ul className="pagination">

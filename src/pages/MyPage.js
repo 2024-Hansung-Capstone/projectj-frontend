@@ -8,9 +8,7 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { HiMiniNoSymbol } from "react-icons/hi2";
 import './css/MyPage.css';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { gql } from '@apollo/client';
-import { useMutation } from '@apollo/client';
+import { gql, useQuery, useMutation } from '@apollo/client';
 import DELETE_USER_MUTATION from './gql/deleteUserGql';
 
  
@@ -31,6 +29,16 @@ export const WHO_AM_I_QUERY = gql`
       profile_image{
         imagePath
       }
+      point
+    }
+  }
+`;
+
+export const FETCH_MY_ROLE_QUERY = gql`
+  query FetchMyRole {
+    fetchMyRole {
+      code
+      name
     }
   }
 `;
@@ -51,6 +59,15 @@ export const WHO_AM_I_QUERY = gql`
     },
   });
   const whoAmI = dataWhoAmI?.whoAmI;
+
+  const { loading: loadingMyRole, error: errorMyRole, data: dataMyRole } = useQuery(FETCH_MY_ROLE_QUERY, {
+    context: {
+      headers: {
+        authorization: `Bearer ${getToken()}`
+      }
+    },
+  });
+  const myRole = dataMyRole?.fetchMyRole;
 
   const handleDeleteUser = async () => {
     try {
@@ -90,11 +107,11 @@ export const WHO_AM_I_QUERY = gql`
         </div>
           <div className='mypage-user-container2'>
           <div className='mypage-userName'>{whoAmI?.name}</div>
-            <div className='mypage-membership'>멤버십</div>
+            <div className='mypage-role'>{myRole?.code} - {myRole?.name}</div>
           </div>
         </div>
         <div className='mypage-user-container3'>
-          <div className='mypage-point'><TbSquareRoundedLetterP />{whoAmI?.point}</div>
+          <div className='mypage-point'><TbSquareRoundedLetterP /> {whoAmI?.point}</div>
           <Link className='mypage-message' to="/MessageCompose"><SlEnvolopeLetter /> 메시지</Link>
         </div>
       </div>
