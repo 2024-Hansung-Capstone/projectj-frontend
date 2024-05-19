@@ -31,6 +31,8 @@ import MarketDetail from './pages/Market/MarketDetail';
 import MarketUpdate from './pages/Market/MarketUpdate';
 import Community from "./pages/Community/Community";
 
+import Notification from "./pages/Notification"; 
+
 // mypage
 import EditUserInfo from './pages/EditUserInfo';
 
@@ -95,6 +97,7 @@ function App() {
                 <Route path="/MessageDetail"  element={isAuthenticated ? <MessageDetail /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MessageReply"  element={isAuthenticated ? <MessageReply /> : <Login onLogin={handleLogin} />} />
                 <Route path="/editUserInfo" element={<EditUserInfo />} />
+                <Route path="/Notification"  element={isAuthenticated ? <Notification /> : <Login onLogin={handleLogin} />} />
               </Routes>
           </div>
           <div className="footer-section">

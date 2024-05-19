@@ -47,7 +47,6 @@ const Home = () => {
           alt="로고"
         />
       </div>
-      <button onClick={handleClick}>커뮤니티 상세페이지</button>
     </div>
   );
 };

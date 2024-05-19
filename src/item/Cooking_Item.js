@@ -7,17 +7,11 @@ export default function Cooking_Item({ cook, onClick }) {
   }
 
   return (
-    <div className='cookingitem-container' onClick={onClick}>
+    <div className='cookingitem-container' onClick={() => onClick(cook)}>
       <div className='cookingitem-photo'>
         {cook.post_images.length > 0 ? (
           <>
-          <img className="main-dish-image" src={cook.post_images[0].imagePath} alt="main-dish"/>
-          {/** 
-            <img className="main-dish-image" src={cook.post_images[0].imagePath} alt="main-dish"/>
-            {cook.post_images.length > 1 && (
-              <img className="sub-dish-image" src={cook.post_images[1].imagePath} alt="sub-dish"/>
-            )}
-            */}
+            <img className="main-dish-image" src={cook.post_images[0].imagePath} alt="main-dish" />
           </>
         ) : (
           <p>No image available</p>
@@ -32,4 +26,3 @@ export default function Cooking_Item({ cook, onClick }) {
     </div>
   );
 }
-

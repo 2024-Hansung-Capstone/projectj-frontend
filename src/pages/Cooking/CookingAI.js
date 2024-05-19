@@ -1,41 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useQuery, gql } from '@apollo/client';
 import './css/CookingAI.css';
 
+// AI 검색 결과 가져오기
+const FETCH_RECIPES = gql`
+  query FetchRecipes($ingredients: [String!]!) {
+    fetchRecipes(ingredients: $ingredients) {
+      name
+      used_ingredients {
+        name
+        volume
+        volume_unit
+      }
+      needed_ingredients {
+        name
+        volume
+        volume_unit
+      }
+      instructions
+    }
+  }
+`;
+
+// AI 결과 페이지
 const CookingAI = () => {
   const location = useLocation();
   const { ingredients } = location.state || { ingredients: [] };
-  const [recipes, setRecipes] = useState([]);
+  const { loading, error, data } = useQuery(FETCH_RECIPES, {
+    variables: { ingredients },
+  });
 
-  useEffect(() => {
-    if (ingredients.length > 0) {
-      // AI API 호출 예시 (임의의 API를 사용하는 경우)
-      fetch('https://api.example.com/recipes', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ingredients }),
-      })
-        .then((response) => response.json())
-        .then((data) => setRecipes(data.recipes))
-        .catch((error) => console.error('Error fetching recipes:', error));
-    }
-  }, [ingredients]);
+  if (loading) return <p>레시피를 불러오는 중...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className='ai-container'>
-      {recipes.length === 0 ? (
-        <p>레시피를 불러오는 중...</p>
-      ) : (
-        <>
-          {recipes.map((recipe, index) => (
-            <div key={index} className={`ai-recipe${index + 1}`}>
-              <p>{recipe}</p>
-            </div>
-          ))}
-        </>
-      )}
+      {data.fetchRecipes.map((recipe, index) => (
+        <div key={index} className={`ai-recipe${index + 1}`}>
+          <p>{recipe.name}</p>
+          {/* 나머지 레시피 정보 출력 */}
+        </div>
+      ))}
     </div>
   );
 };
