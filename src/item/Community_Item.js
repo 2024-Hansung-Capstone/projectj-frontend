@@ -15,6 +15,7 @@ export default function Community_Item({ board,selectedItem }) {
   const [deleteBoard] = useMutation(DELETE_BOARD, {
     variables: { board_id: board.id },
     onCompleted: () => {
+      console.log(selectedItem)
       navigate('/Community',{ state: { selectedItem } });
     },
     onError: (error) => {

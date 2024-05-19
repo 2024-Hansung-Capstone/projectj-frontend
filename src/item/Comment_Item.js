@@ -5,6 +5,11 @@ import { gql, useMutation } from '@apollo/client';
 const DELETE_REPLY = gql`
   mutation DeleteReply($reply_id: String!) {
     deleteReply(reply_id: $reply_id)
+    {
+      id
+      title
+      detail
+    }
   }
 `;
 

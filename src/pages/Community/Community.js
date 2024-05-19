@@ -36,20 +36,7 @@ query GetBoard($category: String!) {
 }
 `;
 
-// 게시물 생성하기
-const CREATE_BOARD = gql`
-  mutation CreateBoard($category: String!, $title: String!, $detail: String!) {
-    createBoardWithImage(createBoardInput: {
-      category: $category,
-      title: $title,
-      detail: $detail,
-    }) {
-      category
-      title
-      detail
-    }
-  }
-`;
+
 
 // 조회수 증가
 const INCREASE_BOARD_VIEW = gql`
@@ -62,24 +49,37 @@ const INCREASE_BOARD_VIEW = gql`
 `;
 
 const FETCH_BOARDS_BY_VIEW_RANK = gql`
-  query FetchBoardsByViewRank($category: String!, $rank: Int!) {
+  query FetchBoardsByViewRank($category: String!, $rank: Float!) {
     fetchBoardsByViewRank(category: $category, rank: $rank) {
       id
       category
       title
       detail
-      viewCount
+      view
     }
   }
 `;
-
+const FETCH_BOARDS_BY_SEARCH = gql`
+  query FetchBoardsBySearch($searchBoardInput: SearchBoardInput!) {
+    fetchBoardsBySerach(SerachBoardInput: $searchBoardInput) {
+      id
+      category
+      title
+      detail
+    }
+  }
+`;
 const Community = () => {
   const [selectedItem, setSelectedItem] = useState(null);//인덱스
   const [selectedItemData, setSelectedItemData] = useState(null); 
   const [isLoggedIn, setIsLoggedIn] = useState(false);  // 로그인 유무 확인
   const [loggedInUserName, setLoggedInUserName] = useState('');  // 로그인 유저 이름 
   const { Search } = Input; // 검색
-  
+  const [searchInput, setSearchInput] = useState({
+    title: '',
+    detail: '',
+  });
+  //삭제랑 게시글 추가시 전달되는 selecteItem
   const location = useLocation();
   const initialSelectedItem = location.state?.selectedItem || null;
 
@@ -87,17 +87,21 @@ const Community = () => {
     variables: { category: selectedItem !== null ? BoardList_Item[selectedItem]?.title : 'default_category' },
   });
   const { loading:toploading, error:toperror, data :topdata,refetch:toprefetch } = useQuery(FETCH_BOARDS_BY_VIEW_RANK, {
-    variables: { category: selectedItem !== null ? BoardList_Item[selectedItem]?.title : 'default_category', rank: 1 },
+    variables: { category: selectedItem !== null ? BoardList_Item[selectedItem]?.title : 'default_category', rank:1.0 },
   });
-
+  const { loading:searchloading, error:searcherror, data:searchdata,refetch:searchrefetch } = useQuery(FETCH_BOARDS_BY_SEARCH, {
+    variables: { searchBoardInput: {
+      category:selectedItem !== null ? BoardList_Item[selectedItem]?.title : 'default_category',
+      title: searchInput.title,
+      detail: searchInput.detail
+    } },
+  });
 
 
   const navigate = useNavigate();
   const [increaseView] = useMutation(INCREASE_BOARD_VIEW);
 
   useEffect(() => {
-    // 카테고리 선택창
-    
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
 
@@ -117,6 +121,14 @@ const Community = () => {
       refetch();
     }
   }, [initialSelectedItem]);
+  
+  
+  //검색에서 쓰이는 훅
+  useEffect(() => {
+    if (searchInput.title || searchInput.detail) {
+      searchrefetch()
+    }
+  }, [searchInput, searchrefetch]);
 
   //카테고리로 변경
   const handleCategoryClick = (index) => {
@@ -141,9 +153,33 @@ const Community = () => {
     navigate('/CommunityPost', { state: { isLoggedIn, loggedInUserName, location } });
   };
 
-  // 검색창
-  const handleSearch = (value) => { 
-    console.log('검색어:', value);
+  const handleChange = (e) => {
+    const value = e.target.value.trim() === '' ? '' : e.target.value;
+    setSearchInput({
+      ...searchInput,
+      [e.target.name]: value,
+    });
+  };
+
+//
+  const renderBoardList = () => {
+    if (searchloading || loading) return <p>Loading...</p>;
+
+    let boards;
+    if (searchInput.title || searchInput.detail) {
+      boards = searchdata?.fetchBoardsBySerach;
+    } else {
+      boards = data?.fetchBoards;
+    }
+    if (!boards || boards.length === 0) {
+      return <p>No boards available</p>;
+    }
+
+    return boards.map((board) => (
+      <div key={board.id} onClick={() => handleListItemClick(board)}>
+        {board.title}
+      </div>
+    ));
   };
 
   return (  
@@ -165,7 +201,21 @@ const Community = () => {
       <div className='community-scroll'>
       <div className='filter-bar-container'>
         <Input.Group compact>
-          <Search placeholder="검색하세요" onSearch={handleSearch}/>
+      
+        <input
+          type="text"
+          name="title"
+          placeholder="Title"
+          value={searchInput.title}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="detail"
+          placeholder="Detail"
+          value={searchInput.detail}
+          onChange={handleChange}
+        />
         </Input.Group>
       </div>
 
@@ -179,25 +229,13 @@ const Community = () => {
               <p>내용</p>  <p>{board.detail}</p>
             </div>
             <div className='community-hot-view'>
-              <p>조회수</p> <p>{board.viewCount}</p>
+              <p>조회수</p> <p>{board.view}</p>
             </div>
           </div>
            ))}
 
           {selectedItemData && <p>{selectedItemData}</p>}
-          {loading ? (
-            <p>Loading...</p>
-          ) : error ? (
-            <p>Error: {error.message}</p>
-          ) : (
-            data && data.fetchBoards ? (
-              data.fetchBoards.map((board) => (
-                <div onClick={() => handleListItemClick(board)}>{board.title}</div>
-              ))
-            ) : (
-              <p>No boards available</p>
-            )
-          )}
+          {selectedItem !== null && renderBoardList()}
         </div>
       </div>
       <button className='post-button2' onClick={handlePostButtonClick}> 게시물 등록</button>
