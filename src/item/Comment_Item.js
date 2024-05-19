@@ -18,7 +18,7 @@ const UPDATE_REPLY = gql`
 `;
 
 // 댓글 컴포넌트
-export default function Comment_Item(comment) {
+export default function Comment_Item({comment}) {
   const [showOptions, setShowOptions] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editedDetail, setEditedDetail] = useState(comment.detail);
@@ -33,7 +33,7 @@ export default function Comment_Item(comment) {
     },
     onError: (error) => {
       console.error('댓글 삭제 중 오류 발생:', error);
-      alert('댓글 삭제 중 오류가 발생했습니다.');
+      alert('댓글 삭제 중 오류가 발생했습니다.'+error);
     }
   });
   const [updateReply] = useMutation(UPDATE_REPLY, {
@@ -44,7 +44,7 @@ export default function Comment_Item(comment) {
     },
     onError: (error) => {
       console.error('댓글 수정 중 오류 발생:', error);
-      alert('댓글 수정 중 오류가 발생했습니다.');
+      alert('댓글 수정 중 오류가 발생했습니다.'+error);
     }
 
   });
@@ -65,6 +65,7 @@ export default function Comment_Item(comment) {
   };
   return (
     <div className='comment-container0'>
+      
       <div className='comment-photo'>
         <p>사진</p>
       </div>
@@ -92,7 +93,7 @@ export default function Comment_Item(comment) {
                 onChange={(e) => setEditedDetail(e.target.value)}
               />
             ) : (
-              <p>{comment.detail}</p>
+              <p>{editedDetail}</p>
             )}
           </div>
         </div>
@@ -103,9 +104,6 @@ export default function Comment_Item(comment) {
           </div>
         )}
         <div className='comment-container3'>
-          <div className='comment-date'>
-            <p>{comment.createdAt}</p>
-          </div>
           <div className='comment-recomment'>
             <p>답글달기</p>
           </div>

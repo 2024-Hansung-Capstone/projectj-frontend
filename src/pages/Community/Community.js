@@ -10,19 +10,30 @@ import { BoardList_Item } from '../../item/BoardList_Item';
 
 // 게시물 가져오기
 const GET_BOARD = gql`
-  query GetBoard($category: String!) {
-    fetchBoards(category: $category) {
+query GetBoard($category: String!) {
+  fetchBoards(category: $category) {
+    id
+    title
+    detail
+    category
+    view
+    user {
       id
-      title
+      name
+    }
+    like
+    create_at
+    reply {
+      id
       detail
-      category
-      view
-      user {
-        id
-        name
-      }
+      
+    }
+    post_images {
+      id
+      imagePath
     }
   }
+}
 `;
 
 // 게시물 생성하기
@@ -80,7 +91,7 @@ const Community = () => {
   });
 
 
-  const [createBoard] = useMutation(CREATE_BOARD); 
+
   const navigate = useNavigate();
   const [increaseView] = useMutation(INCREASE_BOARD_VIEW);
 
@@ -102,6 +113,8 @@ const Community = () => {
     if (initialSelectedItem !== null) {
       setSelectedItem(initialSelectedItem);
       setSelectedItemData(BoardList_Item[initialSelectedItem]?.title);
+      toprefetch();
+      refetch();
     }
   }, [initialSelectedItem]);
 
@@ -121,7 +134,7 @@ const Community = () => {
       .catch(err => {
         console.error('조회수 증가 에러:', err);
       });
-    navigate('/CommunityDetail', { state: { board,  selectedItem } });
+    navigate('/CommunityDetail', { state: { board, loggedInUserName, selectedItem } });
   };
 
   const handlePostButtonClick = () => {

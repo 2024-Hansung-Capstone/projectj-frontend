@@ -9,7 +9,7 @@ const DELETE_BOARD = gql`
 `;
 
 // 커뮤니티 게시물 컴포넌트
-export default function Community_Item({ board,selectedItem, onClick }) { 
+export default function Community_Item({ board,selectedItem }) { 
   // props로 board를 받도록 수정
   const navigate = useNavigate();
   const [deleteBoard] = useMutation(DELETE_BOARD, {
@@ -30,7 +30,7 @@ export default function Community_Item({ board,selectedItem, onClick }) {
 
  
   return (
-    <div className='communitydetail-container' onClick={() => onClick(board)}>
+    <div className='communitydetail-container' >
       {/* 게시물 상세 보기 */}
       <div className='ci-container'>
         <div className='ci-title'>
@@ -39,7 +39,7 @@ export default function Community_Item({ board,selectedItem, onClick }) {
           </div>
 
           <div className='ci-userName'>
-            <h4>유저</h4>
+            <h4>유저</h4>{board.user.name}
           </div>
           <div className='ci-date'>
             <h4>시간</h4> 
@@ -53,7 +53,7 @@ export default function Community_Item({ board,selectedItem, onClick }) {
             <h4>사진</h4>
           </div>
           <div className='ci-text'>
-            <h4>글</h4> {board.title}
+            <h4>글</h4> {board.detail}
           </div>
         </div>
     </div>
