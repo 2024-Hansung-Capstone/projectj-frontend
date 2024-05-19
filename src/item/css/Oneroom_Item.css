@@ -1,9 +1,16 @@
-.roomitem-container {
-  border: 1px groove black;
-  width: calc((100% - 20px));
-  margin: 5px;
-  padding: 5px;
-  flex: 0 0 auto;
+  .roomitem-container-popular {
+    border: 1px groove black;
+    width: calc((100% - 20px));
+    margin: 5px;
+    padding: 10px;
+    flex: 0 0 auto;
+  }
+  
+  .roomitem-container-items {
+    width: 180px;
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
   }
   
 .roomitem-location {

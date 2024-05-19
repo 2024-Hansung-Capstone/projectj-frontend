@@ -51,7 +51,7 @@ const Map = ({ isVisible = true, onBoundsChange , roomsData}) => {
 
   return (
     <div>
-      <div id="map" style={{ height: '85%', width: '100%', display: isVisible ? 'block' : 'none' }} />
+      <div id="map" style={{ height: '690px', width: '930px'}} />
       {bounds && (
         <div>
           <p>Start: {`Lat: ${bounds.start.lat}, Lng: ${bounds.start.lng}`}</p>

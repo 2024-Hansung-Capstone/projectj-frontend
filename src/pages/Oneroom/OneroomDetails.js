@@ -1,8 +1,17 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation, gql } from '@apollo/client';
 import { FETCH_ONE_ROOM_BY_ID } from '../gql/fetchOneRoomByIdGql';
 import './css/OneroomDetails.css';
+
+const INCREASE_VIEW_MUTATION = gql`
+  mutation IncreaseOneRoomView($oneRoomId: String!) {
+    increaseOneRoomView(oneRoom_id: $oneRoomId) {
+      id
+      view
+    }
+  }
+`;
 
 const OneroomDetails = () => {
   const { roomId } = useParams();
@@ -10,9 +19,11 @@ const OneroomDetails = () => {
     variables: { id: roomId }, // roomId를 변수로 전달
   });
 
+  const [increaseView] = useMutation(INCREASE_VIEW_MUTATION);
+  
   useEffect(() => {
     console.log("roomId:", roomId);
-  }, [roomId]);
+  }, [roomId, increaseView]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;

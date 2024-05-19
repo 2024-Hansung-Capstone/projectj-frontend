@@ -42,12 +42,11 @@ const Oneroom = () =>{
                 roomId={room.id}
                 location={`${room.dong}, ${room.jibun}`}
                 price={room.is_monthly_rent ? `월세 ${room.monthly_rent} / ${room.deposit}` : `전세 ${room.deposit}`}
+                className='roomitem-container-popular'
               />
             ))}
           </div>
           <div>
-  <p>Rooms Query Loading: {roomsLoading.toString()}</p>
-  <p>Rooms Query Error: {roomsError ? JSON.stringify(roomsError, null, 2) : 'No Error'}</p>
 </div>
         </div>
       </div>
@@ -62,19 +61,16 @@ const Oneroom = () =>{
             {roomsData && roomsData.fetchOneRoomByXY.length === 0 && <p>No rooms found in the specified area.</p>} 
             {roomsData &&
               roomsData.fetchOneRoomByXY.map((room) => (
-               <div key={room.id} className='oneroom-dish-item'>
-        <Oneroom_Item
-           key={room.id}
-           roomId={room.id}
-          location={`${room.dong}, ${room.jibun}`}
-          price={
-            room.is_monthly_rent
-              ? `월세 ${room.monthly_rent} / ${room.deposit}`
-              : `전세 ${room.deposit}`
-          }
-        />
-      </div>
-    ))}
+                <div key={room.id} className='oneroom-dish-item'>
+                  <Oneroom_Item
+                    key={room.id}
+                    roomId={room.id}
+                    location={`${room.dong}, ${room.jibun}`}
+                    price={room.is_monthly_rent ? `월세 ${room.monthly_rent} / ${room.deposit}` : `전세 ${room.deposit}`}
+                    className='roomitem-container-items'
+                  />
+                </div>
+              ))}
             </div>
         </div>
       </div>
