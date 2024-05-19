@@ -45,9 +45,17 @@
     padding: 5px;
     margin: 5px;
 }
-.mypage-userImage {
+.mypage-userImageblank {
     font-size: 80px;
     padding-top: 20px;
+}
+#profileImage {
+    max-width: 125px;
+    max-height: 125px;
+}
+.mypage-userImage {
+    max-width: 80px;
+    max-height: 80px;
 }
 .mypage-userName {
     margin: 10px;

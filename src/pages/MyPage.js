@@ -28,6 +28,9 @@ export const WHO_AM_I_QUERY = gql`
     whoAmI {
       id
       name
+      profile_image{
+        imagePath
+      }
     }
   }
 `;
@@ -78,7 +81,13 @@ export const WHO_AM_I_QUERY = gql`
       <h1>마이페이지</h1>
       <div className='mypage-user-container'>
         <div className='mypage-user'>
-          <div className='mypage-userImage'><PiUserCircleLight /></div>
+        <div className='mypage-userImage'>
+            {whoAmI?.profile_image ? (
+                <img id="profileImage" src={whoAmI.profile_image.imagePath} alt="Profile" />
+            ) : (
+                <PiUserCircleLight />
+            )}
+        </div>
           <div className='mypage-user-container2'>
           <div className='mypage-userName'>{whoAmI?.name}</div>
             <div className='mypage-membership'>멤버십</div>
