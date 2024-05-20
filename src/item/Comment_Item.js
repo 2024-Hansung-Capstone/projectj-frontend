@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MdMoreVert } from "react-icons/md";
 import './css/Comment_Item.css';
 import { gql, useMutation } from '@apollo/client';
+import CommentToComment_Item from './CoommentToComment_Item';
 const DELETE_REPLY = gql`
   mutation DeleteReply($reply_id: String!) {
     deleteReply(reply_id: $reply_id)
@@ -34,7 +35,17 @@ const DECREASE_REPLY_LIKE = gql`
     decreaseReplyLike(reply_id: $reply_id) 
   }
 `;
-
+const CREATE_COMMENT_REPLY = gql`
+  mutation CreateCommentReply($reply_id: String!, $detail: String!) {
+    createCommetReply(reply_id: $reply_id, detail: $detail) {
+      id
+      detail
+      user{
+        name
+      }
+    }
+  }
+`;
 // 댓글 컴포넌트
 export default function Comment_Item({comment}) {
   const [showOptions, setShowOptions] = useState(false);
@@ -42,6 +53,9 @@ export default function Comment_Item({comment}) {
   const [editedDetail, setEditedDetail] = useState(comment.detail);
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(comment.like);
+  const [createCommentReply] = useMutation(CREATE_COMMENT_REPLY);
+  //대댓글을 바로 반영하기 위해서
+  const [newcomment,setComment]=useState(comment);
   // 수정, 삭제 버튼 메뉴 클릭 리스너
   const handleOptionsClick = () => {
     setShowOptions(!showOptions);
@@ -100,7 +114,7 @@ export default function Comment_Item({comment}) {
       deleteReply();
     }
   };
-  
+  //좋아요기능
   const handleLikeClick = () => {
     if (liked) {
       decreaseReplyLike({ variables: { reply_id: comment.id } });
@@ -111,6 +125,28 @@ export default function Comment_Item({comment}) {
   const handleSaveClick = () => {
     updateReply();
   };
+//대댓글추가기능
+const handleReplyClick = async () => {
+  const detail = prompt('대댓글 내용을 입력하세요.');
+  if (detail) {
+    const { data } = await createCommentReply({ variables: { reply_id: comment.id, detail } })
+    
+      alert('대댓글이 작성되었습니다.');
+      console.log(data);
+      // 새로운 대댓글을 게시판에 반영
+      const updatedComment = {
+        ...newcomment,
+        comment_reply: [...newcomment.comment_reply, data.createCommetReply] // 새로운 댓글을 추가
+      };
+      setComment(updatedComment);
+      console.log(newcomment)
+    }
+  }
+
+ 
+
+
+
   return (
     <div className='comment-container0'>
       
@@ -153,7 +189,16 @@ export default function Comment_Item({comment}) {
         )}
         <div className='comment-container3'>
           <div className='comment-recomment'>
-            <p>답글달기</p>
+            <p onClick={handleReplyClick}>답글달기</p>
+            <div className='commentTocomment-container'> 
+            {newcomment.comment_reply && newcomment.comment_reply.length > 0 ? (
+            newcomment.comment_reply.map((comment) => (
+              <CommentToComment_Item key={comment.id} CommentToComent={comment} />
+            ))
+          ) : (
+            <p>대 댓글이 없습니다.</p>
+          )}
+        </div>
           </div>
           <div className='comment-like'>
           <button onClick={handleLikeClick} className='like-button'>
@@ -165,4 +210,5 @@ export default function Comment_Item({comment}) {
       </div>
     </div>
   );
+
 }

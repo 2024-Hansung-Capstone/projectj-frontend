@@ -5,7 +5,6 @@ import { gql } from '@apollo/client';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Community_Item from '../../item/Community_Item';
 import Comment_Item from '../../item/Comment_Item';
-
 // Community 구성은 크게 Community_Item, Comment_Item, 댓글 작성 총 3가지입니다. 
 // 컴포넌트도 다른 페이지로 데이터 넘기듯이 (board) 괄호 안에 데이터 이름 넣어주고, 
 // 컴포넌트 괄호에도 (board) 이렇게 넣어주고 필드이름을 board.name 형태로 바꿔주시면 됩니다. 
@@ -56,6 +55,7 @@ const CommunityDetail =  () => {
       setNewComment('');
 
       // 새로운 댓글을 게시판에 반영
+      console.log(data.createReply);
       const updatedBoard = {
         ...board,
         reply: [...board.reply, data.createReply] // 새로운 댓글을 추가

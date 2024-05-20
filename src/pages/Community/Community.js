@@ -25,6 +25,7 @@ const GET_BOARD = gql`
       create_at
       reply {
         id
+        like
         detail
         user {
           id
@@ -39,7 +40,12 @@ const GET_BOARD = gql`
         }
         comment_reply{
           id
+          like
           detail
+          user {
+            id
+            name
+          }
           like_user {
             id
             user {
