@@ -69,7 +69,13 @@ const SEARCH_USED_PRODUCTS = gql`
 
 export default function Market() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchProducts, { loading: searchLoading, data: searchData }] = useLazyQuery(SEARCH_USED_PRODUCTS);
+  const [searchResults, setSearchResults] = useState(null);
+  const [searchProducts, { loading: searchLoading, data: searchData }] = useLazyQuery(SEARCH_USED_PRODUCTS, {
+    onCompleted: (data) => {
+      setSearchResults(data.fetchUsedProductsBySearch);
+      setCurrentPage(1);  // 검색 후 현재 페이지를 1로 초기화
+    }
+  });
   const { loading, error, data } = useQuery(GET_USED_PRODUCTS);  // 위에서 지정한 전체상품 gql 변수 선언
   const [increaseView] = useMutation(INCREASE_USED_PRODUCT_VIEW); 
   const [increaseLike] = useMutation(INCREASE_USED_PRODUCT_LIKE);
