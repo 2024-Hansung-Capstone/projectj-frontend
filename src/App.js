@@ -30,7 +30,7 @@ import MarketPost from './pages/Market/MarketPost';
 import MarketDetail from './pages/Market/MarketDetail';
 import MarketUpdate from './pages/Market/MarketUpdate';
 import Community from "./pages/Community/Community";
-
+import CommunityUpdate from "./pages/Community/CommunityUpdate";
 import Notification from "./pages/Notification"; 
 
 // mypage
@@ -77,7 +77,7 @@ function App() {
                 <Route path="/MarketUpdate" element={isAuthenticated ? <MarketUpdate /> : <Login onLogin={handleLogin} />} />
                 <Route path="/CommunityPost" element={isAuthenticated ? <CommunityPost /> : <Login onLogin={handleLogin} />} />
                 <Route path="/CommunityDetail" element={isAuthenticated ? <CommunityDetail /> : <Login onLogin={handleLogin} />} />
-                
+                <Route path="/CommunityUpdate" element={isAuthenticated ? <CommunityUpdate /> : <Login onLogin={handleLogin} />} />
                 <Route path="/Login" element={<Login onLogin={handleLogin} />} />
                 <Route path="/Signup" element={<Signup />} />
                 <Route path="/Oneroom" element={<Oneroom />} />

@@ -76,7 +76,12 @@ export default function Community_Item({ board,selectedItem }) {
       deleteBoard();
     }
   };
-
+  const handleUpdateClick =() => {
+    console.log(board);
+ 
+    navigate('/CommunityUpdate',{ state: { board} });
+  }
+ 
  
   return (
     <div className='communitydetail-container' >
@@ -97,6 +102,10 @@ export default function Community_Item({ board,selectedItem }) {
           <button onClick={handleDelete} className='delete-button'>
             삭제
           </button>
+          <button onClick={handleUpdateClick} className='update-button'>
+          수정
+          </button>
+        
         </div>
         <div className='ci-container2'>
           <div className='ci-post'>
@@ -110,6 +119,7 @@ export default function Community_Item({ board,selectedItem }) {
           </button>
           <h6>좋아요수: {likeCount} </h6>
         </div>
+        
     </div>
   </div>
   );
