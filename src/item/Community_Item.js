@@ -53,7 +53,16 @@ export default function Community_Item({ board,selectedItem }) {
       setLikeCount(data.decreaseBoardLike.like);
     },
   });
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
 
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+  };
   const handleLikeClick = () => {
     if (liked) {
       decreaseBoardLike({ variables: { board_id: board.id } });
@@ -82,7 +91,7 @@ export default function Community_Item({ board,selectedItem }) {
             <h4>유저</h4>{board.user.name}
           </div>
           <div className='ci-date'>
-            <h4>시간 {board.create_at} </h4>
+            <h4>시간 {formatDate(board.create_at)} </h4>
            
           </div>
           <button onClick={handleDelete} className='delete-button'>

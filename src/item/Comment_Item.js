@@ -21,12 +21,27 @@ const UPDATE_REPLY = gql`
     }
   }
 `;
+const INCREASE_REPLY_LIKE = gql`
+  mutation IncreaseReplyLike($reply_id: String!) {
+    increaseReplyLike(reply_id: $reply_id) {
+      id
+    }
+  }
+`;
+
+const DECREASE_REPLY_LIKE = gql`
+  mutation DecreaseReplyLike($reply_id: String!) {
+    decreaseReplyLike(reply_id: $reply_id) 
+  }
+`;
 
 // 댓글 컴포넌트
 export default function Comment_Item({comment}) {
   const [showOptions, setShowOptions] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editedDetail, setEditedDetail] = useState(comment.detail);
+  const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(comment.like);
   // 수정, 삭제 버튼 메뉴 클릭 리스너
   const handleOptionsClick = () => {
     setShowOptions(!showOptions);
@@ -53,6 +68,27 @@ export default function Comment_Item({comment}) {
     }
 
   });
+//댓글 좋아요,좋아요취소 기능
+  const [increaseReplyLike] = useMutation(INCREASE_REPLY_LIKE, {
+    onCompleted: (data) => {
+      console.log(data.increaseReplyLike)
+      setLikeCount();
+      setLiked(!liked);
+    },
+    onError: (error) => {
+      console.error('댓글 삭제 중 오류 발생:', error);
+      alert('댓글 삭제 중 오류가 발생했습니다.'+error);
+      console.error(JSON.stringify(error, null, 2))
+    }
+  });
+
+  const [decreaseReplyLike] = useMutation(DECREASE_REPLY_LIKE, {
+    onCompleted: () => {
+      setLikeCount();
+      setLiked(!liked);
+    },
+  });
+
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -64,7 +100,14 @@ export default function Comment_Item({comment}) {
       deleteReply();
     }
   };
-
+  
+  const handleLikeClick = () => {
+    if (liked) {
+      decreaseReplyLike({ variables: { reply_id: comment.id } });
+    } else {
+      increaseReplyLike({ variables: { reply_id: comment.id } });
+    }
+  };
   const handleSaveClick = () => {
     updateReply();
   };
@@ -113,7 +156,10 @@ export default function Comment_Item({comment}) {
             <p>답글달기</p>
           </div>
           <div className='comment-like'>
-            <p>좋아요</p>
+          <button onClick={handleLikeClick} className='like-button'>
+          {liked ? '좋아요 취소' : '좋아요'}
+          </button>
+          <h6>좋아요수: {likeCount} </h6>
           </div>
         </div>
       </div>

@@ -40,6 +40,13 @@ const GET_BOARD = gql`
         comment_reply{
           id
           detail
+          like_user {
+            id
+            user {
+              id
+              name
+            }
+          }
         }
       }
       post_images {
