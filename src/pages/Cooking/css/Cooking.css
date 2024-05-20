@@ -106,7 +106,7 @@
   font-weight: bold;
   position: fixed;
   bottom: 100px;
-  right: 40px;
+  right: 50px;
   background-color: #29ADB2;
   color: #fff;
   padding: 10px 20px;
@@ -194,11 +194,6 @@
 }
 
 
-
-
-
-
-
 @font-face {
   font-family: 'KCC-Hanbit';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
@@ -214,5 +209,11 @@
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+
+@media (min-width: 1460px) {
+  .post-button2 {
+    right: 220px; /* Adjust the right position as per your preference */
   }
 }
