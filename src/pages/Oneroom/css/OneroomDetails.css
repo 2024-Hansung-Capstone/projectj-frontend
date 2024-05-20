@@ -3,10 +3,21 @@
 .oneroom-details-container {
   max-width: 800px;
   margin: auto;
-  text-align: center;
   margin-top: 80px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 30px;
+  font-family: 'KCC-Hanbit';
 }
-
+.oneroom-details-container2 {
+  display: flex;
+}
+.oneroom-details-container2 img{
+  width: 280px;
+  height: 280px;
+  margin-right: 60px;
+  margin-left: 20px;
+}
 .location {
   font-size: 24px;
   margin-bottom: 10px;
@@ -28,7 +39,6 @@
 
 .details-table td {
   padding: 10px;
-  border: 1px solid #ccc;
 }
 
 @media (min-width: 768px) {
@@ -41,4 +51,9 @@
   }
 }
 
-/* 추가적인 스타일링은 필요한 부분에 따라 추가해주세요. */
+@font-face {
+  font-family: 'KCC-Hanbit';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}

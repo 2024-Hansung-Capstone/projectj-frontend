@@ -1,10 +1,11 @@
 .roomitem-container-popular {
   border: 1px groove #ddd;
-  width: calc(100% - 20px); /* Adjust the width as needed */
+  width: 364px;
   margin: 5px;
   padding: 10px;
   flex: 0 0 auto;
   text-decoration: none;
+  text-align: center;
 }
 
 .roomitem-container-items {
@@ -14,16 +15,20 @@
   box-sizing: border-box;
   text-decoration: none;
 }
-
+.roomitem-price {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+}
 .roomitem-location {
   font-size: 18px;
   font-weight: bold;
-  color: #333; /* Change color as needed */
+  color: gray; /* Change color as needed */
   margin-bottom: 5px; /* Add margin bottom for spacing */
 }
 
-.roomitem-price {
+.roomitem-area {
   font-size: 16px;
   font-weight: bold;
-  color: #666; /* Change color as needed */
+  color: gray; /* Change color as needed */
 }

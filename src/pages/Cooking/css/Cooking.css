@@ -1,11 +1,6 @@
 .cooking-container {
   font-family: 'KCC-Hanbit';
 }
-.map-section {
-  flex: 2;
-  padding: 20px;
-  transition: margin-left 0.3s ease; /* 좌우 이동에 대한 transition 효과 추가 */
-}
 
 .header h1 {
   font-size: 24px;

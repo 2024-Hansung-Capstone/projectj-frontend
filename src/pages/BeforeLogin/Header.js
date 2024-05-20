@@ -16,16 +16,6 @@ export default function Header() {
             />
           </Link>
         </div>
-        <div className="header-search-container">
-            <div className="header-search-icon">
-            <IoSearchOutline />
-              <input
-                type="text"
-                placeholder="검색어를 입력하세요."
-                className="header-search-input"
-              />
-            </div>
-          </div>
           <div className="header-right-wrap">
           <ul className="nav-list">
             <li>
