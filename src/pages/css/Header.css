@@ -13,18 +13,6 @@
   margin: 0 auto;
 }
 
-.header-left-wrap {
-  display: flex;
-  align-items: center;
-}
-
-.header-right-wrap {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin-left: auto;
-}
-
 .logo-link {
   display: flex;
   align-items: center;
@@ -45,17 +33,10 @@
   margin-right: auto; /* 가운데 정렬을 위해 margin-right 추가 */
 }
 
-.search-icon {
-  display: flex;
-  align-items: center;
-  width: 300px;
-  color: black;
-  border-radius: 50px;
-}
-
-.search-icon > svg {
-  font-size: 30px;
-  padding-right: 10px;
+.nav-list img {
+  width: 33px;
+  height: 32px;
+  margin-right: 10px;
 }
 
 .search-input {
@@ -80,19 +61,11 @@
 .header-mypage {
   font-family: 'NanumSquareNeo-Variable';
   text-decoration: none;
-  margin: 20px;
-  font-size: 20px;
+  margin-right: 20px;
+  padding: 20px;
+  font-size: 24px;
   color: black;
 }
-
-.header-message {
-  margin: 30px;
-  color: black;
-  font-size: 25px;
-  padding: 10px;
-}
-
-
 .signup-container {
   position: relative;
 }

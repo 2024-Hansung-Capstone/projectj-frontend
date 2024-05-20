@@ -52,7 +52,7 @@ const Oneroom = () => {
       
       <div className='oneroom-location'>
         <img src="/home.png" alt="Home" />
-        <h2>내 근처 원룸 시세 현황</h2>
+        <h2>내 근처 원룸 매물 현황</h2>
       </div>
       <div className='oneroom-container2'>
         <div className='map-section2'>

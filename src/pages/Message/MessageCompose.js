@@ -110,11 +110,11 @@ const MessageCompose = () => {
   
 
   return (
-    <div className="market-post-container">
+    <div className="message-post-container">
       <h2>쪽지 작성하기</h2>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className='form-group'>
           <label htmlFor="writingId">글 ID:</label>
           <input id="writingId" type="text" value={writingId} readOnly />
         </div>
@@ -134,7 +134,7 @@ const MessageCompose = () => {
           <label htmlFor='detail' className='detail-label'>내용:</label>
           <textarea id='detail' value={detail} onChange={handleDetailChange} required />
         </div>
-        <button type="submit" className="reply-button">작성 완료</button>
+        <button type="submit" className="message-post-button ">작성 완료</button>
       </form>
     </div>
   );

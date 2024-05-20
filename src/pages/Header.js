@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TbMessage } from "react-icons/tb";
 import { IoNotifications } from "react-icons/io5";
 import './css/Header.css';
 
@@ -20,14 +19,17 @@ export default function Header() {
         <div className="header-right-wrap">
           <ul className="nav-list">
             <li>
-              <Link className="header-mypage" to="/MyPage">
-                마이페이지
+            <Link className="header-mypage" to="/MyPage">
+              마이페이지  
+          </Link>
+
+            </li>
+            <li>
+              <Link className="header-message" to="/MessageReceiveBox" style={{ margin: '40px' }}>
+                  <img src="/message.png" alt="message" />
               </Link>
-              <Link className="header-message" to="/MessageReceiveBox">
-                <TbMessage />
-              </Link>
-              <Link className="header-message" to="/Notification">
-                <IoNotifications />
+              <Link className="header-notification" to="/Notification" style={{ margin: '20px' }}>
+              <img src="/alarm.png" alt="alarm" />
               </Link>
             </li>
           </ul>

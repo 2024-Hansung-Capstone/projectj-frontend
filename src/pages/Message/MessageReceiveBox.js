@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useQuery, useMutation, gql } from '@apollo/client';
+import { IoRefreshOutline } from "react-icons/io5";
 import "./css/MessageBox.css";
 
 // 수신 메시지 정보 (받는 사람 (나))
@@ -110,7 +111,7 @@ const MessageReceiveBox = () => {
         <h2>수신함</h2>
         <div className="button-group">
           <Link to="/MessageSendBox">쪽지 송신함 바로가기</Link>
-          <button onClick={handleRefreshClick}>새로고침</button>
+          <button onClick={handleRefreshClick}><IoRefreshOutline style={{font: 'bold'}}/></button>
         </div>
       </div>
       <div className="tabs">

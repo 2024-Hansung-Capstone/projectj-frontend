@@ -147,7 +147,6 @@ export default function MarketDetail() {
               <h3 className="productImage">이미지</h3>
             </div>
             <div className='marketdetail-container4'>
-              <p>{product.id}</p>
               <h2 className="productTitle">{product.title}</h2>
               <p className="productPrice">{product.price} 원</p>
               <hr></hr>
@@ -167,7 +166,6 @@ export default function MarketDetail() {
                     </>
                   )}
                 </div>
-                <p className="productUser">판매자</p>
                 <p className="productUser">판매자</p>
               {product.user && (
                 <p className="productUser">{product.user.name}</p>

@@ -3,6 +3,7 @@
     margin: 30px;
     padding: 10px;
     padding-bottom: 100px;
+    font-family: 'KCC-Hanbit';
 }
 .mypage-user-container {
     border: 2px double gray;
@@ -25,12 +26,26 @@
     font-size: 20px;
     margin-left: 25px;
     border-radius: 15px;
+    text-decoration: none;
+    
 }
 .mypage-user-container3 > div {
     padding: 10px;
     margin-left: 55px;
     border-right: 1px solid rgb(208, 209, 207);
 }
+.mypage-userName {
+    font-size: 40px;
+    font-weight: bold;
+}
+.mypage-message {
+    text-decoration: none;
+    color: black;
+  }
+
+  .mypage-message:hover {
+    text-decoration: none;
+  }
 .mypage-user-container3 > div:last-child {
     border-right: none;
 }
@@ -87,10 +102,6 @@
 .mypage-point,
 .mypage-message,
 .mypage-heart,
-.mypage-event,
-.mypage-question,
-.mypage-notice,
-.mypage-service,
 .mypage-logout {
     flex: 1;
     padding: 10px;
@@ -105,4 +116,12 @@
       margin-left: auto;
       margin-right: auto;
     }
+}
+
+  @font-face {
+    font-family: 'KCC-Hanbit';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
   }
+  

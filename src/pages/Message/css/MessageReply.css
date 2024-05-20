@@ -21,15 +21,7 @@
     margin-bottom: 5px;
     color: #666;
 }
-  
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
+
   
 .reply-button {
     display: block;

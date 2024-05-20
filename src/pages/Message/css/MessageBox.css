@@ -3,6 +3,7 @@
   position: relative;
   overflow-x: auto;
   width: 100%;
+  font-family: 'KCC-Hanbit';
 }
 
 .message-header {
@@ -25,9 +26,7 @@
 .message-header button,
 .message-header a {
   padding: 8px 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
+  border: 1px solid black;
   border-radius: 5px;
   text-decoration: none;
   transition: background-color 0.3s;
@@ -36,7 +35,7 @@
 
 .message-header button:hover,
 .message-header a:hover {
-  background-color: #0056b3;
+  background-color: #ddd;
 }
 
 .message-table {
@@ -119,7 +118,7 @@
 
 .tabs button.active {
   background-color: #fff;
-  border-bottom: 2px solid #007bff;
+  border-bottom: 2px solid #ffea00;
   font-weight: bold;
 }
 
