@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import "./css/MessageBox.css";
@@ -34,6 +34,12 @@ const MessageReceiveBox = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   
+  useEffect(() => {
+    if (!token) {
+      navigate('/login'); // 토큰이 없으면 로그인 페이지로 리디렉션
+    }
+  }, [token, navigate]);
+
   const { loading: loadingLetters, error: errorLetters, data: dataLetters, refetch } = useQuery(FETCH_MY_RECEIVE_LETTERS, {
     context: {
       headers: {
@@ -65,6 +71,11 @@ const MessageReceiveBox = () => {
     refetch();
   };
 
+  const handleUnauthorizedError = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
   return (
     <div className="message-container">
       <div className="message-header">
@@ -84,13 +95,18 @@ const MessageReceiveBox = () => {
         </thead>
         <tbody>
           {loadingLetters || loadingWhoAmI ? (
-            <tr><td colSpan="4">Loading...</td></tr>
+            <tr><td colSpan="5">Loading...</td></tr>
           ) : errorLetters || errorWhoAmI ? (
             <tr>
-              <td colSpan="4">
+              <td colSpan="5">
                 Error: {errorLetters ? errorLetters.message : errorWhoAmI.message}
-                {errorLetters?.message === 'Unauthorized' && ' - Please check your login status.'}
-                {errorWhoAmI?.message === 'Unauthorized' && ' - Please check your login status.'}
+                {((errorLetters && errorLetters.message === 'Unauthorized') ||
+                  (errorWhoAmI && errorWhoAmI.message === 'Unauthorized')) && (
+                  <div>
+                    <p>로그인 상태를 확인해주세요.</p>
+                    <button onClick={handleUnauthorizedError}>로그인 페이지로 이동</button>
+                  </div>
+                )}
               </td>
             </tr>
           ) : (
@@ -105,7 +121,7 @@ const MessageReceiveBox = () => {
                 </tr>
               ))
             ) : (
-              <tr><td colSpan="4" className='nodata'>등록된 쪽지가 없습니다.</td></tr>
+              <tr><td colSpan="5" className='nodata'>등록된 쪽지가 없습니다.</td></tr>
             )
           )}
         </tbody>

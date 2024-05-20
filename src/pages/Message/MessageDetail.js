@@ -24,7 +24,7 @@ const MessageDetail = () => {
         variables: { letter_id: messagedata.id },
       });
       alert('메시지가 성공적으로 삭제되었습니다.');
-      navigate('/Messages');
+      navigate('/MessageReceiveBox');
     } catch (error) {
       console.error('메시지 삭제 중 오류가 발생했습니다:', error);
       alert('메시지 삭제 중 오류가 발생했습니다.');
