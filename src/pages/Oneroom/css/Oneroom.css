@@ -1,17 +1,32 @@
-
 .oneroom-container1 {
   width: 95%;
-  background-color: #f5f5f5;
   padding: 20px;
   margin: 20px;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 그림자 스타일 적용 */
 }
 
 .oneroom-container2 {
   display: flex;
   width: 95%;
   height: 800px;
+}
+.oneroom-items-container {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  height: 100%; 
+  text-align: center; 
+}
+
+.oneroom-items-container p {
+  color: gray;
+}
+
+.oneroom-items-container p span {
+  color: #ddd;
+  font-size: 80px;
+  margin-bottom: 10px;
 }
 
 .map-section1 {
@@ -50,6 +65,7 @@
   width: 220px;
   max-height: 700px;
   margin-top: 10px;
+  border: 1px solid gray;
 }
 
 .oneroom-dish-item {

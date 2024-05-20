@@ -1,23 +1,29 @@
-  .roomitem-container-popular {
-    border: 1px groove black;
-    width: calc((100% - 20px));
-    margin: 5px;
-    padding: 10px;
-    flex: 0 0 auto;
-  }
-  
-  .roomitem-container-items {
-    width: 180px;
-    margin: 10px;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-  
+.roomitem-container-popular {
+  border: 1px groove #ddd;
+  width: calc(100% - 20px); /* Adjust the width as needed */
+  margin: 5px;
+  padding: 10px;
+  flex: 0 0 auto;
+  text-decoration: none;
+}
+
+.roomitem-container-items {
+  width: 180px; /* Adjust the width as needed */
+  margin: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
 .roomitem-location {
   font-size: 18px;
   font-weight: bold;
+  color: #333; /* Change color as needed */
+  margin-bottom: 5px; /* Add margin bottom for spacing */
 }
+
 .roomitem-price {
   font-size: 16px;
   font-weight: bold;
+  color: #666; /* Change color as needed */
 }
