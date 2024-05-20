@@ -83,7 +83,7 @@ export default function EditUserInfo() {
   const fetchUserInfo = async () => {
     try {
       // 서버에서 사용자 정보를 가져오는 요청을 보냄
-      const response = await axios.post('YOUR_API_ENDPOINT_HERE', {
+      const response = await axios.post('http://54.180.182.40:5000/graphql', {
         query: `
           query FetchUser($userId: String!) {
             fetchUserById(user_id: $userId) {
