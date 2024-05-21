@@ -49,7 +49,7 @@ const MessageCompose = () => {
   const [category, setCategory] = useState('자취생메이트');
   const [writingId, setWritingId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const { loading, error, data } = useQuery(FETCH_MY_SEND_LETTERS);
+  const { loading, error, data, refetch } = useQuery(FETCH_MY_SEND_LETTERS); // refetch 추가
   const [writeLetter] = useMutation(WRITE_LETTER);
   const navigate = useNavigate();
   const location = useLocation();
@@ -88,7 +88,7 @@ const MessageCompose = () => {
             authorization: `Bearer ${localStorage.getItem('token') || ''}`
           }
         },
-        refetchQueries: [{ query: FETCH_MY_SEND_LETTERS }]
+        refetchQueries: [{ query: FETCH_MY_SEND_LETTERS }] // refetchQueries 추가
       });
       console.log('작성된 쪽지:', data.writeLetter);
       navigate("/MessageSuccess");

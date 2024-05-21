@@ -21,12 +21,13 @@ const FETCH_MY_SEND_LETTERS = gql`
       category
       title
       detail
+      is_read
       create_at
     }
   }
 `;
 
-export const WHO_AM_I_QUERY = gql`
+const WHO_AM_I_QUERY = gql`
   query WhoAmI {
     whoAmI {
       id
@@ -35,12 +36,21 @@ export const WHO_AM_I_QUERY = gql`
   }
 `;
 
+// 수신함에서는 읽기 표시 안되도록 해놨음.
+// 상대방이 메시지를 읽으면 그때 읽음표시로 전환
+// 메시지 읽음처리 
+const READ_LETTER = gql`
+  mutation ReadLetter($letter_id: String!) {
+    readLetter(letter_id: $letter_id)
+  }
+`;
+
 const MessageSendBox = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('중고마켓');
   const [messages, setMessages] = useState([]);
   const token = localStorage.getItem('token');
-  
+  const [readLetter] = useMutation(READ_LETTER);
   const { loading: loadingLetters, error: errorLetters, data: dataLetters, refetch } = useQuery(FETCH_MY_SEND_LETTERS, {
     context: {
       headers: {
@@ -93,14 +103,13 @@ const MessageSendBox = () => {
       message.id === messagedata.id ? { ...message, is_read: true } : message
     );
     setMessages(updatedMessages);
-  
+
     navigate('/MessageDetail', { state: { messagedata } });
   };
-  
+
   const renderIsReadStatus = (isRead) => {
     return isRead ? "읽음" : "안읽음";
   };
-  
 
   return (
     <div className="message-container">
@@ -108,7 +117,7 @@ const MessageSendBox = () => {
         <h2>송신함</h2>
         <div className="button-group">
           <Link to="/MessageReceiveBox">쪽지 수신함 바로가기</Link>
-          <button onClick={handleRefreshClick}><IoRefreshOutline style={{font: 'bold'}}/></button>
+          <button onClick={handleRefreshClick}><IoRefreshOutline style={{ font: 'bold' }} /></button>
         </div>
       </div>
       <div className="tabs">
@@ -123,7 +132,7 @@ const MessageSendBox = () => {
         <thead>
           <tr>
             <th>읽음 상태</th>
-            <th>보낸 사람</th>
+            <th>받는 사람</th>
             {selectedCategory === '중고마켓' && <th>상품명</th>}
             <th>제목</th>
             <th>내용</th>
@@ -150,12 +159,12 @@ const MessageSendBox = () => {
             dataLetters && dataWhoAmI && dataWhoAmI.whoAmI ? (
               dataLetters.fetchMySendLetters
                 .filter((messagedata) => 
-                  messagedata.receiver.name === dataWhoAmI.whoAmI.name &&
+                  messagedata.sender.name === dataWhoAmI.whoAmI.name &&
                   messagedata.category === selectedCategory
                 ).length > 0 ? (
                 dataLetters.fetchMySendLetters
                   .filter((messagedata) => 
-                    messagedata.receiver.name === dataWhoAmI.whoAmI.name &&
+                    messagedata.sender.name === dataWhoAmI.whoAmI.name &&
                     messagedata.category === selectedCategory
                   )
                   .map((messagedata, index) => (
@@ -178,4 +187,5 @@ const MessageSendBox = () => {
     </div>
   );
 };
+
 export default MessageSendBox;
