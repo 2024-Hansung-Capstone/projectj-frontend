@@ -32,6 +32,7 @@ import MarketUpdate from './pages/Market/MarketUpdate';
 import Community from "./pages/Community/Community";
 import CommunityUpdate from "./pages/Community/CommunityUpdate";
 import Notification from "./pages/Notification"; 
+import Notification_All from "./pages/Notification_All"; 
 
 // mypage
 import EditUserInfo from './pages/EditUserInfo';
@@ -85,10 +86,10 @@ function App() {
                 <Route path="/Oneroom/:roomId" element={<OneroomDetails />} />
                 <Route path="/Cooking" element={<Cooking />} />
                 <Route path="/CookingAI" element={<CookingAI />} />
-                <Route path="/CookingPost" element={<CookingPost />} />
+                <Route path="/CookingPost" element={isAuthenticated ? <CookingPost /> : <Login onLogin={handleLogin} />} />
                 <Route path="/CookingDetails" element={<CookingDetails />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
-                <Route path="/MyPage" element={<MyPage onLogout={handleLogout} />} />
+                <Route path="/MyPage" element={isAuthenticated ? <MyPage /> : <Login onLogin={handleLogin} />} />
                 
                 <Route path="/MessageSendBox"  element={isAuthenticated ? <MessageSendBox /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MessageReceiveBox"  element={isAuthenticated ? <MessageReceiveBox /> : <Login onLogin={handleLogin} />} />
@@ -96,8 +97,21 @@ function App() {
                 <Route path="/MessageSuccess"  element={isAuthenticated ? <MessageSuccess /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MessageDetail"  element={isAuthenticated ? <MessageDetail /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MessageReply"  element={isAuthenticated ? <MessageReply /> : <Login onLogin={handleLogin} />} />
-                <Route path="/editUserInfo" element={<EditUserInfo />} />
+                <Route path="/editUserInfo" element={isAuthenticated ? <editUserInfo /> : <Login onLogin={handleLogin} />} />
                 <Route path="/Notification"  element={isAuthenticated ? <Notification /> : <Login onLogin={handleLogin} />} />
+                <Route path="/Notification_All"  element={isAuthenticated ? <Notification_All /> : <Login onLogin={handleLogin} />} />
+              
+                <Route
+                  path="/MyPage"
+                  element={
+                  isAuthenticated ? (
+                   <MyPage onLogout={handleLogout} />
+                    ) : (
+                    <Login onLogin={handleLogin} />
+                    )
+                  }   
+                />
+
               </Routes>
           </div>
           <div className="footer-section">

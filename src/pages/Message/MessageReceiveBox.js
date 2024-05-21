@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useQuery, useMutation, gql } from '@apollo/client';
+import { useQuery, gql, useMutation } from '@apollo/client'; // useMutation 추가
 import { IoRefreshOutline } from "react-icons/io5";
 import "./css/MessageBox.css";
 
-// 수신 메시지 정보 (받는 사람 (나))
 const FETCH_MY_RECEIVE_LETTERS = gql`
   query FetchMyReceiveLetters {
     fetchMyReceiveLetters {
@@ -27,7 +26,7 @@ const FETCH_MY_RECEIVE_LETTERS = gql`
   }
 `;
 
-export const WHO_AM_I_QUERY = gql`
+const WHO_AM_I_QUERY = gql`
   query WhoAmI {
     whoAmI {
       id
@@ -36,18 +35,24 @@ export const WHO_AM_I_QUERY = gql`
   }
 `;
 
+// 메시지 읽음처리 
+const READ_LETTER = gql`
+  mutation ReadLetter($letter_id: String!) {
+    readLetter(letter_id: $letter_id)
+  }
+`;
+
 const MessageReceiveBox = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const [selectedCategory, setSelectedCategory] = useState('중고마켓');
   const [messages, setMessages] = useState([]);
-  
-    // 메시지 읽음 상태를 관리하기 위한 상태
-    const [readMessageIds, setReadMessageIds] = useState([]);
-    
+  const [previousMessages, setPreviousMessages] = useState([]);
+  const [readLetter] = useMutation(READ_LETTER);
+
   useEffect(() => {
     if (!token) {
-      navigate('/login'); // 토큰이 없으면 로그인 페이지로 리디렉션
+      navigate('/login');
     }
   }, [token, navigate]);
 
@@ -69,9 +74,22 @@ const MessageReceiveBox = () => {
   });
 
   useEffect(() => {
-    // 컴포넌트가 마운트될 때 데이터를 불러옴
     refetch();
   }, [refetch]);
+
+  useEffect(() => {
+    if (dataLetters) {
+      const newMessages = dataLetters.fetchMyReceiveLetters;
+      if (previousMessages.length > 0 && newMessages.length > previousMessages.length) {
+        const newMessage = newMessages.find(message => !previousMessages.some(prevMessage => prevMessage.id === message.id));
+        if (newMessage) {
+          alert("새로운 메시지가 도착했습니다!");
+          navigate('/notification', { state: { notification_id: newMessage.id } });
+        }
+      }
+      setPreviousMessages(newMessages);
+    }
+  }, [dataLetters, previousMessages, navigate]);
 
   const handleRefreshClick = () => {
     refetch();
@@ -91,20 +109,30 @@ const MessageReceiveBox = () => {
     return `${month}.${day}.${hours}:${minutes}`;
   };
 
+  // 메시지 읽음 처리 함수
+  const markMessageAsRead = async (messageId) => {
+    try {
+      await readLetter({ variables: { letter_id: messageId } });
+      // 성공적으로 읽음 처리되었을 때 메시지 상태 업데이트
+      const updatedMessages = messages.map(message =>
+        message.id === messageId ? { ...message, is_read: true } : message
+      );
+      setMessages(updatedMessages);
+    } catch (error) {
+      console.error("Failed to mark message as read:", error);
+    }
+  };
+
   const handleItemClick = (messagedata) => {
-    // Mark the message as read
-    const updatedMessages = messages.map(message =>
-      message.id === messagedata.id ? { ...message, is_read: true } : message
-    );
-    setMessages(updatedMessages);
-  
+    // 메시지를 클릭하면 읽음 처리 함수 호출
+    markMessageAsRead(messagedata.id);
     navigate('/MessageDetail', { state: { messagedata } });
   };
-  
+
   const renderIsReadStatus = (isRead) => {
     return isRead ? "읽음" : "안읽음";
   };
-  
+
   return (
     <div className="message-container">
       <div className="message-header">
@@ -142,7 +170,7 @@ const MessageReceiveBox = () => {
                 Error: {errorLetters ? errorLetters.message : errorWhoAmI.message}
                 {((errorLetters && errorLetters.message === 'Unauthorized') ||
                   (errorWhoAmI && errorWhoAmI.message === 'Unauthorized')) && (
-                  <div>
+                    <div>
                     <p>로그인 상태를 확인해주세요.</p>
                     <button onClick={handleUnauthorizedError}>로그인 페이지로 이동</button>
                   </div>

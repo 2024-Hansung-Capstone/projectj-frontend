@@ -15,7 +15,6 @@ export const WHO_AM_I_QUERY = gql`
       name
       birth_at
       mbti
-      phone_number
     }
   }
 `;
@@ -30,10 +29,6 @@ export default function EditUserInfo() {
     email: "",
     password: "",
     confirmPassword: "",
-    phoneNumber1: "",
-    phoneNumber2: "",
-    phoneNumber3: "",
-    address: "",
     mbti: "",
     birthYear: "",
     birthMonth: "",
@@ -64,10 +59,6 @@ export default function EditUserInfo() {
         email: whoAmI.email,
         password: "",
         confirmPassword: "",
-        phoneNumber1: whoAmI.phone_number.substring(0, 3),
-        phoneNumber2: whoAmI.phone_number.substring(3, 7),
-        phoneNumber3: whoAmI.phone_number.substring(7),
-        address: "",
         mbti: whoAmI.mbti,
         birthYear: birthDate.getFullYear().toString(),
         birthMonth: new Date(whoAmI.birth_at).getMonth() + 1 < 10 ? (new Date(whoAmI.birth_at).getMonth() + 1).toString() : ('0' + (birthDate.getMonth() + 1)).slice(-2).toString(),
@@ -92,7 +83,6 @@ export default function EditUserInfo() {
               name
               birth_at
               mbti
-              phone_number
             }
           }
         `,
@@ -187,16 +177,6 @@ export default function EditUserInfo() {
           <div className="edit-password">
             <label htmlFor="confirmPassword">비밀번호 확인</label>
             <input type="password" id="confirmPassword" name="confirmPassword" value={user.confirmPassword} onChange={(e) => setUser({ ...user, confirmPassword: e.target.value })} />
-          </div>
-          <div className="edit-phonenumber">
-            <label htmlFor="phoneNumber">연락처</label>
-            <div className="phone-inputs">
-              <input type="edit-text" id="phoneNumber1" name="phoneNumber1" className="phone-input" maxLength="3" value={user.phoneNumber1} onChange={(e) => setUser({ ...user, phoneNumber1: e.target.value })} />
-              <span className="phone-separator">-</span>
-              <input type="edit-text" id="phoneNumber2" name="phoneNumber2" className="phone-input" maxLength="4" value={user.phoneNumber2} onChange={(e) => setUser({ ...user, phoneNumber2: e.target.value })} />
-              <span className="phone-separator">-</span>
-              <input type="edit-text" id="phoneNumber3" name="phoneNumber3" className="phone-input" maxLength="4" value={user.phoneNumber3} onChange={(e) => setUser({ ...user, phoneNumber3: e.target.value })} />
-            </div>
           </div>
           <div className="edit-mbti">
             <label htmlFor="mbti">MBTI</label>
