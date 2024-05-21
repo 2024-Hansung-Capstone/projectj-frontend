@@ -105,7 +105,7 @@ function App() {
                   path="/MyPage"
                   element={
                   isAuthenticated ? (
-                   <MyPage onLogout={handleLogout} />
+                   <MyPage />
                     ) : (
                     <Login onLogin={handleLogin} />
                     )

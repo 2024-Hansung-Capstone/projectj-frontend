@@ -93,6 +93,12 @@ export const FETCH_MY_ROLE_QUERY = gql`
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // 로컬 스토리지에서 JWT 토큰 삭제
+    onLogout(); // 로그아웃 콜백 호출
+  };
+
+
   return (
     <div className='mypage-container'>
       <h1>마이페이지</h1>
@@ -121,7 +127,7 @@ export const FETCH_MY_ROLE_QUERY = gql`
       <div className='mypage-list'>
       <Link className='mypage-mypost' to="/mypost">내가 작성한 글</Link>
         <Link className='mypage-edit' to="/editUserInfo"><FaEdit /> 내 정보 수정</Link>
-        <Link className='mypage-logout' to="/" onClick={onLogout}><IoLogOutOutline /> 로그아웃</Link>
+        <Link className='mypage-logout' to="/" onClick={handleLogout}><IoLogOutOutline /> 로그아웃</Link>
         <Link className='mypage-withdraw-link' to="/" onClick={handleDeleteUser}>
           <HiMiniNoSymbol /> 회원탈퇴
         </Link>
