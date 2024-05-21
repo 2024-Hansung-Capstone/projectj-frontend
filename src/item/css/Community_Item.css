@@ -1,76 +1,88 @@
 .ci-container {
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    border: groove 1px #ddd;
-    width: 100%;
-    height: 450px;
-    margin-top: 20px;
-    text-align: center;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  border: groove 1px #ddd;
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
 }
-.ci-container2 {
-    display: flex;
-    height: 410px;
-}
+
 .ci-title {
-    display: flex;
-    width: 50%;
-    padding: 10px;
+  display: flex;
+  padding: 10px;
+  align-items: center;
 }
+
 .ci-userPhoto {
-    width: 17%;
-    margin-right: 5px;
-    border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  margin-right: 5px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 50%; /* Optional: to make it circular */
 }
+
 .ci-userPhoto img {
-    max-width: 100%; /* 부모 요소에 맞게 이미지 크기를 조절합니다. */
-    height: auto; /* 가로세로 비율을 유지한 채로 이미지 크기를 조절합니다. */
+  width: 100%;
+  height: auto;
 }
 
-.ci-userName {
-    border: groove 1px #ddd;
-    width: 40%;
-    margin-right: 5px;
-}
-.ci-date {
-    border: groove 1px #ddd;
-    width: 40%;
-    margin-right: 5px;
-}
-.ci-post{
-    border: groove 1px #ddd;
-    height: 89%;
-    flex: 1;
-}
-.ci-text{
-    border: groove 1px #ddd;
-    height: 89%;
-    flex: 1;
-}
-.ci-comment{
-    display: flex;
-    margin: 10px;
-}
-.ci-write {
-    width: 90%;
-    margin: 10px;
-    border : 1px groove #ddd;
-    border-radius: 10px;
-}
-.ci-send {
-    width: 10%;
-    margin: 10px;
-    background-color: #29adb2;
-    border-radius: 10px;
-    color: white;
+.ci-userName, .ci-date {
+  padding: 5px;
+  margin-right: 5px;
 }
 
-@media (min-width: 1150px) {
-    /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
-    .header-container {
-      width: 100%; /* 요소의 너비를 100%로 설정 */
-      max-width: 1200px; /* 최대 너비를 1200px로 제한 */
-      margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
-      margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
-    }
-  }
+.ci-buttons {
+  margin-left: auto;
+  display: flex;
+}
+
+.delete-button, .update-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.ci-container2 {
+  display: flex;
+  height: auto;
+}
+
+.ci-post, .ci-text {
+  border: groove 1px #ddd;
+  flex: 1;
+  padding: 10px;
+  margin: 5px;
+}
+
+.ci-like {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 10px;
+}
+
+.ci-like .like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.ci-like img {
+  width: 30px;
+  height: 30px;
+}
+
+.ci-like h5 {
+  margin-left: 10px;
+}

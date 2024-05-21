@@ -2,38 +2,9 @@ import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { useLocation } from 'react-router-dom';
 
-export const GET_NOTIFICATION_MESSAGE = gql`
+const GET_NOTIFICATION_MESSAGE = gql`
   query GetNotificationMessage($notification_id: String!) {
-    getNotificationMessage(notification_id: $notification_id) {
-      id
-      user {
-        name
-      }
-      letter {
-        title
-        detail
-      }
-      board {
-        title
-      }
-      reply {
-        content
-      }
-      used_product {
-        name
-      }
-      like {
-        user {
-          name
-        }
-        product {
-          name
-        }
-      }
-      code
-      is_read
-      create_at
-    }
+    getNotificationMessage(notification_id: $notification_id)
   }
 `;
 

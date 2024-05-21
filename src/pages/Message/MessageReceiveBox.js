@@ -83,8 +83,10 @@ const MessageReceiveBox = () => {
       if (previousMessages.length > 0 && newMessages.length > previousMessages.length) {
         const newMessage = newMessages.find(message => !previousMessages.some(prevMessage => prevMessage.id === message.id));
         if (newMessage) {
+          // 새로운 메시지가 도착했을 때 알림 띄우기
           alert("새로운 메시지가 도착했습니다!");
-          navigate('/notification', { state: { notification_id: newMessage.id } });
+          // 새로운 메시지의 상세 화면으로 이동
+          navigate('/MessageDetail', { state: { messagedata: newMessage } });
         }
       }
       setPreviousMessages(newMessages);

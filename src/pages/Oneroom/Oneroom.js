@@ -6,6 +6,22 @@ import './css/Oneroom.css';
 import { FETCH_TOP_THREE_POPULAR_ROOMS } from '../gql/fetchOneRoomsByViewRank';
 import { FETCH_ONE_ROOM_BY_XY } from '../gql/fetchOneRoomByXY';
 import { GrMapLocation } from "react-icons/gr";
+import { BounceLoader, BarLoader, BeatLoader, CircleLoader, ClipLoader, ClockLoader, DotLoader, FadeLoader, GridLoader, HashLoader, MoonLoader, PacmanLoader, PropagateLoader, PuffLoader, PulseLoader, RingLoader, RiseLoader, RotateLoader, ScaleLoader, SkewLoader, SquareLoader, SyncLoader } from 'react-spinners';
+
+const MyComponent = () => {
+  const loading = true;
+
+  return (
+    <div>
+      <BounceLoader color="#36d7b7" loading={loading} />
+      <BarLoader color="#36d7b7" loading={loading} />
+      <BeatLoader color="#36d7b7" loading={loading} />
+      {/* Add more spinners as needed */}
+    </div>
+  );
+};
+
+
 
 const Oneroom = () => {
   const { data: topThreeRoomsData } = useQuery(FETCH_TOP_THREE_POPULAR_ROOMS, { variables: { rank: 3 } });
@@ -60,8 +76,10 @@ const Oneroom = () => {
           <Map onBoundsChange={handleBoundsChange} />
         </div>
         <div className='oneroom-items-container'>
-          {roomLoading ? (
-            <p>Loading...</p>
+        {roomLoading ? (
+          <div className='loading-spinner'>
+            <BeatLoader size={30} color={"yellowgreen"} loading={roomLoading} />
+          </div>
           ) : (
             <div className='oneroom-dishes-grid'>
               {!roomData && (

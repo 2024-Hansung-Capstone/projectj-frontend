@@ -48,7 +48,7 @@ import TermsOfService from "./pages/BeforeLogin/TermsOfService";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // 인증 상태를 관리
-
+  const [notificationData, setNotificationData] = useState(null);
 
   // 사용자가 로그인하면 호출되는 함수
   const handleLogin = () => {
@@ -62,6 +62,16 @@ function App() {
 const uploadLink = createUploadLink({
   uri: 'http://54.180.182.40:5000/graphql', 
 });
+
+  // 알림 데이터를 설정하는 함수
+  const handleSetNotificationData = (data) => {
+    setNotificationData(data);
+  };
+
+  // 알림 데이터를 초기화하는 함수
+  const handleClearNotificationData = () => {
+    setNotificationData(null);
+  };
 
 const client = new ApolloClient({
   link: uploadLink,
@@ -106,8 +116,7 @@ const client = new ApolloClient({
                 <Route path="/MessageSuccess"  element={isAuthenticated ? <MessageSuccess /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MessageDetail"  element={isAuthenticated ? <MessageDetail /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MessageReply"  element={isAuthenticated ? <MessageReply /> : <Login onLogin={handleLogin} />} />
-                <Route path="/editUserInfo" element={isAuthenticated ? <editUserInfo /> : <Login onLogin={handleLogin} />} />
-                <Route path="/Notification"  element={isAuthenticated ? <Notification /> : <Login onLogin={handleLogin} />} />
+                <Route path="/EditUserInfo" element={isAuthenticated ? <EditUserInfo /> : <Login onLogin={handleLogin} />} />
                 <Route path="/Notification_All"  element={isAuthenticated ? <Notification_All /> : <Login onLogin={handleLogin} />} />
               
                 <Route
@@ -120,6 +129,10 @@ const client = new ApolloClient({
                     )
                   }   
                 />
+
+                <Route path="/notification" element={<Notification notificationData={notificationData} clearNotificationData={handleClearNotificationData} />} />
+                <Route path="/" element={<MessageReceiveBox setNotificationData={handleSetNotificationData} />} />
+      
 
               </Routes>
           </div>

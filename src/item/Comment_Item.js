@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { MdMoreVert } from "react-icons/md";
+import { MdMoreVert } from 'react-icons/md';
 import './css/Comment_Item.css';
 import { gql, useMutation } from '@apollo/client';
 import CommentToComment_Item from './CoommentToComment_Item';
+
 const DELETE_REPLY = gql`
   mutation DeleteReply($reply_id: String!) {
-    deleteReply(reply_id: $reply_id)
-    {
+    deleteReply(reply_id: $reply_id) {
       id
       title
       detail
@@ -22,6 +22,7 @@ const UPDATE_REPLY = gql`
     }
   }
 `;
+
 const INCREASE_REPLY_LIKE = gql`
   mutation IncreaseReplyLike($reply_id: String!) {
     increaseReplyLike(reply_id: $reply_id) {
@@ -32,34 +33,35 @@ const INCREASE_REPLY_LIKE = gql`
 
 const DECREASE_REPLY_LIKE = gql`
   mutation DecreaseReplyLike($reply_id: String!) {
-    decreaseReplyLike(reply_id: $reply_id) 
+    decreaseReplyLike(reply_id: $reply_id)
   }
 `;
+
 const CREATE_COMMENT_REPLY = gql`
   mutation CreateCommentReply($reply_id: String!, $detail: String!) {
     createCommetReply(reply_id: $reply_id, detail: $detail) {
       id
       detail
-      user{
+      user {
         name
       }
     }
   }
 `;
-// 댓글 컴포넌트
-export default function Comment_Item({comment}) {
+
+export default function Comment_Item({ comment }) {
   const [showOptions, setShowOptions] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editedDetail, setEditedDetail] = useState(comment.detail);
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(comment.like);
   const [createCommentReply] = useMutation(CREATE_COMMENT_REPLY);
-  //대댓글을 바로 반영하기 위해서
-  const [newcomment,setComment]=useState(comment);
-  // 수정, 삭제 버튼 메뉴 클릭 리스너
+  const [newComment, setComment] = useState(comment);
+
   const handleOptionsClick = () => {
     setShowOptions(!showOptions);
   };
+
   const [deleteReply] = useMutation(DELETE_REPLY, {
     variables: { reply_id: comment.id },
     onCompleted: () => {
@@ -67,9 +69,10 @@ export default function Comment_Item({comment}) {
     },
     onError: (error) => {
       console.error('댓글 삭제 중 오류 발생:', error);
-      alert('댓글 삭제 중 오류가 발생했습니다.'+error);
+      alert('댓글 삭제 중 오류가 발생했습니다.' + error);
     }
   });
+
   const [updateReply] = useMutation(UPDATE_REPLY, {
     variables: { reply_id: comment.id, detail: editedDetail },
     onCompleted: () => {
@@ -78,31 +81,31 @@ export default function Comment_Item({comment}) {
     },
     onError: (error) => {
       console.error('댓글 수정 중 오류 발생:', error);
-      alert('댓글 수정 중 오류가 발생했습니다.'+error);
+      alert('댓글 수정 중 오류가 발생했습니다.' + error);
     }
-
   });
-//댓글 좋아요,좋아요취소 기능
+
   const [increaseReplyLike] = useMutation(INCREASE_REPLY_LIKE, {
     onCompleted: (data) => {
-      console.log(data.increaseReplyLike)
-      setLikeCount();
-      setLiked(!liked);
+      setLikeCount((prev) => prev + 1);
+      setLiked(true);
     },
     onError: (error) => {
-      console.error('댓글 삭제 중 오류 발생:', error);
-      alert('댓글 삭제 중 오류가 발생했습니다.'+error);
-      console.error(JSON.stringify(error, null, 2))
+      console.error('댓글 좋아요 중 오류 발생:', error);
+      alert('댓글 좋아요 중 오류가 발생했습니다.' + error);
     }
   });
 
   const [decreaseReplyLike] = useMutation(DECREASE_REPLY_LIKE, {
     onCompleted: () => {
-      setLikeCount();
-      setLiked(!liked);
+      setLikeCount((prev) => prev - 1);
+      setLiked(false);
     },
+    onError: (error) => {
+      console.error('댓글 좋아요 취소 중 오류 발생:', error);
+      alert('댓글 좋아요 취소 중 오류가 발생했습니다.' + error);
+    }
   });
-
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -114,7 +117,7 @@ export default function Comment_Item({comment}) {
       deleteReply();
     }
   };
-  //좋아요기능
+
   const handleLikeClick = () => {
     if (liked) {
       decreaseReplyLike({ variables: { reply_id: comment.id } });
@@ -122,55 +125,36 @@ export default function Comment_Item({comment}) {
       increaseReplyLike({ variables: { reply_id: comment.id } });
     }
   };
+
   const handleSaveClick = () => {
     updateReply();
   };
-//대댓글추가기능
-const handleReplyClick = async () => {
-  const detail = prompt('대댓글 내용을 입력하세요.');
-  if (detail) {
-    const { data } = await createCommentReply({ variables: { reply_id: comment.id, detail } })
-    
+
+  const handleReplyClick = async () => {
+    const detail = prompt('대댓글 내용을 입력하세요.');
+    if (detail) {
+      const { data } = await createCommentReply({ variables: { reply_id: comment.id, detail } });
       alert('대댓글이 작성되었습니다.');
-      console.log(data);
-      // 새로운 대댓글을 게시판에 반영
       const updatedComment = {
-        ...newcomment,
-        comment_reply: [...newcomment.comment_reply, data.createCommetReply] // 새로운 댓글을 추가
+        ...newComment,
+        comment_reply: [...newComment.comment_reply, data.createCommetReply]
       };
       setComment(updatedComment);
-      console.log(newcomment)
     }
-  }
-
- 
-
-
+  };
 
   return (
     <div className='comment-container0'>
-      
       <div className='comment-photo'>
         <p>사진</p>
       </div>
       <div className='comment-title'>
         <div className='comment-container1'>
           <div className='comment-name'>
-            <p>이름: {comment.user.name}</p>
+            <p>{comment.user.name}</p> {/* 이름 */}
           </div>
-          <div className='comment-more' onClick={handleOptionsClick}>
-            <MdMoreVert />
-            {showOptions && (
-              <div className='comment-options'>
-             <button onClick={handleEditClick}>수정</button>
-                <button onClick={handleDeleteClick}>삭제</button>
-              </div>
-            )}
-          </div>
-        </div>
-        <div className='comment-container2'>
-          <div className='comment-post'>
-          {isEditing ? (
+          <div className='comment-post'> {/* 내용 */}
+            {isEditing ? (
               <input
                 type="text"
                 value={editedDetail}
@@ -178,6 +162,15 @@ const handleReplyClick = async () => {
               />
             ) : (
               <p>{editedDetail}</p>
+            )}
+          </div>
+          <div className='comment-more' onClick={handleOptionsClick}>
+            <MdMoreVert />
+            {showOptions && (
+              <div className='comment-options'>
+                <button onClick={handleEditClick}>수정</button>
+                <button onClick={handleDeleteClick}>삭제</button>
+              </div>
             )}
           </div>
         </div>
@@ -190,25 +183,24 @@ const handleReplyClick = async () => {
         <div className='comment-container3'>
           <div className='comment-recomment'>
             <p onClick={handleReplyClick}>답글달기</p>
-            <div className='commentTocomment-container'> 
-            {newcomment.comment_reply && newcomment.comment_reply.length > 0 ? (
-            newcomment.comment_reply.map((comment) => (
-              <CommentToComment_Item key={comment.id} CommentToComent={comment} />
-            ))
-          ) : (
-            <p>대 댓글이 없습니다.</p>
-          )}
-        </div>
+            <div className='commentTocomment-container'>
+              {newComment.comment_reply && newComment.comment_reply.length > 0 ? (
+                newComment.comment_reply.map((comment) => (
+                  <CommentToComment_Item key={comment.id} CommentToComent={comment} />
+                ))
+              ) : (
+                <p>대 댓글이 없습니다.</p>
+              )}
+            </div>
           </div>
           <div className='comment-like'>
-          <button onClick={handleLikeClick} className='like-button'>
-          {liked ? '좋아요 취소' : '좋아요'}
-          </button>
-          <h6>좋아요수: {likeCount} </h6>
+            <button onClick={handleLikeClick} className='like-button'>
+              <img src={liked ? '/heartFill.png' : '/heartEmpty.png'} alt='like' />
+            </button>
+            <h6>{likeCount}</h6>
           </div>
         </div>
       </div>
     </div>
   );
-
 }

@@ -88,10 +88,10 @@ const CommunityDetail =  () => {
       </div>
 
       {/* 댓글 작성 */}
-      <div className='comment-container0'> 
+      <div className='comment-container4'> 
             <div className='comment-write'>
             <input
-            type="text"
+            type="comment-text"
             value={newComment}
             onChange={handleCommentChange}
             placeholder="댓글쓰기"

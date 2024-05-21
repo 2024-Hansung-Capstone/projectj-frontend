@@ -73,7 +73,7 @@ label {
 }
 
 input[type="edit-text"],
-input[type="id"],
+input[type="edit-id"],
 input[id="password"],
 input[id="confirmPassword"] {
   flex: 2;

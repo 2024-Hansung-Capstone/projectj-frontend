@@ -18,13 +18,6 @@ const DECREASE_REPLY_LIKE = gql`
 `;
 
 
-
-
-
-
-
-
-
 export default function CommentToComment_Item({CommentToComent}) {
 
   const [liked, setLiked] = useState(false);
@@ -59,26 +52,25 @@ export default function CommentToComment_Item({CommentToComent}) {
           increaseReplyLike({ variables: { reply_id: CommentToComent.id } });
         }}
     return (
-        <div className='comment-container0'>
-          
+        <div className='commentTocomment-container'>
           <div className='comment-photo'>
             <p>사진</p>
           </div>
-          <div className='comment-title'>
-            <div className='comment-container1'>
-              <div className='comment-name'>
-                <p>이름:{CommentToComent.user.name}</p>
+          <div className='commentTocomment-title'>
+            <div className='commentTocomment-container1'>
+              <div className='commentTocomment-name'>
+                <p>{CommentToComent.user.name}</p>
               </div>
             </div>
             <div>
               {CommentToComent.detail}
             </div>
-            <div className='comment-container3'>
-              <div className='comment-like'>
+            <div className='commentTocomment-container2'>
+              <div className='commentTocomment-like'>
               <button onClick={handleLikeClick} className='like-button'>
               {liked ? '좋아요 취소' : '좋아요'}
               </button>
-              <h6>좋아요수: {likeCount} </h6>
+              <h6>{likeCount}</h6>
               </div>
             </div>
           </div>
