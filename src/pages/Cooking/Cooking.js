@@ -5,7 +5,7 @@ import { useQuery, gql,useMutation } from '@apollo/client';
 import { Input, Space } from 'antd'; 
 import './css/Cooking.css';
 
-// Cooking: 요리 메인 페이지 (전체 레시피 불러오기 연결됨. AI 레시피, 검색 연결완료 해야합니다.)
+// Cooking: 요리 메인 페이지 (전체 레시피 불러오기 연결됨. AI 레시피)
 // CookingPost: 레시피 등록 페이지 (이미지 연결중입니다. name, detail은 연결됨)
 // CookingDetail: 레시피 상세 정보 (수정, 삭제 추가해야합니다. )
 // CookingAI: AI검색 결과 페이지

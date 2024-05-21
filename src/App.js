@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { ApolloProvider } from '@apollo/client';
-
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 import Category from "./components/Category";
 import Footer from "./components/Footer"
 
@@ -45,6 +45,7 @@ import Market from "./pages/Market/Market";
 import TermsOfService from "./pages/BeforeLogin/TermsOfService";
 
 
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // 인증 상태를 관리
 
@@ -58,9 +59,17 @@ function App() {
   const handleLogout = () => {
     setIsAuthenticated(false);
   };
+const uploadLink = createUploadLink({
+  uri: 'http://54.180.182.40:5000/graphql', 
+});
 
+const client = new ApolloClient({
+  link: uploadLink,
+  cache: new InMemoryCache(),
+});
 
   return (
+    <ApolloProvider client={client}>
     <div className="root-wrap">
         <BrowserRouter>
           <div className="header-section">
@@ -119,6 +128,7 @@ function App() {
           </div>
         </BrowserRouter>
     </div>
+    </ApolloProvider>
   );
 }
 

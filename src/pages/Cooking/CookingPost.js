@@ -8,7 +8,7 @@ import './css/CookingPost.css';
 
 // 레시피 생성
 const CREATE_COOK = gql`
-  mutation CreateCook($input: CreateCookInput!) {
+  mutation CreateCook($createCookInput: CreateCookInput!) {
     createCook(createCookInput: $createCookInput) {
       id
       name
@@ -63,7 +63,7 @@ export default function CookingPost() {
           createCookInput: {
             name,
             detail,
-            post_images: images ? [images]: []
+            post_images: images 
           },
         },
       });
@@ -72,6 +72,7 @@ export default function CookingPost() {
       navigate('/Cooking'); 
     } catch (error) {
         console.error('Error creating cook:', error);
+        console.log(JSON.stringify(error, null, 2));
         alert('게시물을 등록하는 중 오류가 발생했습니다. 다시 시도해주세요.'+error);
     }
   };
