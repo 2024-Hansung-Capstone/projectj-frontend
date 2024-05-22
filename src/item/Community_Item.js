@@ -29,6 +29,7 @@ const DECREASE_BOARD_LIKE = gql`
 
 export default function Community_Item({ board, selectedItem }) {
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(board.like);
   const [deleteBoard] = useMutation(DELETE_BOARD, {
@@ -42,12 +43,22 @@ export default function Community_Item({ board, selectedItem }) {
     },
   });
   const [increaseBoardLike] = useMutation(INCREASE_BOARD_LIKE, {
+    context: {
+      headers: {
+        authorization: `Bearer ${token || ''}`
+      }
+    },
     onCompleted: (data) => {
       setLikeCount(data.increaseBoardLike.like);
     },
   });
 
   const [decreaseBoardLike] = useMutation(DECREASE_BOARD_LIKE, {
+    context: {
+      headers: {
+        authorization: `Bearer ${token || ''}`
+      }
+    },
     onCompleted: (data) => {
       setLikeCount(data.decreaseBoardLike.like);
     },

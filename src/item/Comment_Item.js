@@ -65,7 +65,7 @@ const INCREASE_REPLY_LIKE = gql`
 
 const DECREASE_REPLY_LIKE = gql`
   mutation DecreaseReplyLike($reply_id: String!) {
-    decreaseReplyLike(reply_id: $reply_id){
+    decreaseReplyLike(reply_id: $reply_id) {
       id
     }
   }
@@ -86,6 +86,7 @@ const CREATE_COMMENT_REPLY = gql`
 export default function Comment_Item({ comment, onDeleteSuccessToComment  }) {
   const [showOptions, setShowOptions] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const token = localStorage.getItem('token');
   const [editedDetail, setEditedDetail] = useState(comment.detail);
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(comment.like);
@@ -121,6 +122,11 @@ export default function Comment_Item({ comment, onDeleteSuccessToComment  }) {
   });
 
   const [increaseReplyLike] = useMutation(INCREASE_REPLY_LIKE, {
+    context: {
+      headers: {
+        authorization: `Bearer ${token}` // Include the token in the authorization header
+      }
+    },
     onCompleted: (data) => {
       setLikeCount((prev) => prev + 1);
       setLiked(true);
@@ -130,8 +136,14 @@ export default function Comment_Item({ comment, onDeleteSuccessToComment  }) {
       alert('댓글 좋아요 중 오류가 발생했습니다.' + error);
     }
   });
+  
 
   const [decreaseReplyLike] = useMutation(DECREASE_REPLY_LIKE, {
+    context: {
+      headers: {
+        authorization: `Bearer ${token}` // Include the token in the authorization header
+      }
+    },
     onCompleted: () => {
       setLikeCount((prev) => prev - 1);
       setLiked(false);

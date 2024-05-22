@@ -33,7 +33,6 @@ import MarketUpdate from './pages/Market/MarketUpdate';
 import Community from "./pages/Community/Community";
 import CommunityUpdate from "./pages/Community/CommunityUpdate";
 import Notification from "./pages/Notification"; 
-import Notification_All from "./pages/Notification_All"; 
 
 // mypage
 import EditUserInfo from './pages/EditUserInfo';
@@ -130,7 +129,6 @@ const client = new ApolloClient({
                 <Route path="/MessageDetail"  element={isAuthenticated ? <MessageDetail /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MessageReply"  element={isAuthenticated ? <MessageReply /> : <Login onLogin={handleLogin} />} />
                 <Route path="/EditUserInfo" element={isAuthenticated ? <EditUserInfo /> : <Login onLogin={handleLogin} />} />
-                <Route path="/Notification_All"  element={isAuthenticated ? <Notification_All /> : <Login onLogin={handleLogin} />} />
                 
                 <Route path="/notification" element={<Notification notificationData={notificationData} clearNotificationData={handleClearNotificationData} />} />
                 <Route path="/" element={<MessageReceiveBox setNotificationData={handleSetNotificationData} />} />

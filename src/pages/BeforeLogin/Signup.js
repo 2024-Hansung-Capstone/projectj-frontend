@@ -232,6 +232,11 @@ const Signup = () => {
     setProfileImage(e.target.files[0]);
   };
 
+  const handleSignupSuccess = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
   const generateOptions = (start, end) => {
     const options = [];
     for (let i = start; i <= end; i++) {
