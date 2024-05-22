@@ -1,16 +1,14 @@
-// MyPage.js
 import React from 'react';
 import { PiUserCircleLight } from "react-icons/pi";
 import { TbSquareRoundedLetterP } from "react-icons/tb";
 import { SlEnvolopeLetter } from "react-icons/sl";
-import { FaRegHeart, FaRegBell, FaEdit } from "react-icons/fa";
-import { LuMessagesSquare } from "react-icons/lu";
 import { IoLogOutOutline } from "react-icons/io5";
 import { HiMiniNoSymbol } from "react-icons/hi2";
-import './css/MyPage.css';
+import { FaEdit } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import DELETE_USER_MUTATION from './gql/deleteUserGql';
+import './css/MyPage.css';
 
 const GET_USER_INFO = gql`
   query FetchUserInfo($userId: String!) {
