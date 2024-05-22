@@ -13,9 +13,12 @@
     display: flex;
 
 }
-.mi-photo {
-
-}
+.marketitem-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
 .mi-age {
     border: groove 1px #ddd;
     width: 50%;

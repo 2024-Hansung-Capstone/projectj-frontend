@@ -16,6 +16,10 @@ const GET_USED_PRODUCTS = gql`
         id
         name
       }
+      post_images {
+        id
+        imagePath
+      }
     }
   }
 `;
@@ -33,7 +37,7 @@ const MarketPost = () => {
   const [price, setPrice] = useState('');
   const [detail, setDetail] = useState('');
   const [category, setCategory] = useState('');
-  const [file, setFile] = useState(null); 
+  const [files, setFiles] = useState([]);
 
   const navigate = useNavigate();
   const location = useLocation(); 
@@ -59,27 +63,13 @@ const MarketPost = () => {
   };
 
   const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
+    const selectedFiles = Array.from(e.target.files);
+    setFiles(selectedFiles);
   };
 
   const handleSubmit = async (e) => {  
     e.preventDefault();
     try {
-      let uploadedFilePath = '';
-      if (file) {
-        const formData = new FormData();
-        formData.append('file', file);
-
-        const response = await fetch('http://54.180.182.40:5000/upload', {  // 서버에서 파일을 처리하는 엔드포인트 설정
-          method: 'POST',
-          body: formData,
-        });
-
-        const result = await response.json();
-        uploadedFilePath = result.filePath; // 서버에서 반환된 파일 경로
-      }
-
       const { data } = await createUsedProduct({
         variables: {
           createUsedProductInput: {
@@ -88,7 +78,7 @@ const MarketPost = () => {
             detail,
             category,
             state: "판매중",
-            image: uploadedFilePath  // 업로드된 파일 경로를 전달
+            post_images: files  // 파일 자체를 전달
           }
         },
         context: {
@@ -136,7 +126,7 @@ const MarketPost = () => {
           </div>
           <div className="form-group">
             <label htmlFor="image" className="market-post-photo">사진 첨부</label>
-            <input type="file" id="image" accept="image/*" onChange={handleFileChange} required />
+            <input type="file" id="image" accept="image/*" multiple onChange={handleFileChange} required />
           </div>
           <div className="form-group">
             <label htmlFor="detail" className="market-post-detail">상품 설명</label>

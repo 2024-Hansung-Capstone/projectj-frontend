@@ -45,6 +45,10 @@ const GET_USED_PRODUCTS = gql`
         id
         name
       }
+      post_images {
+        id
+        imagePath
+      }
     }
   }
 `;
@@ -68,6 +72,7 @@ export default function MarketDetail() {
   const [deleteUsedProduct] = useMutation(DELETE_USED_PRODUCT);
   const [updateUsedProduct] = useMutation(UPDATE_USED_PRODUCT);
   const [sellerName, setSellerName] = useState('');
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const { loading: loadingWhoAmI, error: errorWhoAmI, data: dataWhoAmI } = useQuery(WHO_AM_I_QUERY, {
     context: {
@@ -137,6 +142,14 @@ export default function MarketDetail() {
     }
   };
 
+  const handlePreviousImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? product.post_images.length - 1 : prevIndex - 1));
+  };
+
+  const handleNextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex === product.post_images.length - 1 ? 0 : prevIndex + 1));
+  };
+
   return (
     <div className="marketdetail-container">
       <ToastContainer />
@@ -145,6 +158,15 @@ export default function MarketDetail() {
           <div className='marketdetail-container2'>
             <div className='marketdetail-container3'>
               <h3 className="productImage">이미지</h3>
+              {product.post_images && product.post_images.length > 0 ? (
+                <div className="image-slider">
+                  <button onClick={handlePreviousImage}>{"<"}</button>
+                  <img src={product.post_images[currentImageIndex].imagePath} alt="상품 이미지" className="productImage" />
+                  <button onClick={handleNextImage}>{">"}</button>
+                </div>
+              ) : (
+                <p>No images available</p>
+              )}
             </div>
             <div className='marketdetail-container4'>
               <h2 className="productTitle">{product.title}</h2>

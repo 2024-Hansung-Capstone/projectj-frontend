@@ -31,13 +31,20 @@ export default function Market_Item({ product, onClick }) {
 
   if (!product || !product.user) return null; // 사용자 정보가 없는 경우 처리
 
+  const imageSrc = product.post_images && product.post_images.length > 0
+    ? product.post_images[0].imagePath
+    : null; // 이미지가 없는 경우 null
+
   return (  // 데이터 값을 (product) 로 product 데이터를 전달 받음.
     <div className="market-item" onClick={() => onClick(product)}>
       <div className="marketitem-container">
         <div className="marketitem-main1">
-          <div className="marketitem-photo">
-            {/* 상품 이미지 표시 */}
-            <img src={product.imageBase64} alt="Product" />
+        <div className="marketitem-photo">
+            {imageSrc ? (
+              <img src={imageSrc} alt="Product" />
+            ) : (
+              <div className="no-image">no-image</div> // 이미지가 없는 경우 "no-image" 표시
+            )}
           </div>
           <div className="marketitem-id"></div>
           <div className="marketitem-title">

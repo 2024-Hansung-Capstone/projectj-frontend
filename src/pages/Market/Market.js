@@ -19,6 +19,10 @@ const GET_USED_PRODUCTS = gql`
       create_at
       view
       like
+      post_images {
+        id
+        imagePath
+      }
       user {
         id
         name
@@ -64,6 +68,10 @@ const SEARCH_USED_PRODUCTS = gql`
       title
       view
       like
+      post_images {
+        id
+        imagePath
+      }
       price
       detail
       category
