@@ -223,7 +223,7 @@ const Signup = () => {
       } catch (error) {
         console.error('회원가입 중 오류 발생:', error);
       }
-    } else {
+    } else if (e.nativeEvent.submitter.className === 'signup-form-button') {
       alert('입력한 정보를 다시 확인해주십시오.');
     }
   };
