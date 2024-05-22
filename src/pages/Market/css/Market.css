@@ -54,7 +54,7 @@
     box-sizing: border-box;
     padding: 10px;
 }
-.nodata {
+.market-nodata {
     height: 400px;
     color: gray;
     font-size: 30px;

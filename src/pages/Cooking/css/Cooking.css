@@ -115,6 +115,7 @@
 }
 .cook-ai {
   width: 90%;
+  height: 250px;
   border: 2.5px solid black;
   border-radius: 14px;
   padding: 10px;
@@ -123,13 +124,16 @@
 .cook-ai-input {
   width: 60%;
   margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; /* 이 부분을 추가 */
 }
+
 .cook-ai-input > button {
   display: flex;
   flex-direction: column;
-  -webkit-box-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
   align-items: center;
   background-color: #209094;
   border-radius: 16px;
@@ -138,9 +142,21 @@
   height: 28px;
   transition: padding 0.2s ease-in-out 0s;
   color: white;
-  margin-left: auto; 
-  margin-top: 155px;
+  position: absolute; /* 이 부분을 추가 */
+  right: 10px; /* 오른쪽 여백 설정 */
+  bottom: 10px; /* 아래쪽 여백 설정 */
 }
+
+
+.cooking-nodata {
+  color: gray;
+  font-size: 25px;
+  text-align: center;
+  /* 아래 속성들은 .cook-ai-input에 flex를 적용함으로써 불필요해짐 */
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
 .ingredient-result > button {
   display: flex;
   flex-direction: column;
@@ -186,6 +202,18 @@
   width: 55%;
   padding: 15px;
   margin-left: 20px;
+}
+
+/* Ant Design Search 버튼 색상 변경 */
+.cooking-search-container .ant-btn-primary {
+  background-color: #29ADB2;
+  border-color: #29ADB2;
+}
+
+.cooking-search-container .ant-btn-primary:hover,
+.cooking-search-container .ant-btn-primary:focus {
+  background-color: #209094; /* 호버 및 포커스 시 색상 변경 */
+  border-color: #209094;
 }
 
 

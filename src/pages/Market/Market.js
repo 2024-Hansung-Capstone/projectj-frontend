@@ -234,7 +234,7 @@ export default function Market() {
               <Market_Item key={index} product={product} onClick={() => handleItemClick(product)} />
             ))
           ) : (
-            <p className='nodata'>등록된 상품이 없습니다.</p>
+            <p className='market-nodata'>등록된 상품이 없습니다.</p>
           )
         )}
       </div>

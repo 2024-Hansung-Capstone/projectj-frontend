@@ -261,7 +261,7 @@ export default function Cooking() {
             <div className='cook-ai-input'>
               <p>추가된 재료</p>
               {dataIngredients?.fetchMyIngredients.length === 0 ? (
-                <p className="nodata">재료가 없습니다.</p>
+                <p className="cooking-nodata">재료가 없습니다.</p>
                 ) : (
                   dataIngredients?.fetchMyIngredients.map((ing) => (
                 <div className="ingredient-item" key={ing.id}>
@@ -279,10 +279,15 @@ export default function Cooking() {
         {/* 레시피 검색 */}
         <div className='cooking-search-container'>
           <div className='cooking-search'>
-            <Space compact>
-              <Search placeholder="재료/요리를 검색하세요" onSearch={handleSearch} enterButton />
-            </Space>
-          </div>
+           <Space compact>
+            <Search 
+              placeholder="재료/요리를 검색하세요" 
+              onSearch={handleSearch} 
+              enterButton 
+              className='custom-search-button'
+            />
+          </Space>
+        </div>
         </div>
 
         {/* 전체 레시피 */}
