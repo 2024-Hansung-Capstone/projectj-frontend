@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import { NotificationProvider } from "./pages/NotificationProvider"; // 명명된 내보내기 가져오기
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 import Category from "./components/Category";
@@ -119,9 +119,7 @@ const client = new ApolloClient({
                 <Route path="/MessageReply"  element={isAuthenticated ? <MessageReply /> : <Login onLogin={handleLogin} />} />
                 <Route path="/EditUserInfo" element={isAuthenticated ? <EditUserInfo /> : <Login onLogin={handleLogin} />} />
                 <Route path="/Notification_All"  element={isAuthenticated ? <Notification_All /> : <Login onLogin={handleLogin} />} />
-              
                 
-
                 <Route path="/notification" element={<Notification notificationData={notificationData} clearNotificationData={handleClearNotificationData} />} />
                 <Route path="/" element={<MessageReceiveBox setNotificationData={handleSetNotificationData} />} />
       

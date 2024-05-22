@@ -1,6 +1,27 @@
-import React from 'react';
-import { useQuery, gql } from '@apollo/client';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useQuery, useLazyQuery, gql } from '@apollo/client';
+
+const FETCH_MY_NOTIFICATION_MESSAGES = gql`
+  query FetchMyNotificationMessages {
+    fetchMyNotificationMessages {
+      id
+      code
+      create_at
+      letter {
+        id
+      }
+      board {
+        id
+      }
+      reply {
+        id
+      }
+      used_product {
+        id
+      }
+    }
+  }
+`;
 
 const GET_NOTIFICATION_MESSAGE = gql`
   query GetNotificationMessage($notification_id: String!) {
@@ -9,76 +30,46 @@ const GET_NOTIFICATION_MESSAGE = gql`
 `;
 
 const Notification = () => {
-  const location = useLocation();
-  const { notification_id } = location.state || {};
-
-  const { loading, error, data } = useQuery(GET_NOTIFICATION_MESSAGE, {
-    variables: { notification_id },
-    skip: !notification_id,
-    onError: (error) => {
-      console.error("Error fetching notification:", error.message);
-    }
+  const { loading: loadingNotifications, error: errorNotifications, data: dataNotifications } = useQuery(FETCH_MY_NOTIFICATION_MESSAGES, {
+    context: {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || ''}`,
+      },
+    },
   });
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-  if (!data) return <p>gql 연결 안됨</p>;
+  const [getNotificationMessage, { called, loading, data: messageData }] = useLazyQuery(GET_NOTIFICATION_MESSAGE, {
+    context: {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || ''}`,
+      },
+    },
+  });
 
-  const notificationMessage = data.getNotificationMessage;
+  useEffect(() => {
+    if (dataNotifications?.fetchMyNotificationMessages.length) {
+      dataNotifications.fetchMyNotificationMessages.forEach(notification => {
+        getNotificationMessage({ variables: { notification_id: notification.id } });
+      });
+    }
+  }, [dataNotifications, getNotificationMessage]);
+
+  if (loadingNotifications) return <p>로딩 중...</p>;
+  if (errorNotifications) return <p>에러: {errorNotifications.message}</p>;
 
   return (
-    <div className="notification-details-container">
-      <h2>Notification Details</h2>
-      {notificationMessage ? (
-        <>
-          <p>ID: {notificationMessage.id}</p>
-          <p>User: {notificationMessage.user.name}</p>
-          <p>Code: {notificationMessage.code}</p>
-          <p>Is Read: {notificationMessage.is_read ? 'Yes' : 'No'}</p>
-          <p>Created At: {new Date(notificationMessage.create_at).toLocaleString()}</p>
-          
-          {notificationMessage.letter && (
-            <>
-              <h3>Letter Details</h3>
-              <p>Title: {notificationMessage.letter.title}</p>
-              <p>Detail: {notificationMessage.letter.detail}</p>
-            </>
-          )}
-
-          {notificationMessage.board && (
-            <>
-              <h3>Board Details</h3>
-              <p>Title: {notificationMessage.board.title}</p>
-            </>
-          )}
-
-          {notificationMessage.reply && (
-            <>
-              <h3>Reply Details</h3>
-              <p>Content: {notificationMessage.reply.content}</p>
-            </>
-          )}
-
-          {notificationMessage.used_product && (
-            <>
-              <h3>Used Product Details</h3>
-              <p>Name: {notificationMessage.used_product.name}</p>
-            </>
-          )}
-
-          {notificationMessage.like && (
-            <>
-              <h3>Like Details</h3>
-              <p>User: {notificationMessage.like.user.name}</p>
-              {notificationMessage.like.product && (
-                <p>Product: {notificationMessage.like.product.name}</p>
-              )}
-            </>
-          )}
-        </>
-      ) : (
-        <p>알림이 없습니다. </p>
-      )}
+    <div>
+      <h1>알림</h1>
+      <ul>
+        {dataNotifications.fetchMyNotificationMessages.map((notification) => (
+          <li key={notification.id}>
+            <p>{new Date(notification.create_at).toLocaleString()}</p>
+            <div>
+              <p>{messageData && messageData.getNotificationMessage ? messageData.getNotificationMessage : "로딩 중..."}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
