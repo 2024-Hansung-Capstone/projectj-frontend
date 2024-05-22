@@ -68,26 +68,30 @@ export default function MyPage({ onLogout }) {
   const myRole = dataMyRole?.fetchMyRole;
 
   const handleDeleteUser = async () => {
-    try {
-      // 회원 탈퇴 요청 보내기
-      const { data } = await deleteUser({
-        // 요청 헤더에 JWT 토큰 추가
-        context: {
-          headers: {
-            authorization: `Bearer ${getToken()}` // 로컬 스토리지에서 JWT 토큰을 가져옴
+    const confirmation = window.confirm("정말로 탈퇴하시겠습니까?");
+
+    if (confirmation) {
+      try {
+        // 회원 탈퇴 요청 보내기
+        const { data } = await deleteUser({
+          // 요청 헤더에 JWT 토큰 추가
+          context: {
+            headers: {
+              authorization: `Bearer ${getToken()}` // 로컬 스토리지에서 JWT 토큰을 가져옴
+            }
           }
+        });
+        if (data.deleteUser) {
+          // 회원 탈퇴 성공 시 로그아웃 수행
+          onLogout();
+        } else {
+          // 회원 탈퇴 실패
+          alert('회원 탈퇴에 실패했습니다.');
         }
-      });
-      if (data.deleteUser) {
-        // 회원 탈퇴 성공 시 로그아웃 수행
-        onLogout();
-      } else {
-        // 회원 탈퇴 실패
+      } catch (error) {
+        console.error('회원 탈퇴 오류:', error);
         alert('회원 탈퇴에 실패했습니다.');
       }
-    } catch (error) {
-      console.error('회원 탈퇴 오류:', error);
-      alert('회원 탈퇴에 실패했습니다.');
     }
   };
 
