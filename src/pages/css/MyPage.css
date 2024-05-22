@@ -5,6 +5,7 @@
     padding-bottom: 100px;
     font-family: 'KCC-Hanbit';
 }
+
 .mypage-user-container {
     border: 2px double gray;
     width: 95%;
@@ -13,6 +14,7 @@
     border-radius: 20px;
     background-color: rgb(255, 255, 255);
 }
+
 .mypage-user-container2 {
     display: block;
     width: 95%;
@@ -20,65 +22,78 @@
     margin: 10px;
     font-size: 20px;
 }
+
 .mypage-user-container3 {
     display: flex;
+    align-items: center;  /* Ensure vertical alignment */
+    justify-content: space-around; /* Distribute space around items for horizontal alignment */
     width: 95%;
     font-size: 20px;
-    margin-left: 25px;
-    border-radius: 15px;
     text-decoration: none;
-    
 }
+
 .mypage-user-container3 > div {
     padding: 10px;
-    margin-left: 55px;
     border-right: 1px solid rgb(208, 209, 207);
 }
+
 .mypage-userName {
     font-size: 40px;
     font-weight: bold;
 }
+
 .mypage-message {
     text-decoration: none;
     color: black;
-  }
+    text-align: center;
+}
 
-  .mypage-message:hover {
+.mypage-message:hover {
     text-decoration: none;
-  }
+}
+
 .mypage-user-container3 > div:last-child {
     border-right: none;
 }
+
 .mypage-blank {
     background-color: rgb(208, 209, 207);
     margin: 10px;
-    margin-top : 30px;
+    margin-top: 30px;
     height: 3px;
 }
+
 .mypage-user {
     display: flex;
     padding: 5px;
     margin: 5px;
 }
+
 .mypage-userImage {
-    font-size: 80px;
+    font-size: 100px;
     padding-top: 20px;
+    margin-right: 45px;
 }
+
 #profileImage {
     max-width: 125px;
     max-height: 125px;
 }
+
 .mypage-userImage {
     max-width: 80px;
     max-height: 80px;
 }
+
 .mypage-userName {
     margin: 10px;
 }
+
 .mypage-role {
     margin: 10px;
     padding-top: 10px;
 }
+
 .mypage-list {
     padding: 10px;
     margin: 10px;
@@ -86,6 +101,7 @@
     display: flex;
     flex-direction: column;
 }
+
 .mypage-list > a,
 .mypage-list > div {
     padding-bottom: 20px;
@@ -94,12 +110,13 @@
     text-decoration: none;
     color: inherit;
 }
+
 .mypage-list > a:hover,
 .mypage-list > div:hover {
     color: inherit;
 }
+
 .mypage-edit,
-.mypage-point,
 .mypage-message,
 .mypage-heart,
 .mypage-logout {
@@ -108,20 +125,38 @@
     margin: 10px;
 }
 
+.mypage-point {
+    display: flex;
+    align-items: center;  /* 가운데정렬 */
+    justify-content: center; /* 가운데정렬 */
+    flex: 1;
+    margin: 10px;
+}
+.mypage-point svg {
+    margin-right: 10px;
+}
+.mypage-message svg {
+    margin-right: 10px;
+}
+.mypage-list img {
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+  }
+
 @media (min-width: 1150px) {
     /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
     .mypage-container {
-      width: 100%;
-      max-width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
+        width: 100%;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
-  @font-face {
+@font-face {
     font-family: 'KCC-Hanbit';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
-  }
-  
+}

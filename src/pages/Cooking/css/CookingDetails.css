@@ -7,6 +7,9 @@
 }
 
 .ck-main-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 20px;
 }
 
@@ -54,11 +57,11 @@
 }
 
 .cooking-main-image {
-  max-width: 100%;
   height: auto;
-  width: 1208px;
+  width: 500px;
   max-height: 600px;
-  margin-left: -205px;
+  padding: 20px;
+  align-self: center; /* Optional, for better alignment */
 }
 
 .recipe-no-image {

@@ -45,3 +45,8 @@
 .cookingitem-detail p {
     margin: 5px;
 }
+
+.main-dish-image {
+    width: 180px;
+    height: 180px;
+}

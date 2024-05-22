@@ -122,11 +122,15 @@ export default function MyPage({ onLogout }) {
       <div className='mypage-blank'></div>
 
       <div className='mypage-list'>
-        <Link className='mypage-mypost' to="/mypost">내가 작성한 글</Link>
-        <Link className='mypage-edit' to="/editUserInfo"><FaEdit /> 내 정보 수정</Link>
-        <Link className='mypage-logout' to="/" onClick={handleLogout}><IoLogOutOutline /> 로그아웃</Link>
+        <Link className='mypage-edit' to="/editUserInfo">
+          <img src="/edit.png" alt="edit" />
+          내 정보 수정</Link>
+        <Link className='mypage-logout' to="/" onClick={handleLogout}>
+          <img src="/logout.png" alt="logout" />
+          로그아웃</Link>
         <Link className='mypage-withdraw-link' to="/" onClick={handleDeleteUser}>
-          <HiMiniNoSymbol /> 회원탈퇴
+         <img src="/exit.png" alt="exit" />
+          회원탈퇴
         </Link>
       </div>
     </div>
