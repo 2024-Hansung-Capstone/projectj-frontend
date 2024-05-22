@@ -55,7 +55,6 @@ export default function Community_Item({ board, selectedItem }) {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     const hours = String(date.getHours()).padStart(2, '0');
@@ -107,6 +106,11 @@ export default function Community_Item({ board, selectedItem }) {
         <div className='ci-container2'>
           <div className='ci-post'>
             <h4>사진</h4>
+            {board?.post_images?.length > 0 ? (<div className="cooking-images-container">
+            {board.post_images.map((image, index) => (
+              <img key={index} src={image.imagePath} alt={`이미지 ${index + 1}`}className="cooking-main-image"/> ))}
+             </div>) : (
+              <div className="ck-main-no-image">이미지 없음</div>)}
           </div>
           <div className='ci-text'>
             <h4>{board.detail}</h4>

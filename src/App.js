@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import { setContext } from '@apollo/client/link/context';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 import Category from "./components/Category";
@@ -72,9 +72,20 @@ const uploadLink = createUploadLink({
   const handleClearNotificationData = () => {
     setNotificationData(null);
   };
+// 인증 토큰 가져오기 (예: 로컬 스토리지에서)
+const token = localStorage.getItem('token');
 
+// 인증 헤더 설정
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    }
+  }
+});
 const client = new ApolloClient({
-  link: uploadLink,
+  link: authLink.concat(uploadLink),
   cache: new InMemoryCache(),
 });
 

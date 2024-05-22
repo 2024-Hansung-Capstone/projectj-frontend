@@ -10,6 +10,38 @@ const DELETE_REPLY = gql`
       id
       title
       detail
+      reply {
+        id
+        like
+        detail
+        user {
+          id
+          name
+        }
+        like_user {
+          id
+          user {
+            id
+            name
+          }
+        }
+        comment_reply{
+          id
+          like
+          detail
+          user {
+            id
+            name
+          }
+          like_user {
+            id
+            user {
+              id
+              name
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -33,7 +65,9 @@ const INCREASE_REPLY_LIKE = gql`
 
 const DECREASE_REPLY_LIKE = gql`
   mutation DecreaseReplyLike($reply_id: String!) {
-    decreaseReplyLike(reply_id: $reply_id)
+    decreaseReplyLike(reply_id: $reply_id){
+      id
+    }
   }
 `;
 
@@ -49,7 +83,7 @@ const CREATE_COMMENT_REPLY = gql`
   }
 `;
 
-export default function Comment_Item({ comment }) {
+export default function Comment_Item({ comment, onDeleteSuccessToComment  }) {
   const [showOptions, setShowOptions] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editedDetail, setEditedDetail] = useState(comment.detail);
@@ -66,6 +100,7 @@ export default function Comment_Item({ comment }) {
     variables: { reply_id: comment.id },
     onCompleted: () => {
       alert('댓글이 삭제되었습니다.');
+      onDeleteSuccessToComment(comment.id);
     },
     onError: (error) => {
       console.error('댓글 삭제 중 오류 발생:', error);
@@ -104,6 +139,8 @@ export default function Comment_Item({ comment }) {
     onError: (error) => {
       console.error('댓글 좋아요 취소 중 오류 발생:', error);
       alert('댓글 좋아요 취소 중 오류가 발생했습니다.' + error);
+      console.log(JSON.stringify(error, null, 2))
+
     }
   });
 
@@ -132,17 +169,33 @@ export default function Comment_Item({ comment }) {
 
   const handleReplyClick = async () => {
     const detail = prompt('대댓글 내용을 입력하세요.');
-    if (detail) {
+    if (detail) 
+    {
       const { data } = await createCommentReply({ variables: { reply_id: comment.id, detail } });
-      alert('대댓글이 작성되었습니다.');
-      const updatedComment = {
-        ...newComment,
-        comment_reply: [...newComment.comment_reply, data.createCommetReply]
-      };
-      setComment(updatedComment);
+      alert('대댓글이 작성되었습니다.');    
+      if (newComment.comment_reply && newComment.comment_reply.length !== 0) {
+        const updatedComment = {
+          ...newComment,
+          comment_reply: [...newComment.comment_reply, data.createCommetReply]
+        };
+        setComment(updatedComment);
+      } else {
+        // newComment.comment_reply가 존재하지 않거나 길이가 0인 경우에는 새로운 배열로 대댓글을 추가합니다.
+        const updatedComment = {
+          ...newComment,
+          comment_reply: [data.createCommetReply]
+        };
+        setComment(updatedComment);
+      }
     }
   };
-
+  const handleDeleteSuccess = (deletedCommentId) => {
+    const updatedComment = {
+      ...comment,
+      comment_reply: comment.comment_reply.filter(comment => comment.id !== deletedCommentId)
+    };
+    setComment(updatedComment);
+  };
   return (
     <div className='comment-container0'>
       <div className='comment-photo'>
@@ -186,7 +239,7 @@ export default function Comment_Item({ comment }) {
             <div className='commentTocomment-container'>
               {newComment.comment_reply && newComment.comment_reply.length > 0 ? (
                 newComment.comment_reply.map((comment) => (
-                  <CommentToComment_Item key={comment.id} CommentToComent={comment} />
+                  <CommentToComment_Item key={comment.id} CommentToComent={comment} onDeleteSuccess={handleDeleteSuccess}  />
                 ))
               ) : (
                 <p>대 댓글이 없습니다.</p>

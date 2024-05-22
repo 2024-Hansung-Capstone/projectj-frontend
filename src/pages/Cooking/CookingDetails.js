@@ -30,7 +30,7 @@ const CookingDetails = () => {
       <p className="author">작성자: {cook?.user?.name}</p>
       <h1 className="name">{cook?.name || '요리 글 제목'}</h1>
       <div className="detail">내용: {cook.detail}</div>
-
+      <div>조회수: {cook.view}</div>
       <button>수정</button>
       <button>삭제</button>
     </div>

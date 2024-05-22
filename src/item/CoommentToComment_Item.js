@@ -13,26 +13,51 @@ const INCREASE_REPLY_LIKE = gql`
 
 const DECREASE_REPLY_LIKE = gql`
   mutation DecreaseReplyLike($reply_id: String!) {
-    decreaseReplyLike(reply_id: $reply_id) 
+    decreaseReplyLike(reply_id: $reply_id){
+      id
+    } 
+  }
+`;
+const DELETE_COMMENT_REPLY = gql`
+  mutation DeleteCommentReply($commentReplyId: String!) {
+    deleteCommentReply(commentReply_id: $commentReplyId) {
+        id
+        like
+        detail
+        user {
+          id
+          name
+        }
+        like_user {
+          id
+          user {
+            id
+            name
+          }
+        }
+    }
   }
 `;
 
-
-export default function CommentToComment_Item({CommentToComent}) {
+export default function CommentToComment_Item({CommentToComent, onDeleteSuccess }) {
 
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(CommentToComent.like);
   //댓글 좋아요,좋아요취소 기능
   const [increaseReplyLike] = useMutation(INCREASE_REPLY_LIKE, {
+    context: {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    },
     onCompleted: (data) => {
-      console.log(data.increaseReplyLike)
       setLikeCount();
       setLiked(!liked);
     },
     onError: (error) => {
-      console.error('댓글 삭제 중 오류 발생:', error);
-      alert('댓글 삭제 중 오류가 발생했습니다.'+error);
-      console.error(JSON.stringify(error, null, 2))
+      alert('댓글 좋아요 중 오류가 발생했습니다.'+error);
+      console.log(CommentToComent);
+      console.log(JSON.stringify(error, null, 2))
     }
   });
 
@@ -43,7 +68,23 @@ export default function CommentToComment_Item({CommentToComent}) {
     },
   });
 
-  
+  const [deleteCommentReply, { loading, error }] = useMutation(DELETE_COMMENT_REPLY, {
+    onCompleted: (data) => {
+      console.log('대댓글 삭제 성공:', data);
+      if (onDeleteSuccess) {
+        onDeleteSuccess(CommentToComent.id);
+      }
+    },
+    onError: (error) => {
+      console.error('대댓글 삭제 중 오류 발생:', error);
+      alert('대댓글 삭제 중 오류가 발생했습니다: ' + error.message);
+      console.log(JSON.stringify(error, null, 2))
+    }
+  });
+
+  const handleDelete = () => {
+    deleteCommentReply({ variables: { commentReplyId: CommentToComent.id } });
+  };
   
   const handleLikeClick = () => {
         if (liked) {
@@ -63,7 +104,7 @@ export default function CommentToComment_Item({CommentToComent}) {
               </div>
             </div>
             <div>
-              {CommentToComent.detail}
+              {CommentToComent.detail}<button onClick={handleDelete} >삭제</button>
             </div>
             <div className='commentTocomment-container2'>
               <div className='commentTocomment-like'>

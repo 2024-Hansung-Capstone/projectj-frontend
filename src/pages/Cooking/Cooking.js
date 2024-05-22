@@ -22,6 +22,7 @@ const FETCH_ALL_COOKS = gql`
       }
       name
       detail
+      view
       post_images {
         id
         imagePath
@@ -75,12 +76,16 @@ const DELETE_INGREDIENT = gql`
 
 const INCREASE_COOK_VIEW = gql`
   mutation IncreaseCookView($id: String!) {
-    increaseCookView(id: $id) 
+    increaseCookView(id: $id)
+    {
+      id
+      view
+    } 
   }
 `;
 
 const FETCH_COOKS_BY_VIEW_RANK = gql`
-  query FetchCooksByViewRank($rank: Int!) {
+  query FetchCooksByViewRank($rank: Float!) {
     fetchCookByViewRank(rank: $rank) {
       id
       name
@@ -195,7 +200,7 @@ export default function Cooking() {
           (topdata && topdata.fetchCookByViewRank ? (
           topdata.fetchCookByViewRank.map((cook) => (
           <p key={cook.id}>인기 요리 이름: {cook.name}</p>))) : 
-        (<p>데이터를 가져오는 중 에러가 발생했습니다.</p>))}
+        (<pre>{JSON.stringify(toperror, null, 2)}</pre>))}
 
         </div>
         <div className='cooking-items-container'>

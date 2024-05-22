@@ -66,7 +66,7 @@ const CommunityPost = ({ onPost }) => {
             title,
             detail,
             category,
-            post_images: mainImage ? [mainImage] : []
+            post_images: mainImage ? mainImage : []
           }
         }
       });

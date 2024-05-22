@@ -37,7 +37,7 @@ const CommunityDetail =  () => {
   const [board, setBoard] = useState(location.state?.board);
   const [selectedItem, setSelectedItem] = useState(location.state?.selectedItem);
   const [newComment, setNewComment] = useState('');
-
+  const token = localStorage.getItem('token');
   const [createReply] = useMutation(CREATE_REPLY);
 
   const handleCommentChange = (e) => {
@@ -66,6 +66,14 @@ const CommunityDetail =  () => {
       alert('댓글을 작성하는 중 오류가 발생했습니다.'+error);
     }
   };
+  //삭제된 댓글 바로 반영
+  const handleDeleteSuccess = (deletedCommentId) => {
+    const updatedBoard = {
+      ...board,
+      reply: board.reply.filter(comment => comment.id !== deletedCommentId)
+    };
+    setBoard(updatedBoard);
+  };
   if (!board) {
     return <div>게시글을 불러오지 못했습니다.</div>;
   }
@@ -79,7 +87,7 @@ const CommunityDetail =  () => {
         <div className='comment-container'> 
         {board.reply && board.reply.length > 0 ? (
             board.reply.map((comment) => (
-              <Comment_Item key={comment.id} comment={comment} />
+              <Comment_Item key={comment.id} comment={comment} onDeleteSuccessToComment={handleDeleteSuccess}/>
             ))
           ) : (
             <p>댓글이 없습니다.</p>
