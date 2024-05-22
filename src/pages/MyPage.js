@@ -1,3 +1,4 @@
+// MyPage.js
 import React from 'react';
 import { PiUserCircleLight } from "react-icons/pi";
 import { TbSquareRoundedLetterP } from "react-icons/tb";
@@ -11,8 +12,7 @@ import { Link } from 'react-router-dom';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import DELETE_USER_MUTATION from './gql/deleteUserGql';
 
- 
-  const GET_USER_INFO = gql`
+const GET_USER_INFO = gql`
   query FetchUserInfo($userId: String!) {
     fetchUserById(user_id: $userId) {
       id
@@ -20,13 +20,14 @@ import DELETE_USER_MUTATION from './gql/deleteUserGql';
       point
     }
   }
-`
+`;
+
 export const WHO_AM_I_QUERY = gql`
   query WhoAmI {
     whoAmI {
       id
       name
-      profile_image{
+      profile_image {
         imagePath
       }
       point
@@ -43,9 +44,8 @@ export const FETCH_MY_ROLE_QUERY = gql`
   }
 `;
 
-  export default function MyPage({ onLogout }) {
-    const [deleteUser] = useMutation(DELETE_USER_MUTATION);
-    
+export default function MyPage({ onLogout }) {
+  const [deleteUser] = useMutation(DELETE_USER_MUTATION);
 
   const getToken = () => {
     return localStorage.getItem('token') || ''; // 토큰이 없을 경우 빈 문자열 반환
@@ -98,21 +98,20 @@ export const FETCH_MY_ROLE_QUERY = gql`
     onLogout(); // 로그아웃 콜백 호출
   };
 
-
   return (
     <div className='mypage-container'>
       <h1>마이페이지</h1>
       <div className='mypage-user-container'>
         <div className='mypage-user'>
-        <div className='mypage-userImage'>
+          <div className='mypage-userImage'>
             {whoAmI?.profile_image ? (
-                <img id="profileImage" src={whoAmI.profile_image.imagePath} alt="Profile" />
+              <img id="profileImage" src={whoAmI.profile_image.imagePath} alt="Profile" />
             ) : (
-                <PiUserCircleLight />
+              <PiUserCircleLight />
             )}
-        </div>
+          </div>
           <div className='mypage-user-container2'>
-          <div className='mypage-userName'>{whoAmI?.name}</div>
+            <div className='mypage-userName'>{whoAmI?.name}</div>
             <div className='mypage-role'>{myRole?.code} - {myRole?.name}</div>
           </div>
         </div>
@@ -125,7 +124,7 @@ export const FETCH_MY_ROLE_QUERY = gql`
       <div className='mypage-blank'></div>
 
       <div className='mypage-list'>
-      <Link className='mypage-mypost' to="/mypost">내가 작성한 글</Link>
+        <Link className='mypage-mypost' to="/mypost">내가 작성한 글</Link>
         <Link className='mypage-edit' to="/editUserInfo"><FaEdit /> 내 정보 수정</Link>
         <Link className='mypage-logout' to="/" onClick={handleLogout}><IoLogOutOutline /> 로그아웃</Link>
         <Link className='mypage-withdraw-link' to="/" onClick={handleDeleteUser}>

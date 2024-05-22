@@ -108,7 +108,8 @@ const client = new ApolloClient({
                 <Route path="/CookingPost" element={isAuthenticated ? <CookingPost /> : <Login onLogin={handleLogin} />} />
                 <Route path="/CookingDetails" element={<CookingDetails />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
-                <Route path="/MyPage" element={isAuthenticated ? <MyPage /> : <Login onLogin={handleLogin} />} />
+                <Route path="/MyPage" element={isAuthenticated ? <MyPage onLogout={handleLogout} /> : <Login onLogin={handleLogin} />} />
+
                 
                 <Route path="/MessageSendBox"  element={isAuthenticated ? <MessageSendBox /> : <Login onLogin={handleLogin} />} />
                 <Route path="/MessageReceiveBox"  element={isAuthenticated ? <MessageReceiveBox /> : <Login onLogin={handleLogin} />} />
@@ -119,16 +120,7 @@ const client = new ApolloClient({
                 <Route path="/EditUserInfo" element={isAuthenticated ? <EditUserInfo /> : <Login onLogin={handleLogin} />} />
                 <Route path="/Notification_All"  element={isAuthenticated ? <Notification_All /> : <Login onLogin={handleLogin} />} />
               
-                <Route
-                  path="/MyPage"
-                  element={
-                  isAuthenticated ? (
-                   <MyPage />
-                    ) : (
-                    <Login onLogin={handleLogin} />
-                    )
-                  }   
-                />
+                
 
                 <Route path="/notification" element={<Notification notificationData={notificationData} clearNotificationData={handleClearNotificationData} />} />
                 <Route path="/" element={<MessageReceiveBox setNotificationData={handleSetNotificationData} />} />
