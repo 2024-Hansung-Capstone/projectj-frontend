@@ -1,11 +1,17 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './css/CookingDetails.css';
+import { useMutation, gql } from '@apollo/client';
 
+const DELETE_COOK = gql`
+  mutation DeleteCook($cook_id: String!) {
+    deleteCook(cook_id: $cook_id)
+  }
+`;
 const CookingDetails = () => {
   const location = useLocation();
   const { cook } = location.state || {};
-
+  const navigate = useNavigate();
   const renderDetails = () => {
     if (Array.isArray(cook?.detail)) {
       return cook.detail.map((item, index) => (
@@ -18,6 +24,20 @@ const CookingDetails = () => {
     return <p className="no-detail">레시피가 없습니다.</p>;
   };
 
+
+
+  const [deleteCook] = useMutation(DELETE_COOK, {
+    onCompleted: (data) => {
+      navigate('/Cooking'); 
+    },
+    onError: (error) => {
+      console.error('Error deleting cook:', error);
+      console.log(JSON.stringify(error, null, 2))
+    },
+  });
+  const handleDelete = (cookId) => {
+    deleteCook({ variables: { cook_id: cookId } });
+  };
   return (
     <div className="cooking-details-container">
       <div className="ck-main-image-container">
@@ -32,7 +52,7 @@ const CookingDetails = () => {
       <div className="detail">내용: {cook.detail}</div>
       <div>조회수: {cook.view}</div>
       <button>수정</button>
-      <button>삭제</button>
+      <button onClick={() => handleDelete(cook.id)}>삭제</button>
     </div>
   );
 };

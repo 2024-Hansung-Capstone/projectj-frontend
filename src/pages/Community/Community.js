@@ -140,6 +140,9 @@ const Community = () => {
     setIsLoggedIn(!!token);
 
     const loggedInUser = localStorage.getItem('loggedInUserName');
+    const loggedInUserId = localStorage.getItem('loggedInUserNameId');
+    console.log(loggedInUser)
+    console.log(loggedInUserId)
     if (loggedInUser) {
       setLoggedInUserName(loggedInUser);
     } else {
@@ -147,15 +150,16 @@ const Community = () => {
     }
   }, [data]);
 
-  useEffect(() => {
-    if (initialSelectedItem !== null) {
-      setSelectedItem(initialSelectedItem);
-      setSelectedItemData(BoardList_Item[initialSelectedItem]?.title);
-      toprefetch();
-      refetch();
-    }
-  }, [initialSelectedItem]);
   
+  // 삭제,추가 후 GET_BOARD실행
+  useEffect(() => {
+    console.log(initialSelectedItem)
+    setSelectedItem(initialSelectedItem);
+    setSelectedItemData(BoardList_Item[initialSelectedItem]?.title);
+    toprefetch();
+    refetch();
+  }, [location.pathname,initialSelectedItem]); 
+
   
   //검색에서 쓰이는 훅
   useEffect(() => {

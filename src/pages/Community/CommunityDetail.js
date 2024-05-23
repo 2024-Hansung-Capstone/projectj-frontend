@@ -34,18 +34,11 @@ const FETCH_BOARD_BY_ID = gql`
 
 const CommunityDetail =  () => {
   const location = useLocation();
-  const token = localStorage.getItem('token');
   const [board, setBoard] = useState(location.state?.board);
   const [selectedItem, setSelectedItem] = useState(location.state?.selectedItem);
   const [newComment, setNewComment] = useState('');
-
-  const [createReply] = useMutation(CREATE_REPLY, {
-    context: {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('token') || ''}`
-      }
-    }
-  });
+  const token = localStorage.getItem('token');
+  const [createReply] = useMutation(CREATE_REPLY);
 
   const handleCommentChange = (e) => {
     setNewComment(e.target.value);
@@ -87,8 +80,7 @@ const CommunityDetail =  () => {
   return (
     <div className='communitydetail-container'>
       {/* 게시물 정보 */}
-      <Community_Item key={board.id} board={board} selectedItem={selectedItem} token={token} />
-
+      <Community_Item key={board.id} board={board} selectedItem={selectedItem} />
      
       {/* 댓글 */}
       <div className='comment-scroll'>

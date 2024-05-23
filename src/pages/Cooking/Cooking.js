@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Cooking_Item from '../../item/Cooking_Item';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery, gql,useMutation } from '@apollo/client'; 
 import { Input, Space } from 'antd'; 
 import './css/Cooking.css';
+import { render } from '@testing-library/react';
 
 // Cooking: 요리 메인 페이지 (전체 레시피 불러오기 연결됨. AI 레시피)
 // CookingPost: 레시피 등록 페이지 (이미지 연결중입니다. name, detail은 연결됨)
@@ -94,8 +95,9 @@ const FETCH_COOKS_BY_VIEW_RANK = gql`
   }
 `;
 export default function Cooking() {
-  const { loading, error, data } = useQuery(FETCH_ALL_COOKS);
+  const { loading, error, data,refetch:refetchAll } = useQuery(FETCH_ALL_COOKS);
   const [increaseView] = useMutation(INCREASE_COOK_VIEW);
+  const location = useLocation();
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState('');
   const { loading: loadingSearch, error: errorSearch, data: dataSearch } = useQuery(SEARCH_COOK, {
@@ -124,6 +126,12 @@ export default function Cooking() {
       setLoggedInUserName('');
     }
   }, []);
+
+  useEffect(() => {
+    refetchAll().then((result) => {
+      console.log(result.data);
+    });
+  }, [location.pathname]);
 
   // 글 작성
   const handlePostButtonClick = () => {
