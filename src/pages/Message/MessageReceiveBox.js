@@ -49,6 +49,8 @@ const MessageReceiveBox = () => {
   const [messages, setMessages] = useState([]);
   const [previousMessages, setPreviousMessages] = useState([]);
   const [readLetter] = useMutation(READ_LETTER);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(8); // 페이지당 알림 수
 
   useEffect(() => {
     if (!token) {
@@ -119,6 +121,7 @@ const MessageReceiveBox = () => {
   const renderIsReadStatus = (isRead) => {
     return isRead ? "읽음" : "안읽음";
   };
+
 
   return (
     <div className="message-container">
