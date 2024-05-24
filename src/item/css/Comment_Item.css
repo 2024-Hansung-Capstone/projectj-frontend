@@ -1,49 +1,65 @@
-.comment-container0 {
-  max-width: 1200px;
+.comment-container {
   margin-left: auto;
   margin-right: auto;
   display: flex;
   flex-direction: row;
-  border: 1px solid #ccc;
   border-radius: 5px;
   margin-top: 5px;
-  width: 100%;
   padding: 10px;
+  width: 90%;
+  border-radius: 15px;
+}
+.comment-container0 {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding: 10px;
+  width: 90%;
 }
 
 .comment-container1 {
-  display: flex;
-  align-items: center;
-}
-.comment-container2 {
-  display: flex;
   align-items: center;
 }
 
-.comment-container3 {
+.comment-container2 {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
 }
+
+.comment-container3 {
+  flex-direction: column; /* 대댓글을 수직으로 나열 */
+}
+
 .comment-container4 {
   margin-left: auto;
   margin-right: auto;
   display: flex;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
   margin-top: 10px;
   justify-content: space-between;
-  width: 100%;
-  padding: 10px;
+  width: 90%;
+  padding: 5px;
+  align-items: center;  /* 가운데정렬 */
 }
 
+.comment-send {
+  width: 100px;
+  padding: 5px;
+  background-color: #29ADB2;
+  border-radius: 10px;
+  text-align: center;
+}
 .comment-photo {
   width: 50px;
   height: 50px;
   background-color: #f0f0f0;
   border-radius: 50%;
   margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,6 +70,7 @@
 }
 
 .comment-name {
+  display: flex;
   font-weight: bold;
   font-size: 15px;
   margin-right: 10px;
@@ -64,23 +81,28 @@
   color: gray;
   margin-left: auto; /* 오른쪽 정렬 */
   cursor: pointer;
+  position: relative; /* Make parent relative */
 }
 
 .comment-options {
   display: flex;
+  flex-direction: column; /* Ensure vertical alignment */
   justify-content: space-between;
-  flex-direction: column;
   align-items: center;
   margin-top: 5px;
   font-size: 13px;
+  position: absolute; /* Make dropdown absolute */
+  right: 0; /* Align it to the right */
+  width: 50px;
 }
 
 .comment-options button {
   background-color: transparent;
   border: none;
-  margin-left: 10px;
   cursor: pointer;
   color: #888;
+  font-size: 15px;
+  margin: 5px 0;
 }
 
 .comment-options button:hover {
@@ -89,6 +111,7 @@
 
 .comment-post {
   flex: 1;
+  display: flex;
 }
 
 .comment-recomment,
@@ -99,9 +122,15 @@
 }
 
 .commentTocomment-container {
-  margin-top: 10px;
+  display: flex;
+  flex-direction: column; /* 대댓글을 수직으로 나열 */
+  width: 100%;
 }
-
+.commentTocomment-container2 {
+  display: flex;
+  padding: 5px;
+  width: 100%;
+}
 .comment-like .like-button {
   background: none;
   border: none;
@@ -113,6 +142,14 @@
   display: flex;
   font-size: 20px;
 }
+.comment-write {
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  width: 80%;
+}
+
+
 
 .comment-like img {
   width: 15px;
@@ -120,40 +157,79 @@
   margin-right: 10px;
 }
 
-
 input[type="comment-text"] {
-  flex: 2;
   padding: 20px;
   border: none;
   border-radius: 5px;
-  width: 100%;
   font-size: 18px;
+  margin-left: 20px;
+  width: 100%;
 }
 
 .comment-recomment {
-  margin-left: auto;
   margin-left: auto;
   margin-right: 10px;
 }
 
 
-.commentTocomment-container {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+.commentTocomment-container0 {
   display: flex;
-  flex-direction: row;
-  border-radius: 5px;
-  margin-top: 5px;
-  width: 100%;
-  padding: 10px;
+  width: 100%; 
+  flex-direction: column; /* 대댓글을 수직으로 나열 */
+  background-color: #f8f6f6;
+  border-radius: 15px;
+  margin-bottom: 10px;
 }
+
 
 .commentTocomment-container1 {
   display: flex;
   align-items: center;
+  width: 100%;
 }
+
 .commentTocomment-container2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  /* 가운데정렬 */
+  justify-content: center; /* 가운데정렬 */
+  width: 100%;
+}
+.commentTocomment-detail {
+  margin-left: 30px;
+}
+.comment-like {
+  margin-left: auto;
+  margin-right: 30px;
+  font-size: 0.8em;
   display: flex;
   align-items: center;
 }
+
+.comment-like h6 {
+  margin-left: 5px;
+}
+
+.comment-like .like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.comment-like img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+.commentTocomment-like {
+  display: flex;
+}
+
+.commentTocomment-delete {
+  margin-left: auto;
+  margin-right: 22px;
+}
+

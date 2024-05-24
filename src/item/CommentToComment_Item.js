@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MdMoreVert } from "react-icons/md";
 import './css/Comment_Item.css';
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 
 const INCREASE_REPLY_LIKE = gql`
   mutation IncreaseReplyLike($reply_id: String!) {
@@ -27,6 +27,7 @@ const DELETE_COMMENT_REPLY = gql`
         user {
           id
           name
+          profile_image
         }
         like_user {
           id
@@ -39,11 +40,21 @@ const DELETE_COMMENT_REPLY = gql`
   }
 `;
 
-export default function CommentToComment_Item({CommentToComent, onDeleteSuccess }) {
+export const WHO_AM_I_QUERY = gql`
+  query WhoAmI {
+    whoAmI {
+      id
+      name
+    }
+  }
+`;
 
+export default function CommentToComment_Item({CommentToComent, onDeleteSuccess }) {
+  const { loading: whoAmILoading, error: whoAmIError, data: whoAmIData } = useQuery(WHO_AM_I_QUERY);
+  const whoAmI = whoAmIData?.whoAmI;
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(CommentToComent.like);
-  //댓글 좋아요,좋아요취소 기능
+
   const [increaseReplyLike] = useMutation(INCREASE_REPLY_LIKE, {
     context: {
       headers: {
@@ -85,36 +96,42 @@ export default function CommentToComment_Item({CommentToComent, onDeleteSuccess 
   const handleDelete = () => {
     deleteCommentReply({ variables: { commentReplyId: CommentToComent.id } });
   };
-  
+
   const handleLikeClick = () => {
-        if (liked) {
-          decreaseReplyLike({ variables: { reply_id: CommentToComent.id } });
-        } else {
-          increaseReplyLike({ variables: { reply_id: CommentToComent.id } });
-        }}
-    return (
-        <div className='commentTocomment-container'>
-          <div className='comment-photo'>
-            <p>사진</p>
-          </div>
-          <div className='commentTocomment-title'>
-            <div className='commentTocomment-container1'>
-              <div className='commentTocomment-name'>
-                <p>{CommentToComent.user.name}</p>
-              </div>
-            </div>
-            <div>
-              {CommentToComent.detail}<button onClick={handleDelete} >삭제</button>
-            </div>
-            <div className='commentTocomment-container2'>
-              <div className='commentTocomment-like'>
-              <button onClick={handleLikeClick} className='like-button'>
-              {liked ? '좋아요 취소' : '좋아요'}
-              </button>
-              <h6>{likeCount}</h6>
-              </div>
-            </div>
-          </div>
+    if (liked) {
+      decreaseReplyLike({ variables: { reply_id: CommentToComent.id } });
+    } else {
+      increaseReplyLike({ variables: { reply_id: CommentToComent.id } });
+    }
+  };
+
+  return (
+    <div className='commentTocomment-container0'>
+      <div className='commentTocomment-container1'> {/* 사진, 이름, 삭제 */}
+        <div className='comment-photo'>
+          <p>{CommentToComent.user.profile_image}</p>
         </div>
-      );
+        <div className='commentTocomment-name'>
+          <p>{CommentToComent.user.name}</p>
+        </div>
+        {whoAmI && whoAmI.id === CommentToComent.user.id && (
+          <div className='commentTocomment-delete'>
+            <button onClick={handleDelete}>삭제</button>
+          </div>
+        )}
+      </div>
+
+      <div className='commentTocomment-container2'> {/* 내용, 좋아요 */}
+        <div className='commentTocomment-detail'>
+          {CommentToComent.detail}
+        </div>
+        <div className='comment-like'>
+          <button onClick={handleLikeClick} className='like-button'>
+            <img src={liked ? '/heartFill.png' : '/heartEmpty.png'} alt='like' />
+          </button>
+          <h6>{likeCount}</h6>
+        </div>
+      </div>
+    </div>
+  );
 }

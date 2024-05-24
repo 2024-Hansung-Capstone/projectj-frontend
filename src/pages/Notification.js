@@ -82,7 +82,6 @@ const Notification = () => {
       });
     },
   });
-  
 
   const [deleteAllMyNotificationMessages] = useMutation(DELETE_ALL_MY_NOTIFICATION_MESSAGES, {
     context: {

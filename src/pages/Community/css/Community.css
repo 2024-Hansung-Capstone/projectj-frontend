@@ -1,4 +1,5 @@
 .community-container {
+  font-family: 'KCC-Hanbit';
   display: flex;
   height: 1000px;
 }
@@ -36,31 +37,54 @@
 }
 .community-hot-board {
   display: flex;
-  border: 1px solid black;
-  font-size: 40px;
+  font-size: 34px;
+  padding-left: 20px;
   align-items: center;
+  width: 90%;
+  align-items: center;  /* 가운데정렬 */
+  justify-content: center; /* 가운데정렬 */
 }
 .community-hot-context {
+  display: flex;
+  width: 100%;
+  background-color: rgba(153, 45, 45, 0.976); /* 빨간색 배경의 투명도를 50%로 조절 */
+  color: white;
+  border-radius: 20px;
+  padding-left: 10px;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.community-hot-detail {
   font-size: 20px;
   margin-left: 10px;
 }
 .community-hot-view {
+  display: flex;
   font-size: 20px;
-  margin-left: 10px;
+  margin-left: auto;
+  align-items: center;  /* 가운데정렬 */
+  justify-content: center; /* 가운데정렬 */
+  margin-right: 20px;
 }
+.community-hot-view img {
+  width: 40px;
+  height: 35px;
+  margin-right: 10px;
+}
+
 .scroll-view {
-  border: groove 1px black;
   flex: 1;
-  padding: 20px;
+  padding: 10px;
   overflow-y: auto;
   background-color: #ffffff;
-  height: 900px;
+  height: 950px;
 }
 
 .scroll-view h1 {
   margin-bottom: 20px;
 }
-
 
 @font-face {
   font-family: 'LINESeedKR-Bd';

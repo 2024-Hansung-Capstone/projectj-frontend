@@ -130,7 +130,7 @@ const client = new ApolloClient({
                 <Route path="/MessageReply"  element={isAuthenticated ? <MessageReply /> : <Login onLogin={handleLogin} />} />
                 <Route path="/EditUserInfo" element={isAuthenticated ? <EditUserInfo /> : <Login onLogin={handleLogin} />} />
                 
-                <Route path="/notification" element={<Notification notificationData={notificationData} clearNotificationData={handleClearNotificationData} />} />
+                <Route path="/Notification" element={isAuthenticated ? <Notification notificationData={notificationData} clearNotificationData={handleClearNotificationData} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/" element={<MessageReceiveBox setNotificationData={handleSetNotificationData} />} />
       
 

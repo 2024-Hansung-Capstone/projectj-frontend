@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './css/Community_Item.css';
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 
 const DELETE_BOARD = gql`
@@ -27,7 +27,16 @@ const DECREASE_BOARD_LIKE = gql`
   }
 `;
 
-export default function Community_Item({ board, selectedItem }) {
+export const WHO_AM_I_QUERY = gql`
+  query WhoAmI {
+    whoAmI {
+      id
+      name
+    }
+  }
+`;
+
+export default function Community_Item({ board, selectedItem, onClick }) {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const [liked, setLiked] = useState(false);
@@ -35,7 +44,7 @@ export default function Community_Item({ board, selectedItem }) {
   const [deleteBoard] = useMutation(DELETE_BOARD, {
     variables: { board_id: board.id },
     onCompleted: () => {
-      console.log(selectedItem)
+      console.log(selectedItem);
       navigate('/Community', { state: { selectedItem } });
     },
     onError: (error) => {
@@ -63,6 +72,16 @@ export default function Community_Item({ board, selectedItem }) {
       setLikeCount(data.decreaseBoardLike.like);
     },
   });
+
+  const { loading: whoAmILoading, error: whoAmIError, data: whoAmIData } = useQuery(WHO_AM_I_QUERY);
+  const whoAmI = whoAmIData?.whoAmI;
+
+  useEffect(() => {
+    if (whoAmI && board.user && whoAmI.id === board.user.id) {
+      // 현재 로그인한 사용자와 게시글 작성자가 동일한 경우에만 수정 및 삭제 버튼을 표시
+      // 해당 조건에 따라 렌더링하도록 조건 추가
+    }
+  }, [whoAmI, board.user]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -96,10 +115,11 @@ export default function Community_Item({ board, selectedItem }) {
 
   return (
     <div className='communitydetail-container'>
-      <div className='ci-container'>
+      <div className='ci-container'  onClick={onClick}>
         <div className='ci-title'>
           <div className='ci-userPhoto'>
-            <p>photo</p>
+            <p>{board.user.profile_image && board.user.profile_image}</p>
+            {board.profile_image && board.profile_image.imagePath}
             {/* 유저 사진 */}
           </div>
           <div className='ci-userName'>
@@ -109,24 +129,38 @@ export default function Community_Item({ board, selectedItem }) {
             <h4>{formatDate(board.create_at)} </h4>
           </div>
           <div className='ci-buttons'>
-            <button onClick={handleDelete} className='delete-button'>삭제</button>
-            <button onClick={handleUpdateClick} className='update-button'>수정</button>
+            {whoAmI && board.user && whoAmI.id === board.user.id && (
+              // 현재 로그인한 사용자와 게시글 작성자가 동일한 경우에만 수정 및 삭제 버튼을 표시
+              <>
+                <button onClick={handleDelete} className='delete-button'>삭제</button>
+                <button onClick={handleUpdateClick} className='update-button'>수정</button>
+              </>
+            )}
           </div>
         </div>
 
-        <div className='ci-container2'>
-          <div className='ci-post'>
-            <h4>사진</h4>
-            {board?.post_images?.length > 0 ? (<div className="cooking-images-container">
-            {board.post_images.map((image, index) => (
-              <img key={index} src={image.imagePath} alt={`이미지 ${index + 1}`}className="cooking-main-image"/> ))}
-             </div>) : (
-              <div className="ck-main-no-image">이미지 없음</div>)}
+        {board?.post_images?.length > 0 && (
+          <div className='ci-container2'>
+            <div className='ci-post'>
+              <div className="community-images-container">
+                {board.post_images.map((image, index) => (
+                  <img key={index} src={image.imagePath} alt={`이미지 ${index + 1}`} className="community-main-image" />
+                ))}
+              </div>
+            </div>
+            <div className='ci-text'>
+              <h4>{board.detail}</h4>
+            </div>
           </div>
-          <div className='ci-text'>
-            <h4>{board.detail}</h4>
+        )}
+
+        {board?.post_images?.length === 0 && (
+          <div className='ci-container2'>
+            <div className='ci-text'>
+              <h4>{board.detail}</h4>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className='ci-like'>
           <button onClick={handleLikeClick} className='like-button'>

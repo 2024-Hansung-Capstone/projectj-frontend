@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MdMoreVert } from 'react-icons/md';
 import './css/Comment_Item.css';
 import { gql, useMutation } from '@apollo/client';
-import CommentToComment_Item from './CoommentToComment_Item';
+import CommentToComment_Item from './CommentToComment_Item';
 
 const DELETE_REPLY = gql`
   mutation DeleteReply($reply_id: String!) {
@@ -217,7 +217,17 @@ export default function Comment_Item({ comment, onDeleteSuccessToComment  }) {
         <div className='comment-container1'>
           <div className='comment-name'>
             <p>{comment.user.name}</p> {/* 이름 */}
+            <div className='comment-more' onClick={handleOptionsClick}>
+            <MdMoreVert />
+            {showOptions && (
+              <div className='comment-options'>
+                <button onClick={handleEditClick}>수정</button>
+                <button onClick={handleDeleteClick}>삭제</button>
+              </div>
+            )}
           </div>
+          </div>
+          <div className='comment-container2'> 
           <div className='comment-post'> {/* 내용 */}
             {isEditing ? (
               <input
@@ -229,18 +239,16 @@ export default function Comment_Item({ comment, onDeleteSuccessToComment  }) {
               <p>{editedDetail}</p>
             )}
           </div>
-          <div className='comment-more' onClick={handleOptionsClick}>
-            <MdMoreVert />
-            {showOptions && (
-              <div className='comment-options'>
-                <button onClick={handleEditClick}>수정</button>
-                <button onClick={handleDeleteClick}>삭제</button>
-              </div>
-            )}
+          <div className='comment-like'>
+            <button onClick={handleLikeClick} className='like-button'>
+              <img src={liked ? '/heartFill.png' : '/heartEmpty.png'} alt='like' />
+            </button>
+            <h6>{likeCount}</h6>
+          </div>
           </div>
         </div>
         {isEditing && (
-          <div className='comment-container3'>
+          <div className='comment-container2'>
             <button onClick={handleSaveClick}>저장</button>
             <button onClick={() => setIsEditing(false)}>취소</button>
           </div>
@@ -248,22 +256,14 @@ export default function Comment_Item({ comment, onDeleteSuccessToComment  }) {
         <div className='comment-container3'>
           <div className='comment-recomment'>
             <p onClick={handleReplyClick}>답글달기</p>
+            {newComment.comment_reply && newComment.comment_reply.length > 0 && (
             <div className='commentTocomment-container'>
-              {newComment.comment_reply && newComment.comment_reply.length > 0 ? (
-                newComment.comment_reply.map((comment) => (
-                  <CommentToComment_Item key={comment.id} CommentToComent={comment} onDeleteSuccess={handleDeleteSuccess}  />
-                ))
-              ) : (
-                <p>대 댓글이 없습니다.</p>
-              )}
+              {newComment.comment_reply.map((comment) => (
+              <CommentToComment_Item key={comment.id} CommentToComent={comment} onDeleteSuccess={handleDeleteSuccess} />
+              ))}
             </div>
-          </div>
-          <div className='comment-like'>
-            <button onClick={handleLikeClick} className='like-button'>
-              <img src={liked ? '/heartFill.png' : '/heartEmpty.png'} alt='like' />
-            </button>
-            <h6>{likeCount}</h6>
-          </div>
+            )}
+        </div>
         </div>
       </div>
     </div>
