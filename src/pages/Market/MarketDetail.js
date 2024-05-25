@@ -214,15 +214,15 @@ export default function MarketDetail() {
           <div className='marketdetail-container2'>
             <div className='marketdetail-container3'>
               <div className="productImage">
-              {product.post_images && product.post_images.length > 0 ? (
-                <div className="image-slider">
-                  <button onClick={handlePreviousImage}>{"<"}</button>
-                  <img src={product.post_images[currentImageIndex].imagePath} alt="상품 이미지" className="productImage" />
-                  <button onClick={handleNextImage}>{">"}</button>
-                </div>
-              ) : (
-                <p>No images available</p>
-              )}
+                {product.post_images && product.post_images.length > 0 ? (
+                  <div className="image-slider">
+                    <button onClick={handlePreviousImage}>{"<"}</button>
+                    <img src={product.post_images[currentImageIndex].imagePath} alt="상품 이미지" className="productImage" />
+                    <button onClick={handleNextImage}>{">"}</button>
+                  </div>
+                ) : (
+                  <p>No images available</p>
+                )}
               </div>
             </div>
             <div className='marketdetail-container4'>
