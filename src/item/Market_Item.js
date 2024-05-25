@@ -29,49 +29,50 @@ export default function Market_Item({ product, onClick }) {
       });
   };
 
+  // 날짜를 변환하는 함수
+  const convertDateToAgo = (dateString) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) {
+      return '오늘';
+    } else if (diffDays === 1) {
+      return '1일 전';
+    } else {
+      return `${diffDays}일 전`;
+    }
+  };
+
   if (!product || !product.user) return null; // 사용자 정보가 없는 경우 처리
 
   const imageSrc = product.post_images && product.post_images.length > 0
     ? product.post_images[0].imagePath
     : null; // 이미지가 없는 경우 null
 
-  return (  // 데이터 값을 (product) 로 product 데이터를 전달 받음.
+  return (
     <div className="market-item" onClick={() => onClick(product)}>
       <div className="marketitem-container">
         <div className="marketitem-main1">
-        <div className="marketitem-photo">
+          <div className="marketitem-photo">
             {imageSrc ? (
               <img src={imageSrc} alt="Product" />
             ) : (
-              <div className="no-image">no-image</div> // 이미지가 없는 경우 "no-image" 표시
+              <div className="marketitem-no-image">no-image</div> // 이미지가 없는 경우 "no-image" 표시
             )}
           </div>
-          <div className="marketitem-id"></div>
           <div className="marketitem-title">
-            <p>제목 : {product.title}</p>
+            <p>{product.title}</p>
           </div>
-          <div className="marketitem-seller">
-            <p>판매자 : {product.user.name}</p>
-          </div>
-        </div>
-        <div className="marketitem-category">
-          <p>{product.category}</p>
         </div>
         <div className="marketitem-main2">
           <div className="marketitem-price">
             <p>{product.price} 원</p>
           </div>
-          <div className="marketitem-state">
+          <div className="marketitem-StateAndTime">
             <p>{product.state}</p>
-          </div>
-        </div>
-        <div className="marketitem-likeview">
-          <div className="marketitem-like" onClick={handleLikeClick}>
-            {/* isLiked 상태에 따라 채워진 하트 또는 빈 하트를 보여줌 */}
-            <p>{isLiked ? <GoHeartFill /> : <GoHeart />} {product.like}</p>
-          </div>
-          <div className="marketitem-view">
-            <p><LiaEyeSolid/> {product.view}</p>
+            <p>{convertDateToAgo(product.create_at)}</p>
           </div>
         </div>
       </div>

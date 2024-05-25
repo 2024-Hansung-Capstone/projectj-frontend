@@ -17,11 +17,13 @@ export default function Cooking_Item({ cook, onClick }) {
           <p>No image available</p>
         )}
       </div>
+      {/* 제목 */}
       <div className='cookingitem-menu'>
-        <p>제목: {cook.name}</p>
+        <p>{cook.name}</p>
       </div>
+      {/* 내용 */}
       <div className='cookingitem-detail'>
-        <p>내용: {cook.detail}</p>
+        <p>{cook.detail}</p>
       </div>
     </div>
   );

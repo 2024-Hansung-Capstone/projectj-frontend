@@ -64,3 +64,16 @@
 .login-form-link a {
     font-weight: bold;
 }
+
+/* 모바일 반응형 스타일 */
+@media (max-width: 768px) {
+.login-form-container {
+    width: 300px;
+    margin-top: 50px;
+    text-align: center;
+    padding: 50px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 50px;
+    }
+}

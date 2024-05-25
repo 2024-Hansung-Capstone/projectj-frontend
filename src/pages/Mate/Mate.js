@@ -130,13 +130,16 @@ export default function Mate() {
     <div className={`Mate-container ${isFilterVisible ? 'filter-open' : ''}`}>
       <h2>{whoAmI.name}님, 추천 메이트 </h2>
       <div className='Mate-recommend'>
-        {data.fetchUsers.map((user) => (
-          <Mate_Item key={user.id} user={user} />
+        {data.fetchUsers.slice(0, 5).map((user) => ( // Use slice to select the first 5 elements
+        <Mate_Item key={user.id} user={user} />
         ))}
       </div>
+
       <div className='Mate-main'>
         <div className='Mate-filter'>
-          <button onClick={handleFilterClick}> <RiMenu2Line /></button>
+          <button onClick={handleFilterClick}> 
+            <img src='filter.png' alt='filter'/>
+          </button>
           <h4>나와 맞는 메이트를 찾아보세요</h4>
           {isFilterVisible && <MateFilterModal onClose={handleConfirmButtonClick} />}
         </div>

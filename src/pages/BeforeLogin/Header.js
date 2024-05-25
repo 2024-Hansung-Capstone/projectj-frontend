@@ -5,9 +5,9 @@ import './css/Header.css';
 
 export default function Header() {
   return (
-    <div className='header-container'>
-      <div className="header-wrap">
-        <div className="header-left-wrap">
+    <div className='before-header-container'>
+      <div className="before-header-wrap">
+        <div className="before-header-left-wrap">
           <Link className="logo-link" to="/">
             <img
               className="logo-image"
@@ -16,15 +16,15 @@ export default function Header() {
             />
           </Link>
         </div>
-          <div className="header-right-wrap">
+          <div className="before-header-right-wrap">
           <ul className="nav-list">
             <li>
-              <Link className="header-login" to="/Login">
+              <Link className="before-header-login" to="/Login">
                 로그인
               </Link>
             </li>
             <li>
-              <Link className="header-signup" to="/Signup">
+              <Link className="before-header-signup" to="/Signup">
                 회원가입
               </Link>
             </li>

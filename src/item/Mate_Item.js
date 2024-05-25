@@ -31,18 +31,18 @@ export default function Mate_Item({ user }) {
         )}
       </div>
       <div className='mi-name'>
-        <h4>{userName}</h4>
+        <p>{userName}</p>
       </div>
       <div className='mi-container2'>
         <div className='mi-age'>
-          <h4>{userAge}</h4>
+          <p>{userAge}</p>
         </div>
         <div className='mi-gender'>
-          <h4>{gender}</h4>
+          <p>{gender}</p>
         </div>
       </div>
       <div className='mi-mbti'>
-        <h4>{mbti}</h4>
+        <p>{mbti}</p>
       </div>
       <div className='mi-btn'>
         <button onClick={handleSendMessage}>쪽지보내기</button>

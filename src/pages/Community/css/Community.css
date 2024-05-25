@@ -13,41 +13,42 @@
 .board-list ul {
   list-style-type: none;
   padding: 0;
-
 }
+
 .board-list li {
-  margin-bottom: 10px; 
+  margin-bottom: 20px; /* 중복된 margin-bottom 제거 */
   cursor: pointer;
   padding: 3px;
-  margin-bottom: 20px;
   font-size: 18px;
   font-family: 'SOYOMapleBoldTTF';
 }
+
 .board-list li.selected-item {
   color: #ffffff;
   background: #29adb2;
 }
 
 .community-scroll {
-  display: column;
+  display: column; /* display: flex;로 수정 */
   width: 100%;
   height: 1000px;
   padding: 10px;
-  
 }
+
 .community-hot-board {
   display: flex;
   font-size: 34px;
   padding-left: 20px;
   align-items: center;
   width: 90%;
-  align-items: center;  /* 가운데정렬 */
-  justify-content: center; /* 가운데정렬 */
+  align-items: center;
+  justify-content: center;
 }
+
 .community-hot-context {
   display: flex;
   width: 100%;
-  background-color: rgba(153, 45, 45, 0.976); /* 빨간색 배경의 투명도를 50%로 조절 */
+  background-color: rgba(153, 45, 45, 0.976);
   color: white;
   border-radius: 20px;
   padding-left: 10px;
@@ -60,14 +61,16 @@
   font-size: 20px;
   margin-left: 10px;
 }
+
 .community-hot-view {
   display: flex;
   font-size: 20px;
   margin-left: auto;
-  align-items: center;  /* 가운데정렬 */
-  justify-content: center; /* 가운데정렬 */
+  align-items: center;
+  justify-content: center;
   margin-right: 20px;
 }
+
 .community-hot-view img {
   width: 40px;
   height: 35px;
@@ -86,27 +89,86 @@
   margin-bottom: 20px;
 }
 
-@font-face {
-  font-family: 'LINESeedKR-Bd';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'SOYOMapleBoldTTF';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/SOYOMapleBoldTTF.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-}
-
-
-@media (min-width: 1150px) {
-  /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
+/* 반응형 스타일 */
+@media (max-width: 768px) {
   .community-container {
-    width: 100%; /* 요소의 너비를 100%로 설정 */
-    max-width: 1200px; /* 최대 너비를 1200px로 제한 */
-    margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
-    margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
   }
+
+  .menu-container {
+    position: relative;
+    width: 200px;
+  }
+  
+  .board-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    display: none;
+  }
+  
+  .menu-container:hover .board-list {
+    display: block;
+  }
+  
+  .toggle-board-list {
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .filter-bar-container img {
+    width: 50px;
+  }
+  
+  .board-list.visible {
+    display: block;
+  }
+  
+  .filter-bar-container {
+    display: flex;
+    margin-bottom: 10px;
+  }
+}
+
+@media (min-width: 769px) {
+  .menu-container {
+    display: none;
+  }
+}
+
+/* 웹사이트 반응형 */
+@media (min-width: 1150px) {
+  .community-container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* 버튼 스타일 */
+.post-button2 {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.post-button2:hover {
+  background-color: #0056b3;
 }

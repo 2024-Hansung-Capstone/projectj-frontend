@@ -3,9 +3,6 @@ import React from 'react';
 const Footer = () => {
   return (
     <div className="footer-container" style={styles.footerContainer}>
-        <div className="footer-category" style={styles.footerCategory}>
-            <p>회사소개 | 채용정보 | 이용약관  | 개인정보 처리방침 | 위치기반 서비스 이용약관  |  중개사 사이트 바로가기</p>
-        </div>
         <div className='footer-detail' style={styles.footerDetail}>
             <p>주소: 서울특별시 성북구 삼선교로16길 116</p>
             <p>전화번호: 02-1234-5678</p>
@@ -28,13 +25,9 @@ const styles = {
     padding: '10px',
     paddingLeft: '40px',
     textAlign: 'left',
-    marginTop: '80px',
-  },
-  footerCategory: {
-    marginBottom: '40px',
-    borderBottom: '1px solid white',
+    marginTop: '20px', /* 모바일 화면에서 상단 여백 조정 */
   },
   footerDetail: {
-    fontSize: '13px',
+    fontSize: '14px', /* 모바일 화면에서 폰트 크기 조정 */
   }
 };

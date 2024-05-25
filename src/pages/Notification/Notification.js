@@ -177,6 +177,22 @@ const Notification = () => {
     });
   };
 
+    // 날짜를 변환하는 함수
+    const convertDateToAgo = (dateString) => {
+      const date = new Date(dateString);
+      const now = new Date();
+      const diffTime = Math.abs(now - date);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+      if (diffDays === 0) {
+        return '오늘';
+      } else if (diffDays === 1) {
+        return '1일 전';
+      } else {
+        return `${diffDays}일 전`;
+      }
+    };
+
   const handleNotificationClick = (notification) => {
     console.log("알림 클릭됨:", notification);
     switch (notification.code) {
@@ -225,7 +241,8 @@ const Notification = () => {
                     <p>{notificationDetails[notification.id] || "로딩 중..."}</p>
                   </div>
                   <div className='notification-date'>
-                    <p>{new Date(notification.create_at).toLocaleString()}</p>
+                    <p>{convertDateToAgo(notification.create_at)}</p>
+                    {/*<p>{new Date(notification.create_at).toLocaleString()}</p>*/}
                   </div>
                   <button onClick={() => handleDeleteNotification(notification.id)}>
                     <img src="/deleteBox.png" alt="deleteBox" style={{width:'25px', height:'25px'}}/>
@@ -246,4 +263,3 @@ const Notification = () => {
 };
 
 export default Notification;
-

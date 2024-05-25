@@ -157,7 +157,7 @@ export default function MarketDetail() {
         <div className='marketdetail-container'>
           <div className='marketdetail-container2'>
             <div className='marketdetail-container3'>
-              <h3 className="productImage">이미지</h3>
+              <div className="productImage">
               {product.post_images && product.post_images.length > 0 ? (
                 <div className="image-slider">
                   <button onClick={handlePreviousImage}>{"<"}</button>
@@ -167,6 +167,7 @@ export default function MarketDetail() {
               ) : (
                 <p>No images available</p>
               )}
+              </div>
             </div>
             <div className='marketdetail-container4'>
               <h2 className="productTitle">{product.title}</h2>

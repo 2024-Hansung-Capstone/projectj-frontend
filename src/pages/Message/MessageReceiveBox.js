@@ -119,7 +119,7 @@ const MessageReceiveBox = () => {
   };
 
   const renderIsReadStatus = (isRead) => {
-    return isRead ? "읽음" : "안읽음";
+    return isRead ? "읽음" : <img src="new.png" alt="new" style={{width: "50px", textAlign:'center'}}/>;
   };
 
 
@@ -143,7 +143,7 @@ const MessageReceiveBox = () => {
       <table className='message-table'>
         <thead>
           <tr>
-            <th>읽음 상태</th>
+            <th></th>
             <th>보낸 사람</th>
             {selectedCategory === '중고마켓' && <th>상품명</th>}
             <th>제목</th>
