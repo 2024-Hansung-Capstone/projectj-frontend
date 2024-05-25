@@ -5,7 +5,7 @@ import { FaCamera } from "react-icons/fa";
 import { UploadOutlined } from '@ant-design/icons';
 import { Form, Button, Input, Upload } from 'antd';
 import './css/CookingPost.css';
-
+import { useEffect } from 'react';
 // 레시피 생성
 const CREATE_COOK = gql`
   mutation CreateCook($createCookInput: CreateCookInput!) {
@@ -28,6 +28,9 @@ export default function CookingPost() {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const location =useLocation();
+  const recipeInstructions=location.state.recipeInstructions
+  const allIngredientsMap=location.state.allIngredientsMap
+  const recipeName=location.state.recipeName
   const { isLoggedIn,  loggedInUserName } = location.state || {};
   const [createCook] = useMutation(CREATE_COOK, { // 토큰
     context: {
@@ -76,7 +79,18 @@ export default function CookingPost() {
         alert('게시물을 등록하는 중 오류가 발생했습니다. 다시 시도해주세요.'+error);
     }
   };
-
+  
+  useEffect(() => {
+    if (recipeName) {
+      setName(recipeName);
+    }
+    if (recipeInstructions && allIngredientsMap) {
+      const ingredientsDetail = Array.from(allIngredientsMap.entries())
+        .map(([name, volume]) => `${name}: ${volume}`)
+        .join('\n');
+      setDetail(`${ingredientsDetail}\n\n${recipeInstructions}`);
+    }
+  }, [recipeInstructions, allIngredientsMap, recipeName]);
   return (
     <div className="cooking-post-container">
       <h2>레시피 등록하기</h2>
