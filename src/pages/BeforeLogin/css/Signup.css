@@ -149,3 +149,17 @@
   .date-picker {
     margin-bottom: -30px; /* 여백을 조절할 값 */
   }
+
+  /* 모바일 반응형 스타일 */
+@media (max-width: 768px) {
+    .signup-form-container {
+        width: 400px;
+        margin: 0 auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        text-align: center;
+        padding: 40px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+    }
+}

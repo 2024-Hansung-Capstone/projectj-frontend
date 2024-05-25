@@ -1,38 +1,32 @@
 .category-container {
-    display: flex;
-    justify-content: space-around;
-    background-color: #29adb2;
-    padding: 5px;
-  }
-  
-  .category-item {
-    font-family: 'BMDOHYEON';
-    font-size: 18px;
-    color: white;
-    padding: 5px;
-    padding-top: 10px;
-    margin: 5px;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  
-  .category-item:hover {
-    color: #f4e869;
-  }
-  .category-item.active {
-    color: #f4e869; /* 클릭된 카테고리의 텍스트 색을 노란색으로 변경 */
-  }
+  display: flex;
+  justify-content: space-around;
+  background-color: #29adb2;
+  padding: 5px;
+}
 
-  @font-face {
-    font-family: 'BMDOHYEON';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+.category-item {
+  font-family: 'BMDOHYEON';
+  font-size: 18px;
+  color: white;
+  padding: 5px;
+  padding-top: 10px;
+  margin: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.category-item:hover {
+  color: #f4e869;
+}
+
+.category-item.active {
+  color: #f4e869; /* 클릭된 카테고리의 텍스트 색을 노란색으로 변경 */
 }
 
 @font-face {
-  font-family: 'seolleimcool-SemiBold';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/seolleimcool-SemiBold.woff2') format('woff2');
+  font-family: 'BMDOHYEON';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -47,7 +41,6 @@
   }
 }
 
-
 @media (min-width: 1150px) {
   /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
   .footer-container {
@@ -55,5 +48,31 @@
     max-width: 1200px; /* 최대 너비를 1200px로 제한 */
     margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
     margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
+  }
+}
+
+@media (max-width: 768px) {
+  .category-container {
+    flex-wrap: wrap; /* 너비에 따라 아이템을 여러 줄에 걸쳐 정렬 */
+  }
+
+  .category-item {
+    font-size: 15px; /* 폰트 크기 조정 */
+  }
+}
+
+
+@media (max-width: 768px) {
+  .footer-container {
+    padding: 20px; /* 패딩 조정 */
+    margin-top: 20px; /* 위쪽 여백 조정 */
+  }
+
+  .footer-category {
+    margin-bottom: 20px; /* 카테고리 아래 여백 조정 */
+  }
+
+  .footer-detail {
+    font-size: 8px; /* 폰트 크기 조정 */
   }
 }

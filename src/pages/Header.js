@@ -24,11 +24,11 @@ export default function Header() {
           </Link>
 
             </li>
-            <li>
-              <Link className="header-message" to="/MessageReceiveBox" style={{ margin: '40px' }}>
+            <li className='header-img'>
+              <Link className="header-message" to="/MessageReceiveBox">
                   <img src="/message.png" alt="message" />
               </Link>
-              <Link className="header-notification" to="/Notification" style={{ margin: '20px' }}>
+              <Link className="header-notification" to="/Notification" >
               <img src="/alarm.png" alt="alarm" />
               </Link>
             </li>

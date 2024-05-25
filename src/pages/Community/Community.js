@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './css/Community.css';
 import { Input } from 'antd';
 import { useQuery, useMutation } from '@apollo/client';
-import { FaFire } from "react-icons/fa6";
+import { FaFire, FaBars } from "react-icons/fa";
 import { gql } from '@apollo/client';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Community_Item from '../../item/Community_Item';
@@ -102,19 +102,19 @@ const FETCH_BOARDS_BY_SEARCH = gql`
 `;
 
 const Community = () => {
-  const [selectedItem, setSelectedItem] = useState(0); // 초기값을 0으로 설정하여 룸메이트 카테고리가 선택되도록 함
-  const [selectedItemData, setSelectedItemData] = useState(BoardList_Item[0]?.title); // 초기값을 룸메이트 카테고리로 설정
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 유무 확인
-  const [loggedInUserName, setLoggedInUserName] = useState(''); // 로그인 유저 이름
-  const { Search } = Input; // 검색
-  const { loading:errorLoading, error:errorWho, data:dataWho } = useQuery(WHO_AM_I_QUERY);
+  const [selectedItem, setSelectedItem] = useState(0);
+  const [selectedItemData, setSelectedItemData] = useState(BoardList_Item[0]?.title);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedInUserName, setLoggedInUserName] = useState('');
+  const { Search } = Input;
   const [searchInput, setSearchInput] = useState({
     title: '',
     detail: '',
   });
+  const [isBoardListVisible, setIsBoardListVisible] = useState(false);
 
   const location = useLocation();
-  const initialSelectedItem = location.state?.selectedItem || 0; // 초기값을 0으로 설정하여 룸메이트 카테고리가 선택되도록 함
+  const initialSelectedItem = location.state?.selectedItem || 0;
 
   const { loading, error, data, refetch } = useQuery(GET_BOARD, {
     variables: { category: selectedItem !== null ? BoardList_Item[selectedItem]?.title : 'default_category' },
@@ -150,7 +150,6 @@ const Community = () => {
     }
   }, [data]);
 
-  // 삭제, 추가 후 GET_BOARD 실행
   useEffect(() => {
     console.log(initialSelectedItem);
     setSelectedItem(initialSelectedItem);
@@ -159,14 +158,12 @@ const Community = () => {
     refetch();
   }, [location.pathname, initialSelectedItem, toprefetch, refetch]);
 
-  // 검색에서 쓰이는 훅
   useEffect(() => {
     if (searchInput.title || searchInput.detail) {
       searchrefetch();
     }
   }, [searchInput, searchrefetch]);
 
-  // 카테고리로 변경
   const handleCategoryClick = (index) => {
     setSelectedItem(index);
     setSelectedItemData(BoardList_Item[index]?.title);
@@ -174,8 +171,7 @@ const Community = () => {
     refetch();
   };
 
-  
-  const handleListItemClick = (board,isLiked) => {
+  const handleListItemClick = (board) => {
     increaseView({ variables: { board_id: board.id } })
       .then((response) => {
         console.log('조회수가 증가되었습니다.', response.data);
@@ -183,8 +179,8 @@ const Community = () => {
       .catch((err) => {
         console.error('조회수 증가 에러:', err);
       });
-    navigate('/CommunityDetail', { state: { board, loggedInUserName, selectedItem,isLiked } });
-  };   
+    navigate('/CommunityDetail', { state: { board, loggedInUserName, selectedItem } });
+  };
 
   const handlePostButtonClick = () => {
     navigate('/CommunityPost', { state: { isLoggedIn, loggedInUserName, location } });
@@ -213,26 +209,24 @@ const Community = () => {
         return <p>No boards available</p>;
       }
     }
-  
-    return boards.map((board) => {
-     
-      const isLiked = board.like_user.some(like_user => like_user.user.id === dataWho.whoAmI.id);
-     
-      return (
-        <Community_Item
-          key={board.id}
-          board={board}
-          selectedItem={selectedItem}
-          onClick={() => handleListItemClick(board,isLiked)}
-          isLiked={isLiked} // isLiked 값을 Community_Item에 prop으로 전달
-        />
-      );
-    });
-  };  
+
+    return boards.map((board) => (
+      <Community_Item
+        key={board.id}
+        board={board}
+        selectedItem={selectedItem}
+        onClick={() => handleListItemClick(board)}
+      />
+    ));
+  };
+
+  const toggleBoardListVisibility = () => {
+    setIsBoardListVisible(!isBoardListVisible);
+  };
 
   return (
     <div className='community-container'>
-      <div className='board-list'>
+      <div className={`board-list ${isBoardListVisible ? 'visible' : ''}`}>
         <ul>
           {BoardList_Item.map((item, index) => (
             <li
@@ -245,9 +239,30 @@ const Community = () => {
           ))}
         </ul>
       </div>
-      {/* 검색창 */}
       <div className='community-scroll'>
         <div className='filter-bar-container'>
+          <div className="menu-container"
+            onMouseEnter={() => setIsBoardListVisible(true)} // 마우스를 올렸을 때 보이도록 설정
+            onMouseLeave={() => setIsBoardListVisible(false)} // 마우스를 뗐을 때 안 보이도록 설정
+          >
+          <button onClick={toggleBoardListVisibility}>
+            <img src='menu.png' alt='menu'/>
+        </button>
+        <div className={`board-list ${isBoardListVisible ? 'visible' : ''}`}>
+           <ul>
+              {BoardList_Item.map((item, index) => (
+              <li
+                key={index}
+                onClick={() => handleCategoryClick(index)}
+                className={selectedItem === index ? 'selected-item' : ''}
+               >
+            {item.icon} {item.title}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
           <Input.Group compact>
             <input
               type="text"
@@ -255,6 +270,7 @@ const Community = () => {
               placeholder="Title"
               value={searchInput.title}
               onChange={handleChange}
+              style={{padding: '10px', marginLeft:'30px'}}
             />
             <input
               type="text"
@@ -262,29 +278,25 @@ const Community = () => {
               placeholder="Detail"
               value={searchInput.detail}
               onChange={handleChange}
+              style={{padding: '10px'}}
             />
           </Input.Group>
         </div>
         <div className='scroll-view'>
-          {/* 클릭된 카테고리명 */}
-          { /* <h2>{selectedItemData}</h2> */ } 
-          {/* 인기 게시물 */}
           {topdata && topdata.fetchBoardsByViewRank.map((board) => (
             <div className='community-hot-board' key={board.id}>
               <FaFire style={{ color: '#b22b29'}} />
               <div className='community-hot-context'>
-              <div className='community-hot-detail'>
-                <p>{board.detail}</p>
+                <div className='community-hot-detail'>
+                  <p>{board.detail}</p>
+                </div>
+                <div className='community-hot-view'>
+                  <img src="/view.png" alt="view" />
+                  <p>{board.view}</p>
+                </div>
               </div>
-              <div className='community-hot-view'>
-              <img src="/view.png" alt="view" />
-                <p>{board.view}</p>
-              </div>
-            </div>
             </div>
           ))}
-
-          {/* 선택된 카테고리의 게시물 리스트 보여주기 */}
           {selectedItem !== null && renderBoardList()}
         </div>
       </div>

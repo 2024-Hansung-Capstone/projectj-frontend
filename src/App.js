@@ -6,7 +6,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client';
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 import Category from "./components/Category";
 import Footer from "./components/Footer";
-import NotificationBanner from "./pages/NotificationBanner"; // Import NotificationBanner component
+import NotificationBanner from "./pages/Notification/NotificationBanner"; // Import NotificationBanner component
 
 // main
 import HeaderA from "./pages/Header";
@@ -33,7 +33,7 @@ import MarketDetail from './pages/Market/MarketDetail';
 import MarketUpdate from './pages/Market/MarketUpdate';
 import Community from "./pages/Community/Community";
 import CommunityUpdate from "./pages/Community/CommunityUpdate";
-import Notification from "./pages/Notification";
+import Notification from "./pages/Notification/Notification";
 
 // mypage
 import EditUserInfo from './pages/EditUserInfo';

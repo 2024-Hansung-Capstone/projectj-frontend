@@ -62,6 +62,7 @@ const MateFilterModal = ({ onClose }) => {
           확인
         </Button>,
       ]}
+      onCancel={onClose} // "x" 버튼 클릭 시 onClose 함수 호출하여 모달을 닫음
     >
       <div className='Matefilter-bar-container'>
         <div className='Matefilter-item'>

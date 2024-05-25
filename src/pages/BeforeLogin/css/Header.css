@@ -1,11 +1,11 @@
-.header-container {
+.before-header-container {
   background-color: white;
   color: black;
   padding: 5px;
   overflow-x: auto; /* Enable horizontal scrolling */
 }
 
-.header-wrap {
+.before-header-wrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,12 +13,12 @@
   margin: 0 auto;
 }
 
-.header-left-wrap {
+.before-header-left-wrap {
   display: flex;
   align-items: center;
 }
 
-.header-right-wrap {
+.before-header-right-wrap {
   display: flex;
   list-style: none;
   padding: 0;
@@ -38,14 +38,14 @@
   padding: 5%;
 }
 
-.header-search-container {
+.before-header-search-container {
   display: flex;
   align-items: center;
   margin-left: auto;
   margin-right: auto; /* 가운데 정렬을 위해 margin-right 추가 */
 }
 
-.header-search-icon {
+.before-header-search-icon {
   display: flex;
   align-items: center;
   width: 300px;
@@ -53,12 +53,12 @@
   border-radius: 50px;
 }
 
-.header-search-icon > svg {
+.before-header-search-icon > svg {
   font-size: 30px;
   padding-right: 10px;
 }
 
-.header-search-input {
+.before-header-search-input {
   padding: 10px;
   padding-left: 20px;
   border-radius: 100px;
@@ -76,8 +76,8 @@
   padding: 0; /* 기본적인 패딩 제거 */
 }
 
-.header-login,
-.header-signup {
+.before-header-login,
+.before-header-signup {
   font-family: 'NanumSquareNeo-Variable';
   text-decoration: none;
   margin: 20px;
@@ -86,37 +86,26 @@
   padding: 8px;
 }
 
-.header-signup {
+.before-header-signup {
   border: 2px groove #29adb2;
   border-radius: 10px;
 }
 
-
-@font-face {
-  font-family: 'JalnanGothic';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+/* 모바일 반응형 스타일 */
+@media (max-width: 768px) {
+    .logo-image {
+      width: 220px;
+      height: 85px;
+    }
 }
 
-@font-face {
-  font-family: 'NPSfontBold';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'NanumSquareNeo-Variable';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@media screen and (max-width: 900px) {
-  .header-container,
-  .category-container ,
-  .Home-container {
-    width: 845px;
-  }
+/* 모바일 반응형 스타일 */
+@media (max-width: 600px) {
+  .before-header-container {
+    width: 99%;
+    }
+    .logo-image {
+      width: 190px;
+      height: 70px;
+    }
 }
