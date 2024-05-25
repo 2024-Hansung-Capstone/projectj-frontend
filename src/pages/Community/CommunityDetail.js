@@ -5,6 +5,7 @@ import { gql } from '@apollo/client';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Community_Item from '../../item/Community_Item';
 import Comment_Item from '../../item/Comment_Item';
+import { WHO_AM_I_QUERY } from '../../item/Community_Item';
 // Community 구성은 크게 Community_Item, Comment_Item, 댓글 작성 총 3가지입니다. 
 // 컴포넌트도 다른 페이지로 데이터 넘기듯이 (board) 괄호 안에 데이터 이름 넣어주고, 
 // 컴포넌트 괄호에도 (board) 이렇게 넣어주고 필드이름을 board.name 형태로 바꿔주시면 됩니다. 
@@ -36,6 +37,7 @@ const CommunityDetail =  () => {
   const location = useLocation();
   const [board, setBoard] = useState(location.state?.board);
   const [selectedItem, setSelectedItem] = useState(location.state?.selectedItem);
+  const { loading:errorLoading, error:errorWho, data:dataWho } = useQuery(WHO_AM_I_QUERY);
   const [newComment, setNewComment] = useState('');
   const token = localStorage.getItem('token');
   const [createReply] = useMutation(CREATE_REPLY);
@@ -80,15 +82,18 @@ const CommunityDetail =  () => {
   return (
     <div className='communitydetail-container'>
       {/* 게시물 정보 */}
-      <Community_Item key={board.id} board={board} selectedItem={selectedItem} />
+      <Community_Item key={board.id} board={board} selectedItem={selectedItem}  isLiked={location.state?.isLiked} />
      
       {/* 댓글 */}
       <div className='comment-scroll'>
         <div className='comment-container'> 
         {board.reply && board.reply.length > 0 ? (
-            board.reply.map((comment) => (
-              <Comment_Item key={comment.id} comment={comment} onDeleteSuccessToComment={handleDeleteSuccess}/>
-            ))
+            board.reply.map((comment) =>{
+              console.log(comment)
+              const isLiked = comment.like_user.some(like_user => like_user.user.id === dataWho.whoAmI.id);
+              return (
+              <Comment_Item key={comment.id} comment={comment} isLiked ={isLiked} onDeleteSuccessToComment={handleDeleteSuccess}/>
+                     )})
           ) : (
             <p>댓글이 없습니다.</p>
           )}

@@ -36,10 +36,10 @@ export const WHO_AM_I_QUERY = gql`
   }
 `;
 
-export default function Community_Item({ board, selectedItem, onClick }) {
+export default function Community_Item({ board, selectedItem, onClick,isLiked }) {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(isLiked);
   const [likeCount, setLikeCount] = useState(board.like);
   const [deleteBoard] = useMutation(DELETE_BOARD, {
     variables: { board_id: board.id },

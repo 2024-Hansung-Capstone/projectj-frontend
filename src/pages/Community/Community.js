@@ -7,7 +7,7 @@ import { gql } from '@apollo/client';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Community_Item from '../../item/Community_Item';
 import { BoardList_Item } from '../../item/BoardList_Item';
-
+import { WHO_AM_I_QUERY } from '../../item/Community_Item';
 const GET_BOARD = gql`
   query GetBoard($category: String!) {
     fetchBoards(category: $category) {
@@ -107,6 +107,7 @@ const Community = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 유무 확인
   const [loggedInUserName, setLoggedInUserName] = useState(''); // 로그인 유저 이름
   const { Search } = Input; // 검색
+  const { loading:errorLoading, error:errorWho, data:dataWho } = useQuery(WHO_AM_I_QUERY);
   const [searchInput, setSearchInput] = useState({
     title: '',
     detail: '',
@@ -174,7 +175,7 @@ const Community = () => {
   };
 
   
-  const handleListItemClick = (board) => {
+  const handleListItemClick = (board,isLiked) => {
     increaseView({ variables: { board_id: board.id } })
       .then((response) => {
         console.log('조회수가 증가되었습니다.', response.data);
@@ -182,7 +183,7 @@ const Community = () => {
       .catch((err) => {
         console.error('조회수 증가 에러:', err);
       });
-    navigate('/CommunityDetail', { state: { board, loggedInUserName, selectedItem } });
+    navigate('/CommunityDetail', { state: { board, loggedInUserName, selectedItem,isLiked } });
   };   
 
   const handlePostButtonClick = () => {
@@ -213,14 +214,20 @@ const Community = () => {
       }
     }
   
-    return boards.map((board) => (
-      <Community_Item
-        key={board.id}
-        board={board}
-        selectedItem={selectedItem}
-        onClick={() => handleListItemClick(board)} // Pass handleListItemClick as onClick prop
-      />
-    ));
+    return boards.map((board) => {
+     
+      const isLiked = board.like_user.some(like_user => like_user.user.id === dataWho.whoAmI.id);
+     
+      return (
+        <Community_Item
+          key={board.id}
+          board={board}
+          selectedItem={selectedItem}
+          onClick={() => handleListItemClick(board,isLiked)}
+          isLiked={isLiked} // isLiked 값을 Community_Item에 prop으로 전달
+        />
+      );
+    });
   };  
 
   return (

@@ -83,12 +83,12 @@ const CREATE_COMMENT_REPLY = gql`
   }
 `;
 
-export default function Comment_Item({ comment, onDeleteSuccessToComment  }) {
+export default function Comment_Item({ comment, isLiked,onDeleteSuccessToComment  }) {
   const [showOptions, setShowOptions] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const token = localStorage.getItem('token');
   const [editedDetail, setEditedDetail] = useState(comment.detail);
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(isLiked);
   const [likeCount, setLikeCount] = useState(comment.like);
   const [createCommentReply] = useMutation(CREATE_COMMENT_REPLY);
   const [newComment, setComment] = useState(comment);
