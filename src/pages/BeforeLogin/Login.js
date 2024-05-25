@@ -58,6 +58,12 @@ const Login = ({ onLogin }) => {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
   return (
     <div className="login-form-container">
       <h2 className="login-form-title">로그인</h2>
@@ -68,6 +74,7 @@ const Login = ({ onLogin }) => {
             placeholder="아이디"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            onKeyPress={handleKeyPress}
           />
         </div>
         <div className="login-form-item">
@@ -76,6 +83,7 @@ const Login = ({ onLogin }) => {
             placeholder="비밀번호"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyPress={handleKeyPress}
           />
         </div>
         <div>

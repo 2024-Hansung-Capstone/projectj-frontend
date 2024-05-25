@@ -43,6 +43,22 @@ const FETCH_MY_SEND_LETTERS = gql`
   }
 `;
 
+const FETCH_USER_BY_ID = gql`
+  query FetchUserById($user_id: String!) {
+    fetchUserById(user_id: $user_id) {
+      name
+    }
+  }
+`;
+
+const FETCH_USED_PRODUCT_BY_ID = gql`
+  query FetchUsedProductById($id: String!) {
+    fetchUsedProductById(id: $id) {
+      title
+    }
+  }
+`;
+
 const MessageCompose = () => {
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
@@ -50,6 +66,12 @@ const MessageCompose = () => {
   const [writingId, setWritingId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const { loading, error, data, refetch } = useQuery(FETCH_MY_SEND_LETTERS); // refetch 추가
+  const { data: userData } = useQuery(FETCH_USER_BY_ID, {
+    variables: { user_id: writingId } 
+  });
+  const { data: productData } = useQuery(FETCH_USED_PRODUCT_BY_ID, {
+    variables: { id: writingId } 
+  });
   const [writeLetter] = useMutation(WRITE_LETTER);
   const navigate = useNavigate();
   const location = useLocation();
@@ -69,6 +91,25 @@ const MessageCompose = () => {
 
   const handleDetailChange = (e) => {
     setDetail(e.target.value);
+  };
+
+  const renderLabelAndValue = () => {
+    if (category === '자취생메이트') {
+      return {
+        label: '받는 이:',
+        value: userData?.fetchUserById?.name || '',
+      };
+    } else if (category === '커뮤니티') {
+      return {
+        label: '글 제목:',
+        value: data?.writeLetter?.board?.title || '',
+      };
+    } else if (category === '중고마켓') {
+      return {
+        label: '글 제목:',
+        value: productData?.fetchUsedProductById?.title || '',
+      };
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -115,8 +156,8 @@ const MessageCompose = () => {
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
         <div className='form-group'>
-          <label htmlFor="writingId">글 ID:</label>
-          <input id="writingId" type="text" value={writingId} readOnly />
+          <label htmlFor="writingId">{renderLabelAndValue().label}</label>
+          <input id="writingId" type="text" value={renderLabelAndValue().value} readOnly />
         </div>
         <div className='form-group'>
           <label htmlFor='title' className='title-label'>제목:</label>
