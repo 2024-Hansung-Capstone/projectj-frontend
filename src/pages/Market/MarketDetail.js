@@ -28,6 +28,10 @@ const UPDATE_USED_PRODUCT = gql`
         id
         name
       }
+      post_images {
+        id
+        imagePath
+      }
     }
   }
 `;
@@ -62,7 +66,29 @@ export const WHO_AM_I_QUERY = gql`
   }
 `;
 
+const INCREASE_USED_PRODUCT_LIKE = gql`
+  mutation IncreaseUsedProductLike($product_id: String!) {
+    increaseUsedProductLike(product_id: $product_id) {
+      id
+      like
+    }
+  }
+`;
+
+const DECREASE_USED_PRODUCT_LIKE = gql`
+  mutation DecreaseUsedProductLike($product_id: String!) {
+    decreaseUsedProductLike(product_id: $product_id) {
+      id
+      like
+    }
+  }
+`;
+
 export default function MarketDetail() {
+  const [isLiked, setIsLiked] = useState(false); // 상품의 좋아요 여부를 초기화
+  const [likeCount, setLikeCount] = useState(0); // 좋아요 수 상태 추가
+  const [increaseLike] = useMutation(INCREASE_USED_PRODUCT_LIKE);
+  const [decreaseLike] = useMutation(DECREASE_USED_PRODUCT_LIKE);
   const getToken = () => {
     return localStorage.getItem('token') || '';
   };
@@ -112,9 +138,17 @@ export default function MarketDetail() {
   useEffect(() => {
     if (product && product.user) {
       setSellerName(product.user.name);
+      setLikeCount(product.like); // 초기 좋아요 수 설정
     }
   }, [product]);
   
+  useEffect(() => {
+    if (location.state?.product) {
+      setProduct(location.state.product);
+      const isLikedByUser = location.state.product.like_user?.some(likeUser => likeUser.user.id === whoAmI?.id);
+      setIsLiked(isLikedByUser); // 상품의 좋아요 여부를 초기화
+    }
+  }, [location.state?.product, whoAmI]);
 
   const handleEditProduct = () => {
     navigate('/MarketUpdate', { state: { product, loggedInUserName: whoAmI.name } });
@@ -150,6 +184,28 @@ export default function MarketDetail() {
     setCurrentImageIndex((prevIndex) => (prevIndex === product.post_images.length - 1 ? 0 : prevIndex + 1));
   };
 
+  const handleLikeClick = () => {
+    if (!isLiked) {
+      increaseLike({ variables: { product_id: product.id } })
+        .then((response) => {
+          setIsLiked(true); // 좋아요 상태 토글
+          setLikeCount(response.data.increaseUsedProductLike.like); // 좋아요 수 업데이트
+        })
+        .catch((err) => {
+          console.error('좋아요 증가 에러:', err);
+        });
+    } else {
+      decreaseLike({ variables: { product_id: product.id } })
+        .then((response) => {
+          setIsLiked(false); // 좋아요 상태 토글
+          setLikeCount(response.data.decreaseUsedProductLike.like); // 좋아요 수 업데이트
+        })
+        .catch((err) => {
+          console.error('좋아요 감소 에러:', err);
+        });
+    }
+  };
+
   return (
     <div className="marketdetail-container">
       <ToastContainer />
@@ -174,7 +230,7 @@ export default function MarketDetail() {
               <hr></hr>
               <div className='marketdetail-container5'>
                 <p className="productUser"><GoHeartFill /></p>
-                <p className="productUser">{product.like}</p>
+                <p className="productUser">{likeCount}</p>
                 <p className="productUser"><LiaEyeSolid /></p>
                 <p className="productUser">{product.view}</p>
               </div>
@@ -199,7 +255,7 @@ export default function MarketDetail() {
               </div>
               <div className='productDetailBtn'>
                 <button onClick={handleSendMessage}>쪽지보내기</button>
-                <button>찜하기</button>
+                <button onClick={handleLikeClick}>{isLiked ? '찜 해제' : '찜하기'}</button>
               </div>
             </div>
           </div>
