@@ -4,30 +4,8 @@ import { LiaEyeSolid } from "react-icons/lia";
 import { useMutation, gql } from '@apollo/client';
 import './css/Market_Item.css';
 
-const INCREASE_PRODUCT_LIKE = gql`
-  mutation IncreaseProductLike($product_id: ID!) {
-    increaseProductLike(product_id: $product_id) {
-      id
-      like
-    }
-  }
-`;
-
-export default function Market_Item({ product, onClick }) {
-  const [isLiked, setIsLiked] = useState(false); // 좋아요 상태를 저장하는 상태
-  const [increaseLike] = useMutation(INCREASE_PRODUCT_LIKE);  // 쿼리 사용할 때 반드시 이름 별칭 처리
-
-  const handleLikeClick = (e) => {
-    e.stopPropagation(); 
-    increaseLike({ variables: { product_id: product.id } })
-      .then((response) => {
-        console.log('좋아요가 증가되었습니다.', response.data);
-        setIsLiked(prev => !prev); // 상태를 토글하여 좋아요 상태 변경
-      })
-      .catch((err) => {
-        console.error('좋아요 증가 에러:', err);
-      });
-  };
+export default function Market_Item({ product, onClick, isLiked }) {
+  const [liked, setLiked] = useState(isLiked);
 
   // 날짜를 변환하는 함수
   const convertDateToAgo = (dateString) => {
