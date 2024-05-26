@@ -163,12 +163,12 @@
 .post-button2 {
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #29ADB2;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 .post-button2:hover {
-  background-color: #0056b3;
+  background-color: #1c8e92;
 }

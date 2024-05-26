@@ -1,52 +1,113 @@
 .cooking-container {
   font-family: 'KCC-Hanbit';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+.ck-detail-context {
+  padding: 10px;
+}
+.cooking-header1 {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
 }
 
-.header h1 {
-  font-size: 24px;
-  margin-left: 10px;
+.cooking-header img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.best-dishes-section {
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 20px;
 }
 
 .best-dishes {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.best-dish {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #eee;
+}
+
+.dish-details {
   margin-bottom: 10px;
-  margin-left: 5px;
-  margin-right: 5px;
-  gap: 10px;
-  transition: margin-left 0.3s ease; /* 좌우 이동에 대한 transition 효과 추가 */
+  font-size: 18px;
 }
 
 .best-dishes img {
+  width: 300px;
+  object-fit: cover;
+  height: 300px;
+  border-radius: 10px;
+}
+
+.best-dish-context {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.dish-name {
+  margin-bottom: 10px;
+  background-color: rgb(93, 155, 0);
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.cooking-items-container {
   width: 100%;
+  max-width: 1200px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-y: auto;
+  max-height: calc(100vh - 475px);
 }
 
 .divider {
   border: none;
   height: 1px;
-  background-color: #ccc;
+  background-color: #29ADB2;
   margin: 10px 0;
   margin-bottom: 20px;
 }
 
 .cooking-dishes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 유동적인 그리드 설정 */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 15px;
-  transition: margin-left 0.3s ease; /* 좌우 이동에 대한 transition 효과 추가 */
 }
 
 .dish-item img {
   width: 100%;
 }
+.cookingitem-menu {
+  background-color: rgb(93, 155, 0);
+  color: white;
+  font-size: 20px;
+}
 
 .bold-title {
   font-weight: bold;
-}
-
-.cooking-items-container {
-  overflow-y: auto;
-  max-height: calc(100vh - 475px);
 }
 
 .cooking-filter-bar-container {
@@ -66,21 +127,21 @@
   border-color: #29adb2;
 }
 
-  .filter-section.open {
-    width: 300px; /* 필터바가 열린 상태에서 너비는 300px 유지 */
-  }
+.filter-section.open {
+  width: 300px;
+}
 
-  .map-section.open {
-    margin-left: 40px; /* 필터바가 열린 상태에서 왼쪽 여백 추가 */
-  }
+.map-section.open {
+  margin-left: 40px;
+}
 
-  .best-dishes.open {
-    margin-left: 5px; /* 필터바가 열린 상태에서 왼쪽 여백 추가 */
-  }
+.best-dishes.open {
+  margin-left: 5px;
+}
 
-  .dishes-grid.open {
-    margin-left: 5px; /* 필터바가 열린 상태에서 왼쪽 여백 추가 */
-  }
+.dishes-grid.open {
+  margin-left: 5px;
+}
 
 .post-button1 {
   font-size: 15px;
@@ -113,56 +174,58 @@
 .post-button:hover {
   background-color: #209094;
 }
+
 .cook-ai {
   width: 90%;
+  max-width: 1200px;
   height: 250px;
-  border: 2.5px solid black;
+  border: 2.5px solid #ccc;
   border-radius: 14px;
   padding: 10px;
   margin-bottom: 20px;
 }
+
 .cook-ai-input {
   width: 60%;
   margin-left: 40px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: relative; /* 이 부분을 추가 */
+  align-items: flex-start;
+  position: relative;
+}
+
+.cookingDelete-btn {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 5px;
+
 }
 
 .cook-ai-input > button {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #209094;
+  background-color: rgb(93, 155, 0);
   border-radius: 16px;
   padding: 10px;
   width: 28px;
   height: 28px;
   transition: padding 0.2s ease-in-out 0s;
   color: white;
-  position: absolute; /* 이 부분을 추가 */
-  right: 10px; /* 오른쪽 여백 설정 */
-  bottom: 10px; /* 아래쪽 여백 설정 */
+  position: absolute;
+  right: 0;
+  bottom: 10px;
 }
-
 
 .cooking-nodata {
   color: gray;
   font-size: 25px;
   text-align: center;
-  /* 아래 속성들은 .cook-ai-input에 flex를 적용함으로써 불필요해짐 */
-  /* justify-content: center; */
-  /* align-items: center; */
 }
 
 .ingredient-result > button {
   display: flex;
-  flex-direction: column;
-  -webkit-box-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
   align-items: center;
   background-color: #209094;
   border-radius: 16px;
@@ -177,45 +240,49 @@
 .ingredient {
   display: flex;
 }
+
+.ingredient-item {
+  display: flex;
+}
+
 .ingredient-inputs {
   width: 50%;
   margin: 2px;
   font-size: 14px;
   color: gray;
 }
+
 .ingredient-inputs > input {
   margin: 5px;
   padding: 10px;
   width: 93%;
 }
+
 .ingredient-inputs > button {
   margin: 5px;
   padding: 5px;
   border: 1px solid black;
   border-radius: 5px;
   color: black;
-  display: flex;
   margin-left: auto; 
-  
 }
+
 .ingredient-result {
   width: 55%;
   padding: 15px;
   margin-left: 20px;
 }
 
-/* Ant Design Search 버튼 색상 변경 */
 .cooking-search-container .ant-btn-primary {
-  background-color: #29ADB2;
-  border-color: #29ADB2;
+  background-color: rgb(93, 155, 0);;
+  border-color: rgb(93, 155, 0);;
 }
 
 .cooking-search-container .ant-btn-primary:hover,
 .cooking-search-container .ant-btn-primary:focus {
-  background-color: #209094; /* 호버 및 포커스 시 색상 변경 */
+  background-color: #209094;
   border-color: #209094;
 }
-
 
 @font-face {
   font-family: 'KCC-Hanbit';
@@ -224,9 +291,7 @@
   font-style: normal;
 }
 
-
 @media (min-width: 1150px) {
-  /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
   .cooking-container {
     width: 100%;
     max-width: 1200px;
@@ -237,6 +302,6 @@
 
 @media (min-width: 1460px) {
   .post-button2 {
-    right: 220px; /* Adjust the right position as per your preference */
+    right: 220px;
   }
 }

@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Cooking_Item from '../../item/Cooking_Item';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useQuery, gql,useMutation } from '@apollo/client'; 
+import { useQuery, gql, useMutation } from '@apollo/client'; 
 import { Input, Space } from 'antd'; 
 import './css/Cooking.css';
-import { render } from '@testing-library/react';
 
-// Cooking: 요리 메인 페이지 (전체 레시피 불러오기 연결됨. AI 레시피)
-// CookingPost: 레시피 등록 페이지 (이미지 연결중입니다. name, detail은 연결됨)
-// CookingDetail: 레시피 상세 정보 (수정, 삭제 추가해야합니다. )
-// CookingAI: AI검색 결과 페이지
-
-
-// 전체 레시피 불러오기
+// GraphQL queries and mutations
 const FETCH_ALL_COOKS = gql`
   query FetchAllCooks {
     fetchAllCooks {
@@ -31,6 +24,7 @@ const FETCH_ALL_COOKS = gql`
     }
   }
 `;
+
 const SEARCH_COOK = gql`
   query SearchCook($keyword: String!) {
     searchCook(keyword: $keyword) {
@@ -48,6 +42,7 @@ const SEARCH_COOK = gql`
     }
   }
 `;
+
 const FETCH_MY_INGREDIENTS = gql`
   query FetchMyIngredients {
     fetchMyIngredients {
@@ -69,44 +64,49 @@ const CREATE_INGREDIENT = gql`
     }
   }
 `;
+
 const DELETE_INGREDIENT = gql`
   mutation DeleteIngredient($ingredientId: String!) {
     deleteIngredient(ingredient_id: $ingredientId)
   }
 `;
-
+// 조회수 증가
 const INCREASE_COOK_VIEW = gql`
   mutation IncreaseCookView($id: String!) {
-    increaseCookView(id: $id)
-    {
+    increaseCookView(id: $id) {
       id
       view
     } 
   }
 `;
-
+// 인기 레시피
 const FETCH_COOKS_BY_VIEW_RANK = gql`
   query FetchCooksByViewRank($rank: Float!) {
     fetchCookByViewRank(rank: $rank) {
       id
       name
       detail
+      post_images {
+        id
+        imagePath
+      }
     }
   }
 `;
+
 export default function Cooking() {
-  const { loading, error, data,refetch:refetchAll } = useQuery(FETCH_ALL_COOKS);
+  const { loading, error, data, refetch: refetchAll } = useQuery(FETCH_ALL_COOKS);
   const [increaseView] = useMutation(INCREASE_COOK_VIEW);
   const location = useLocation();
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState('');
   const { loading: loadingSearch, error: errorSearch, data: dataSearch } = useQuery(SEARCH_COOK, {
     variables: { keyword },
-    skip: !keyword
+    skip: !keyword,
   });
-  const { loading: loadingIngredients,error: errorIngredients, data: dataIngredients ,refetch} = useQuery(FETCH_MY_INGREDIENTS);
-  const { loading:toploading, error:toperror, data :topdata} = useQuery(FETCH_COOKS_BY_VIEW_RANK, {
-    variables: {  rank:1.0 },
+  const { loading: loadingIngredients, error: errorIngredients, data: dataIngredients, refetch } = useQuery(FETCH_MY_INGREDIENTS);
+  const { loading: toploading, error: toperror, data: topdata } = useQuery(FETCH_COOKS_BY_VIEW_RANK, {
+    variables: { rank: 1.0 },
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loggedInUserName, setLoggedInUserName] = useState('');
@@ -116,6 +116,7 @@ export default function Cooking() {
   const { Search } = Input;
   const [createIngredient] = useMutation(CREATE_INGREDIENT);
   const [deleteIngredient] = useMutation(DELETE_INGREDIENT);
+
   useEffect(() => { // 토큰
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
@@ -133,35 +134,34 @@ export default function Cooking() {
     });
   }, [location.pathname]);
 
-  // 글 작성
+  // 레시피 등록 버튼
   const handlePostButtonClick = () => {
     navigate('/CookingPost');
   };
-  // 검색창
+
+  // 레시피 검색
   const handleSearch = (value) => {
     setKeyword(value);
   };
 
-  // AI 검색 결과 페이지로 이동
+  // AI 검색
   const handleAISearch = (e) => {
     e.preventDefault();
     navigate("/CookingAI");
-    
   };
-  // Cook 상세 페이지로 이동
-  const handleItemClick = (cook) => {
-    increaseView({ variables: { id: cook.id }}).then(response => {
-      console.log('조회수가 증가되었습니다.', response.data);
-    })
-    .catch(err => {
-      console.error('조회수 증가 에러:', err);
-      console.log(JSON.stringify(err, null, 2))
 
-    });
+  const handleItemClick = (cook) => {
+    increaseView({ variables: { id: cook.id } })
+      .then(response => {
+        console.log('조회수가 증가되었습니다.', response.data);
+      })
+      .catch(err => {
+        console.error('조회수 증가 에러:', err);
+        console.log(JSON.stringify(err, null, 2));
+      });
     navigate("/CookingDetails", { state: { cook } });
   };
 
-  // 재료 추가
   const handleAddIngredient = async (e) => {
     e.preventDefault();
     if (ingredientName && volume && volume_unit) {
@@ -180,13 +180,28 @@ export default function Cooking() {
       } catch (error) {
         console.error('식재료 추가 중 오류 발생:', error);
         alert('식재료 추가 중 오류가 발생했습니다.');
-        
       }
       setIngredient('');
       setQuantity('');
       setUnit('');
     }
   };
+
+  const handleDeleteIngredient = async (ingredientId) => {
+    try {
+      await deleteIngredient({
+        variables: {
+          ingredientId: ingredientId,
+        },
+      });
+      await refetch();
+      alert('식재료가 성공적으로 삭제되었습니다.');
+    } catch (error) {
+      console.error('식재료 삭제 중 오류 발생:', error);
+      alert('식재료 삭제 중 오류가 발생했습니다.');
+    }
+  };
+
   const renderCooks = () => {
     const cooks = keyword ? dataSearch?.searchCook : data?.fetchAllCooks;
     if (loading || loadingSearch) {
@@ -203,13 +218,33 @@ export default function Cooking() {
 
     return (
       <div className="cooking-item">
-        <div className='header'>
-        {
-          (topdata && topdata.fetchCookByViewRank ? (
-          topdata.fetchCookByViewRank.map((cook) => (
-          <p key={cook.id}>인기 요리 이름: {cook.name}</p>))) : 
-        (<pre>{JSON.stringify(toperror, null, 2)}</pre>))}
+        <div className="cooking-header">
+          <div className="cooking-header1">
+            <img src="/top.png" alt="Top Rooms" />
+            <p>인기 레시피  BEST</p>
+          </div>
+          <div className="best-dishes">
+          {topdata && topdata.fetchCookByViewRank ? (
+            topdata.fetchCookByViewRank.map((cook) => (
+            <div className="best-dish" key={cook.id}>
+              {cook.post_images && cook.post_images.length > 0 && (
+               <img src={cook.post_images[0].imagePath} alt={cook.name} />
+              )}
+              <div className="best-dish-context">
+               <div className="dish-name">
+                <h3>{cook.name}</h3>
+               </div>
+               <div className="dish-details">
+                  <p>{cook.detail}</p>
+              </div>
+            </div>
+          </div>
+          ))
+        ) : (
+        <pre>{JSON.stringify(toperror, null, 2)}</pre>
+        )}
 
+          </div>
         </div>
         <div className='cooking-items-container'>
           <p>전체 레시피</p>
@@ -222,36 +257,13 @@ export default function Cooking() {
       </div>
     );
   };
-  const handleDeleteIngredient = async (ingredientId) => {
-    try {
-      // 삭제 요청 보내기
-      await deleteIngredient({
-        variables: {
-          ingredientId: ingredientId,
-        },
-      });
-      // 삭제 성공 시 재료 다시 불러오기
-      await refetch();
-      alert('식재료가 성공적으로 삭제되었습니다.');
-    } catch (error) {
-      console.log(JSON.stringify(error, null, 2))
-
-      console.error('식재료 삭제 중 오류 발생:', error);
-      alert('식재료 삭제 중 오류가 발생했습니다.');
-    }
-  };
-
-
 
   return (
     <div className='cooking-container'>
-      <div className='cook-ai-container'>  
+      <div className='cook-ai-container'>
         <h2>AI 레시피</h2>
-
-        {/* AI 검색 */}
         <div className='cook-ai'>
           <div className='ingredient'>
-            {/* 재료 입력 받기 */}
             <div className='ingredient-inputs'>
               <p>AI에게 레시피를 추천받을 수 있어요</p>
               <input type="text" placeholder="재료" value={ingredientName}
@@ -267,41 +279,40 @@ export default function Cooking() {
               <button onClick={handleAddIngredient}>추가하기</button>
             </div>
             <div className='cook-ai-input'>
-              <p>추가된 재료</p>
+              <p style={{ color: 'rgb(93, 155, 0)', fontSize: '18px' }}>[ 추가된 재료 ]</p>
               {dataIngredients?.fetchMyIngredients.length === 0 ? (
                 <p className="cooking-nodata">재료가 없습니다.</p>
-                ) : (
-                  dataIngredients?.fetchMyIngredients.map((ing) => (
-                <div className="ingredient-item" key={ing.id}>
-                  <span style={{ margin: '10px 10px 0 10px' }}>{ing.name}</span>
-                  <span>{ing.volume}</span>
-                  <span>{ing.volume_unit}</span>
-                  <button onClick={() => handleDeleteIngredient(ing.id)}>삭제</button>
-                </div>)))}
-              {/* AI 검색 결과 페이지로 이동 */}
+              ) : (
+                dataIngredients?.fetchMyIngredients.map((ing) => (
+                  <div className="ingredient-item" key={ing.id}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ marginRight: '5px' }}>{ing.name}</span>
+                      <span style={{ marginRight: '5px' }}>{ing.volume}</span>
+                      <span style={{ marginRight: '15px' }}>{ing.volume_unit}</span>
+                    </div>
+                    <button className="cookingDelete-btn" onClick={() => handleDeleteIngredient(ing.id)}>삭제</button>
+                  </div>
+                ))
+              )}
               <button onClick={handleAISearch}>➔</button>
             </div>
           </div>
         </div>
-
-        {/* 레시피 검색 */}
         <div className='cooking-search-container'>
           <div className='cooking-search'>
-           <Space compact>
-            <Search 
-              placeholder="재료/요리를 검색하세요" 
-              onSearch={handleSearch} 
-              enterButton 
-              className='custom-search-button'
-            />
-          </Space>
+            <Space compact>
+              <Search 
+                placeholder="재료/요리를 검색하세요" 
+                onSearch={handleSearch} 
+                enterButton 
+                className='custom-search-button'
+              />
+            </Space>
+          </div>
         </div>
-        </div>
-
-        {/* 전체 레시피 */}
         {renderCooks()}
       </div>
-      <button className='post-button2' onClick={handlePostButtonClick}> 요리 글 등록</button>
+      <button className='post-button2' onClick={handlePostButtonClick} style={{ backgroundColor: '#29ADB2' }}> 요리 글 등록</button>
     </div>
   );
 }

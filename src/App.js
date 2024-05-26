@@ -23,7 +23,7 @@ import MessageCompose from "./pages/Message/MessageCompose";
 import MessageSuccess from "./pages/Message/MessageSuccess";
 import MessageDetail from "./pages/Message/MessageDetail";
 import MessageReply from "./pages/Message/MessageReply";
-
+import CookingUpdate from './pages/Cooking/CookingUpdate';
 import CookingPost from './pages/Cooking/CookingPost';
 import CookingDetails from "./pages/Cooking/CookingDetails";
 import CommunityPost from './pages/Community/CommunityPost';
@@ -107,30 +107,29 @@ const App = () => {
               <Route path="/OneroomDetails" element={<OneroomDetails />} />
               <Route path="/Oneroom/:roomId" element={<OneroomDetails />} />
               <Route path="/Cooking" element={<Cooking />} />
-              <Route path="/CookingAI" element={<CookingAI />} />
+              <Route path="/CookingAI" element={isAuthenticated ? <CookingAI onLogout={handleLogout} /> : <Login onLogin={handleLogin} />} />
               <Route path="/CookingPost" element={isAuthenticated ? <CookingPost /> : <Login onLogin={handleLogin} />} />
-              <Route path="/CookingDetails" element={<CookingDetails />} />
+              <Route path="/CookingDetails" element={isAuthenticated ? <CookingDetails /> : <Login onLogin={handleLogin} />} />
+              <Route path="/CookingUpdate" element={isAuthenticated ? <CookingUpdate onLogout={handleLogout} /> : <Login onLogin={handleLogin} />} />
+              
               <Route path="/terms-of-service" element={<TermsOfService />} />
-<Route path="/MyPage" element={isAuthenticated ? <MyPage onLogout={handleLogout} /> : <Login onLogin={handleLogin} />} />
-<Route path="/MessageSendBox"  element={isAuthenticated ? <MessageSendBox /> : <Login onLogin={handleLogin} />} />
-<Route path="/MessageReceiveBox"  element={isAuthenticated ? <MessageReceiveBox /> : <Login onLogin={handleLogin} />} />
-<Route path="/MessageCompose"  element={isAuthenticated ? <MessageCompose /> : <Login onLogin={handleLogin} />} />
-<Route path="/MessageSuccess"  element={isAuthenticated ? <MessageSuccess /> : <Login onLogin={handleLogin} />} />
-<Route path="/MessageDetail"  element={isAuthenticated ? <MessageDetail /> : <Login onLogin={handleLogin} />} />
-<Route path="/MessageReply"  element={isAuthenticated ? <MessageReply /> : <Login onLogin={handleLogin} />} />
-<Route path="/EditUserInfo" element={isAuthenticated ? <EditUserInfo /> : <Login onLogin={handleLogin} />} />
-<Route path="/Notification" element={isAuthenticated ? <Notification /> : <Login onLogin={handleLogin} />} />
-<Route path="/" element={<MessageReceiveBox />} />
-</Routes>
-</div>
-<div className="footer-section">
-<Footer />
-</div>
-</BrowserRouter>
-</div>
-</ApolloProvider>
-);
+              <Route path="/MyPage" element={isAuthenticated ? <MyPage onLogout={handleLogout} /> : <Login onLogin={handleLogin} />} />
+              <Route path="/MessageSendBox"  element={isAuthenticated ? <MessageSendBox /> : <Login onLogin={handleLogin} />} />
+              <Route path="/MessageReceiveBox"  element={isAuthenticated ? <MessageReceiveBox /> : <Login onLogin={handleLogin} />} />
+              <Route path="/MessageCompose"  element={isAuthenticated ? <MessageCompose /> : <Login onLogin={handleLogin} />} />
+              <Route path="/MessageSuccess"  element={isAuthenticated ? <MessageSuccess /> : <Login onLogin={handleLogin} />} />
+              <Route path="/MessageDetail"  element={isAuthenticated ? <MessageDetail /> : <Login onLogin={handleLogin} />} />                <Route path="/MessageReply"  element={isAuthenticated ? <MessageReply /> : <Login onLogin={handleLogin} />} />
+              <Route path="/EditUserInfo" element={isAuthenticated ? <EditUserInfo /> : <Login onLogin={handleLogin} />} />
+              <Route path="/Notification" element={isAuthenticated ? <Notification /> : <Login onLogin={handleLogin} />} />
+              <Route path="/" element={<MessageReceiveBox />} />
+          </Routes>
+        </div>
+        <div className="footer-section">
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </div>
+  </ApolloProvider>
+  );
 }
-
 export default App;
-

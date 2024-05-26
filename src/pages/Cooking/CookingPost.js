@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { useNavigate,useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useMutation, gql } from '@apollo/client';
 import { FaCamera } from "react-icons/fa";
-import { UploadOutlined } from '@ant-design/icons';
-import { Form, Button, Input, Upload } from 'antd';
+import { Input } from 'antd';
 import './css/CookingPost.css';
-import { useEffect } from 'react';
+
 // 레시피 생성
 const CREATE_COOK = gql`
   mutation CreateCook($createCookInput: CreateCookInput!) {
@@ -26,13 +25,12 @@ export default function CookingPost() {
   const [detail, setDetail] = useState('');
   const [images, setImages] = useState(null);
   const navigate = useNavigate();
-  const [form] = Form.useForm();
-  const location =useLocation();
-  const recipeInstructions=location.state.recipeInstructions
-  const allIngredientsMap=location.state.allIngredientsMap
-  const recipeName=location.state.recipeName
-  const { isLoggedIn,  loggedInUserName } = location.state || {};
-  const [createCook] = useMutation(CREATE_COOK, { // 토큰
+  const location = useLocation();
+  const recipeInstructions = location.state ? location.state.recipeInstructions : '';
+  const allIngredientsMap = location.state ? location.state.allIngredientsMap : new Map();
+  const recipeName = location.state ? location.state.recipeName : '';
+  const { isLoggedIn, loggedInUserName } = location.state || {};
+  const [createCook] = useMutation(CREATE_COOK, {
     context: {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token') || ''}`,
@@ -60,13 +58,13 @@ export default function CookingPost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try { 
+    try {
       const { data } = await createCook({
         variables: {
           createCookInput: {
             name,
             detail,
-            post_images: images 
+            post_images: images,
           },
         },
       });
@@ -74,12 +72,12 @@ export default function CookingPost() {
       console.log('게시되었습니다:', data.createCook);
       navigate('/Cooking'); 
     } catch (error) {
-        console.error('Error creating cook:', error);
-        console.log(JSON.stringify(error, null, 2));
-        alert('게시물을 등록하는 중 오류가 발생했습니다. 다시 시도해주세요.'+error);
+      console.error('Error creating cook:', error);
+      console.log(JSON.stringify(error, null, 2));
+      alert('게시물을 등록하는 중 오류가 발생했습니다. 다시 시도해주세요.' + error);
     }
   };
-  
+
   useEffect(() => {
     if (recipeName) {
       setName(recipeName);
@@ -91,25 +89,25 @@ export default function CookingPost() {
       setDetail(`${ingredientsDetail}\n\n${recipeInstructions}`);
     }
   }, [recipeInstructions, allIngredientsMap, recipeName]);
+
   return (
     <div className="cooking-post-container">
       <h2>레시피 등록하기</h2>
       <form onSubmit={handleSubmit}>
-
         {/* 제목 */}
         <div className="form-group">
           <label htmlFor="name" className="cooking-post-title">이름</label>
           <Input id="name" value={name} onChange={handleNameChange} required placeholder='제목'/>
         </div>
 
-         {/* 이미지 */}
+        {/* 이미지 */}
         <div className="form-group">
           <label htmlFor="images" className="community-post-photo"><FaCamera /> 사진 첨부 </label>
           <input type="file" id="images" accept="image/*" onChange={handleImagesChange} required />
           {images && <img src={URL.createObjectURL(images)} className="cooking-main-image-preview" />}
         </div>
 
-         {/* 내용(레시피) */}
+        {/* 내용(레시피) */}
         <div className="form-group">
           <label htmlFor="detail" className="cooking-post-detail">내용</label>
           <Input.TextArea id="detail" value={detail} onChange={handleDetailChange} required placeholder="내용을 작성하세요." />
