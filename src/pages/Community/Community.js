@@ -105,6 +105,7 @@ const Community = () => {
   const [selectedItem, setSelectedItem] = useState(0);
   const [selectedItemData, setSelectedItemData] = useState(BoardList_Item[0]?.title);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { loading:errorLoading, error:errorWho, data:dataWho } = useQuery(WHO_AM_I_QUERY);
   const [loggedInUserName, setLoggedInUserName] = useState('');
   const { Search } = Input;
   const [searchInput, setSearchInput] = useState({
@@ -171,7 +172,7 @@ const Community = () => {
     refetch();
   };
 
-  const handleListItemClick = (board) => {
+  const handleListItemClick = (board,isLiked) => {
     increaseView({ variables: { board_id: board.id } })
       .then((response) => {
         console.log('조회수가 증가되었습니다.', response.data);
@@ -179,7 +180,7 @@ const Community = () => {
       .catch((err) => {
         console.error('조회수 증가 에러:', err);
       });
-    navigate('/CommunityDetail', { state: { board, loggedInUserName, selectedItem } });
+    navigate('/CommunityDetail', { state: { board, loggedInUserName, selectedItem,isLiked  } });
   };
 
   const handlePostButtonClick = () => {
@@ -210,14 +211,20 @@ const Community = () => {
       }
     }
 
-    return boards.map((board) => (
-      <Community_Item
-        key={board.id}
-        board={board}
-        selectedItem={selectedItem}
-        onClick={() => handleListItemClick(board)}
-      />
-    ));
+    return boards.map((board) => {
+     
+      const isLiked = board.like_user.some(like_user => like_user.user.id === dataWho.whoAmI.id);
+     
+      return (
+        <Community_Item
+          key={board.id}
+          board={board}
+          selectedItem={selectedItem}
+          onClick={() => handleListItemClick(board,isLiked)}
+          isLiked={isLiked} // isLiked 값을 Community_Item에 prop으로 전달
+        />
+      );
+    });
   };
 
   const toggleBoardListVisibility = () => {

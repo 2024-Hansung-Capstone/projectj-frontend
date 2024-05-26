@@ -73,7 +73,7 @@ const Oneroom = () => {
       <div className='oneroom-container2'>
         <div className='map-section2'>
           {/* Map 컴포넌트에 콜백 함수 전달 */}
-          <Map onBoundsChange={handleBoundsChange} />
+          <Map onBoundsChange={handleBoundsChange} roomsData={roomData?.fetchOneRoomByXY || []}/>
         </div>
         <div className='oneroom-items-container'>
         {roomLoading ? (
