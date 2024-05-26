@@ -107,24 +107,27 @@ export default function EditUserInfo() {
       alert('비밀번호를 확인하세요');
       return;
     }
+  
     try {
-      const formData = new FormData();
-      formData.append('map', JSON.stringify({
-        0: ['variables.createUserInput.profile_image']
-      }));
-      formData.append('0', user.profileImage);
-      
-      // 프로필 이미지 업로드
-      const uploadResponse = await axios.post('http://54.180.182.40:5000/graphql', formData, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('token') || ''}`
-        }
-      });
-      
-      // 프로필 이미지의 URL을 변수에 저장
-      const profileImageUrl = uploadResponse.data.imageUrl;
-
-      await updateUser({
+      let profileImageUrl = null;
+  
+      if (user.profileImage) {
+        // 먼저 프로필 이미지를 업로드합니다.
+        const formData = new FormData();
+        formData.append('file', user.profileImage); // 프로필 이미지를 업로드하는데 사용할 폼 데이터에 파일을 추가합니다.
+        const uploadResponse = await axios.post('URL_TO_UPLOAD_PROFILE_IMAGE', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${getToken()}`
+          }
+        });
+  
+        // 업로드된 이미지의 URL을 가져옵니다.
+        profileImageUrl = uploadResponse.data.url; // 서버가 업로드된 이미지의 URL을 반환하는 것으로 가정합니다.
+      }
+  
+      // 이제 프로필 이미지 URL을 포함하여 사용자 정보를 업데이트합니다.
+      const updateUserResponse = await updateUser({
         variables: {
           updateUserInput: {
             email: user.email,
@@ -134,15 +137,27 @@ export default function EditUserInfo() {
             birth_day: user.birthDay,
             mbti: user.mbti,
             password: user.password,
-            profile_image: profileImageUrl
+            profile_image: profileImageUrl // 여기에 프로필 이미지 URL을 전달합니다.
+          }
+        },
+        context: {
+          headers: {
+            authorization: `Bearer ${getToken()}`
           }
         }
       });
+  
+      console.log('updateUserResponse:', updateUserResponse.data);
+  
       navigate('/mypage');
     } catch (error) {
       console.error('사용자 정보를 업데이트하는 중 오류 발생:', error);
+      if (error.response && error.response.data) {
+        console.error('서버 오류 메시지:', error.response.data.errors);
+      }
     }
   };
+  
   
   const handleProfileImageChange = (event) => {
     const file = event.target.files[0];
