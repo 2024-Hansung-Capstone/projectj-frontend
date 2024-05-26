@@ -4,6 +4,9 @@ export const UPDATE_USER_MUTATION = gql`
   mutation UpdateUser($updateUserInput: UpdateUserInput!) {
     updateUser(updateUserInput: $updateUserInput) {
       id
+      profile_image {
+        imagePath
+      }
       email
       name
       gender
