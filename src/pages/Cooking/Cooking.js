@@ -93,6 +93,17 @@ const FETCH_COOKS_BY_VIEW_RANK = gql`
     }
   }
 `;
+// 재료 수정
+const UPDATE_INGREDIENT = gql`
+  mutation UpdateIngredient($updateIngredientInput: UpdateIngredientInput!) {
+    updateIngredient(updateIngredientInput: $updateIngredientInput) {
+      id
+      name
+      volume
+      volume_unit
+    }
+  }
+`;
 
 export default function Cooking() {
   const { loading, error, data, refetch: refetchAll } = useQuery(FETCH_ALL_COOKS);
@@ -116,6 +127,7 @@ export default function Cooking() {
   const { Search } = Input;
   const [createIngredient] = useMutation(CREATE_INGREDIENT);
   const [deleteIngredient] = useMutation(DELETE_INGREDIENT);
+  const [updateIngredient] = useMutation(UPDATE_INGREDIENT);
 
   useEffect(() => { // 토큰
     const token = localStorage.getItem('token');
@@ -150,6 +162,7 @@ export default function Cooking() {
     navigate("/CookingAI");
   };
 
+  // 조회수
   const handleItemClick = (cook) => {
     increaseView({ variables: { id: cook.id } })
       .then(response => {
@@ -162,6 +175,7 @@ export default function Cooking() {
     navigate("/CookingDetails", { state: { cook } });
   };
 
+// 재료 추가
   const handleAddIngredient = async (e) => {
     e.preventDefault();
     if (ingredientName && volume && volume_unit) {
@@ -186,7 +200,7 @@ export default function Cooking() {
       setUnit('');
     }
   };
-
+// 재료 삭제
   const handleDeleteIngredient = async (ingredientId) => {
     try {
       await deleteIngredient({
@@ -201,6 +215,46 @@ export default function Cooking() {
       alert('식재료 삭제 중 오류가 발생했습니다.');
     }
   };
+  // 재료 수정
+  const [isEditing, setIsEditing] = useState(false);
+const [editedIngredient, setEditedIngredient] = useState({
+  id: "",
+  name: "",
+  volume: "",
+  volume_unit: ""
+});
+
+const handleUpdateIngredient = (ingredientId, name, volume, volume_unit) => {
+  setIsEditing(true); // 수정 폼을 보여줌
+  setEditedIngredient({
+    id: ingredientId,
+    name: name,
+    volume: volume,
+    volume_unit: volume_unit
+  });
+};
+
+const handleFinishEdit = async () => {
+  try {
+    await updateIngredient({
+      variables: {
+        updateIngredientInput: {
+          id: editedIngredient.id,
+          name: editedIngredient.name,
+          volume: parseFloat(editedIngredient.volume),
+          volume_unit: editedIngredient.volume_unit,
+        },
+      },
+    });
+    setIsEditing(false); // 수정 폼을 닫음
+    await refetch(); // 재료 정보를 다시 불러옴
+    alert('재료 정보가 성공적으로 수정되었습니다.');
+  } catch (error) {
+    console.error('재료 정보 수정 중 오류 발생:', error);
+    alert('재료 정보 수정 중 오류가 발생했습니다.');
+  }
+};
+
 
   const renderCooks = () => {
     const cooks = keyword ? dataSearch?.searchCook : data?.fetchAllCooks;
@@ -284,14 +338,42 @@ export default function Cooking() {
                 <p className="cooking-nodata">재료가 없습니다.</p>
               ) : (
                 dataIngredients?.fetchMyIngredients.map((ing) => (
-                  <div className="ingredient-item" key={ing.id}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ marginRight: '5px' }}>{ing.name}</span>
-                      <span style={{ marginRight: '5px' }}>{ing.volume}</span>
-                      <span style={{ marginRight: '15px' }}>{ing.volume_unit}</span>
-                    </div>
-                    <button className="cookingDelete-btn" onClick={() => handleDeleteIngredient(ing.id)}>삭제</button>
-                  </div>
+                  <React.Fragment key={ing.id}>
+                    {isEditing && editedIngredient.id === ing.id ? (
+                      <div className="edit-ingredient-form">
+                        {/* 수정 폼 */}
+                        <input
+                          type="text"
+                          value={editedIngredient.name}
+                          onChange={(e) => setEditedIngredient({ ...editedIngredient, name: e.target.value })}
+                        />
+                        <input
+                          type="text"
+                          value={editedIngredient.volume}
+                          onChange={(e) => setEditedIngredient({ ...editedIngredient, volume: e.target.value })}
+                        />
+                        <input
+                          type="text"
+                          value={editedIngredient.volume_unit}
+                          onChange={(e) => setEditedIngredient({ ...editedIngredient, volume_unit: e.target.value })}
+                        />
+                        {/* 수정 완료 버튼 */}
+                        <button onClick={() => handleFinishEdit()}>수정 완료</button>
+                      </div>
+                    ) : (
+                      <div className="ingredient-item">
+                        {/* 재료 정보 출력 */}
+                        <div className="ingredient-item-container" style={{ display: 'flex', alignItems: 'center' }}>
+                          <span style={{ marginRight: '12px' }}>{ing.name}</span>
+                          <span style={{ marginRight: '5px' }}>{ing.volume}</span>
+                          <span>{ing.volume_unit}</span>
+                        </div>
+                        {/* 수정 및 삭제 버튼 */}
+                        <button className="update-ingredient-btn" onClick={() => handleUpdateIngredient(ing.id, ing.name, ing.volume, ing.volume_unit)}>수정</button>
+                        <button className="cookingDelete-btn" onClick={() => handleDeleteIngredient(ing.id)}>삭제</button>
+                      </div>
+                    )}
+                  </React.Fragment>
                 ))
               )}
               <button onClick={handleAISearch}>➔</button>
@@ -315,4 +397,5 @@ export default function Cooking() {
       <button className='post-button2' onClick={handlePostButtonClick} style={{ backgroundColor: '#29ADB2' }}> 요리 글 등록</button>
     </div>
   );
+  
 }

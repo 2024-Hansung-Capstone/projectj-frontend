@@ -184,7 +184,9 @@
   padding: 10px;
   margin-bottom: 20px;
 }
-
+.ingredient-item-container {
+  width: 150px;
+}
 .cook-ai-input {
   width: 60%;
   margin-left: 40px;
@@ -193,12 +195,29 @@
   align-items: flex-start;
   position: relative;
 }
+.ingredient-item {
+  display: flex;
+  justify-content: space-between; /* 재료 이름과 버튼을 왼쪽과 오른쪽에 배치 */
+}
 
+.update-ingredient-btn,
 .cookingDelete-btn {
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 5px;
+  margin-left: 5px; /* 수정, 삭제 버튼 사이의 간격 조정 */
+}
 
+.cookingDelete-btn {
+  margin-left: 0; /* 삭제 버튼이 가장 오른쪽에 위치하도록 마진 조정 */
+}
+
+.update-ingredient-btn,
+.cookingDelete-btn {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 5px;
+  margin-right: 5px;
 }
 
 .cook-ai-input > button {
@@ -215,6 +234,32 @@
   position: absolute;
   right: 0;
   bottom: 10px;
+}
+/* 재료 수정 */
+.edit-ingredient-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.edit-ingredient-form input[type="text"] {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.edit-ingredient-form button {
+  padding: 5px 10px;
+  background-color: #29ADB2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-ingredient-form button:hover {
+  background-color: #209094;
 }
 
 .cooking-nodata {
