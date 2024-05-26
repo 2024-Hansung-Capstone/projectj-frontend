@@ -2,6 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+
+const geocodeAddress = async (address) => {
+  const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
+  const data = await response.json();
+  if (data && data.length > 0) {
+    return [data[0].lat, data[0].lon];
+  }
+  return null;
+};
 const Map = ({ isVisible = true, onBoundsChange , roomsData}) => {
   const mapRef = useRef(null);
   const [bounds, setBounds] = useState(null);
@@ -40,7 +49,7 @@ const Map = ({ isVisible = true, onBoundsChange , roomsData}) => {
     });
    
     mapRef.current = newMap;
-
+   
     return () => {
       if (mapRef.current) {
         mapRef.current.remove();
@@ -48,6 +57,23 @@ const Map = ({ isVisible = true, onBoundsChange , roomsData}) => {
       }
     };
   }, []);
+
+
+  useEffect(() => {
+    if (mapRef.current && roomsData) {
+      roomsData.forEach((room) => {
+        const address = `${room.dong}, ${room.jibun}`;
+        geocodeAddress(address).then((coords) => {
+          if (coords) {
+            L.marker(coords)
+              .addTo(mapRef.current)
+              .bindPopup(`<b>${address}</b><br>${room.is_monthly_rent ? `월세 ${room.monthly_rent} / ${room.deposit}` : `전세 ${room.deposit}`}`)
+              .openPopup();
+          }
+        });
+      });
+    }
+  }, [roomsData]);
 
   return (
     <div>
