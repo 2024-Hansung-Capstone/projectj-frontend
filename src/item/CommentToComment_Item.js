@@ -27,7 +27,6 @@ const DELETE_COMMENT_REPLY = gql`
         user {
           id
           name
-          profile_image
         }
         like_user {
           id
