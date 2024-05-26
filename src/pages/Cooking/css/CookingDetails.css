@@ -6,6 +6,7 @@
   align-items: flex-start;
   margin-bottom: 50px;
   margin-top: 50px;
+  justify-content: center;
 }
 
 .cooking-main-image {

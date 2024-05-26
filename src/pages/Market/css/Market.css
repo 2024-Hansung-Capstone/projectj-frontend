@@ -47,6 +47,7 @@
 .market-item {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .market-item > * {

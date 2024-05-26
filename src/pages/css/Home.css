@@ -21,7 +21,11 @@
     image-rendering: auto;
 }
 
-
+.foot-container {
+    max-width: 1200px;
+    padding: 10px;
+    margin: 0 auto;
+}
 @media (min-width: 1150px) {
     /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
     .Home-container {

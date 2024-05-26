@@ -254,7 +254,14 @@ const handleFinishEdit = async () => {
     alert('재료 정보 수정 중 오류가 발생했습니다.');
   }
 };
-
+// 레시피 줄바꿈
+const renderDetailItems = (detail) => {
+  if (typeof detail === 'string') {
+    return detail.split(',').map((item, index) => (
+      <p key={index} className="detail-item">{item.trim()}</p>
+    ));
+  }
+};
 
   const renderCooks = () => {
     const cooks = keyword ? dataSearch?.searchCook : data?.fetchAllCooks;
@@ -279,26 +286,38 @@ const handleFinishEdit = async () => {
           </div>
           <div className="best-dishes">
           {topdata && topdata.fetchCookByViewRank ? (
-            topdata.fetchCookByViewRank.map((cook) => (
-            <div className="best-dish" key={cook.id}>
-              {cook.post_images && cook.post_images.length > 0 && (
-               <img src={cook.post_images[0].imagePath} alt={cook.name} />
-              )}
-              <div className="best-dish-context">
-               <div className="dish-name">
-                <h3>{cook.name}</h3>
-               </div>
-               <div className="dish-details">
-                  <p>{cook.detail}</p>
-              </div>
+          topdata.fetchCookByViewRank.map((cook) => (
+          <div className="best-dish" key={cook.id}>
+            {cook.post_images && cook.post_images.length > 0 && (
+            <img src={cook.post_images[0].imagePath} alt={cook.name} />
+            )}
+          <div className="best-dish-context">
+            <div className="dish-name">
+              <h3>{cook.name}</h3>
+            </div>
+            <div className="dish-details">
+              {/* ","로 분할된 항목을 p 태그로 렌더링 */}
+              {renderDetailItems(cook.detail)}
             </div>
           </div>
-          ))
-        ) : (
-        <pre>{JSON.stringify(toperror, null, 2)}</pre>
-        )}
-
+        </div>
+        ))
+      ) : (
+      <pre>{JSON.stringify(toperror, null, 2)}</pre>
+      )}
           </div>
+        </div>
+        <div className='custom-search-container'>
+          <div className='custom-search'>
+            <input 
+              type="text" 
+              placeholder="재료/요리를 검색하세요" 
+              onChange={(e) => setKeyword(e.target.value)} 
+              value={keyword}
+              className='custom-search-input'
+            />
+            <button onClick={handleSearch} className='custom-search-button'>검색</button>
+           </div>
         </div>
         <div className='cooking-items-container'>
           <p>전체 레시피</p>
@@ -378,18 +397,6 @@ const handleFinishEdit = async () => {
               )}
               <button onClick={handleAISearch}>➔</button>
             </div>
-          </div>
-        </div>
-        <div className='cooking-search-container'>
-          <div className='cooking-search'>
-            <Space compact>
-              <Search 
-                placeholder="재료/요리를 검색하세요" 
-                onSearch={handleSearch} 
-                enterButton 
-                className='custom-search-button'
-              />
-            </Space>
           </div>
         </div>
         {renderCooks()}
