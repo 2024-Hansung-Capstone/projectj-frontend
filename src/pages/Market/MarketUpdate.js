@@ -64,7 +64,7 @@ const MarketUpdate = () => {
     const { name, value } = e.target;
     setFormState({
       ...formState,
-      [name]: value
+      [name]: name === 'price' ? parseFloat(value) : value // 가격은 문자열에서 부동 소수점 숫자로 변환
     });
   };
 
