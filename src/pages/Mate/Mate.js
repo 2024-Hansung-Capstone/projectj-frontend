@@ -43,6 +43,7 @@ export const WHO_AM_I_QUERY = gql`
     whoAmI {
       id
       name
+      mbti
     }
   }
 `;
@@ -126,12 +127,17 @@ export default function Mate() {
     return true;
   });
 
+  // 본인 제외 MBTI 같은 사용자만 추천 메이트에 넣기
+  const recommendedUsers = data.fetchUsers
+    .filter(user => user.mbti === whoAmI.mbti && user.id !== whoAmI.id)
+    .slice(0, 5);
+
   return (
     <div className={`Mate-container ${isFilterVisible ? 'filter-open' : ''}`}>
       <h2>{whoAmI.name}님, 추천 메이트 </h2>
       <div className='Mate-recommend'>
-        {data.fetchUsers.slice(0, 5).map((user) => ( // Use slice to select the first 5 elements
-        <Mate_Item key={user.id} user={user} />
+        {recommendedUsers.map((user) => (
+          <Mate_Item key={user.id} user={user} />
         ))}
       </div>
 
