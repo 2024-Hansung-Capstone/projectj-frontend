@@ -121,7 +121,7 @@ export default function Community_Item({ board, selectedItem, onClick,isLiked })
             {board.user.profile_image && board.user.profile_image.imagePath ? (
               <img className="ci-userImage" src={board.user.profile_image.imagePath} alt={board.user.name} />
             ) : (
-              <img className="ci-userImage" src="/user.jpeg" alt="user" />
+              <img className="ci-userImage" src="assets/mate/user.jpeg" alt="user" />
             )}
             {/* 유저 사진 */}
           </div>
