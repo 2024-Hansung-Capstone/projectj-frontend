@@ -29,9 +29,9 @@
   border-radius: 50%; /* Optional: to make it circular */
 }
 
-.ci-userPhoto img {
-  width: 100%;
-  height: auto;
+.ci-userImage {
+  min-width: 52px;
+  min-height: 52px;
 }
 
 .ci-userName, .ci-date {

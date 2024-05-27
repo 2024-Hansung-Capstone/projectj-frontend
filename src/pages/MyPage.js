@@ -109,7 +109,7 @@ export default function MyPage({ onLogout }) {
             {whoAmI?.profile_image ? (
               <img id="profileImage" src={whoAmI.profile_image.imagePath} alt="Profile" />
             ) : (
-              <PiUserCircleLight />
+              <PiUserCircleLight className="mypage-user-icon" />
             )}
           </div>
           <div className='mypage-user-container2'>

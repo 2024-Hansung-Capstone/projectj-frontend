@@ -219,7 +219,12 @@ export default function Comment_Item({ comment, isLiked,onDeleteSuccessToComment
   return (
     <div className='comment-container0'>
       <div className='comment-photo'>
-        <p>사진</p>
+        {comment.user.profile_image && comment.user.profile_image.imagePath ? (
+          <img className="comment-photo" src={comment.user.profile_image.imagePath} alt={comment.user.name} />
+        ) : (
+          <img className="comment-photo" src="/user.jpeg" alt="user" />
+        )}
+        {/* 유저 사진 */}
       </div>
       <div className='comment-title'>
         <div className='comment-container1'>

@@ -67,22 +67,30 @@
     display: flex;
     padding: 5px;
     margin: 5px;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
 }
 
 .mypage-userImage {
-    font-size: 100px;
-    padding-top: 20px;
-    margin-right: 45px;
+    max-width: 150px;
+    max-height: 150px;
+    display: flex;
+    width: 100%; /* 부모 요소의 크기에 따라 이미지 크기 조정 */
+    height: 100%; /* 부모 요소의 크기에 따라 이미지 크기 조정 */
+}
+
+.mypage-user-icon {
+    max-width: 150px;
+    max-height: 150px;
+    display: flex;
+    width: 100%; /* 부모 요소의 크기에 따라 이미지 크기 조정 */
+    height: 100%; /* 부모 요소의 크기에 따라 이미지 크기 조정 */
 }
 
 #profileImage {
-    max-width: 250px;
-    max-height: 125px;
-}
-
-.mypage-userImage {
-    max-width: 80px;
-    max-height: 80px;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover; /* 이미지를 부모 요소에 맞추기 위해 */
 }
 
 .mypage-userName {
