@@ -48,10 +48,10 @@ export const WHO_AM_I_QUERY = gql`
   }
 `;
 
-export default function CommentToComment_Item({CommentToComent, onDeleteSuccess }) {
+export default function CommentToComment_Item({CommentToComent, onDeleteSuccess,likedCTC }) {
   const { loading: whoAmILoading, error: whoAmIError, data: whoAmIData } = useQuery(WHO_AM_I_QUERY);
   const whoAmI = whoAmIData?.whoAmI;
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(likedCTC);
   const [likeCount, setLikeCount] = useState(CommentToComent.like);
 
   const [increaseReplyLike] = useMutation(INCREASE_REPLY_LIKE, {
@@ -61,7 +61,7 @@ export default function CommentToComment_Item({CommentToComent, onDeleteSuccess 
       }
     },
     onCompleted: (data) => {
-      setLikeCount();
+      setLikeCount((prev) => prev + 1);
       setLiked(!liked);
     },
     onError: (error) => {
@@ -73,9 +73,14 @@ export default function CommentToComment_Item({CommentToComent, onDeleteSuccess 
 
   const [decreaseReplyLike] = useMutation(DECREASE_REPLY_LIKE, {
     onCompleted: () => {
-      setLikeCount();
+      setLikeCount((prev) => prev - 1);
       setLiked(!liked);
     },
+    onError: (error) => {
+      console.error('대댓글 삭제 중 오류 발생:', error);
+      alert('대댓글 삭제 중 오류가 발생했습니다: ' + error.message);
+      console.log(JSON.stringify(error, null, 2))
+    }
   });
 
   const [deleteCommentReply, { loading, error }] = useMutation(DELETE_COMMENT_REPLY, {

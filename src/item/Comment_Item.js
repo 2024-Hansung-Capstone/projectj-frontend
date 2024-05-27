@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MdMoreVert } from 'react-icons/md';
 import './css/Comment_Item.css';
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import CommentToComment_Item from './CommentToComment_Item';
 
 const DELETE_REPLY = gql`
@@ -83,6 +83,14 @@ const CREATE_COMMENT_REPLY = gql`
   }
 `;
 
+const WHO_AM_I_QUERY = gql`
+  query WhoAmI {
+    whoAmI {
+      id
+      name
+    }
+  }
+`;
 export default function Comment_Item({ comment, isLiked,onDeleteSuccessToComment  }) {
   const [showOptions, setShowOptions] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -92,7 +100,7 @@ export default function Comment_Item({ comment, isLiked,onDeleteSuccessToComment
   const [likeCount, setLikeCount] = useState(comment.like);
   const [createCommentReply] = useMutation(CREATE_COMMENT_REPLY);
   const [newComment, setComment] = useState(comment);
-
+  const { loading: whoAmILoading, error: whoAmIError, data: whoAmIData } = useQuery(WHO_AM_I_QUERY);
   const handleOptionsClick = () => {
     setShowOptions(!showOptions);
   };
@@ -258,9 +266,10 @@ export default function Comment_Item({ comment, isLiked,onDeleteSuccessToComment
             <p onClick={handleReplyClick}>답글달기</p>
             {newComment.comment_reply && newComment.comment_reply.length > 0 && (
             <div className='commentTocomment-container'>
-              {newComment.comment_reply.map((comment) => (
-              <CommentToComment_Item key={comment.id} CommentToComent={comment} onDeleteSuccess={handleDeleteSuccess} />
-              ))}
+              {newComment.comment_reply.map((comment) => {
+                const isLiked = comment.like_user.some(like_user => like_user.user.id === whoAmIData.whoAmI.id);
+              <CommentToComment_Item key={comment.id} CommentToComent={comment} onDeleteSuccess={handleDeleteSuccess} likedCTC={isLiked}/>
+            })}
             </div>
             )}
         </div>
