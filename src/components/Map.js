@@ -2,7 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-
+const customIcon = L.icon({
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png', // 기본 마커 이미지 URL 또는 사용자 정의 이미지 URL
+  iconSize: [50, 82], // 아이콘의 크기 (너비, 높이)
+  iconAnchor: [25, 82], // 아이콘의 앵커 지점 (아이콘의 '발' 부분이 좌표에 위치)
+  popupAnchor: [1, -82], // 팝업의 앵커 지점
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png', // 그림자 이미지 URL
+  shadowSize: [82, 82], // 그림자의 크기
+});
 const geocodeAddress = async (address) => {
   const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
   const data = await response.json();
@@ -61,20 +68,25 @@ const Map = ({ isVisible = true, onBoundsChange , roomsData}) => {
 
   useEffect(() => {
     if (mapRef.current && roomsData) {
+      // 기존 마커 제거
+      mapRef.current.eachLayer((layer) => {
+        if (layer instanceof L.Marker) {
+          mapRef.current.removeLayer(layer);
+        }
+      });
+
       roomsData.forEach((room) => {
         const address = `${room.dong}, ${room.jibun}`;
         geocodeAddress(address).then((coords) => {
           if (coords) {
-            L.marker(coords)
-              .addTo(mapRef.current)
-              .bindPopup(`<b>${address}</b><br>${room.is_monthly_rent ? `월세 ${room.monthly_rent} / ${room.deposit}` : `전세 ${room.deposit}`}`)
-              .openPopup();
+            const marker = L.marker(coords, { icon: customIcon });
+            marker.addTo(mapRef.current)
+              .bindPopup(`<b>${address}</b><br>${room.is_monthly_rent ? `월세 ${room.monthly_rent} / ${room.deposit}` : `전세 ${room.deposit}`}`);
           }
         });
       });
     }
   }, [roomsData]);
-
   return (
     <div>
       <div id="map" style={{ height: '690px', width: '930px'}} />
