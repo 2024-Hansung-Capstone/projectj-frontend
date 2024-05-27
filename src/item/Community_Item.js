@@ -117,9 +117,12 @@ export default function Community_Item({ board, selectedItem, onClick,isLiked })
     <div className='communitydetail-container'>
       <div className='ci-container'  onClick={onClick}>
         <div className='ci-title'>
-          <div className='ci-userPhoto'>
-            <p>{board.user.profile_image && board.user.profile_image}</p>
-            {board.profile_image && board.profile_image.imagePath}
+        <div className='ci-userPhoto'>
+            {board.user.profile_image && board.user.profile_image.imagePath ? (
+              <img className="user-image" src={board.user.profile_image.imagePath} alt={board.user.name} />
+            ) : (
+              <img className="user-image" src="/user.jpeg" alt="user" />
+            )}
             {/* 유저 사진 */}
           </div>
           <div className='ci-userName'>

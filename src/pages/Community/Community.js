@@ -19,6 +19,9 @@ const GET_BOARD = gql`
       user {
         id
         name
+        profile_image{
+          imagePath
+        }
       }
       like
       create_at
