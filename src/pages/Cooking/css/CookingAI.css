@@ -1,5 +1,15 @@
+.ai-container0 {
+    font-family: 'KCC-Hanbit';
+    padding: 10px;
+    margin: 0 auto;
+
+}
+.main-section {
+    max-width: 1200px;
+    padding: 10px;
+    margin: 0 auto;
+}
 .ai-container0 > p {
-font-family: 'KCC-Hanbit';
  font-size: 30px;
  padding: 10px;
  margin: 10px;
@@ -8,21 +18,20 @@ font-family: 'KCC-Hanbit';
     font-family: 'KCC-Hanbit';
     display: flex;
     justify-content: center;
-    align-items: center;
     overflow-x: hidden; 
-    padding: 20px;
     border-radius: 10px;
     position: relative; 
     margin-bottom: 50px;
+    min-height: 1000px;
+    width: 95%;
 }
 
 .ai-recipe {
     background-color: #ffffff;
     border: 1px solid #dee2e6;
     border-radius: 8px;
-    padding: 20px;
-    flex: 0 0 50%; 
-    max-width: 50%; 
+    padding: 30px;
+    min-width: 60%;
     transition: transform 0.2s, opacity 0.2s;
     margin: 0 5px;
     box-shadow: 0 4px 8px rgb(93, 155, 0);
@@ -101,6 +110,7 @@ font-family: 'KCC-Hanbit';
     justify-content: center;
     align-items: center;
     height: 50vh;
+    min-height: 1000px;
 }
 
 .loading-spinner .BeatLoader {

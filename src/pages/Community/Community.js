@@ -270,24 +270,23 @@ const Community = () => {
     </div>
   </div>
 
-          <Input.Group compact>
-            <input
-              type="text"
-              name="title"
-              placeholder="Title"
-              value={searchInput.title}
-              onChange={handleChange}
-              style={{padding: '10px', marginLeft:'30px'}}
-            />
-            <input
-              type="text"
-              name="detail"
-              placeholder="Detail"
-              value={searchInput.detail}
-              onChange={handleChange}
-              style={{padding: '10px'}}
-            />
-          </Input.Group>
+  <Input.Group className='input-group'>
+  <input
+    type="text"
+    name="title"
+    placeholder="Title"
+    value={searchInput.title}
+    onChange={handleChange}
+  />
+  <input
+    type="text"
+    name="detail"
+    placeholder="Detail"
+    value={searchInput.detail}
+    onChange={handleChange}
+  />
+</Input.Group>
+
         </div>
         <div className='scroll-view'>
           {topdata && topdata.fetchBoardsByViewRank.map((board) => (

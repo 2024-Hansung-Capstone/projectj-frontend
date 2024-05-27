@@ -4,6 +4,7 @@
   margin: 20px;
   border-radius: 10px;
   position: relative;
+  min-height: 1300px;
 }
 
 .oneroom-container2 {
@@ -15,21 +16,25 @@
 
 .oneroom-items-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   justify-content: center;
   align-items: center;
   height: 100%;
   text-align: center;
   z-index: 2; /* Higher z-index to ensure it is above the map */
-  position: absolute; /* Positioned absolutely within the container */
   top: 0;
   right: 0;
   background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
   width: 230px;
   max-height: 700px;
   border: 1px solid gray;
+  margin-right: 10px;
   overflow-y: auto;
+  width: 93.4%;
+  margin-bottom: 10px;
+  min-height: 163px;
 }
+
 
 .oneroom-items-container p {
   color: gray;
@@ -47,7 +52,7 @@
 }
 
 .map-section2 {
-  height: 300px; /* 적절한 높이로 조절하세요 */
+  height: 300px;
   order: 2;
 }
 
@@ -89,7 +94,20 @@
   margin-right: 0;
 }
 
+.oneroom-items-container .oneroom-dish-item {
+  margin: 10px; /* Add some margin for spacing */
+}
+
+.map-section2 {
+  height: 400px;
+  order: 2;
+}
+
 .oneroom-dish-item {
+  display: flex;
+  flex-direction: column; /* 세로 정렬을 위한 설정 */
+  align-items: center; /* 가운데 정렬을 위한 설정 */
+  text-align: center; /* 텍스트 정렬을 위한 설정 */
   width: 180px;
   max-height: calc(100vh - 550px);
   padding-left: 10px;
@@ -97,10 +115,16 @@
   border: 1px solid #ccc;
   margin: 10px;
 }
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 163px;
+}
 
 @media (min-width: 1150px) {
   .oneroom-container {
-    width: 100%;
+    width: 95%;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
@@ -117,49 +141,14 @@
   }
 }
 
-@font-face {
-  font-family: 'KCC-Hanbit';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-
-  .oneroom-items-container {
-    position: relative;
-    width: 100%;
-    max-height: none;
-    margin-bottom: 20px;
-    flex-direction: row; /* Change flex direction to row */
-    flex-wrap: wrap; /* Allow items to wrap to the next line */
-    justify-content: center; /* Center the items horizontally */
-  }
-
-  .oneroom-items-container .oneroom-dish-item {
-    margin: 10px; /* Add some margin for spacing */
-  }
-
-  .map-section2 {
-    height: 400px;
-    order: 2;
-  }
-
-  .oneroom-dishes-grid {
-    display: flex;
-  }
-
-.loading-spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  padding: 60px;
-}
-
 
 @media (max-width: 1150px) {
   .oneroom-container2 {
     flex-direction: column;
     height: auto;
+  }
+    .oneroom-dishes-grid {
+    display: flex;
   }
 }
 
@@ -172,8 +161,8 @@
     border-radius: 10px;
     position: relative;
   }
-}
-/* 모바일 반응형 스타일 */
-@media (max-width: 600px) {
 
+  .oneroom-dishes-grid {
+    display: flex;
+  }
 }
