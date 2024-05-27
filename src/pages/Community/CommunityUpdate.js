@@ -81,7 +81,7 @@ const CommunityUpdate = () => {
                 <div>
                     <label>카테고리:</label>
                     <input
-                        type="text"
+                        type="cu-text"
                         name="category"
                         value={formState.category}
                         onChange={handleInputChange}
@@ -90,7 +90,7 @@ const CommunityUpdate = () => {
                 <div>
                     <label>제목:</label>
                     <input
-                        type="text"
+                        type="cu-text"
                         name="title"
                         value={formState.title}
                         onChange={handleInputChange}
@@ -112,7 +112,7 @@ const CommunityUpdate = () => {
                         onChange={handleFileChange}
                     />
                 </div>
-                <button type="submit">수정</button>
+                <button type="cu-submit">수정</button>
             </form>
         </div>
     );

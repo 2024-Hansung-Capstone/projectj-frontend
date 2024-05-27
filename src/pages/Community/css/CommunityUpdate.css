@@ -27,9 +27,9 @@ label {
     font-weight: bold;
 }
 
-input[type="text"],
+input[type="cu-text"],
 textarea {
-    width: calc(100% - 20px); /* 수정 */
+    width: calc(100% - 20px);
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -41,7 +41,7 @@ input[type="file"] {
     margin-top: 5px;
 }
 
-button[type="submit"] {
+button[type="cu-submit"] {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -50,6 +50,6 @@ button[type="submit"] {
     cursor: pointer;
 }
 
-button[type="submit"]:hover {
+button[type="cu-submit"]:hover {
     background-color: #45a049;
 }

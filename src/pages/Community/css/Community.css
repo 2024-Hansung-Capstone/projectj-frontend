@@ -48,8 +48,7 @@
 .community-hot-context {
   display: flex;
   width: 100%;
-  background-color: rgba(153, 45, 45, 0.976);
-  color: white;
+  border: 3px solid rgba(153, 45, 45, 0.976);
   border-radius: 20px;
   padding-left: 10px;
   margin-top: 20px;
@@ -113,9 +112,22 @@
   outline: none;
   border-color: #29ADB2;
 }
+/* 버튼 스타일 */
+.post-button2 {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #29ADB2;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.post-button2:hover {
+  background-color: #1c8e92;
+}
 
 /* 반응형 스타일 */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .community-container {
     display: flex;
     flex-direction: column;
@@ -156,6 +168,7 @@
   
   .filter-bar-container img {
     width: 50px;
+    margin-top: 7px;
   }
   
   .board-list.visible {
@@ -165,6 +178,11 @@
   .filter-bar-container {
     display: flex;
     margin-bottom: 10px;
+    justify-content: center;
+    width: 90%;
+  }
+  .filter-bar-container input {
+    width: 170px;
   }
 }
 
@@ -182,18 +200,4 @@
     margin-left: auto;
     margin-right: auto;
   }
-}
-
-/* 버튼 스타일 */
-.post-button2 {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #29ADB2;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.post-button2:hover {
-  background-color: #1c8e92;
 }

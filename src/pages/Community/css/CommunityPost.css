@@ -1,4 +1,5 @@
 .community-post-container {
+    font-family: 'KCC-Hanbit';
     max-width: 800px;
     margin: 0 auto;
     margin-top: 20px;
@@ -7,7 +8,11 @@
     border-radius: 10px; /* 모서리 둥글게 */
     background-color: #f9f9f9; /* 배경색 추가 */
 }
-
+.community-post-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .form-group {
     margin-bottom: 20px;
 }

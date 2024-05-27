@@ -61,20 +61,20 @@ const CookingDetails = () => {
         )}
       </div>
       <div className="ck-detail-context">
-        <h1 className="name" style={{backgroundColor: 'rgb(93, 155, 0)', color: 'white'}}>{cook?.name || '요리 글 제목'}</h1>
+        <h1 className="name">{cook?.name || '요리 글 제목'}</h1>
         <div className="author-view-container">
           <p className="author">작성자: {cook?.user?.name}</p>
           <div className="view-count">
-            <img src="/view.png" alt="view" style={{width:'30px', marginRight:'5px'}}/>
+            <img src="/view.png" alt="view"/>
             {cook.view}
           </div>
         </div>
-        <div className="detail" style={{marginTop: '20px'}}>{renderDetails()}</div>
+        <div className="detail">{renderDetails()}</div>
         {currentUser === cook?.user?.name && (
-          <>
-            <button onClick={handleEdit}>수정</button> 
-            <button onClick={() => handleDelete(cook.id)}>삭제</button>
-          </>
+          <div className="button-container">
+            <button onClick={handleEdit} className="cook-button">수정</button>
+            <button onClick={() => handleDelete(cook.id)} className="cook-button">삭제</button>
+          </div>
         )}
       </div>
     </div>

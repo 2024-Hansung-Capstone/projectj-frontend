@@ -89,7 +89,10 @@ const CommunityPost = ({ onPost }) => {
 
   return (
     <div className="community-post-container">
-      <h2>게시물 등록하기</h2>
+      <div className="community-post-header">
+        <img src='write.png' alt='write' style={{width:'40px', height: '40px', marginRight:'5px'}}/>
+        <h2>게시물 등록하기</h2>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="category" className="community-post-category">카테고리</label>

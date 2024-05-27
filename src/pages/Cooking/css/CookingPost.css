@@ -1,53 +1,71 @@
-@media (min-width: 1150px) {
-    .cooking-post-container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        margin-top: 20px;
-    }
-}
-
-.form-group {
+.cooking-post-container {
+    margin: 30px auto;
+    padding: 20px;
+    max-width: 600px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cp-name,
+  .cp-image,
+  .cp-detail {
     margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-button.cooking-post-button {
+  }
+  
+  .cooking-post-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .community-post-photo {
+    display: inline-block;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #3f3f3f;
+    background-color: rgb(93, 155, 0);
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-button.cooking-post-button:hover {
-    background-color: #555;
-}
-
-.reciepe-image-preview {
-    max-width: 400px;
-    max-height: 400px;
-    width: auto;
+  }
+  
+  .community-post-photo:hover {
+    background-color: rgb(70, 115, 2);
+  }
+  
+  .cooking-main-image-preview {
+    max-width: 100%;
     height: auto;
     object-fit: contain;
-}
+    margin-top: 10px;
+  }
+  
+  .cooking-post-detail {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .community-post-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: rgb(93, 155, 0);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cu-post-button:hover {
+    background-color: rgb(70, 115, 2);
+  }
 
-.cooking-main-image-preview {
-    max-width: 400px;
-    max-height: 400px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-}
-
-.cooking-post-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: black;
-}
+  .cu-post-button {
+    margin-right: 0;
+    background-color: rgb(93, 155, 0);
+    color: white;
+    padding: 14px;
+    border-radius: 10px;
+  }
+  

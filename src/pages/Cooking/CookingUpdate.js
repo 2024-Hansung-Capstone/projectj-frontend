@@ -19,104 +19,92 @@ const UPDATE_COOK = gql`
 
 const CookingUpdate = () => {
   const location = useLocation();
-  const { cook } = location.state || {};
+  const [cook, setCook] = useState(location.state?.cook);
   const [formState, setFormState] = useState({
-    name: cook?.name || '',
-    detail: cook?.detail || '',
-    post_images: cook?.post_images || []
+      id: cook.id,
+      name: cook.name,
+      detail: cook.detail,
+      post_images: []
   });
   const navigate = useNavigate();
-
   const [updateCook] = useMutation(UPDATE_COOK, {
-    onCompleted: () => {
-      alert('게시글이 성공적으로 수정되었습니다.');
-      navigate('/Cooking');
-    },
-    onError: (error) => {
-      console.error('게시글 수정 중 오류 발생:', error);
-      alert(`게시글 수정 중 오류가 발생했습니다: ${error.message}`);
-    }
+      onCompleted: (data) => {
+          alert('게시글이 성공적으로 수정되었습니다.');
+          navigate('/Cooking')
+      },
+      onError: (error) => {
+          console.error('게시글 수정 중 오류 발생:', error);
+          console.log(JSON.stringify(error, null, 2));
+          alert('게시글 수정 중 오류가 발생했습니다.');
+      }
   });
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormState(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+      const { name, value } = e.target;
+      setFormState({
+          ...formState,
+          [name]: value
+      });
   };
 
-  const handleImagesChange = (e) => {
-    const selectedImages = Array.from(e.target.files);
-    setFormState(prevState => ({
-      ...prevState,
-      post_images: selectedImages
-    }));
+  const handleFileChange = (e) => {
+      setFormState({
+          ...formState,
+          post_images: e.target.files
+      });
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(formState); // 제출 시 formState 상태 확인
-    try {
-      const formData = new FormData();
-      formData.append('name', formState.name);
-      formData.append('detail', formState.detail);
-      formState.post_images.forEach((image, index) => {
-        formData.append(`image${index}`, image);
-      });
-      
-      await updateCook({
-        variables: {
-          cook_id: cook.id,
-          updateCookInput: formData // 파일 경로를 서버에서 받아 처리할 것으로 가정
-        },
-      });
-    } catch (error) {
-      console.error('Error updating cook:', error);
-      alert('게시물을 수정하는 중 오류가 발생했습니다. 다시 시도해주세요.');
-    }
+      e.preventDefault();
+      try {
+          await updateCook({
+              variables: {
+                cook_id: formState.id,
+                updateCookInput: {
+                    name: formState.name,
+                    detail: formState.detail,
+                    post_images: Array.from(formState.post_images)
+                  }
+              }
+          });
+      } catch (error) {
+          console.error('게시글 수정 중 오류 발생:', error);
+          alert('게시글 수정 중 오류가 발생했습니다.');
+      }
   };
 
   return (
-    <div className="cooking-update-container">
-      <h2>레시피 수정하기</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name" className="cooking-update-title">이름</label>
-          <Input
-            id="name"
-            name="name"
-            value={formState.name}
-            onChange={handleInputChange}
-            required
-            placeholder="제목"
-          />
-        </div>
-
-        <div>
-          <label>이미지 업로드:</label>
-          <input
-            type="file"
-            multiple
-            onChange={handleImagesChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="detail" className="cooking-update-detail">내용</label>
-          <Input.TextArea
-            id="detail"
-            name="detail"
-            value={formState.detail}
-            onChange={handleInputChange}
-            required
-            placeholder="내용을 작성하세요."
-          />
-        </div>
-
-        <button type="submit" className="cooking-update-button">수정 완료</button>
-      </form>
-    </div>
+      <div className="container"> {/* container 클래스 추가 */}
+          <h2>레시피 수정</h2>
+          <form onSubmit={handleSubmit}>
+              <div>
+                  <label>제목:</label>
+                  <input
+                      type="text"
+                      name="name"
+                      value={formState.name}
+                      onChange={handleInputChange}
+                  />
+              </div>
+              <div>
+                  <label>내용:</label>
+                  <textarea
+                      name="detail"
+                      value={formState.detail}
+                      onChange={handleInputChange}
+                  />
+              </div>
+              <div>
+                  <label>이미지 업로드:</label>
+                  <input
+                      type="file"
+                      multiple
+                      onChange={handleFileChange}
+                  />
+              </div>
+              <button type="cu-submit">수정</button>
+          </form>
+      </div>
   );
 };
 

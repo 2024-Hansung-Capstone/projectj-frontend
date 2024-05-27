@@ -5,7 +5,10 @@
     padding: 40px;
 
 }
-
+.market-post-header {
+    display: flex;
+    align-items: center;
+}
 .form-group {
     margin-bottom: 20px;
 }

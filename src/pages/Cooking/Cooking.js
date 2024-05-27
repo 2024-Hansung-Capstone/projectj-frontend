@@ -129,6 +129,9 @@ export default function Cooking() {
   const [deleteIngredient] = useMutation(DELETE_INGREDIENT);
   const [updateIngredient] = useMutation(UPDATE_INGREDIENT);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
   useEffect(() => { // 토큰
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
@@ -263,6 +266,28 @@ const renderDetailItems = (detail) => {
   }
 };
 
+const renderPagination = () => {
+  const cooks = keyword ? dataSearch?.searchCook : data?.fetchAllCooks;
+  const pageCount = Math.ceil(cooks.length / itemsPerPage);
+  const pages = [];
+  for (let i = 1; i <= pageCount; i++) {
+    pages.push(i);
+  }
+  return (
+    <div className="pagination">
+      {pages.map((page) => (
+        <button
+          key={page}
+          onClick={() => setCurrentPage(page)}
+          className={page === currentPage ? 'active' : ''}
+        >
+          {page}
+        </button>
+      ))}
+    </div>
+  );
+};
+
   const renderCooks = () => {
     const cooks = keyword ? dataSearch?.searchCook : data?.fetchAllCooks;
     if (loading || loadingSearch) {
@@ -277,11 +302,14 @@ const renderDetailItems = (detail) => {
       return <p className='nodata'>등록된 요리가 없습니다.</p>;
     }
 
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const selectedCooks = cooks.slice(startIndex, startIndex + itemsPerPage);
+
     return (
       <div className="cooking-item">
         <div className="cooking-header">
           <div className="cooking-header1">
-            <img src="/top.png" alt="Top Rooms" />
+            <img src="/top.png" alt="Top" />
             <p>인기 레시피  BEST</p>
           </div>
           <div className="best-dishes">
@@ -320,13 +348,17 @@ const renderDetailItems = (detail) => {
            </div>
         </div>
         <div className='cooking-items-container'>
-          <p>전체 레시피</p>
+        <div className='cooking-items-header'>
+          <img src="/cook2.png" alt="cook" style={{width: '40px', marginRight:'10px'}} />
+            <p style={{fontSize:'24px'}}>전체 레시피</p>
+          </div>
           <div className='cooking-dishes-grid'>
-            {cooks.map((cook) => (
+            {selectedCooks.map((cook) => (
               <Cooking_Item key={cook.id} cook={cook} onClick={() => handleItemClick(cook)} />
             ))}
           </div>
         </div>
+        {renderPagination()}
       </div>
     );
   };
@@ -334,7 +366,10 @@ const renderDetailItems = (detail) => {
   return (
     <div className='cooking-container'>
       <div className='cook-ai-container'>
-        <h2>AI 레시피</h2>
+        <div className='cook-ai-header'>
+          <img src="/ai1.png" alt="ai" style={{width:'50px',height: '50px', marginRight:'10px', marginBottom:'5px'}}/>
+          <p style={{fontSize:'30px'}}>AI 레시피</p>
+        </div>
         <div className='cook-ai'>
           <div className='ingredient'>
             <div className='ingredient-inputs'>
@@ -404,5 +439,4 @@ const renderDetailItems = (detail) => {
       <button className='post-button2' onClick={handlePostButtonClick} style={{ backgroundColor: '#29ADB2' }}> 요리 글 등록</button>
     </div>
   );
-  
 }

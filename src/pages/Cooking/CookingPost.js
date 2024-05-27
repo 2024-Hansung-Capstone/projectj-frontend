@@ -92,27 +92,30 @@ export default function CookingPost() {
 
   return (
     <div className="cooking-post-container">
-      <h2>레시피 등록하기</h2>
+      <div className='cooking-items-header'>
+          <img src="/cook2.png" alt="cook" style={{width: '40px', marginRight:'10px'}} />
+          <h2>레시피 등록</h2>
+          </div>
       <form onSubmit={handleSubmit}>
-        {/* 제목 */}
-        <div className="form-group">
-          <label htmlFor="name" className="cooking-post-title">이름</label>
-          <Input id="name" value={name} onChange={handleNameChange} required placeholder='제목'/>
+        {/* 요리명 */}
+        <div className="cp-name">
+          <label htmlFor="name" className="cooking-post-title">요리명</label>
+          <Input id="name" value={name} onChange={handleNameChange} required placeholder='제목' style={{fontSize:'20px'}}/>
         </div>
 
         {/* 이미지 */}
-        <div className="form-group">
+        <div className="cp-image">
           <label htmlFor="images" className="community-post-photo"><FaCamera /> 사진 첨부 </label>
           <input type="file" id="images" accept="image/*" onChange={handleImagesChange} required />
           {images && <img src={URL.createObjectURL(images)} className="cooking-main-image-preview" />}
         </div>
 
-        {/* 내용(레시피) */}
-        <div className="form-group">
-          <label htmlFor="detail" className="cooking-post-detail">내용</label>
-          <Input.TextArea id="detail" value={detail} onChange={handleDetailChange} required placeholder="내용을 작성하세요." />
+        {/* 레시피 */}
+        <div className="cp-detail">
+          <label htmlFor="detail" className="cooking-post-detail">레시피</label>
+          <Input.TextArea id="detail" value={detail} onChange={handleDetailChange} required placeholder="내용을 작성하세요." style={{minHeight:'300px',fontSize:'20px'}}/>
         </div>
-        <button type="submit" onClick={handleSubmit} className="community-post-button">작성 완료</button>
+        <button type="cp-submit" onClick={handleSubmit} className="cu-post-button">작성 완료</button>
       </form>
     </div>
   );

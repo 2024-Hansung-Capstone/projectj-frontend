@@ -97,7 +97,10 @@ const MarketPost = () => {
   
   return (
     <div className="market-post-container">
-      <h2>상품 등록하기</h2>
+      <div className="market-post-header">
+        <img src='marketPost.png' alt='marketPost' style={{width:'40px', height: '40px', marginRight:'5px'}}/>
+        <h2>상품 등록하기</h2>
+      </div>
       {isLoggedIn && (
         <form onSubmit={handleSubmit}>
           <div className="form-group">

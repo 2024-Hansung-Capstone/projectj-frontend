@@ -272,19 +272,18 @@ const Community = () => {
       </ul>
     </div>
   </div>
-
   <Input.Group className='input-group'>
   <input
     type="text"
     name="title"
-    placeholder="Title"
+    placeholder="제목"
     value={searchInput.title}
     onChange={handleChange}
   />
   <input
     type="text"
     name="detail"
-    placeholder="Detail"
+    placeholder="내용"
     value={searchInput.detail}
     onChange={handleChange}
   />
@@ -297,7 +296,7 @@ const Community = () => {
               <FaFire style={{ color: '#b22b29'}} />
               <div className='community-hot-context'>
                 <div className='community-hot-detail'>
-                  <p>{board.detail}</p>
+                  <p>{board.title}</p>
                 </div>
                 <div className='community-hot-view'>
                   <img src="/view.png" alt="view" />
