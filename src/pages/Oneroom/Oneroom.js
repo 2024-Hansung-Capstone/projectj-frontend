@@ -33,7 +33,7 @@ const Oneroom = () => {
       <div className='map-section'>
         <div className='popular-rooms'>
           <div className='popular-rooms-title'>
-            <img src="/top.png" alt="Top Rooms" />
+            <img src="/assets/cook/top.png" alt="Top Rooms" />
             <h2>인기 원룸 Best 3</h2>
           </div>
           <div className='popular-room-list'>
@@ -52,7 +52,7 @@ const Oneroom = () => {
       </div>
       
       <div className='oneroom-location'>
-        <img src="/home.png" alt="Home" />
+        <img src="/assets/oneroom/home.png" alt="Home" />
         <h2>내 근처 원룸 매물 현황</h2>
       </div>
       <div className='oneroom-container2'>
@@ -78,7 +78,9 @@ const Oneroom = () => {
                 <p>
                   <span><GrMapLocation /></span>
                   <br />
-                  검색조건에 맞는 방이 없습니다. 지도를 근처로 움직여보세요.
+                  검색조건에 맞는 방이 없습니다.
+                  <br />
+                  지도를 근처로 움직여보세요.
                 </p>
               )}
               {roomData &&

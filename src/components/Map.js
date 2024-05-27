@@ -89,15 +89,16 @@ const Map = ({ isVisible = true, onBoundsChange , roomsData}) => {
   }, [roomsData]);
   return (
     <div>
-      <div id="map" style={{ height: '690px', width: '930px'}} />
-      {bounds && (
+      <div className='oneroom-map' id="map"  />
+    {/*{bounds && (
         <div>
           <p>Start: {`Lat: ${bounds.start.lat}, Lng: ${bounds.start.lng}`}</p>
           <p>End: {`Lat: ${bounds.end.lat}, Lng: ${bounds.end.lng}`}</p>
         </div>
-      )}
-    </div>
+      )} */}
+      </div>
   );
+
 };
 
 export default Map;

@@ -23,7 +23,8 @@ const CREATE_COOK = gql`
 export default function CookingPost() {
   const [name, setName] = useState('');
   const [detail, setDetail] = useState('');
-  const [images, setImages] = useState(null);
+  const [images, setImages] = useState([]);
+
   const navigate = useNavigate();
   const location = useLocation();
   const recipeInstructions = location.state ? location.state.recipeInstructions : '';
@@ -50,8 +51,9 @@ export default function CookingPost() {
 
   // 이미지
   const handleImagesChange = (e) => {
-    const selectedImage = e.target.files[0];
-    setImages(selectedImage);
+    const selectedImages = e.target.files;
+    const validImages = Array.from(selectedImages).filter(image => image.type.startsWith('image/'));
+    setImages(validImages);
   };
 
   // 완료
@@ -92,10 +94,10 @@ export default function CookingPost() {
 
   return (
     <div className="cooking-post-container">
-      <div className='cooking-items-header'>
-          <img src="/cook2.png" alt="cook" style={{width: '40px', marginRight:'10px'}} />
-          <h2>레시피 등록</h2>
-          </div>
+      <div className="community-post-header">
+        <img src='/assets/cook/cook2.png' alt='cook2' style={{width:'40px', height: '40px', marginBottom:'5px', marginRight:'10px'}}/>
+        <h2>레시피 등록</h2>
+      </div>
       <form onSubmit={handleSubmit}>
         {/* 요리명 */}
         <div className="cp-name">
@@ -107,7 +109,7 @@ export default function CookingPost() {
         <div className="cp-image">
           <label htmlFor="images" className="community-post-photo"><FaCamera /> 사진 첨부 </label>
           <input type="file" id="images" accept="image/*" onChange={handleImagesChange} required />
-          {images && <img src={URL.createObjectURL(images)} className="cooking-main-image-preview" />}
+          {images.length > 0 && <img src={URL.createObjectURL(images[0])} className="cooking-main-image-preview" alt="미리보기" />}
         </div>
 
         {/* 레시피 */}

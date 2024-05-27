@@ -1,36 +1,64 @@
 .message-detail-container {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    max-width: 600px;
-    margin: 20px auto;
-  }
-  
-  .message-detail-header {
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .message-detail-info {
-    margin-bottom: 10px;
-  }
-  
-  .message-detail-info p {
-    margin: 5px 0;
-  }
-  
-  .reply-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .reply-button:hover {
-    background-color: #0056b3;
-  }
-  
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.message-detail-header {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  color: #4a4a4a;
+}
+
+.message-detail-info {
+  margin-bottom: 20px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.message-detail-info th, 
+.message-detail-info td {
+  padding: 10px;
+  text-align: left;
+}
+
+.message-detail-info th {
+  background-color: #e8e8e8;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+.message-detail-info td {
+  border-bottom: 1px solid #eee;
+  color: #555;
+}
+
+.md-button-container { 
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  padding-top: 20px;
+}
+
+.md-button {
+  background-color: rgb(93, 155, 0);
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px; /* 버튼 간 간격 조정 */
+  transition: background-color 0.3s ease;
+}
+
+.md-button:hover {
+  background-color: rgb(98, 138, 38);
+}
+

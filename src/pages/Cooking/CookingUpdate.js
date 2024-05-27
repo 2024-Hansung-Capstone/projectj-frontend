@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useMutation, gql } from '@apollo/client';
-import { Input } from 'antd';
 
 const UPDATE_COOK = gql`
   mutation UpdateCook($cook_id: String!, $updateCookInput: UpdateCookInput!) {
@@ -29,13 +28,13 @@ const CookingUpdate = () => {
   const navigate = useNavigate();
   const [updateCook] = useMutation(UPDATE_COOK, {
       onCompleted: (data) => {
-          alert('게시글이 성공적으로 수정되었습니다.');
+          alert('레시피가 성공적으로 수정되었습니다.');
           navigate('/Cooking')
       },
       onError: (error) => {
-          console.error('게시글 수정 중 오류 발생:', error);
+          console.error('레시피 수정 중 오류 발생:', error);
           console.log(JSON.stringify(error, null, 2));
-          alert('게시글 수정 중 오류가 발생했습니다.');
+          alert('레시피 수정 중 오류가 발생했습니다.');
       }
   });
 
@@ -68,17 +67,20 @@ const CookingUpdate = () => {
               }
           });
       } catch (error) {
-          console.error('게시글 수정 중 오류 발생:', error);
-          alert('게시글 수정 중 오류가 발생했습니다.');
+          console.error('레시피 수정 중 오류 발생:', error);
+          alert('레시피 수정 중 오류가 발생했습니다.');
       }
   };
 
   return (
-      <div className="container"> {/* container 클래스 추가 */}
-          <h2>레시피 수정</h2>
+      <div className="cooking-post-container">
+          <div className="community-post-header">
+            <img src='/assets/cook/cook2.png' alt='cook2' style={{width:'40px', height: '40px', marginBottom:'5px', marginRight:'10px'}}/>
+            <h2>레시피 수정</h2>
+        </div>
           <form onSubmit={handleSubmit}>
               <div>
-                  <label>제목:</label>
+                  <label className="cooking-post-label">제목:</label> {/* 클래스명 변경 */}
                   <input
                       type="text"
                       name="name"
@@ -87,22 +89,23 @@ const CookingUpdate = () => {
                   />
               </div>
               <div>
-                  <label>내용:</label>
+                  <label className="cooking-post-label">내용:</label> {/* 클래스명 변경 */}
                   <textarea
                       name="detail"
                       value={formState.detail}
                       onChange={handleInputChange}
+                      style={{height: '300px'}}
                   />
               </div>
               <div>
-                  <label>이미지 업로드:</label>
+                  <label className="cooking-post-label">이미지 업로드:</label> {/* 클래스명 변경 */}
                   <input
                       type="file"
                       multiple
                       onChange={handleFileChange}
                   />
               </div>
-              <button type="cu-submit">수정</button>
+              <button type="submit" className="cu-post-button">수정</button> {/* 클래스명 변경 */}
           </form>
       </div>
   );

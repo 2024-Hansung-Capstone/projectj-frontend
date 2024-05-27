@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import "./css/Market.css";
+import "./css/MarketPost.css";
 import { useMutation, useQuery, gql } from '@apollo/client'; 
 
 const GET_USED_PRODUCTS = gql`
@@ -97,43 +97,43 @@ const MarketPost = () => {
   
   return (
     <div className="market-post-container">
-      <div className="market-post-header">
-        <img src='marketPost.png' alt='marketPost' style={{width:'40px', height: '40px', marginRight:'5px'}}/>
-        <h2>상품 등록하기</h2>
+      <div className="community-post-header">
+        <img src='/assets/market/marketPost.png' alt='marketPost' className="market-post-image"/>
+        <h2>상품 등록</h2>
       </div>
       {isLoggedIn && (
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="category" className="market-label">카테고리</label>
+          <div className="market-post-form-group">
+            <label htmlFor="category" className="market-post-label">카테고리</label>
             <select 
-            id="category" 
-            className="form-control" 
-            value={category} 
-            onChange={handleCategoryChange}
-          >
-            <option value="">선택해주세요</option>
-            <option value="의류">의류</option>
-            <option value="신발">신발</option>
-            <option value="전자기기">전자기기</option>
-            <option value="가구">가구/인테리어</option>
-            <option value="도서">도서</option>
+              id="category" 
+              className="market-post-select" 
+              value={category} 
+              onChange={handleCategoryChange}
+            >
+              <option value="">선택해주세요</option>
+              <option value="의류">의류</option>
+              <option value="신발">신발</option>
+              <option value="전자기기">전자기기</option>
+              <option value="가구">가구/인테리어</option>
+              <option value="도서">도서</option>
             </select>
-            </div>
-          <div className="form-group">
-            <label htmlFor="title" className="market-post-title">제목</label>
+          </div>
+          <div className="market-post-form-group">
+            <label htmlFor="title" className="market-post-label">제목</label>
             <input type="text" className='market-post-input' id="title" value={title} onChange={handleTitleChange} required placeholder='제목'/>
           </div>
-          <div className="form-group">
-            <label htmlFor="price" className="market-post-price">판매 가격</label>
+          <div className="market-post-form-group">
+            <label htmlFor="price" className="market-post-label">판매 가격</label>
             <input id="price" className='market-post-input' value={price} onChange={handlePriceChange} required placeholder="₩ 가격을 입력해주세요." />
           </div>
-          <div className="form-group">
-            <label htmlFor="image" className="market-post-photo">사진 첨부</label>
+          <div className="market-post-form-group">
+            <label htmlFor="image" className="market-post-label">사진 첨부</label>
             <input type="file" id="image" accept="image/*" multiple onChange={handleFileChange} required />
           </div>
-          <div className="form-group">
-            <label htmlFor="detail" className="market-post-detail">상품 설명</label>
-            <textarea id="detail" value={detail} onChange={handleDetailChange} required placeholder="신뢰할 수 있는 거래를 위해 자세한 상품 설명을 작성해주세요." />
+          <div className="market-post-form-group">
+            <label htmlFor="detail" className="market-post-label">상품 설명</label>
+            <textarea id="detail" className='market-post-textarea' value={detail} onChange={handleDetailChange} required placeholder="신뢰할 수 있는 거래를 위해 자세한 상품 설명을 작성해주세요." />
           </div>
           <button type="submit" className="market-post-button">작성 완료</button>
         </form>

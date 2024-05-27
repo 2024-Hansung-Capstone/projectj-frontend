@@ -1,8 +1,6 @@
 .mi-container {
-  border: groove 1px #ddd;
   text-align: center;
   margin: 10px;
-  padding: 10px;
   flex: 0 0 auto;
   width: 220px;
   height: auto;

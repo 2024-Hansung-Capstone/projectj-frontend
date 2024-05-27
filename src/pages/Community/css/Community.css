@@ -8,6 +8,7 @@
   width: 200px;
   padding: 20px;
   background-color: #e7e6e6a9;
+  font-family: 'KCC-Hanbit';
 }
 
 .board-list ul {
@@ -54,11 +55,13 @@
   margin-top: 20px;
   margin-left: 10px;
   margin-bottom: 10px;
+  align-items: center;
+  box-shadow: 0 4px 8px #ddd;
 }
 
-.community-hot-detail {
+.community-hot-title {
   font-size: 20px;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 .community-hot-view {
@@ -115,6 +118,7 @@
 /* 버튼 스타일 */
 .post-button2 {
   margin-top: 20px;
+  margin-right: 35px;
   padding: 10px 20px;
   background-color: #29ADB2;
   color: white;
@@ -127,7 +131,7 @@
 }
 
 /* 반응형 스타일 */
-@media (max-width: 600px) {
+@media (max-width: 770px) {
   .community-container {
     display: flex;
     flex-direction: column;

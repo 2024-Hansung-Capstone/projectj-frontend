@@ -95,7 +95,7 @@ const OneroomDetails = () => {
   return (
     <div className="oneroom-details-container">
       <div className="oneroom-details-container2">
-        <img src="/house2.png" alt="house2" />
+        <img src="/assets/oneroom/house2.png" alt="house2" />
         <div className="oneroom-details-container3">
           <div className="price">
             <h2>{convertedPrice}</h2>

@@ -11,7 +11,7 @@ export default function Header() {
           <Link className="logo-link" to="/">
             <img
               className="logo-image"
-              src="/logo.png"
+              src="/assets/logo/logo.png"
               alt="로고"
             />
           </Link>
@@ -26,10 +26,10 @@ export default function Header() {
             </li>
             <li className='header-img'>
               <Link className="header-message" to="/MessageReceiveBox">
-                  <img src="/message.png" alt="message" />
+                  <img src="/assets/home/message.png" alt="message" />
               </Link>
               <Link className="header-notification" to="/Notification" >
-              <img src="/alarm.png" alt="alarm" />
+              <img src="/assets/home/alarm.png" alt="alarm" />
               </Link>
             </li>
           </ul>

@@ -152,7 +152,10 @@ const MessageCompose = () => {
 
   return (
     <div className="message-post-container">
-      <h2>쪽지 작성하기</h2>
+      <div className="community-post-header">
+        <img src='/assets/home/message.png' alt='message' style={{width:'40px', height: '40px', marginRight:'10px'}}/>
+        <h2>메시지 작성</h2>
+      </div>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
         <div className='form-group'>

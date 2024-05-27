@@ -36,13 +36,12 @@
   }
   
   .Matefilter-bar-container .ant-btn-primary {
-    background-color: #29adb2;
-    border-color: #29adb2;
+    background-color: rgb(93, 155, 0);
   }
   
   .filter-bar-container .ant-btn-primary:hover {
-    background-color: #209094 !important;
-    border-color: #209094 !important;
+    background-color: rgb(93, 155, 0);
+    background-color: rgb(93, 155, 0);
   }
   
   .filter-item:first-child {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate, useLocation } from 'react-router-dom';
-import './css/CommunityUpdate.css'; // CommunityUpdate.css 파일 임포트
+import './css/CommunityUpdate.css'; // Importing CommunityUpdate.css file
 
 // GraphQL mutation for updating a board
 const UPDATE_BOARD = gql`
@@ -75,8 +75,11 @@ const CommunityUpdate = () => {
     };
 
     return (
-        <div className="container"> {/* container 클래스 추가 */}
-            <h2>게시글 수정</h2>
+        <div className="community-update-container"> {/* Modify the class name */}
+            <div className="community-post-header">
+                <img src='/assets/community/write.png' alt='write' style={{width:'40px', height: '40px', marginRight:'5px'}}/>
+                <h2>게시물 수정</h2>
+            </div>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>카테고리:</label>
@@ -112,7 +115,7 @@ const CommunityUpdate = () => {
                         onChange={handleFileChange}
                     />
                 </div>
-                <button type="cu-submit">수정</button>
+                <button type="submit" className="cu-submit">수정</button> {/* Modify the class name */}
             </form>
         </div>
     );

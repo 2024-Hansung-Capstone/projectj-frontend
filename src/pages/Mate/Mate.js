@@ -69,6 +69,7 @@ export default function Mate() {
     },
   });
 
+
   // 필터 클릭 리스너
   const handleFilterClick = () => {
     setFilterVisible(prev => !prev);
@@ -134,7 +135,10 @@ export default function Mate() {
 
   return (
     <div className={`Mate-container ${isFilterVisible ? 'filter-open' : ''}`}>
-      <h2>{whoAmI.name}님, 추천 메이트 </h2>
+      <div className='cook-ai-header'>
+          <img src="/assets/mate/mate2.png" alt="mate" style={{width:'50px',height: '50px', marginRight:'10px', marginBottom:'5px'}}/>
+          <h2>{whoAmI.name}님, 추천 메이트 </h2>
+        </div>
       <div className='Mate-recommend'>
         {recommendedUsers.map((user) => (
           <Mate_Item key={user.id} user={user} />
@@ -144,7 +148,7 @@ export default function Mate() {
       <div className='Mate-main'>
         <div className='Mate-filter'>
           <button onClick={handleFilterClick}> 
-            <img src='filter.png' alt='filter'/>
+            <img src='/assets/mate/filter.png' alt='filter'/>
           </button>
           <h4>나와 맞는 메이트를 찾아보세요</h4>
           {isFilterVisible && <MateFilterModal onClose={handleConfirmButtonClick} />}

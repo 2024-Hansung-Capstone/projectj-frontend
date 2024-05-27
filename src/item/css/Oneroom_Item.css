@@ -1,8 +1,10 @@
 .roomitem-container-popular {
-  border: 1px groove #ddd;
+  border: 3px solid  rgb(93, 155, 0);
+  border-radius: 10px;
+  background-color: white;
   width: 364px;
   margin: 5px;
-  padding: 10px;
+  padding: 15px;
   flex: 0 0 auto;
   text-decoration: none;
   text-align: center;
@@ -11,7 +13,7 @@
 .roomitem-container-items {
   width: 180px; /* Adjust the width as needed */
   margin: 10px;
-  padding: 10px;
+  padding: 5px;
   box-sizing: border-box;
   text-decoration: none;
 }

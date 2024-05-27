@@ -95,8 +95,11 @@ const MarketUpdate = () => {
   
 
   return (
-    <div className="market-post-container">
-      <h2>상품 수정</h2>
+    <div className="market-update-container">
+      <div className="community-post-header">
+        <img src='/assets/market/marketPost.png' alt='marketPost' className="market-post-image"/>
+        <h2>상품 수정</h2>
+      </div>
       <p>판매자: {sellerName}</p>
       <form onSubmit={handleSubmit}>
         <div className="form-group">

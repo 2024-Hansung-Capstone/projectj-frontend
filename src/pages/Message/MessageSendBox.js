@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { IoRefreshOutline } from "react-icons/io5";
 import { useQuery, useMutation, gql } from '@apollo/client';
 import "./css/MessageBox.css";
 
@@ -114,10 +113,12 @@ const MessageSendBox = () => {
   return (
     <div className="message-container">
       <div className="message-header">
-        <h2>송신함</h2>
+        <div className="community-post-header">
+          <img src='/assets/home/message.png' alt='message' style={{width:'40px', height: '40px', marginRight:'10px'}}/>
+          <h2>송신함</h2>
+      </div>
         <div className="button-group">
           <Link to="/MessageReceiveBox">쪽지 수신함 바로가기</Link>
-          <button onClick={handleRefreshClick}><IoRefreshOutline style={{ font: 'bold' }} /></button>
         </div>
       </div>
       <div className="tabs">
@@ -131,7 +132,7 @@ const MessageSendBox = () => {
       <table className='message-table'>
         <thead>
           <tr>
-            <th>읽음 상태</th>
+            <th></th>
             <th>받는 사람</th>
             {selectedCategory === '중고마켓' && <th>상품명</th>}
             <th>제목</th>

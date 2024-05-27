@@ -24,24 +24,24 @@
     margin-bottom: 50px;
     min-height: 1000px;
     width: 95%;
+    margin-top: 20px;
 }
 
 .ai-recipe {
     background-color: #ffffff;
-    border: 1px solid #dee2e6;
     border-radius: 8px;
-    padding: 30px;
+    padding: 0 20px;
     min-width: 60%;
-    transition: transform 0.2s, opacity 0.2s;
-    margin: 0 5px;
+    max-height: 900px;
     box-shadow: 0 4px 8px rgb(93, 155, 0);
 }
 .ai-recipe-title {
-    font-family: 'MoveSans-Bold';
     color: white;
+    border-radius: 8px;
     background-color: #218838;
-    text-align: center
-    ;
+    text-align: center;
+    font-size: 24px;
+    padding: 10px;
 }
 
 .ai-recipe.current {
@@ -80,14 +80,6 @@
     border-radius: 4px;
 }
 
-
-.ai-recipe p {
-    font-size: 1rem;
-    margin-top: 10px;
-    line-height: 1.5;
-}
-
-
 .ai-recipe button {
     background-color: #28a745;
     color: #ffffff;
@@ -106,15 +98,15 @@
 
 
 .loading-spinner {
-    display: flex;
     justify-content: center;
     align-items: center;
     height: 50vh;
     min-height: 1000px;
+    font-size: 24px;
 }
 
 .loading-spinner .BeatLoader {
-    display: flex;
+    font-family: 'KCC-Hanbit';
     justify-content: center;
     align-items: center;
 }

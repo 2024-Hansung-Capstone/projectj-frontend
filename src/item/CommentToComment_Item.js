@@ -131,7 +131,7 @@ export default function CommentToComment_Item({CommentToComent, onDeleteSuccess,
         </div>
         <div className='comment-like'>
           <button onClick={handleLikeClick} className='like-button'>
-            <img src={liked ? '/heartFill.png' : '/heartEmpty.png'} alt='like' />
+            <img src={liked ? '/assets/community/heartFill.png' : '/assets/community/heartEmpty.png'} alt='like' />
           </button>
           <h6>{likeCount}</h6>
         </div>

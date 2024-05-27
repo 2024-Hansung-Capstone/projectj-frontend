@@ -254,7 +254,7 @@ export default function Comment_Item({ comment, isLiked,onDeleteSuccessToComment
           </div>
           <div className='comment-like'>
             <button onClick={handleLikeClick} className='like-button'>
-              <img src={liked ? '/heartFill.png' : '/heartEmpty.png'} alt='like' />
+              <img src={liked ? '/assets/community/heartFill.png' : '/assets/community/heartEmpty.png'} alt='like' />
             </button>
             <h6>{likeCount}</h6>
           </div>
@@ -272,11 +272,11 @@ export default function Comment_Item({ comment, isLiked,onDeleteSuccessToComment
             {newComment.comment_reply && newComment.comment_reply.length > 0 && (
             <div className='commentTocomment-container'>
               {newComment.comment_reply.map((comment) => {
-                const isLiked = comment.like_user.some(like_user => like_user.user.id === whoAmIData.whoAmI.id);
-              <CommentToComment_Item key={comment.id} CommentToComent={comment} onDeleteSuccess={handleDeleteSuccess} likedCTC={isLiked}/>
-            })}
-            </div>
-            )}
+              const isLiked = comment.like_user && comment.like_user.some(like_user => like_user.user.id === whoAmIData.whoAmI.id);
+             return <CommentToComment_Item key={comment.id} CommentToComent={comment} onDeleteSuccess={handleDeleteSuccess} likedCTC={isLiked || false}/>
+              })}
+          </div>
+          )}
         </div>
         </div>
       </div>

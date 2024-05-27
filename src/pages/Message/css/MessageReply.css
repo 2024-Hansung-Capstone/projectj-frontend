@@ -25,10 +25,9 @@
   
 .reply-button {
     display: block;
-    width: 100%;
     padding: 10px;
     color: white;
-    background-color: #007bff;
+    background-color: #926bdb;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -36,7 +35,7 @@
 }
   
 .reply-button:hover {
-    background-color: #0056b3;
+    background-color: #764fc0;
 }
   
 .error-message {

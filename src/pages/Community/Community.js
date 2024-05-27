@@ -234,6 +234,10 @@ const Community = () => {
     setIsBoardListVisible(!isBoardListVisible);
   };
 
+  const handleHotBoardClick = (boardId) => {
+    navigate('/CommunityDetail', { state: { boardId } });
+  };
+
   return (
     <div className='community-container'>
       <div className={`board-list ${isBoardListVisible ? 'visible' : ''}`}>
@@ -256,7 +260,7 @@ const Community = () => {
             onMouseLeave={() => setIsBoardListVisible(false)} // 마우스를 뗐을 때 안 보이도록 설정
           >
           <button onClick={toggleBoardListVisibility}>
-            <img src='menu.png' alt='menu'/>
+            <img src='/assets/Community/menu.png' alt='menu'/>
         </button>
         <div className={`board-list ${isBoardListVisible ? 'visible' : ''}`}>
            <ul>
@@ -276,14 +280,14 @@ const Community = () => {
   <input
     type="text"
     name="title"
-    placeholder="제목"
+    placeholder="제목을 검색하세요."
     value={searchInput.title}
     onChange={handleChange}
   />
   <input
     type="text"
     name="detail"
-    placeholder="내용"
+    placeholder="내용을 검색하세요."
     value={searchInput.detail}
     onChange={handleChange}
   />
@@ -293,13 +297,13 @@ const Community = () => {
         <div className='scroll-view'>
           {topdata && topdata.fetchBoardsByViewRank.map((board) => (
             <div className='community-hot-board' key={board.id}>
-              <FaFire style={{ color: '#b22b29'}} />
               <div className='community-hot-context'>
-                <div className='community-hot-detail'>
+                <FaFire style={{ color: '#b22b29', marginBottom:'5px'}} />
+                <div className='community-hot-title'>
                   <p>{board.title}</p>
                 </div>
                 <div className='community-hot-view'>
-                  <img src="/view.png" alt="view" />
+                  <img src="/assets/community/view.png" alt="view" />
                   <p>{board.view}</p>
                 </div>
               </div>
@@ -308,7 +312,7 @@ const Community = () => {
           {selectedItem !== null && renderBoardList()}
         </div>
       </div>
-      <button className='post-button2' onClick={handlePostButtonClick}> 게시물 등록</button>
+      <button className='post-button2' onClick={handlePostButtonClick}> 게시글 등록</button>
     </div>
   );
 };

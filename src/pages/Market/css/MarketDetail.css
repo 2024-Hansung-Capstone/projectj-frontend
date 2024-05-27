@@ -58,14 +58,20 @@
 }
 
 .productImage {
-  height: 338px;
+  height: 475px;
   width: 100%;
-  border: 1px solid black;
   display: flex;
-  text-align: center;
   align-items: center;
   justify-content: center;
+  overflow: hidden; /* Hide any image overflow */
 }
+
+.productImage img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover; /* Cover the container, maintaining aspect ratio */
+}
+
 
 .productTitle {
   font-size: 40px;
@@ -133,6 +139,40 @@ button:hover {
   right: 0px;
   display: flex;
 }
+.image-slider {
+  position: relative;
+}
+
+.image-slider button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: black;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.image-slider button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.image-slider button:first-child {
+  left: 0;
+}
+
+.image-slider button:last-child {
+  right: 0;
+}
+
 
 @font-face {
   font-family: 'KCC-Hanbit';

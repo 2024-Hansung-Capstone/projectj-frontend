@@ -65,7 +65,7 @@ const CookingDetails = () => {
         <div className="author-view-container">
           <p className="author">작성자: {cook?.user?.name}</p>
           <div className="view-count">
-            <img src="/view.png" alt="view"/>
+            <img src="/assets/community/view.png" alt="view"/>
             {cook.view}
           </div>
         </div>

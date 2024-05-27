@@ -1,63 +1,61 @@
 .market-post-container {
-    max-width: 800px;
-    margin: 0 auto;
-    margin-top : 20px;
-    padding: 40px;
-
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    font-family: 'KCC-Hanbit';
+    justify-content: center;
 }
+
 .market-post-header {
     display: flex;
     align-items: center;
-}
-.form-group {
     margin-bottom: 20px;
 }
 
-label {
+.market-post-image {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+}
+
+.market-post-form-group {
+    margin-bottom: 20px;
+}
+
+.market-post-label {
     display: block;
     margin-bottom: 5px;
 }
 
-.market-post-input {
-    height: 40px;
-    width: 200px;
-    border: 1px groove #ddd;
+.market-post-input, .market-post-select, .market-post-textarea {
+    width: 100%;
+    border: 1px solid #ddd;
     font-size: 16px;
     border-radius: 5px;
-    margin: 5px;
+    margin: 5px 0;
     padding: 10px;
 }
 
-
-button.market-post-button:hover {
-    background-color: #555;
+.market-post-input {
+    height: 40px;
 }
 
-.reciepe-image-preview {
-    max-width: 400px;
-    max-height: 400px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
+.market-post-textarea {
+    height: 100px;
 }
 
-.market-main-image-preview {
-    max-width: 400px;
-    max-height: 400px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
+.market-post-button-container {
+    display: flex;
+    justify-content: flex-end;
 }
 
-.market-post-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: black;
-}
-
-.button.market-post-button {
-    width: 100%;
-    padding: 10px 0;
+.market-post-button {
+    width: 97%;
+    padding: 10px;
     border: none;
     border-radius: 4px;
     background-color: #29adb2;
@@ -65,9 +63,8 @@ button.market-post-button:hover {
     cursor: pointer;
     transition: background-color 0.2s;
     text-align: center;
-  }
-  
-  /* 버튼 호버 효과 */
-  .btn.market-post-btn:hover {
+}
+
+.market-post-button:hover {
     background-color: #0056b3;
-  }
+}

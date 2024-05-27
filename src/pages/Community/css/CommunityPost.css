@@ -36,15 +36,17 @@ label {
 button.community-post-button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #3f3f3f;
+    background-color: #29adb2;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 97%;
+    text-align: center;
 }
 
 button.community-post-button:hover {
-    background-color: #555;
+    background-color: #1c7073;
 }
 
 .community-main-image-preview {

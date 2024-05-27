@@ -309,7 +309,7 @@ const renderPagination = () => {
       <div className="cooking-item">
         <div className="cooking-header">
           <div className="cooking-header1">
-            <img src="/top.png" alt="Top" />
+            <img src="/assets/cook/top.png" alt="Top" />
             <p>인기 레시피  BEST</p>
           </div>
           <div className="best-dishes">
@@ -349,7 +349,7 @@ const renderPagination = () => {
         </div>
         <div className='cooking-items-container'>
         <div className='cooking-items-header'>
-          <img src="/cook2.png" alt="cook" style={{width: '40px', marginRight:'10px'}} />
+          <img src="/assets/cook/cook2.png" alt="cook" style={{width: '40px', marginRight:'10px'}} />
             <p style={{fontSize:'24px'}}>전체 레시피</p>
           </div>
           <div className='cooking-dishes-grid'>
@@ -367,13 +367,13 @@ const renderPagination = () => {
     <div className='cooking-container'>
       <div className='cook-ai-container'>
         <div className='cook-ai-header'>
-          <img src="/ai1.png" alt="ai" style={{width:'50px',height: '50px', marginRight:'10px', marginBottom:'5px'}}/>
+          <img src="/assets/cook/ai1.png" alt="ai" style={{width:'50px',height: '50px', marginRight:'10px', marginBottom:'5px'}}/>
           <p style={{fontSize:'30px'}}>AI 레시피</p>
         </div>
         <div className='cook-ai'>
           <div className='ingredient'>
             <div className='ingredient-inputs'>
-              <p>AI에게 레시피를 추천받을 수 있어요</p>
+              <p>냉장고 속 재료를 입력해볼까요?</p>
               <input type="text" placeholder="재료" value={ingredientName}
                 onChange={(e) => setIngredient(e.target.value)}
               />
@@ -436,7 +436,7 @@ const renderPagination = () => {
         </div>
         {renderCooks()}
       </div>
-      <button className='post-button2' onClick={handlePostButtonClick} style={{ backgroundColor: '#29ADB2' }}> 요리 글 등록</button>
+      <button className='post-button2' onClick={handlePostButtonClick} style={{ backgroundColor: '#29ADB2' }}> 레시피 등록</button>
     </div>
   );
 }

@@ -194,6 +194,10 @@ export default function Market() {
 
   return (
     <div className="market-container">
+      <div className='cook-ai-header'>
+          <img src="/assets/market/marketPost.png" alt="market" style={{width:'50px',height: '50px', marginRight:'10px', marginBottom:'5px'}}/>
+          <h2>중고마켓 </h2>
+        </div>
       <div className="market-header">
         <div
           className="market-category-icon"
@@ -202,7 +206,6 @@ export default function Market() {
         >
           <HiOutlineBars3 style={{ fontSize: '40px' }} />
         </div>
-        <IoSearchOutline className="market-search-icon" onClick={handleSearch} />
         <input
           type="text"
           className="market-search-input"
@@ -215,6 +218,7 @@ export default function Market() {
             }
           }}
         />
+        <IoSearchOutline className="market-search-icon" onClick={handleSearch} />
       </div>
       {isHovered && (
         <div

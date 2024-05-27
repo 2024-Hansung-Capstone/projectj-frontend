@@ -63,6 +63,8 @@ const CookingAI = () => {
     return (
       <div className='loading-spinner'>
         <BeatLoader size={20} color={'yellowgreen'} />
+        <br />
+        <p>AI 가 검색 중입니다. 잠시만 기다려주세요.</p>
       </div>
     );
   if (error) return <p>Error: {JSON.stringify(error, null, 2)}</p>;
@@ -154,7 +156,11 @@ const CookingAI = () => {
 
   return (
     <div className='ai-container0'>
-      <p>총 {data.fetchRecipes.length} 개의 레시피가 검색되었습니다.</p>
+      <div className='cook-ai-header'>
+          <img src="/assets/cook/ai1.png" alt="ai" style={{width:'50px',height: '50px', marginRight:'10px', marginBottom:'5px'}}/>
+          <p style={{fontSize:'24px'}}>총 {data.fetchRecipes.length} 개의 레시피가 검색되었습니다.</p>
+        </div>
+      
       <div className='ai-container' ref={containerRef}>
         {data.fetchRecipes.length > 0 && renderRecipe(data.fetchRecipes[currentIndex], currentIndex)}
         {currentIndex > 0 && (

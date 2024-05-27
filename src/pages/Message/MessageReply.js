@@ -45,7 +45,7 @@ const MessageReply = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedTitle = `[reply] ${title}`;
+    const updatedTitle = `[답장] ${title}`;
     console.log('Submitting reply with:', { letter_id: writingId, title: updatedTitle, detail }); // Debug log
     replyLetter({ variables: { letter_id: writingId, replyLetterInput: { title: updatedTitle, detail } } });
   };

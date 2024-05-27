@@ -3,15 +3,9 @@
     color: black;
     padding: 5px;
     margin-bottom: 300px;
-}
-.Home-section {
-    border: groove 1px black;
-    display: flex;
-    width: 100%;
-    margin: 10px;
-    overflow-x: scroll;
-    white-space: nowrap;
-
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    text-align: center; /* Center text content */
 }
 .Home-photoList {
     width: 100%;
@@ -20,17 +14,83 @@
     width: 100%;
     image-rendering: auto;
 }
-
 .foot-container {
     max-width: 1200px;
     padding: 10px;
     margin: 0 auto;
 }
+
+
+.Home-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center all items */
+    width: 100%;
+}
+/* Common style for centering items */
+.Home-cook, .Home-oneroom, .Home-mate, .Home-market, .Home-community, .Home-message, .Home-notification {
+    border: 1px solid red;
+    width: 100%;
+    max-width: 800px; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    padding: 20px;
+}
+/* 요리 */
+.Home-cook {
+    justify-content: center;
+    align-items: center;
+}
+/* 원룸 */
+.Home-oneroom {
+
+}
+/* 자취메이트 */
+.Home-mate {
+
+}
+/* 중고마켓 */
+.Home-market {
+
+}
+/* 커뮤니티 */
+.Home-community {
+
+}
+/* 메시지 */
+.Home-message {
+
+}
+/* 알림 */
+.Home-notification {
+    
+
+}
+
+
+
+
+
+
+
+
 @media (min-width: 1150px) {
     /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
     .Home-container {
       width: 100%; /* 요소의 너비를 100%로 설정 */
       max-width: 1200px; /* 최대 너비를 1200px로 제한 */
+      margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
+      margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
+    }
+  }
+
+  @media (max-width: 600px) {
+    /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
+    .Home-container {
+      width: 100%; /* 요소의 너비를 100%로 설정 */
+      max-width: 600px; /* 최대 너비를 1200px로 제한 */
       margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
       margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
     }

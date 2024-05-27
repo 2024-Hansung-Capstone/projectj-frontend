@@ -88,15 +88,16 @@ const CommunityDetail =  () => {
       <div className='comment-scroll'>
         <div className='comment-container'> 
         {board.reply && board.reply.length > 0 ? (
-            board.reply.map((comment) =>{
-              console.log(comment)
-              const isLiked = comment.like_user.some(like_user => like_user.user.id === dataWho.whoAmI.id);
-              return (
-              <Comment_Item key={comment.id} comment={comment} isLiked ={isLiked} onDeleteSuccessToComment={handleDeleteSuccess}/>
-                     )})
-          ) : (
-            <p>댓글이 없습니다.</p>
-          )}
+    board.reply.map((comment) =>{
+      console.log(comment)
+      const isLiked = comment.like_user && comment.like_user.some(like_user => like_user.user.id === dataWho.whoAmI.id);
+      return (
+      <Comment_Item key={comment.id} comment={comment} isLiked ={isLiked} onDeleteSuccessToComment={handleDeleteSuccess}/>
+             )})
+  ) : (
+    <p>댓글이 없습니다.</p>
+  )}
+
         </div>
       </div>
 

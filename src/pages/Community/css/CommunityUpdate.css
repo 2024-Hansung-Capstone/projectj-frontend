@@ -1,6 +1,4 @@
-/* CommunityUpdate.css */
-
-.container {
+.community-update-container {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -14,21 +12,21 @@
     background-color: #f9f9f9;
 }
 
-form {
-    width: 100%; /* 수정 */
+.community-update-container form {
+    width: 100%;
     margin-top: 20px;
 }
 
-form div {
+.community-update-container form div {
     margin-bottom: 10px;
 }
 
-label {
+.community-update-container label {
     font-weight: bold;
 }
 
-input[type="cu-text"],
-textarea {
+.community-update-container input[type="cu-text"],
+.community-update-container textarea {
     width: calc(100% - 20px);
     padding: 8px;
     border: 1px solid #ccc;
@@ -37,19 +35,21 @@ textarea {
     resize: vertical;
 }
 
-input[type="file"] {
+.community-update-container input[type="file"] {
     margin-top: 5px;
 }
 
-button[type="cu-submit"] {
-    background-color: #4CAF50;
+.community-update-container button.cu-submit {
+    width: 93%;
+    background-color: #29adb2;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    text-align: center;
 }
 
-button[type="cu-submit"]:hover {
-    background-color: #45a049;
+.community-update-container button.cu-submit:hover {
+    background-color: #1c777a;
 }

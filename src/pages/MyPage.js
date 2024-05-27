@@ -127,13 +127,13 @@ export default function MyPage({ onLogout }) {
 
       <div className='mypage-list'>
         <Link className='mypage-edit' to="/editUserInfo">
-          <img src="/edit.png" alt="edit" />
+          <img src="/assets/mypage/edit.png" alt="edit" />
           내 정보 수정</Link>
         <Link className='mypage-logout' to="/" onClick={handleLogout}>
-          <img src="/logout.png" alt="logout" />
+          <img src="/assets/mypage/logout.png" alt="logout" />
           로그아웃</Link>
         <Link className='mypage-withdraw-link' to="/" onClick={handleDeleteUser}>
-         <img src="/exit.png" alt="exit" />
+         <img src="/assets/mypage/exit.png" alt="exit" />
           회원탈퇴
         </Link>
       </div>

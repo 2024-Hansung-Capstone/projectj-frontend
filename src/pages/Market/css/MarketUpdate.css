@@ -1,5 +1,5 @@
 /* 전체 컨테이너 스타일링 */
-.market-post-container {
+.market-update-container {
     display: flex;
     flex-direction: column;
     margin: 20px;

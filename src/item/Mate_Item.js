@@ -27,7 +27,7 @@ export default function Mate_Item({ user }) {
         {user.profile_image && user.profile_image.imagePath ? (
           <img className="user-image" src={user.profile_image.imagePath} alt={userName} />
         ) : (
-          <img className="user-image" src="/user.jpeg" alt="user" />
+          <img className="user-image" src="/assets/mate/user.jpeg" alt="user" />
         )}
       </div>
       <div className='mi-name'>

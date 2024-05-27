@@ -90,8 +90,8 @@ const CommunityPost = ({ onPost }) => {
   return (
     <div className="community-post-container">
       <div className="community-post-header">
-        <img src='write.png' alt='write' style={{width:'40px', height: '40px', marginRight:'5px'}}/>
-        <h2>게시물 등록하기</h2>
+        <img src='/assets/community/write.png' alt='write' style={{width:'40px', height: '40px', marginRight:'5px'}}/>
+        <h2>게시물 등록</h2>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="form-group">

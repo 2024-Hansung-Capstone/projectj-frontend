@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useQuery, gql, useMutation } from '@apollo/client'; // useMutation 추가
-import { IoRefreshOutline } from "react-icons/io5";
 import "./css/MessageBox.css";
 
 const FETCH_MY_RECEIVE_LETTERS = gql`
@@ -119,17 +118,19 @@ const MessageReceiveBox = () => {
   };
 
   const renderIsReadStatus = (isRead) => {
-    return isRead ? "읽음" : <img src="new.png" alt="new" style={{width: "50px", textAlign:'center'}}/>;
+    return isRead ? "읽음" : <img src="/assets/message/new.png" alt="new" style={{width: "50px", textAlign:'center'}}/>;
   };
 
 
   return (
     <div className="message-container">
       <div className="message-header">
+        <div className="community-post-header">
+        <img src='/assets/home/message.png' alt='message' style={{width:'40px', height: '40px', marginRight:'10px'}}/>
         <h2>수신함</h2>
+      </div>
         <div className="button-group">
           <Link to="/MessageSendBox">쪽지 송신함 바로가기</Link>
-          <button onClick={handleRefreshClick}><IoRefreshOutline style={{font: 'bold'}}/></button>
         </div>
       </div>
       <div className="tabs">

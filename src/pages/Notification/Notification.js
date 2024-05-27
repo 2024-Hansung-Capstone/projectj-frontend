@@ -223,7 +223,7 @@ const Notification = () => {
     <div>
       <div className='notification-container'>
         <div className='notification-container1'>
-          <img src="/notification.png" alt="notification" />
+          <img src="/assets/notification/notification.png" alt="notification" />
           <h1>알림</h1>
           <button onClick={handleDeleteAllNotifications}>전체 삭제</button>
         </div>
@@ -245,7 +245,7 @@ const Notification = () => {
                     {/*<p>{new Date(notification.create_at).toLocaleString()}</p>*/}
                   </div>
                   <button onClick={() => handleDeleteNotification(notification.id)}>
-                    <img src="/deleteBox.png" alt="deleteBox" style={{width:'25px', height:'25px'}}/>
+                    <img src="/assets/notification/deleteBox.png" alt="deleteBox" style={{width:'25px', height:'25px'}}/>
                   </button>
                 </li>
               ))}

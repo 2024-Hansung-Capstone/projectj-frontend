@@ -11,7 +11,7 @@ export default function Header() {
           <Link className="logo-link" to="/">
             <img
               className="logo-image"
-              src="/logo.png"
+              src="/assets/logo/logo.png"
               alt="로고"
             />
           </Link>

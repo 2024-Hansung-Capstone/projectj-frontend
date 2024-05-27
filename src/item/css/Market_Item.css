@@ -10,18 +10,22 @@
 .marketitem-photo {
     height: 220px;
     text-align: center;
-    border: 1px groove #ddd;
+    border: 1px groove #f6f6f6;
+    object-fit: cover; 
+}
+.marketitem-photo  img {
     object-fit: cover; 
 }
 
 .marketitem-title,
-.marketitem-seller,
-.marketitem-category,
 .marketitem-price,
 .marketitem-StateAndTime {
     border: 1px groove #ddd;
 }
 
+.marketitem-title {
+    font-size: 20px;
+}
 .marketitem-likeview {
     display: flex;
     justify-content: center; 
