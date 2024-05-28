@@ -151,10 +151,11 @@ export default function Community_Item({ board, selectedItem, onClick,isLiked })
                 ))}
               </div>
             </div>
-            <div className='ci-text'>
-              <h4>{board.detail}</h4>
+              <div className='ci-text'>
+              <p className='board-title'>{board.title}</p>
+              <h4 className="ci-text">{board.detail}</h4>
+              </div>
             </div>
-          </div>
         )}
 
         {board?.post_images?.length === 0 && (
@@ -169,7 +170,7 @@ export default function Community_Item({ board, selectedItem, onClick,isLiked })
           <button onClick={handleLikeClick} className='like-button'>
             <img src={liked ? '/assets/community/heartFill.png' : '/assets/community/heartEmpty.png'} alt='like' />
           </button>
-          <h5>{likeCount}</h5>
+          <p>{likeCount}</p>
         </div>
       </div>
     </div>

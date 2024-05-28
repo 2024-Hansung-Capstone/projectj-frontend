@@ -22,7 +22,7 @@
   width: 220px;
   height: 150px;
   object-fit: contain;
-  object-fit: cover; /* 이미지를 비율 유지하면서 컨테이너에 꽉 차게 채웁니다. */
+  object-fit: cover; 
   background-color: white;
 }
 
@@ -31,7 +31,7 @@
   padding: 10px;
   position: relative;
   top: 0;
-  transition: left 0.3s ease; /* Apply transition for sliding effect */
+  transition: left 0.3s ease; 
 }
 
 .Mate-container.filter-open .Mate-filter {
@@ -79,14 +79,6 @@
 }
 .user-info {
   margin-bottom: 10px;
-}
-
-
-@font-face {
-  font-family: 'KCC-Hanbit';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
 }
 
 @media (max-width: 768px) {

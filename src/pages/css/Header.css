@@ -12,7 +12,6 @@
   justify-content: space-between;
   max-width: 1150px;
   width: 100%; /* 너비를 100%로 설정 */
-  padding: 0 10px; /* 좌우 여백 추가 */
 }
 
 .header-left-wrap {
@@ -84,7 +83,7 @@
   
   .header-wrap {
     width: 100%; /* 너비를 100%로 설정 */
-    padding: 0 20px; /* 좌우 여백 추가 */
+    padding: 0; /* 좌우 여백 추가 */
   }
   
   .header-left-wrap,
@@ -97,12 +96,12 @@
     margin-top: 10px; /* 버튼 상단 여백 추가 */
     margin-bottom: 10px; /* 버튼 하단 여백 추가 */
     padding: 5px; /* 버튼 내부 여백 조정 */
-    font-size: 14px; /* 폰트 크기 조정 */
+    font-size: 12px; /* 폰트 크기 조정 */
   }
   
   .header-img img {
-    margin-right: 5px; /* 이미지 사이 여백 조정 */
-    width: 20px;
-    height: 20px;
+    margin-right: 1px; /* 이미지 사이 여백 조정 */
+    width: 15px;
+    height: 15px;
   }
 }
