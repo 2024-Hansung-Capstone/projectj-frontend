@@ -85,10 +85,62 @@ const FETCH_BOARDS_BY_VIEW_RANK = gql`
   query FetchBoardsByViewRank($category: String!, $rank: Float!) {
     fetchBoardsByViewRank(category: $category, rank: $rank) {
       id
-      category
       title
       detail
+      category
       view
+      user {
+        id
+        name
+        profile_image{
+          imagePath
+        }
+      }
+      like
+      create_at
+      reply {
+        id
+        like
+        detail
+        user {
+          id
+          name
+        }
+        like_user {
+          id
+          user {
+            id
+            name
+          }
+        }
+        comment_reply {
+          id
+          like
+          detail
+          user {
+            id
+            name
+          }
+          like_user {
+            id
+            user {
+              id
+              name
+            }
+          }
+        }
+      }
+      post_images {
+        id
+        imagePath
+      }
+      like_user {
+        id
+        user {
+          id
+          name
+        }
+      }
     }
   }
 `;
@@ -348,20 +400,24 @@ const Community = () => {
 
         </div>
         <div className='scroll-view'>
-          {topdata && topdata.fetchBoardsByViewRank.map((board) => (
-            <div className='community-hot-board' key={board.id}>
-              <div className='community-hot-context'>
-                <FaFire style={{ color: '#b22b29', marginBottom:'5px'}} />
-                <div className='community-hot-title'>
-                  <p>{board.title}</p>
-                </div>
-                <div className='community-hot-view'>
-                  <img src="/assets/community/view.png" alt="view" />
-                  <p>{board.view}</p>
-                </div>
-              </div>
-            </div>
-          ))}
+        {topdata && topdata.fetchBoardsByViewRank.map((board) => {
+    console.log(board);
+    const isLiked = board.like_user.some(like_user => like_user.user.id === dataWho.whoAmI.id);
+    return (
+      <div className='community-hot-board' key={board.id} onClick={() => handleListItemClick(board, isLiked)}>
+        <div className='community-hot-context'>
+          <FaFire style={{ color: '#b22b29', marginBottom: '5px' }} />
+          <div className='community-hot-title'>
+            <p>{board.title}</p>
+          </div>
+          <div className='community-hot-view'>
+            <img src="/assets/community/view.png" alt="view" />
+            <p>{board.view}</p>
+          </div>
+        </div>
+      </div>
+    );
+})}
           {selectedItem !== null && renderBoardList()}
         </div>
       </div>
