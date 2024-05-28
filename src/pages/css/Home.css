@@ -1,27 +1,33 @@
 .Home-container {
+    font-family: 'KCC-Hanbit';
     background-color: white;
     color: black;
     justify-content: center;
     align-items: center; 
     text-align: center; 
 }
+
 .Home-detail img {
     width: 50%;
-
 }
+
 .Home-photoList {
     width: 100%;
 }
+
 .card-photo {
     width: 100%;
+    max-width: 1200px;
     image-rendering: auto;
+    margin-left: auto; /* 추가 */
+    margin-right: auto; /* 추가 */
 }
+
 .foot-container {
     max-width: 1150px;
     padding: 10px;
     margin: 0 auto;
 }
-
 
 .Home-detail {
     display: flex;
@@ -29,63 +35,199 @@
     align-items: center; /* Center all items */
     width: 100%;
 }
-/* Common style for centering items */
+
+.Home-title {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 0 10px;
+    border-radius: 10px;
+    font-size: 15px; /* 제목의 폰트 크기 조정 */
+    font-weight: bold; /* 제목의 굵기 설정 */
+    color: #333; /* 제목의 색상 설정 */
+    margin-bottom: 10px;
+}
+
 .Home-cook, .Home-oneroom, .Home-mate, .Home-market, .Home-community, .Home-message, .Home-notification {
-    border: 1px solid #ddd;
     width: 100%;
     max-width: 800px; 
+    display: flex;
+    flex-direction: column;
     justify-content: center; 
     align-items: center; 
     text-align: center; 
     padding: 20px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ddd;
 }
+
 /* 요리 */
 .Home-cook {
     justify-content: center;
     align-items: center;
 }
+
+.Home-cook1,
+.Home-cook2 {
+    display: flex;
+}
+
+.Home-cook1-1 {
+    width: 100%;
+    max-width: 800px; 
+    display: flex; /* 텍스트를 이미지 가운데로! */
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    padding: 20px;
+}
+
+.Home-cook1-1 img {
+    max-width: 100%; /* 이미지가 부모 요소에 맞춰지도록 */
+    height: auto; /* 이미지의 가로세로 비율 유지 */
+}
+
+.Home-cook2 {
+    display: flex; /* 이미지 가운데로 ! */
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+}
+
+.Home-cook2 img {
+    margin-top: 10px;
+}
+
 /* 원룸 */
-.Home-oneroom {
+.Home-oneroom {}
 
-}
 /* 자취메이트 */
-.Home-mate {
+.Home-mate {}
 
+.Home-mate1,
+.Home-mate2 {
+    display: flex;
+    align-items: center; 
+    text-align: center; 
 }
+
 /* 중고마켓 */
 .Home-market {
-
+    display: flex;
 }
+
+.Home-market1 {
+    display: flex;
+    align-items: center; 
+    text-align: center; 
+}
+
 /* 커뮤니티 */
-.Home-community {
+.Home-community {}
 
-}
 /* 메시지 */
-.Home-message {
+.Home-message {}
 
-}
 /* 알림 */
 .Home-notification {
-    
-
+    border-bottom: none;
 }
 
 @media (min-width: 1150px) {
     /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
     .Home-container {
-      width: 100%; /* 요소의 너비를 100%로 설정 */
-      max-width: 1200px; /* 최대 너비를 1200px로 제한 */
-      margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
-      margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
+        width: 100%; /* 요소의 너비를 100%로 설정 */
+        max-width: 1200px; /* 최대 너비를 1200px로 제한 */
+        margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
+        margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
     }
-  }
+}
 
-  @media (max-width: 750px) {
-    /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
+@media (max-width: 750px) {
     .Home-container {
-      width: 100%; /* 요소의 너비를 100%로 설정 */
-      max-width: 600px; /* 최대 너비를 1200px로 제한 */
-      margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
-      margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
+        width: 100%; /* 요소의 너비를 100%로 설정 */
+        max-width: 600px; /* 최대 너비를 1200px로 제한 */
+        margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
+        margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
     }
-  }
+
+
+.category-container {
+    display: flex;
+    justify-content: space-around;
+    background-color: #29adb2;
+    padding: 5px;
+    width: 98%; /* 추가 */
+    margin-left: auto; /* 추가 */
+    margin-right: auto; /* 추가 */
+}
+
+.category-item {
+    font-family: 'BMDOHYEON';
+    font-size: 18px;
+    color: white;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.category-item:hover {
+    color: #f4e869;
+}
+
+.category-item.active {
+    color: #f4e869; /* 클릭된 카테고리의 텍스트 색을 노란색으로 변경 */
+}
+}
+
+@media (min-width: 1150px) {
+    /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
+    .category-container {
+        width: 99%; /* 요소의 너비를 100%로 설정 */
+        max-width: 1200px; /* 최대 너비를 1200px로 제한 */
+        margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
+        margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
+    }
+}
+
+@media (min-width: 1150px) {
+    /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
+    .footer-container {
+        width: 100%; /* 요소의 너비를 100%로 설정 */
+        max-width: 1200px; /* 최대 너비를 1200px로 제한 */
+        margin-left: auto; /* 왼쪽 여백을 자동으로 추가하여 가운데 정렬 */
+        margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
+    }
+}
+
+@media (max-width: 768px) {
+    .category-container {
+        flex-wrap: wrap; /* 너비에 따라 아이템을 여러 줄에 걸쳐 정렬 */
+    }
+
+    .category-item {
+        font-size: 10px; /* 폰트 크기 조정 */
+    }
+    
+    .footer-container {
+        padding: 20px; /* 패딩 조정 */
+        margin-top: 20px; /* 위쪽 여백 조정 */
+    }
+
+    .footer-category {
+        margin-bottom: 20px; /* 카테고리 아래 여백 조정 */
+    }
+
+    .footer-detail {
+        font-size: 8px; /* 폰트 크기 조정 */
+    }
+}
+
+@font-face {
+    font-family: 'BMDOHYEON';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

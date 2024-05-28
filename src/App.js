@@ -6,8 +6,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client';
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 import Category from "./components/Category";
 import Footer from "./components/Footer";
-import NotificationBanner from "./pages/Notification/NotificationBanner"; // Import NotificationBanner component
-
+import NotificationBanner from "./pages/Notification/NotificationBanner";
 // main
 import HeaderA from "./pages/Header";
 import Home from "./pages/Home";

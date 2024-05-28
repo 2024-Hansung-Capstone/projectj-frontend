@@ -70,7 +70,7 @@
     display: flex;
     list-style: none; /* 기본 목록 스타일 제거 */
     justify-content: center; /* 중앙 정렬 */
-    padding: 0; /* 기본 패딩 제거 */
+    padding: 10px; /* 기본 패딩 제거 */
   }
   
   .pagination li {

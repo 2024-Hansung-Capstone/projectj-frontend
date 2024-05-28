@@ -10,12 +10,6 @@
     font-family: 'KCC-Hanbit';
   }
   
-  /* 제목 스타일링 */
-  h2 {
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
   /* 폼 그룹 스타일링 */
   .form-group {
     margin-bottom: 15px;
@@ -60,7 +54,7 @@
   
   /* 버튼 호버 효과 */
   .btn.market-post-btn:hover {
-    background-color: #0056b3;
+    background-color: #1d878b;
   }
   
   /* 선택 박스 스타일 */

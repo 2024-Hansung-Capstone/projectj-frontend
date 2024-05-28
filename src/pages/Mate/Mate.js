@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import MateFilterModal from '../../components/MateFilterModal.js';
-import { BiCategory } from "react-icons/bi";
-import { RiMenu2Line } from "react-icons/ri";
 import Mate_Item from '../../item/Mate_Item.js';
 import './Mate.css';
 
@@ -48,6 +46,8 @@ export const WHO_AM_I_QUERY = gql`
   }
 `;
 
+const PAGE_SIZE = 10; // 한 페이지에 표시할 항목 수
+
 export default function Mate() {
   const navigate = useNavigate();
   const [isFilterVisible, setFilterVisible] = useState(false);  // 필터 기능
@@ -57,6 +57,7 @@ export default function Mate() {
     age: null,
     mbti: null
   });
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const { data, loading, error } = useQuery(FETCH_ALL_USERS);  // gql
   const { data: sgngData, loading: sgngLoading, error: sgngError } = useQuery(FETCH_ALL_SGNG);  // gql
   const token = localStorage.getItem('token');
@@ -78,6 +79,7 @@ export default function Mate() {
   // 필터에서 확인 버튼 클릭 리스너
   const handleConfirmButtonClick = (selectedFilters) => {
     setFilters(selectedFilters);
+    setCurrentPage(1); // 필터가 변경되면 첫 페이지로 이동
     setFilterVisible(false);
   };
 
@@ -128,6 +130,11 @@ export default function Mate() {
     return true;
   });
 
+  // 페이지네이션을 위한 데이터 슬라이싱
+  const startIndex = (currentPage - 1) * PAGE_SIZE;
+  const endIndex = startIndex + PAGE_SIZE;
+  const paginatedUsers = filteredUsers.slice(startIndex, endIndex);
+
   // 본인 제외 MBTI 같은 사용자만 추천 메이트에 넣기
   const recommendedUsers = data.fetchUsers
     .filter(user => user.mbti === whoAmI.mbti && user.id !== whoAmI.id)
@@ -136,9 +143,9 @@ export default function Mate() {
   return (
     <div className={`Mate-container ${isFilterVisible ? 'filter-open' : ''}`}>
       <div className='cook-ai-header'>
-          <img src="/assets/mate/mate2.png" alt="mate" style={{width:'50px',height: '50px', marginRight:'10px', marginBottom:'5px'}}/>
-          <h2>{whoAmI.name}님, 추천 메이트 </h2>
-        </div>
+        <img src="/assets/mate/mate2.png" alt="mate" style={{ width: '50px', height: '50px', marginRight: '10px', marginBottom: '5px' }} />
+        <h2>{whoAmI.name}님, 추천 메이트 </h2>
+      </div>
       <div className='Mate-recommend'>
         {recommendedUsers.map((user) => (
           <Mate_Item key={user.id} user={user} />
@@ -147,17 +154,35 @@ export default function Mate() {
 
       <div className='Mate-main'>
         <div className='Mate-filter'>
-          <button onClick={handleFilterClick}> 
-            <img src='/assets/mate/filter.png' alt='filter'/>
+          <button onClick={handleFilterClick}>
+            <img src='/assets/mate/filter.png' alt='filter' />
           </button>
           <h4>나와 맞는 메이트를 찾아보세요</h4>
           {isFilterVisible && <MateFilterModal onClose={handleConfirmButtonClick} />}
         </div>
         <div className='Mate-list'>
           <div className='Mate-items'>
-            {filteredUsers.map((user) => (
-              <Mate_Item  key={user.id} user={user} />
+            {paginatedUsers.map((user) => (
+              <Mate_Item key={user.id} user={user} />
             ))}
+          </div>
+          {/* 페이지네이션 */}
+          <div className="pagination">
+            <button
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              style={{marginRight:'10px'}}
+            >
+              이전
+            </button>
+            <span>{currentPage}</span>
+            <button
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={endIndex >= filteredUsers.length}
+              style={{marginLeft:'10px'}}
+            >
+              다음
+            </button>
           </div>
         </div>
       </div>

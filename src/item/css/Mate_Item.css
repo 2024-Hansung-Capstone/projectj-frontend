@@ -1,12 +1,13 @@
 .mi-container {
   text-align: center;
-  margin: 10px;
+  margin: 10px auto;
   flex: 0 0 auto;
   width: 220px;
   height: auto;
   text-align: center;
   justify-content: center;
   overflow: hidden; /* 컨테이너 경계를 벗어나는 내용을 숨기기. */
+  border: 1px solid #ddd;
 }
 .mi-container2 {
     display: flex;
@@ -17,22 +18,16 @@
     height: 100%;
     object-fit: contain;
 }
-  
-.mi-age {
-    border: groove 1px #ddd;
-    width: 50%;
+.mi-info1,
+.mi-info2 {
+  display: flex;
+  border-top: 1px solid #ddd;
 }
-.mi-gender {
-    border: groove 1px #ddd;
-    width: 50%;
-    }
-.mi-name {
-    border: groove 1px #ddd;
-
-}
+.mi-age,
+.mi-gender,
+.mi-name,
 .mi-mbti {
-    border: groove 1px #ddd;
-
+    width: 50%;
 }
 /* 버튼 스타일링 */
 .mi-btn {
@@ -54,5 +49,38 @@
   .mi-btn:hover {
     background-color: #0056b3 !important;
   }
+
+  @media (max-width: 768px) {
+    .mi-container {
+      width: 90%; /* 화면 폭의 90%로 설정하여 좀 더 좁은 화면에 맞춤 */
+      margin: 10px auto; /* 좌우 여백을 auto로 설정하여 중앙 정렬 */
+    }
+  
+    .mi-container2 {
+      flex-direction: column; /* 좁은 화면에서 세로로 배치되도록 변경 */
+    }
+  
+    .mi-name,
+    .mi-age,
+    .mi-gender,
+    .mi-mbti {
+      width: 100%; /* 정보 요소가 가로폭을 가득 채우도록 설정 */
+      border-radius: 0; /* 테두리의 모서리를 없애서 깔끔한 디자인 유지 */
+      border-width: 0 0 1px 0; /* 아래쪽만 선으로 구분되도록 변경 */
+      border-style: solid;
+      border-color: #ddd;
+      padding: 6px; /* 정보 요소의 내부 여백을 추가하여 가독성 향상 */
+      box-sizing: border-box; /* 테두리까지 포함하여 요소의 크기를 계산하도록 설정 */
+    }
+  
+    .mi-mbti {
+      border-width: 0; /* MBTI 정보 요소에는 아래쪽 선을 제거하여 깔끔하게 보이도록 변경 */
+    }
+  
+    .mi-btn {
+      width: 100%; /* 버튼이 가로폭을 가득 채우도록 설정 */
+    }
+  }
+  
 
   

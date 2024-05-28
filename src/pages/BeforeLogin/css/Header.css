@@ -9,7 +9,9 @@
   align-items: center;
   justify-content: space-between;
   max-width: 1150px;
+  margin: 0 auto; /* 추가 */
 }
+
 
 .before-header-left-wrap {
   display: flex;

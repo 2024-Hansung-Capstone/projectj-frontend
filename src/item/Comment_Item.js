@@ -222,7 +222,7 @@ export default function Comment_Item({ comment, isLiked,onDeleteSuccessToComment
         {comment.user.profile_image && comment.user.profile_image.imagePath ? (
           <img className="comment-photo" src={comment.user.profile_image.imagePath} alt={comment.user.name} />
         ) : (
-          <img className="comment-photo" src="/user.jpeg" alt="user" />
+          <img className="comment-photo" src="/assets/mate/user.jpeg"/>
         )}
         {/* 유저 사진 */}
       </div>

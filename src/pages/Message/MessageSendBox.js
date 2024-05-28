@@ -136,7 +136,6 @@ const MessageSendBox = () => {
             <th>받는 사람</th>
             {selectedCategory === '중고마켓' && <th>상품명</th>}
             <th>제목</th>
-            <th>내용</th>
             <th>보낸 시간</th>
           </tr>
         </thead>
@@ -174,7 +173,6 @@ const MessageSendBox = () => {
                       <td>{messagedata.receiver.name}</td>
                       {selectedCategory === '중고마켓' && messagedata.product && <td>{messagedata.product.title}</td>}
                       <td>{messagedata.title}</td>
-                      <td>{messagedata.detail}</td>
                       <td>{formatDateTime(messagedata.create_at)}</td>
                     </tr>
                   ))

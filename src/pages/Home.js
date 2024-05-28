@@ -41,71 +41,100 @@ const Home = () => {
   return (
     <div className='Home-container'>
       <div className='Home-photoList'>
-        <img
-          className="card-photo"
-          src={images[currentImageIndex]}
-          alt="로고"
-        />
+        <img className="card-photo" src={images[currentImageIndex]} alt="로고"/>
       </div>
 
       {/* 설명 */}
       <div className='Home-detail'> 
       {/* 요리 */}
       <div className='Home-cook'> 
+        <div className="Home-title">
+          <img src='/assets/cook/cook2.png' alt='cook2' style={{width:'30px', height: '30px', marginRight:'10px'}}/>
+          <h2>요리</h2>
+        </div>
+
         <div className='Home-cook1'> 
-          <p>요리</p>
-          <p>냉장고 속 재료로 어떤 요리를 해야할지 고민되세요?</p>
-          <p>AI 레시피에게 물어보세요.</p>
-          <img src="/assets/cook/cookai2.png" alt="cook1"/>
+          <div className='Home-cook1-1'> 
+            <p>냉장고 속 재료로 어떤 요리를 해야할지 고민되세요?</p>
+            <p>AI 레시피에게 물어보세요.</p>
+          </div>
+          <img src="/assets/cook/cookai2.png"/>
+        </div>
+
+        <div className='Home-cook2'> 
+          <img src="/assets/cook/cook3.png"/>
           <p>AI가 검색한 레시피로 쉽고 간편하게</p>
-          <img src="/assets/cook/cookai1.png" alt="cook1"/>
-          
-          
         </div>
       </div>
 
        {/* 원룸 */}
       <div className='Home-oneroom'> 
-      <p>원룸</p>
+      <div className="Home-title">
+        <img src='/assets/oneroom/home.png' style={{width:'40px', height: '40px', marginRight:'10px'}}/>
+        <h2>원룸</h2>
+      </div>
       <p>지도를 이동하여 원하는 지역의 원룸 정보를 받아보세요.</p>
       <img src="/assets/oneroom/oneroom2.png" alt="oneroom"/>
       </div>
 
        {/* 자취메이트 */}
       <div className='Home-mate'> 
-      <p>자취메이트</p>
-      <img src="/assets/mate/mate1.png"/>
-          
-          
+        <div className="Home-title">
+          <img src='/assets/cook/cook2.png' alt='cook2' style={{width:'40px', height: '40px', marginTop:'8px', marginRight:'10px'}}/>
+          <h2>자취메이트</h2>
+        </div>
+        <div className='Home-mate1'> 
+          <img src="/assets/mate/mate1.png"/>
+          <p>나와 맞는 동네친구 찾자!</p>
+        </div>
+        <div className='Home-mate2'> 
+          <p>유형별로 다양하게 검색할 수 있어요.</p>
+          <img src="/assets/mate/mateFilter.png"/>
+        </div>
       </div>
 
        {/* 중고마켓 */}
       <div className='Home-market'> 
-      <p>중고마켓</p>
-      <img src="/assets/market/market2.png" alt="market"/>
+        <div className="Home-title">
+          <img src='/assets/market/marketPost.png' style={{width:'40px', height: '40px', marginTop:'8px', marginRight:'10px'}}/>
+          <h2>중고마켓</h2>
+        </div>
+        <div className='Home-market1'> 
+          <p>안쓰는 물건을 사고팔아요.</p>
+          <img src="/assets/market/market2.png" alt="market"/>
+        </div>
       </div>
 
        {/* 커뮤니티 */}
       <div className='Home-community'>
-      <p>커뮤니티</p>
+      <div className="Home-title">
+        <img src='/assets/community/write.png' style={{width:'40px', height: '40px', marginTop:'8px', marginRight:'10px'}}/>
+        <h2>커뮤니티</h2>
+      </div>
+      <p>메시지를 통해 다른 사용자와 대화를 나눌 수 있어요.</p>
       </div>
 
       {/* 메시지 */}
       <div className='Home-message'> 
-      <p>메시지</p>
-      <p>메시지를 통해 다른 사용자와 대화할 수 있어요.</p>
-      <img src="/assets/message/message1.png"/>
-        
+      <div className="Home-title">
+        <img src='/assets/home/message.png' style={{width:'40px', height: '40px', marginTop:'8px', marginRight:'10px'}}/>
+        <h2>메시지</h2>
+      </div>
+      <p>메시지를 통해 다른 사용자와 대화를 나눌 수 있어요.</p>
+      <img src="/assets/message/messagebox.png"/>
       </div>
 
        {/* 알림 */}
       <div className='Home-notification'> 
+      <div className="Home-title">
+        <img src='/assets/notification/notification.png' style={{width:'40px', height: '40px', marginTop:'8px', marginRight:'10px'}}/>
+          <h2>알림</h2>
+        </div>
         <div className='Home-notification1'> 
-        <p>알림</p>
-        <img src="/assets/notification/notification1.png"/>
+        <img src="/assets/notification/notification1.png" />
         </div>
         <div className='Home-notification2'>  
-        <p>알림을 통해 좋아요, 메시지 등의 알림을 받습니다.</p>
+        <p>알림을 통해 좋아요, 메시지 등의 알림을 받아요.</p>
       </div>
       </div>
   

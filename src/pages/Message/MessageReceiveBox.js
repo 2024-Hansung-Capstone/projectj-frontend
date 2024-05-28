@@ -118,7 +118,7 @@ const MessageReceiveBox = () => {
   };
 
   const renderIsReadStatus = (isRead) => {
-    return isRead ? "읽음" : <img src="/assets/message/new.png" alt="new" style={{width: "50px", textAlign:'center'}}/>;
+    return isRead ? "읽음" : <img src='/assets/message/new.png' alt="new" style={{width: "50px", textAlign:'center'}}/>;
   };
 
 
@@ -148,7 +148,6 @@ const MessageReceiveBox = () => {
             <th>보낸 사람</th>
             {selectedCategory === '중고마켓' && <th>상품명</th>}
             <th>제목</th>
-            <th>내용</th>
             <th>보낸 시간</th>
           </tr>
         </thead>
@@ -186,7 +185,6 @@ const MessageReceiveBox = () => {
                       <td>{messagedata.sender.name}</td>
                       {selectedCategory === '중고마켓' && <td>{messagedata.product.title}</td>}
                       <td>{messagedata.title}</td>
-                      <td>{messagedata.detail}</td>
                       <td>{formatDateTime(messagedata.create_at)}</td>
                     </tr>
                   ))

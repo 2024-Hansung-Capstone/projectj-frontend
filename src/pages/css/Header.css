@@ -25,7 +25,6 @@
 
 .logo-image {
   width: 100%;
-  max-width: 220px; /* 최대 너비 설정 */
   height: auto;
   padding: 5%;
 }

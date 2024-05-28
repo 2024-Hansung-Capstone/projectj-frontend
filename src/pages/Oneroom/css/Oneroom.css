@@ -87,7 +87,7 @@
 .popular-room-list {
   display: flex;
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px;
   box-shadow: 0 2px 4px rgb(93, 155, 0);
 }
 
@@ -151,9 +151,6 @@
   .oneroom-items-container {
     width: 90%;
   }
-}
-
-@media (max-width: 1150px) {
   .oneroom-container2 {
     flex-direction: column;
     height: auto;
@@ -166,7 +163,7 @@
 }
 
 /* 모바일 반응형 */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .oneroom-container1 {
     width: 95%;
     padding: 10px;

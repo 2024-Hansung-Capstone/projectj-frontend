@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './css/Mate_Item.css';
 
-
 export default function Mate_Item({ user }) {
   const navigate = useNavigate();
 
@@ -30,19 +29,21 @@ export default function Mate_Item({ user }) {
           <img className="user-image" src="/assets/mate/user.jpeg" alt="user" />
         )}
       </div>
-      <div className='mi-name'>
-        <p>{userName}</p>
-      </div>
-      <div className='mi-container2'>
+      <div className='mi-info1'>
+        <div className='mi-name'>
+          <p>{userName}</p>
+        </div>
         <div className='mi-age'>
           <p>{userAge}</p>
         </div>
+      </div>
+      <div className='mi-info2'>
         <div className='mi-gender'>
           <p>{gender}</p>
         </div>
-      </div>
-      <div className='mi-mbti'>
-        <p>{mbti}</p>
+        <div className='mi-mbti'>
+         <p>{mbti}</p>
+        </div>
       </div>
       <div className='mi-btn'>
         <button onClick={handleSendMessage}>쪽지보내기</button>
