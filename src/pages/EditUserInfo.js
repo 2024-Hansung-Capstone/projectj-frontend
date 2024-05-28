@@ -65,37 +65,10 @@ export default function EditUserInfo() {
         birthDay: new Date(whoAmI.birth_at).getDate() < 10 ? new Date(whoAmI.birth_at).getDate().toString() : ('0' + new Date(whoAmI.birth_at).getDate()).slice(-2).toString()
       });
     }
-    setYearOptions(generateOptions(1930, 2024)); // 생년월일 옵션 설정
+    setYearOptions(generateOptions(1970, 2024)); // 생년월일 옵션 설정
     setMonthOptions(generateOptions(1, 12));
     setDayOptions(generateOptions(1, 31));
   }, [dataWhoAmI]);
-
-  // 사용자 정보를 가져오는 함수
-  const fetchUserInfo = async () => {
-    try {
-      // 서버에서 사용자 정보를 가져오는 요청을 보냄
-      const response = await axios.post('http://54.180.182.40:5000/graphql', {
-        query: `
-          query FetchUser($userId: String!) {
-            fetchUserById(user_id: $userId) {
-              id
-              email
-              name
-              birth_at
-              mbti
-            }
-          }
-        `,
-        variables: {
-          userId: localStorage.getItem('token') // 로그인된 사용자의 JWT 토큰을 사용자 ID로 사용
-        }
-      });
-      // 가져온 사용자 정보를 상태에 저장
-      setUser(response.data);
-    } catch (error) {
-      console.error('사용자 정보를 가져오는 중 오류 발생:', error);
-    }
-  };
 
   const handleEditSubmit = async (event) => {
     event.preventDefault();
@@ -114,8 +87,39 @@ export default function EditUserInfo() {
       if (user.profileImage) {
         // 먼저 프로필 이미지를 업로드합니다.
         const formData = new FormData();
-        formData.append('file', user.profileImage); // 프로필 이미지를 업로드하는데 사용할 폼 데이터에 파일을 추가합니다.
-        const uploadResponse = await axios.post('URL_TO_UPLOAD_PROFILE_IMAGE', formData, {
+        formData.append('operations', JSON.stringify({
+          query: `
+            mutation updateUser($input: UpdateUserInput!) {
+              updateUser(updateUserInput: $input) {
+                id
+                profile_image {
+                  imagePath
+                }
+                email
+                name
+                gender
+                birth_at
+                mbti
+                phone_number
+              }
+            }
+          `,
+          variables: {
+            input: {
+              email: user.email,
+              name: user.username,
+              birth_year: user.birthYear,
+              birth_month: user.birthMonth,
+              birth_day: user.birthDay,
+              mbti: user.mbti,
+              password: user.password
+            }
+          }
+        }));
+        formData.append('map', JSON.stringify({ '0': ['variables.input.profile_image'] }));
+        formData.append('0', user.profileImage);
+  
+        const uploadResponse = await axios.post('http://54.180.182.40:5000/graphql', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${getToken()}`
@@ -123,7 +127,7 @@ export default function EditUserInfo() {
         });
   
         // 업로드된 이미지의 URL을 가져옵니다.
-        profileImageUrl = uploadResponse.data.url; // 서버가 업로드된 이미지의 URL을 반환하는 것으로 가정합니다.
+        profileImageUrl = uploadResponse.data.data.updateUser.profile_image.imagePath; // 서버가 업로드된 이미지의 URL을 반환하는 것으로 가정합니다.
       }
   
       // 이제 프로필 이미지 URL을 포함하여 사용자 정보를 업데이트합니다.
@@ -152,12 +156,12 @@ export default function EditUserInfo() {
       navigate('/mypage');
     } catch (error) {
       console.error('사용자 정보를 업데이트하는 중 오류 발생:', error);
+      navigate('/mypage');
       if (error.response && error.response.data) {
         console.error('서버 오류 메시지:', error.response.data.errors);
       }
     }
   };
-  
   
   const handleProfileImageChange = (event) => {
     const file = event.target.files[0];

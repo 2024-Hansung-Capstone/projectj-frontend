@@ -4,8 +4,7 @@ import { LiaEyeSolid } from "react-icons/lia";
 import { useMutation, gql } from '@apollo/client';
 import './css/Market_Item.css';
 
-export default function Market_Item({ product, onClick, isLiked }) {
-  const [liked, setLiked] = useState(isLiked);
+export default function Market_Item({ product, onClick }) {
 
   // 날짜를 변환하는 함수
   const convertDateToAgo = (dateString) => {

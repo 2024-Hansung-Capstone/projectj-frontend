@@ -32,10 +32,10 @@ const GET_USED_PRODUCTS = gql`
       }
       like_user {
         id
-          user {
-            id
-            name
-          }
+        user {
+          id
+          name
+        }
       }
     }
   }
@@ -124,7 +124,7 @@ export default function Market() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
-    console.log(JSON.stringify(error, null, 2));
+
     const loggedInUser = localStorage.getItem('loggedInUserName');
     if (loggedInUser) {
       setLoggedInUserName(loggedInUser);
@@ -143,7 +143,7 @@ export default function Market() {
     setCurrentPage(1); // 카테고리 변경 시 페이지를 1로 초기화
   };
 
-  const handleItemClick = (product) => {
+  const handleItemClick = (product, isLiked) => {
     increaseView({ variables: { product_id: product.id } })
       .then(response => {
         console.log('조회수가 증가되었습니다.', response.data);
@@ -151,7 +151,7 @@ export default function Market() {
       .catch(err => {
         console.error('조회수 증가 에러:', err);
       });
-    navigate('/MarketDetail', { state: { product, loggedInUserName } });
+    navigate('/MarketDetail', { state: { product, loggedInUserName, isLiked } });
   };
 
   const handleLikeClick = (product) => {
@@ -243,19 +243,28 @@ export default function Market() {
       )}
 
       <div className="market-item">
-        {loading || whoAmILoading ? (
-          <p>Loading...</p>
-        ) : error || whoAmIError ? (
-          <p>Error: {error ? error.message : whoAmIError.message}{console.log(JSON.stringify(error, null, 2))}</p>
-        ) : (
-          itemsToDisplay && itemsToDisplay.length > 0 ? (
-            itemsToDisplay.map((product, index) => (
-              <Market_Item key={index} product={product} onClick={() => handleItemClick(product)} />
-            ))
-          ) : (
-            <p className='market-nodata'>등록된 상품이 없습니다.</p>
-          )
-        )}
+      {loading || whoAmILoading ? (
+  <p>Loading...</p>
+) : error || whoAmIError ? (
+  <p>Error: {error ? error.message : whoAmIError.message}</p>
+) : (
+  itemsToDisplay && itemsToDisplay.length > 0 ? (
+    itemsToDisplay.map((product, index) => {
+      // product.like_user 배열이 존재하는지 확인
+      const isLiked = product.like_user && product.like_user.some(like_user => like_user.user.id === whoAmIData.whoAmI.id);
+      return (
+        <Market_Item
+          key={index}
+          product={product}
+          onClick={() => handleItemClick(product)}
+          isLiked={isLiked}
+        />
+      );
+    })
+  ) : (
+    <p className='market-nodata'>등록된 상품이 없습니다.</p>
+  )
+)}
       </div>
 
       <ul className="pagination">

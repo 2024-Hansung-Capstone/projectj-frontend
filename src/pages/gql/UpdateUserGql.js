@@ -16,6 +16,9 @@ export const UPDATE_USER_MUTATION = gql`
       is_find_mate
       point
       create_at
+      dong {
+        name
+      }
     }
   }
 `;
