@@ -9,14 +9,11 @@ const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [login] = useMutation(LOGIN, {
-    // 로그인 요청 전에 실행되는 함수
     update: (cache, { data }) => {
-      // 로그인 성공 시 반환된 토큰을 받아옴
       const token = data.login;
-      // 토큰을 로컬 스토리지에 저장
       localStorage.setItem('token', token);
+      onLogin();
     },
-    // 헤더에 JWT 토큰을 추가하는 함수
     context: {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token') || ''}`

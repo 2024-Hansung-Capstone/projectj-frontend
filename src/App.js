@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ApolloProvider } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
@@ -58,10 +58,16 @@ const App = () => {
   };
 
   // 인증 토큰 가져오기 (예: 로컬 스토리지에서)
-  const token = localStorage.getItem('token');
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
 
   // 인증 헤더 설정
   const authLink = setContext((_, { headers }) => {
+    const token = localStorage.getItem('token');
     return {
       headers: {
         ...headers,
