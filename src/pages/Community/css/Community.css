@@ -38,7 +38,7 @@
 
 .community-hot-board {
   display: flex;
-  font-size: 34px;
+  font-size: 30px;
   padding-left: 20px;
   align-items: center;
   width: 90%;
@@ -51,22 +51,21 @@
   width: 100%;
   border: 3px solid rgba(153, 45, 45, 0.976);
   border-radius: 20px;
-  padding-left: 10px;
-  margin-top: 20px;
-  margin-left: 10px;
-  margin-bottom: 10px;
+  padding-left: 5px;
+  margin-top: 10px;
+  margin-bottom: 5px;
   align-items: center;
   box-shadow: 0 4px 8px #ddd;
 }
 
 .community-hot-title {
-  font-size: 20px;
+  font-size: 18px;
   margin-left: 20px;
 }
 
 .community-hot-view {
   display: flex;
-  font-size: 20px;
+  font-size: 17px;
   margin-left: auto;
   align-items: center;
   justify-content: center;
@@ -74,8 +73,8 @@
 }
 
 .community-hot-view img {
-  width: 40px;
-  height: 35px;
+  width: 30px;
+  height: 25px;
   margin-right: 10px;
 }
 

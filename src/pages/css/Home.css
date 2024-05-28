@@ -50,7 +50,6 @@
 
 .Home-cook, .Home-oneroom, .Home-mate, .Home-market, .Home-community, .Home-message, .Home-notification {
     width: 100%;
-    max-width: 800px; 
     display: flex;
     flex-direction: column;
     justify-content: center; 

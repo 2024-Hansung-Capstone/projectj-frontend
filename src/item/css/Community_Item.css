@@ -1,11 +1,11 @@
 .ci-container {
   font-family: 'KCC-Hanbit';
-  max-width: 1200px;
+  max-width: 1150px;
   margin-left: auto;
   margin-right: auto;
   border: groove 1px #ddd;
   width: 90%;
-  margin-top: 20px;
+  margin-top: 5px;
   text-align: center;
   border-radius: 5px;
   padding: 10px;
@@ -13,7 +13,6 @@
 
 .ci-title {
   display: flex;
-  padding: 10px;
   align-items: center;
 }
 
@@ -33,7 +32,6 @@
   height: 100%; 
   object-fit: cover;
 }
-
 
 .ci-userName, .ci-date {
   padding: 5px;
@@ -66,28 +64,19 @@
   border-right: 1px solid #ddd;
   width: 100px;
   flex: 1;
-  padding: 10px;
-  margin: 5px;
 }
 .ci-text {
   flex: 1;
-  padding: 10px;
-  margin: 5px;
   display: flex; /* Flex 컨테이너로 설정 */
   justify-content: center; /* 수평 가운데 정렬 */
   align-items: center; /* 수직 가운데 정렬 */
-}
-
-.ci-text p {
-  text-align: center; /* p 요소 텍스트 가운데 정렬 */
+  text-align: center;
 }
 
 .ci-like {
   display: flex;
   align-items: center;
-  margin-top: 10px;
   margin-left: 10px;
-  padding: 10px;
 }
 
 .ci-like .like-button {
@@ -101,11 +90,12 @@
   width: 30px;
   height: 30px;
 }
-
 .ci-like h5 {
   margin-left: 10px;
 }
 
 .community-main-image {
   width: 100%;
+  max-height: 200px;
+  object-fit: cover;
 }
