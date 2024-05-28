@@ -1,9 +1,11 @@
 .mypage-container {
     width: 90%;
-    margin: 30px;
     padding: 10px;
     padding-bottom: 100px;
     font-family: 'KCC-Hanbit';
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; 
 }
 
 .mypage-user-container {
@@ -18,9 +20,7 @@
 .mypage-user-container2 {
     display: block;
     width: 95%;
-    padding: 10px;
-    margin: 10px;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .mypage-user-container3 {
@@ -38,7 +38,7 @@
 }
 
 .mypage-userName {
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
 }
 
@@ -140,12 +140,11 @@
     flex: 1;
     margin: 10px;
 }
-.mypage-point svg {
-    margin-right: 10px;
-}
+.mypage-point svg,
 .mypage-message svg {
     margin-right: 10px;
 }
+
 .mypage-list img {
     width: 45px;
     height: 45px;
@@ -161,6 +160,46 @@
         margin-right: auto;
     }
 }
+@media (max-width: 768px) {
+    .mypage-user-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .mypage-user-container2 {
+        display: block;
+        width: 95%;
+        font-size: 20px;
+    }
+    .mypage-user-container3 {
+      justify-content: center;
+      text-align: center;
+      font-size: 15px;
+    }
+    .mypage-user-container3 > div {
+      margin: 5px 0;
+      border-right: none;
+      padding: 0;
+    }
+    .mypage-user-icon {
+        max-width: 100px;
+        max-height: 100px;
+        width: 100%; /* 부모 요소의 크기에 따라 이미지 크기 조정 */
+        height: 100%; /* 부모 요소의 크기에 따라 이미지 크기 조정 */
+    }
+    .mypage-list {
+        font-size: 15px;
+    }
+    .mypage-list > a,
+    .mypage-list > div {
+      padding-bottom: 10px;
+    }
+    .mypage-list img {
+        max-width: 30px;
+        max-height: 30px;
+        margin-right: 10px;
+      }
+  }
+  
 
 @font-face {
     font-family: 'KCC-Hanbit';

@@ -367,8 +367,8 @@ const renderPagination = () => {
     <div className='cooking-container'>
       <div className='cook-ai-container'>
         <div className='cook-ai-header'>
-          <img src="/assets/cook/ai1.png" alt="ai" style={{width:'50px',height: '50px', marginRight:'10px', marginBottom:'5px'}}/>
-          <p style={{fontSize:'30px'}}>AI 레시피</p>
+          <img src="/assets/cook/ai1.png" alt="ai" style={{ width: '50px', height: '50px', marginRight: '10px', marginBottom: '5px' }} />
+          <p style={{ fontSize: '30px' }}>AI 레시피</p>
         </div>
         <div className='cook-ai'>
           <div className='ingredient'>
@@ -387,7 +387,7 @@ const renderPagination = () => {
               <button onClick={handleAddIngredient}>추가하기</button>
             </div>
             <div className='cook-ai-input'>
-              <p style={{ color: 'rgb(93, 155, 0)', fontSize: '18px' }}>[ 추가된 재료 ]</p>
+              <p style={{ color: 'rgb(93, 155, 0)', fontSize: '15px' }}>[ 추가된 재료 ]</p>
               {dataIngredients?.fetchMyIngredients.length === 0 ? (
                 <p className="cooking-nodata">재료가 없습니다.</p>
               ) : (
@@ -395,7 +395,6 @@ const renderPagination = () => {
                   <React.Fragment key={ing.id}>
                     {isEditing && editedIngredient.id === ing.id ? (
                       <div className="edit-ingredient-form">
-                        {/* 수정 폼 */}
                         <input
                           type="text"
                           value={editedIngredient.name}
@@ -411,18 +410,15 @@ const renderPagination = () => {
                           value={editedIngredient.volume_unit}
                           onChange={(e) => setEditedIngredient({ ...editedIngredient, volume_unit: e.target.value })}
                         />
-                        {/* 수정 완료 버튼 */}
                         <button onClick={() => handleFinishEdit()}>수정 완료</button>
                       </div>
                     ) : (
                       <div className="ingredient-item">
-                        {/* 재료 정보 출력 */}
                         <div className="ingredient-item-container" style={{ display: 'flex', alignItems: 'center' }}>
                           <span style={{ marginRight: '12px' }}>{ing.name}</span>
                           <span style={{ marginRight: '5px' }}>{ing.volume}</span>
                           <span>{ing.volume_unit}</span>
                         </div>
-                        {/* 수정 및 삭제 버튼 */}
                         <button className="update-ingredient-btn" onClick={() => handleUpdateIngredient(ing.id, ing.name, ing.volume, ing.volume_unit)}>수정</button>
                         <button className="cookingDelete-btn" onClick={() => handleDeleteIngredient(ing.id)}>삭제</button>
                       </div>

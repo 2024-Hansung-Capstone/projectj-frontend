@@ -1,11 +1,13 @@
 .Home-container {
     background-color: white;
     color: black;
-    padding: 5px;
-    margin-bottom: 300px;
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
-    text-align: center; /* Center text content */
+    justify-content: center;
+    align-items: center; 
+    text-align: center; 
+}
+.Home-detail img {
+    width: 50%;
+
 }
 .Home-photoList {
     width: 100%;
@@ -15,7 +17,7 @@
     image-rendering: auto;
 }
 .foot-container {
-    max-width: 1200px;
+    max-width: 1150px;
     padding: 10px;
     margin: 0 auto;
 }
@@ -29,10 +31,9 @@
 }
 /* Common style for centering items */
 .Home-cook, .Home-oneroom, .Home-mate, .Home-market, .Home-community, .Home-message, .Home-notification {
-    border: 1px solid red;
+    border: 1px solid #ddd;
     width: 100%;
     max-width: 800px; 
-    display: flex;
     justify-content: center; 
     align-items: center; 
     text-align: center; 
@@ -69,13 +70,6 @@
 
 }
 
-
-
-
-
-
-
-
 @media (min-width: 1150px) {
     /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
     .Home-container {
@@ -86,7 +80,7 @@
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 750px) {
     /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
     .Home-container {
       width: 100%; /* 요소의 너비를 100%로 설정 */

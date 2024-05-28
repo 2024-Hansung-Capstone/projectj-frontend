@@ -19,17 +19,18 @@ export default function Header() {
         <div className="header-right-wrap">
           <ul className="nav-list">
             <li>
-            <Link className="header-mypage" to="/MyPage">
-              마이페이지  
-          </Link>
-
+              <Link className="header-mypage" to="/MyPage">
+                마이페이지  
+              </Link>
             </li>
             <li className='header-img'>
               <Link className="header-message" to="/MessageReceiveBox">
                   <img src="/assets/home/message.png" alt="message" />
               </Link>
+              </li>
+              <li className='header-img'>
               <Link className="header-notification" to="/Notification" >
-              <img src="/assets/home/alarm.png" alt="alarm" />
+                <img src="/assets/home/alarm.png" alt="alarm" />
               </Link>
             </li>
           </ul>

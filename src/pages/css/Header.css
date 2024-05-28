@@ -1,8 +1,9 @@
 .header-container {
   background-color: white;
   color: black;
-  padding: 5px;
   overflow-x: auto;
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
 }
 
 .header-wrap {
@@ -10,109 +11,99 @@
   align-items: center;
   justify-content: space-between;
   max-width: 1150px;
-  margin: 0 auto;
+  width: 100%; /* 너비를 100%로 설정 */
+  padding: 0 10px; /* 좌우 여백 추가 */
+}
+
+.header-left-wrap {
+  flex-grow: 1; /* 왼쪽 요소가 가능한 최대 크기를 가지도록 설정 */
+}
+
+.logo-link {
+  display: block; /* 링크를 블록 요소로 변환 */
 }
 
 .logo-image {
   width: 100%;
-  height: 90px;
+  max-width: 220px; /* 최대 너비 설정 */
+  height: auto;
   padding: 5%;
 }
 
 .header-right-wrap {
   display: flex;
-  justify-content: center; /* 수평 가운데 정렬 */
-  align-items: center; /* 수직 가운데 정렬 */
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  align-items: center;
+  flex-shrink: 1; /* 오른쪽 요소가 가능한 최대 크기를 가지도록 설정 */
 }
 
-.header-right-wrap .nav-list {
+.nav-list {
   display: flex;
   align-items: center; /* 수직 가운데 정렬 */
+  list-style-type: none; /* 리스트 스타일 제거 */
+  margin: 0;
+  padding: 0;
 }
 
-.header-right-wrap .nav-list li {
-  margin-right: 10px; /* 각 아이템 사이 여백 */
+.nav-list li {
+  margin-right: 30px; /* 각 아이템 사이 여백 */
 }
 
-.header-right-wrap .nav-list li:last-child {
-  margin-right: 0; /* 마지막 아이템의 오른쪽 여백 제거 */
+
+
+.header-img {
+  display: flex;
+}
+
+.header-img img {
+  margin-right: 10px; /* 이미지 사이 여백 조정 */
+  width: 30px;
+  height: 30px;
 }
 
 .header-mypage {
   font-family: 'NanumSquareNeo-Variable';
   text-decoration: none;
-  margin-right: 40px; /* 마이페이지 버튼과 우측 여백 조정 */
+  margin-right: 10px; /* 마이페이지 버튼과 우측 여백 조정 */
   padding: 10px; /* 버튼 내부 여백 조정 */
-  font-size: 25px; /* 폰트 크기 조정 */
+  font-size: 20px; /* 폰트 크기 조정 */
   color: black;
 }
 
-.signup-container {
-  position: relative;
-}
-.header-img {
-  display: flex;
-}
-.header-img img {
-  margin-right: 60px;
-  width: 40px;
-  height: 40px;
-}
-.bubble {
-  position: absolute;
-  bottom: -50px;
-  left: 47%;
-  transform: translateX(-50%);
-  padding: 9px;
-  border-radius: 12px;
-  font-size: 10px;
-  white-space: nowrap;
-  background-color: rgba(41, 173, 178, 0.9);
-  color: white;
-  box-shadow: 0 2px 5px rgba(0, 0.3, 0.3, 0.1);
-  animation: fadeInOut 3s ease-out forwards infinite;
-}
-
-@keyframes fadeInOut {
-  0%, 100% {
-    background-color: rgba(41, 173, 178, 1);
-  }
-  80% {
-    background-color: rgba(41, 173, 178, 0.6);
-  }
+.header-message ,
+.header-notification {
+  display: flex; /* 이미지들을 수평으로 정렬하기 위해 flex 사용 */
+  align-items: center; /* 수직 가운데 정렬 */
 }
 
 /* 모바일 반응형 */
 @media (max-width: 768px) {
+  .header-container {
+    flex-direction: column; /* 모바일에서 수직 정렬 */
+    align-items: center; /* 가운데 정렬 */
+  }
+  
   .header-wrap {
-    display: flex;
-
+    width: 100%; /* 너비를 100%로 설정 */
+    padding: 0 20px; /* 좌우 여백 추가 */
   }
+  
+  .header-left-wrap,
   .header-right-wrap {
-    display: flex;
+    width: 100%; /* 요소를 100%로 설정 */
   }
-  .logo-image {
-    width: 220px;
-    height: 85px;
-  }
+  
   .header-mypage {
-    margin-right: 25px;
-    font-size: 22px;
+    margin-right: 0; /* 마이페이지 버튼의 우측 여백 제거 */
+    margin-top: 10px; /* 버튼 상단 여백 추가 */
+    margin-bottom: 10px; /* 버튼 하단 여백 추가 */
+    padding: 5px; /* 버튼 내부 여백 조정 */
+    font-size: 14px; /* 폰트 크기 조정 */
   }
+  
   .header-img img {
-    margin-right: 40px;
-    width: 30px;
-    height: 30px;
+    margin-right: 5px; /* 이미지 사이 여백 조정 */
+    width: 20px;
+    height: 20px;
   }
 }
-/* 모바일 반응형 스타일 */
-@media (max-width: 600px) {
-.before-header-container {
-  width: 99%;
-  }
-  .logo-image {
-    width: 190px;
-    height: 70px;
-  }
-}
-

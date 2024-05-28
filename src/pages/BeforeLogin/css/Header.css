@@ -1,7 +1,6 @@
 .before-header-container {
   background-color: white;
   color: black;
-  padding: 5px;
   overflow-x: auto; /* Enable horizontal scrolling */
 }
 
@@ -9,8 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1150px;
 }
 
 .before-header-left-wrap {
@@ -38,38 +36,6 @@
   padding: 5%;
 }
 
-.before-header-search-container {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto; /* 가운데 정렬을 위해 margin-right 추가 */
-}
-
-.before-header-search-icon {
-  display: flex;
-  align-items: center;
-  width: 300px;
-  color: black;
-  border-radius: 50px;
-}
-
-.before-header-search-icon > svg {
-  font-size: 30px;
-  padding-right: 10px;
-}
-
-.before-header-search-input {
-  padding: 10px;
-  padding-left: 20px;
-  border-radius: 100px;
-  width: 100%;
-  height: 60px;
-  border: none;
-  box-sizing: border-box;
-  box-shadow: 0 0 2px #0000001a;
-  outline: none;
-}
-
 .nav-list {
   display: flex;
   list-style-type: none; /* 리스트 앞에 번호 없음 */
@@ -93,19 +59,128 @@
 
 /* 모바일 반응형 스타일 */
 @media (max-width: 768px) {
-    .logo-image {
-      width: 220px;
-      height: 85px;
-    }
+  .logo-image {
+    width: 180px;
+    height: 85px;
+  }
+  .before-header-search-container {
+    width: 100%;
+  }
+  .before-header-search-icon {
+    width: 100%;
+  }
 }
 
 /* 모바일 반응형 스타일 */
-@media (max-width: 600px) {
+@media (max-width: 750px) {
   .before-header-container {
     width: 99%;
-    }
-    .logo-image {
-      width: 190px;
-      height: 70px;
-    }
+  }
+  .logo-image {
+    width: 170px;
+    height: 60px;
+  }
+  .before-header-search-container {
+    width: 100%;
+  }
+  .before-header-search-icon {
+    width: 100%;
+  }
+}
+
+.login-form-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 120px;
+  text-align: center;
+  padding: 40px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 200px;
+  box-sizing: border-box; /* padding과 border를 포함한 전체 너비 계산 */
+}
+
+.login-form-item {
+  width: calc(100% - 20px);
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.login-form-title {
+  margin-top: 40px; 
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 36px;
+  color: #000000;
+}
+
+.login-form-item input {
+  width: calc(100% - 20px);
+  height: 40px;
+  font-size: 16px;
+  margin-bottom: 0px;
+  padding-left: 10px;
+  border: 1px solid gray;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.login-form-button {
+  width: calc(100% - 20px);
+  height: 50px;
+  font-size: 18px;
+  font-weight: bold; 
+  margin-top: 40px;
+  margin-bottom: 20px;
+  background-color: #29ADB2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.login-form-button:hover {
+  background-color: #209094;
+}
+
+.login-form-link {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.login-form-link a {
+  font-weight: bold;
+}
+
+/* 모바일 반응형 스타일 */
+@media (max-width: 768px) {
+  .login-form-container {
+    padding: 20px; /* 패딩을 줄여서 화면에 더 잘 맞게 조정 */
+    margin-top: 60px;
+    margin-bottom: 100px;
+  }
+
+  .login-form-title {
+    font-size: 28px; /* 작은 화면에서 폰트 크기 조정 */
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .login-form-button {
+    height: 45px; /* 버튼 높이 조정 */
+    font-size: 16px; /* 버튼 폰트 크기 조정 */
+  }
+  .before-header-login,
+.before-header-signup {
+  font-family: 'NanumSquareNeo-Variable';
+  text-decoration: none;
+  margin: 20px;
+  font-size: 10px;
+  color: black;
+  padding: 8px;
+}
 }

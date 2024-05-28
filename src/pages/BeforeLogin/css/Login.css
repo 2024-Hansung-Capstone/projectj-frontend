@@ -1,5 +1,6 @@
 .login-form-container {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     margin: 0 auto;
     margin-top: 120px;
     text-align: center;
@@ -7,24 +8,24 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     margin-bottom: 200px;
-}
-
-.login-form-item {
+    box-sizing: border-box; /* padding과 border를 포함한 전체 너비 계산 */
+  }
+  
+  .login-form-item {
     width: calc(100% - 20px);
     margin-bottom: 10px;
     margin-left: 10px;
-}
-
-.login-form-title {
+  }
+  
+  .login-form-title {
     margin-top: 40px; 
     text-align: center;
     margin-bottom: 40px;
     font-size: 36px;
     color: #000000;
-}
-
-
-.login-form-item input {
+  }
+  
+  .login-form-item input {
     width: calc(100% - 20px);
     height: 40px;
     font-size: 16px;
@@ -33,9 +34,9 @@
     border: 1px solid gray;
     border-radius: 6px;
     display: inline-block;
-}
-
-.login-form-button {
+  }
+  
+  .login-form-button {
     width: calc(100% - 20px);
     height: 50px;
     font-size: 18px;
@@ -49,31 +50,39 @@
     cursor: pointer;
     display: inline-block;
     transition: background-color 0.3s, color 0.3s;
-}
-
-.login-form-button:hover {
+  }
+  
+  .login-form-button:hover {
     background-color: #209094;
-}
-
-.login-form-link {
+  }
+  
+  .login-form-link {
     text-align: center;
     margin-top: 20px;
     margin-bottom: 40px;
-}
-
-.login-form-link a {
+  }
+  
+  .login-form-link a {
     font-weight: bold;
-}
-
-/* 모바일 반응형 스타일 */
-@media (max-width: 768px) {
-.login-form-container {
-    width: 300px;
-    margin-top: 50px;
-    text-align: center;
-    padding: 50px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin-bottom: 50px;
+  }
+  
+  /* 모바일 반응형 스타일 */
+  @media (max-width: 768px) {
+    .login-form-container {
+      padding: 20px; /* 패딩을 줄여서 화면에 더 잘 맞게 조정 */
+      margin-top: 60px;
+      margin-bottom: 100px;
     }
-}
+  
+    .login-form-title {
+      font-size: 28px; /* 작은 화면에서 폰트 크기 조정 */
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  
+    .login-form-button {
+      height: 45px; /* 버튼 높이 조정 */
+      font-size: 16px; /* 버튼 폰트 크기 조정 */
+    }
+  }
+  

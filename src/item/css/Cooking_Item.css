@@ -3,13 +3,10 @@
     margin: 10px;
     flex: 0 0 auto;
     width: 220px;
-    height: 360px;
+    height: auto;
     text-align: center;
     justify-content: center;
-    
 }
-
-  
 .cookingitem-photo {
     display: flex;
     justify-content: center; /* Center horizontally */
@@ -24,7 +21,6 @@
     height: 100%; /* 이미지의 높이를 100%로 설정하여 꽉 차게 표시 */
     object-fit: cover; /* 이미지가 컨테이너에 꽉 차게 표시되도록 설정 */
   }
-  
   
 
 .cookingitem-name {
@@ -48,3 +44,32 @@
 .cookingitem-detail p {
     margin: 5px;
 }
+
+@media (max-width: 768px) {
+    .cookingitem-container {
+      width: 90%; /* 부모 요소에 맞게 너비 조정 */
+      margin: 10px auto; /* 가운데 정렬 */
+      height: auto; /* 높이 자동 조정 */
+    }
+
+    
+    .cookingitem-name {
+      font-size: 13px; /* 폰트 크기 축소 */
+      margin-top: 2px; /* 상단 마진 축소 */
+    }
+  
+    .cookingitem-user {
+      font-size: 12px; /* 폰트 크기 축소 */
+    }
+  
+    .cookingitem-detail {
+      font-size: 13px; /* 폰트 크기 축소 */
+    }
+  
+    .cookingitem-name p,
+    .cookingitem-user p,
+    .cookingitem-detail p {
+      margin: 3px; /* 문단 간격 축소 */
+    }
+  }
+  

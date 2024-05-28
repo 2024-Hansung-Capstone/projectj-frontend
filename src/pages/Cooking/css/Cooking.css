@@ -3,27 +3,33 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-left: 20px;
+  padding: 20px;
   width: 95%;
+  margin: 0 auto; 
 }
+
 .ck-detail-context {
   padding: 10px;
 }
+
 .cooking-header1 {
   font-size: 24px;
   display: flex;
   align-items: center;
   margin-top: 20px;
 }
+
 .cooking-items-header {
   display: flex;
   align-items: center; 
   margin-top: 20px;
 }
+
 .cook-ai-header {
   display: flex;
   align-items: center;
 }
+
 .cooking-header img {
   width: 50px;
   height: 50px;
@@ -40,11 +46,9 @@
   width: 90%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  background-color: #f9f9f9;
-  padding: 20px;
   border-radius: 10px;
   justify-content: center;
+  margin: 0 auto;
 }
 
 .best-dish {
@@ -106,12 +110,13 @@
 .cooking-dishes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 15px;
+  gap: 20px;
 }
 
 .dish-item img {
   width: 100%;
 }
+
 .cookingitem-menu {
   background-color: rgb(93, 155, 0);
   color: white;
@@ -131,7 +136,7 @@
 
 .filter-bar-container .ant-btn {
   height: 47.1px;
-  line-height: 47.1px; 
+  line-height: 47.1px;
 }  
 
 .filter-bar-container .ant-btn-primary {
@@ -189,27 +194,29 @@
 
 .cook-ai {
   width: 90%;
-  max-width: 1200px;
+  max-width: 1150px;
   height: auto;
   border: 2.5px solid #ccc;
   border-radius: 14px;
   padding: 15px;
   margin-bottom: 20px;
 }
+
 .ingredient-item-container {
   width: 150px;
 }
+
 .cook-ai-input {
   width: 60%;
-  margin-left: 40px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   position: relative;
 }
+
 .ingredient-item {
   display: flex;
-  justify-content: space-between; /* 재료 이름과 버튼을 왼쪽과 오른쪽에 배치 */
+  justify-content: space-between;
 }
 
 .update-ingredient-btn,
@@ -217,20 +224,20 @@
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 5px;
-  margin-left: 5px; /* 수정, 삭제 버튼 사이의 간격 조정 */
+  margin-left: 5px;
 }
 
 .cookingDelete-btn {
-  margin-left: 0; /* 삭제 버튼이 가장 오른쪽에 위치하도록 마진 조정 */
+  margin-left: 0;
 }
 
 .update-ingredient-btn,
 .cookingDelete-btn {
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 5px;
   margin-right: 5px;
   margin-bottom: 2px;
-  font-size: 14px;
+  font-size: 12px;
   background-color: #ddd;
 }
 
@@ -249,6 +256,7 @@
   right: 0;
   bottom: 10px;
 }
+
 /* 재료 수정 */
 .edit-ingredient-form {
   display: flex;
@@ -293,7 +301,7 @@
   height: 28px;
   transition: padding 0.2s ease-in-out 0s;
   color: white;
-  margin-left: auto; 
+  margin-left: auto;
 }
 
 .ingredient {
@@ -309,12 +317,13 @@
   margin: 2px;
   font-size: 14px;
   color: gray;
+  margin-right: 30px;
 }
 
 .ingredient-inputs > input {
-  margin: 5px;
-  padding: 10px;
-  width: calc(100% - 10px); /* Adjust width to fit within the container */
+  margin: 4px;
+  padding: 7px;
+  width: calc(100% - 30px);
 }
 
 .ingredient-inputs > button {
@@ -323,7 +332,7 @@
   border: 1px solid black;
   border-radius: 5px;
   color: black;
-  margin-left: auto; 
+  margin-left: auto;
 }
 
 .ingredient-result {
@@ -367,11 +376,6 @@
   background-color: #1E808D;
 }
 
-@media (min-width: 1460px) {
-  .post-button2 {
-    right: 220px;
-  }
-}
 @media (min-width: 1150px) {
   .cooking-container {
     width: 100%;
@@ -380,78 +384,41 @@
     margin-right: auto;
   }
 }
-@media (max-width: 599px) {
-  .cooking-container {
-    padding-left: 10px;
+
+@media (max-width: 750px) {
+  .best-dish {
+    flex-direction: column;
+    align-items: center;
+  }
+  .best-dishes {
+
+  }
+
+  .best-dish img {
     width: 100%;
+    height: auto;
   }
 
-  .cooking-header1 {
-    font-size: 20px;
-    margin-top: 10px;
-  }
-
-  .best-dishes-section,
-  .cook-ai,
-  .best-dishes,
-  .cooking-items-container {
-    width: 90%;
-    max-width: 100%;
-    padding: 10px;
-  }
-
-  .cook-ai-input {
-    width: 80%;
-    margin-left: 40px;
-  }
-
-  .custom-search-container {
-    margin-top: 20px;
-  }
-
-  .custom-search-input {
-    width: 70%;
-  }
-
-  .custom-search-button {
-    width: auto;
-    padding: 10px 15px;
-  }
-
-  .post-button1,
-  .post-button2 {
-    right: 20px;
-    bottom: 100px;
-  }
-
-  .ingredient-result {
-    width: 100%;
-    margin-left: 0;
+  .dish-name,
+  .dish-details {
+    text-align: center;
+    font-size: 12px;
   }
 
   .ingredient-inputs {
-    width: 50%;
-    margin: 0;
-    font-size: 11px;
+    font-size: 10px;
   }
 
-  .ingredient-inputs > input {
-    width: 100%;
+  .update-ingredient-btn,
+  .cookingDelete-btn {
+    border-radius: 3px;
+    font-size: 8px;
+    padding: 3px;
+    background-color: white;
   }
-  .ingredient-item-container {
-    margin-left: 10px;
-    width: 100px;
-  }
-  .dish-details {
-    font-size: 12px;
-  }
-  .dish-name {
-    font-size: 15px;
-    padding: 1px;
-    margin-bottom: 5px;
-  }
-  .best-dishes img {
-    object-fit: cover;
-    width: 200px;
+  .cooking-dishes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
   }
 }

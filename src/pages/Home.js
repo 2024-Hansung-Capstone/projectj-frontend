@@ -56,9 +56,9 @@ const Home = () => {
           <p>요리</p>
           <p>냉장고 속 재료로 어떤 요리를 해야할지 고민되세요?</p>
           <p>AI 레시피에게 물어보세요.</p>
-          <img src="/assets/cook/cookai2.png" alt="cook1" style={{width:'500px'}} />
+          <img src="/assets/cook/cookai2.png" alt="cook1"/>
           <p>AI가 검색한 레시피로 쉽고 간편하게</p>
-          <img src="/assets/cook/cookai1.png" alt="cook1" style={{width:'400px'}} />
+          <img src="/assets/cook/cookai1.png" alt="cook1"/>
           
           
         </div>
@@ -67,15 +67,14 @@ const Home = () => {
        {/* 원룸 */}
       <div className='Home-oneroom'> 
       <p>원룸</p>
-      
-    
       <p>지도를 이동하여 원하는 지역의 원룸 정보를 받아보세요.</p>
+      <img src="/assets/oneroom/oneroom2.png" alt="oneroom"/>
       </div>
 
        {/* 자취메이트 */}
       <div className='Home-mate'> 
       <p>자취메이트</p>
-      <img src="/assets/mate/mate1.png" style={{width:'400px'}} />
+      <img src="/assets/mate/mate1.png"/>
           
           
       </div>
@@ -83,6 +82,7 @@ const Home = () => {
        {/* 중고마켓 */}
       <div className='Home-market'> 
       <p>중고마켓</p>
+      <img src="/assets/market/market2.png" alt="market"/>
       </div>
 
        {/* 커뮤니티 */}
@@ -94,7 +94,7 @@ const Home = () => {
       <div className='Home-message'> 
       <p>메시지</p>
       <p>메시지를 통해 다른 사용자와 대화할 수 있어요.</p>
-      <img src="/assets/message/message1.png" style={{width:'400px'}} />
+      <img src="/assets/message/message1.png"/>
         
       </div>
 
@@ -102,7 +102,7 @@ const Home = () => {
       <div className='Home-notification'> 
         <div className='Home-notification1'> 
         <p>알림</p>
-        <img src="/assets/notification/notification1.png" style={{width:'400px'}} />
+        <img src="/assets/notification/notification1.png"/>
         </div>
         <div className='Home-notification2'>  
         <p>알림을 통해 좋아요, 메시지 등의 알림을 받습니다.</p>

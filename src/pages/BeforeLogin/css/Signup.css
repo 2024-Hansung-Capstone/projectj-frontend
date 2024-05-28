@@ -153,12 +153,13 @@
   /* 모바일 반응형 스타일 */
 @media (max-width: 768px) {
     .signup-form-container {
-        width: 400px;
+        width: 80%;
+        max-width: 768px;
         margin: 0 auto;
-        margin-top: 50px;
-        margin-bottom: 50px;
+        margin-top: 10px;
+        margin-bottom: 10px;
         text-align: center;
-        padding: 40px;
+        padding: 30px;
         border: 1px solid #ddd;
         border-radius: 10px;
     }
