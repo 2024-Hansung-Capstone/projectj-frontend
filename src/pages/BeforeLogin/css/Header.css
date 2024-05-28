@@ -61,11 +61,11 @@
 /* 모바일 반응형 스타일 */
 @media (max-width: 768px) {
   .logo-image {
-    width: 100px;
+    width: 110px;
     height: 40px;
   }
   .nav-list {
-    margin-right: 20px;
+    margin-right: 0;
   }
   .before-header-search-container,
   .before-header-search-icon {

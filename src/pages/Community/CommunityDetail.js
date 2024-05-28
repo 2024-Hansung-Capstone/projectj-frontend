@@ -19,6 +19,9 @@ const CREATE_REPLY = gql`
       user {
         id
         name
+        profile_image {
+          imagePath
+        }
       }
     }
   }
@@ -27,7 +30,11 @@ const FETCH_BOARD_BY_ID = gql`
   query FetchBoardById($board_id: String!) {
     fetchBoardById(board_id: $board_id) {
       id
-     
+      user {
+        profile_image {
+          imagePath
+        }
+      }
     }
   }
 `;
