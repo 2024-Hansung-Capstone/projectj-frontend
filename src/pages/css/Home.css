@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center; 
     text-align: center; 
+    overflow: hidden; /* 자식 요소가 부모 요소를 벗어나지 않도록 함 */
 }
 
 .Home-detail img {
@@ -13,6 +14,7 @@
 
 .Home-photoList {
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .card-photo {
@@ -48,8 +50,8 @@
     margin-bottom: 10px;
 }
 
-.Home-cook, .Home-oneroom, .Home-mate, .Home-market, .Home-community, .Home-message, .Home-notification {
-    width: 100%;
+.Home-cook, .Home-oneroom, .Home-mate, .Home-market, .Home-community, .Home-message, .Home-notification, .Home-web {
+    width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center; 
@@ -58,6 +60,27 @@
     padding: 20px;
     padding-bottom: 30px;
     border-bottom: 1px solid #ddd;
+    font-size: 15px;
+    
+}
+
+.Home-cook1, .Home-cook2, .Home-oneroom, .Home-mate1, .Home-mate2, .Home-market, .Home-community1, .Home-community2, .Home-message1, .Home-notification1 {
+    color: #1f6a6e;
+    font-weight: bold;
+}
+
+.Home-cook1 img,
+.Home-cook2 img,
+.Home-market img,
+.Home-oneroom1 img,
+.Home-mate1 img,
+.Home-mate2 img,
+.Home-community1 img,
+.Home-community2 img,
+.Home-notification1 img {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0.5, 0.5); /* 그림자 설정 */
+    border-radius: 20px;
+    padding: 5px;
 }
 
 /* 요리 */
@@ -67,8 +90,13 @@
 }
 
 .Home-cook1,
-.Home-cook2 {
+.Home-cook2,
+.Home-community1,
+.Home-community2 {
     display: flex;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
 }
 
 .Home-cook1-1 {
@@ -93,24 +121,27 @@
     align-items: center; 
     text-align: center; 
 }
-
 .Home-cook2 img {
-    margin-top: 10px;
+    margin: 10px;
+}
+.Home-community img {
+    margin: 10px;
 }
 
 /* 원룸 */
 .Home-oneroom {}
 
 /* 자취메이트 */
-.Home-mate {}
-
-.Home-mate1,
-.Home-mate2 {
+.Home-mate1, .Home-mate2 {
     display: flex;
+    justify-content: center; 
     align-items: center; 
     text-align: center; 
 }
-
+.Home-mate1 img, 
+.Home-mate2 img {
+    margin: 10px;
+}
 /* 중고마켓 */
 .Home-market {
     display: flex;
@@ -133,6 +164,9 @@
     border-bottom: none;
 }
 
+.Home-web img  {
+    width: 100%;
+}
 @media (min-width: 1150px) {
     /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
     .Home-container {
@@ -161,7 +195,9 @@
     margin-left: auto; /* 추가 */
     margin-right: auto; /* 추가 */
 }
-
+.Home-cook, .Home-oneroom, .Home-mate, .Home-market, .Home-community, .Home-message, .Home-notification {
+    font-size: 10px;
+}
 .category-item {
     font-family: 'BMDOHYEON';
     font-size: 18px;

@@ -102,7 +102,7 @@ export default function CookingPost() {
         {/* 요리명 */}
         <div className="cp-name">
           <label htmlFor="name" className="cooking-post-title">요리명</label>
-          <Input id="name" value={name} onChange={handleNameChange} required placeholder='제목' style={{fontSize:'20px'}}/>
+          <Input id="name" value={name} onChange={handleNameChange} required placeholder='제목'/>
         </div>
 
         {/* 이미지 */}
@@ -115,7 +115,7 @@ export default function CookingPost() {
         {/* 레시피 */}
         <div className="cp-detail">
           <label htmlFor="detail" className="cooking-post-detail">레시피</label>
-          <Input.TextArea id="detail" value={detail} onChange={handleDetailChange} required placeholder="내용을 작성하세요." style={{minHeight:'300px',fontSize:'20px'}}/>
+          <Input.TextArea id="detail" value={detail} onChange={handleDetailChange} required placeholder="내용을 작성하세요." style={{minHeight:'300px'}}/>
         </div>
         <button type="cp-submit" onClick={handleSubmit} className="cu-post-button">작성 완료</button>
       </form>

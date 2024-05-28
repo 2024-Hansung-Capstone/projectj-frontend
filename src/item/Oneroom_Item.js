@@ -53,8 +53,8 @@ const Oneroom_Item = ({ roomId, location, price, className, area }) => {
   return (
     <Link to={`/oneroom/${roomId}`} className={className} onClick={handleClick}>
         <div className='roomitem-price'>{formattedPrice}</div>
-        <div className='roomitem-area'><p>{area || '정보 없음'}m²</p></div>
         <div className='roomitem-location'>{location} </div>
+        <div className='roomitem-area'><p>{area || '정보 없음'}m²</p></div>
     </Link>
   );
 };

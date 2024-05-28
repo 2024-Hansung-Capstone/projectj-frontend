@@ -96,7 +96,7 @@
     margin-top: 10px; /* 버튼 상단 여백 추가 */
     margin-bottom: 10px; /* 버튼 하단 여백 추가 */
     padding: 5px; /* 버튼 내부 여백 조정 */
-    font-size: 12px; /* 폰트 크기 조정 */
+    font-size: 10px; /* 폰트 크기 조정 */
   }
   
   .header-img img {

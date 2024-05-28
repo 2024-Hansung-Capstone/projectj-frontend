@@ -8,6 +8,7 @@
   flex: 0 0 auto;
   text-decoration: none;
   text-align: center;
+  justify-content: center;
 }
 
 .roomitem-container-items {
@@ -26,11 +27,36 @@
   font-size: 18px;
   font-weight: bold;
   color: gray; /* Change color as needed */
-  margin-bottom: 5px; /* Add margin bottom for spacing */
+  margin-top: 5px; /* Add margin bottom for spacing */
 }
-
 .roomitem-area {
   font-size: 16px;
   font-weight: bold;
   color: gray; /* Change color as needed */
+}
+
+@media (max-width: 768px) { 
+  .roomitem-container-popular {
+    border: 2px solid  rgb(93, 155, 0);
+    border-radius: 10px;
+    width: 95%; /* 너비를 최대 너비의 일정 비율로 조정 */
+    max-width: 364px; /* 최대 너비를 설정 */
+    margin: 5px;
+  }
+  
+  .roomitem-container-items {
+    width: 95%; /* 너비를 최대 너비의 일정 비율로 조정 */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .roomitem-price {
+    font-size: 14px;
+  }
+  .roomitem-location {
+    font-size: 13px;
+  }
+  .roomitem-area {
+    font-size: 12px;
+  }
 }

@@ -72,4 +72,44 @@
       margin: 3px; /* 문단 간격 축소 */
     }
   }
+
+  @media (max-width: 768px) {
+    .cookingitem-container {
+      text-align: center;
+      margin: 10px;
+      flex: 0 0 auto;
+      width: 150px;
+      height: auto;
+      text-align: center;
+      justify-content: center;
+  }
+
+    .cookingitem-name {
+      font-size: 13px;
+      margin-top: 2px;
+    }
+  
+    .cookingitem-user {
+      font-size: 12px;
+    }
+  
+    .cookingitem-detail {
+      font-size: 13px;
+    }
+  
+    .cookingitem-name p,
+    .cookingitem-user p,
+    .cookingitem-detail p {
+      margin: 3px;
+    }
+  
+    .cookingitem-photo {
+      height: 150px; /* 이미지 컨테이너 높이 축소 */
+    }
+  
+    .main-dish-image {
+      height: 100%; /* 이미지 높이 유지 */
+    }
+  }
+  
   

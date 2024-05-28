@@ -5,7 +5,7 @@ export default function Cooking_Item({ cook, onClick }) {
   if (!cook) {
     return <p>Loading cook data...</p>;
   }
-  // 내용이 너무 길면 일정 길이로 자르고 생략 부호를 추가
+
   const truncatedDetail = cook.detail.length > 100 ? `${cook.detail.substring(0, 50)}...` : cook.detail;
 
   const renderDetailItems = (detail) => {
@@ -27,13 +27,10 @@ export default function Cooking_Item({ cook, onClick }) {
           <p>No image available</p>
         )}
       </div>
-      {/* 제목 */}
       <div className='cookingitem-menu'>
-        <p>{cook.name}</p>
+        <p className="cookingitem-name">{cook.name}</p>
       </div>
-      {/* 내용 */}
       <div className='cookingitem-detail'>
-        {/* ","로 분할된 항목을 p 태그로 렌더링 */}
         {renderDetailItems(truncatedDetail)}
       </div>
     </div>

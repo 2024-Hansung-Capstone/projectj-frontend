@@ -52,3 +52,20 @@ cursor: pointer; / 버튼처럼 보이게 커서 변경 */
 .message-success-container a:hover {
 background-color: #45a049;
 }
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .message-success-container {
+        margin-top: 50px;
+        height: 100vh;
+        }
+    .messagesuccess-icon {
+        width: 150px;
+        height: 150px;
+        padding: 10px;
+    }
+    .messagesuccess-icon svg {
+        width: 100px;
+        height: 100px;
+    }
+}

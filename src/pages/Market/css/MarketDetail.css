@@ -173,10 +173,63 @@ button:hover {
   right: 0;
 }
 
+/* 기존 스타일 생략 */
 
-@font-face {
-  font-family: 'KCC-Hanbit';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
+@media (max-width: 768px) {
+  .marketdetail-container {
+    margin: 5px auto;
+    padding: 5px;
+  }
+  .marketdetail-container2 {
+    flex-direction: column; /* 세로로 정렬 */
+  }
+
+  .marketdetail-container3,
+  .marketdetail-container4 {
+    width: 100%; /* 너비 100% */
+  }
+  .marketdetail-container4 {
+    padding: 0; /* 패딩 제거 */
+    text-align: center; /* 중앙 정렬 */
+  }
+
+  .productTitle {
+    font-size: 24px; /* 폰트 크기 조정 */
+  }
+
+  .productPrice {
+    font-size: 24px; /* 폰트 크기 조정 */
+  }
+
+  .productDetail {
+    margin: 10px 0; /* 마진 조정 */
+  }
+
+  .productDetailBtn {
+    flex-direction: column; /* 세로로 정렬 */
+    gap: 10px; /* 버튼 간 간격 추가 */
+  }
+
+  .productDetailBtn button {
+    width: 100%; /* 버튼 너비 100% */
+  }
+
+  .productDetail-userbutton {
+    flex-direction: column; /* 세로로 정렬 */
+    align-items: center; /* 중앙 정렬 */
+    gap: 5px; /* 버튼 간 간격 추가 */
+  }
+
+  .productImage img {
+    height: 300px; /* 이미지 높이 자동 조정 */
+    width: 100%; /* 너비 100% */
+  }
+  .productImage {
+    margin: 0;
+    padding: 2px 5px;
+    border-radius: 4px;
+  }
+  .productImage {
+    height: 250px;
+  }
 }

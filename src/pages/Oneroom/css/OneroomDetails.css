@@ -1,16 +1,18 @@
-/* OneroomDetails.css */
-
 .oneroom-details-container {
-  max-width: 800px;
-  margin: auto;
+  font-family: 'KCC-Hanbit';
+  display: flex;
+  margin: 30px;
   margin-top: 80px;
   border: 2px solid #ddd;
   border-radius: 10px;
   padding: 30px;
-  font-family: 'KCC-Hanbit';
+  align-items: center;
 }
-.oneroom-details-container2 {
-  display: flex;
+.oneroom-details-container3 {
+  width: 60%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 .oneroom-details-container2 img{
   width: 280px;
@@ -40,6 +42,9 @@
 .details-table td {
   padding: 10px;
 }
+.od-td {
+  color: gray;
+}
 
 @media (min-width: 768px) {
   .oneroom-details-container {
@@ -51,9 +56,37 @@
   }
 }
 
-@font-face {
-  font-family: 'KCC-Hanbit';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
+@media (max-width: 767px) {
+  .oneroom-details-container {
+    padding: 20px;
+    margin-top: 60px;
+  }
+
+  .oneroom-details-container2 {
+    flex-direction: column;
+  }
+
+  .oneroom-details-container2 img {
+    width: 100%;
+    height: auto;
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
+
+  .location {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+
+  .price {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .details-table {
+    margin: 0;
+    font-size: 10px;
+  }
 }
+

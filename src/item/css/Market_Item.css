@@ -13,7 +13,8 @@
     border: 1px groove #f6f6f6;
     object-fit: cover; 
 }
-.marketitem-photo  img {
+
+.marketitem-photo img {
     object-fit: cover; 
 }
 
@@ -26,6 +27,7 @@
 .marketitem-title {
     font-size: 20px;
 }
+
 .marketitem-likeview {
     display: flex;
     justify-content: center; 
@@ -40,6 +42,7 @@
 .marketitem-view {
     width: 50%;
 }
+
 .marketitem-StateAndTime {
     display: flex;
     justify-content: space-between; 
@@ -53,15 +56,38 @@
     padding: 10px;
 }
 
-
 /* 모바일 반응형 */
 @media (max-width: 768px) {
     .marketitem-container {
-        width: 200px;
+        width: 180px; /* 모바일 화면에서 너비를 200px로 변경 */
         height: auto;
-        text-align: center;
-        flex: 0 0 auto;  /* 슬라이드 적용 시 빼먹지 않기! */
+        padding: 3px; /* 패딩 줄이기 */
+        margin: 3px; /* 마진 줄이기 */
+        font-size: 10px; /* 폰트 크기 줄이기 */
+    }
+
+    .marketitem-photo {
+        height: 180px; /* 높이 줄이기 */
+    }
+
+    .marketitem-title {
+        font-size: 12px; /* 폰트 크기 줄이기 */
+    }
+
+    .marketitem-price {
+        font-size: 12px; /* 폰트 크기 줄이기 */
+    }
+
+    .marketitem-StateAndTime {
+        font-size: 10px; /* 폰트 크기 줄이기 */
+    }
+
+    .marketitem-StateAndTime > p {
+        padding: 8px; /* 패딩 줄이기 */
+    }
+
+    .marketitem-no-image {
+        font-size: 10px; /* 폰트 크기 줄이기 */
+        line-height: 180px; /* 높이 줄이기와 일치시키기 */
     }
 }
-  
-  

@@ -18,12 +18,14 @@
 }
 
 .Matefilter-items button {
-  flex: 1 1 20%; /* 각 버튼의 너비를 20%로 설정 */
-  max-width: 20%; /* 각 버튼의 최대 너비를 20%로 설정 */
+  flex: 1 1 auto; /* 각 버튼의 유연한 너비를 설정 */
+  max-width: 100px; /* 각 버튼의 최대 너비를 100px로 설정 */
+  min-width: 80px; /* 각 버튼의 최소 너비를 80px로 설정 */
   margin-right: 3px; /* 각 버튼 사이의 간격 */
   margin-bottom: 3px; /* 버튼 행 간의 간격 */
-  padding: 3px 20px; /* 버튼 내부의 여백 설정 */
-  font-size: 16px; /* 버튼 텍스트 크기 설정 */
+  padding: 3px 10px; /* 버튼 내부의 여백 설정 */
+  font-size: 14px; /* 버튼 텍스트 크기 설정 */
+  text-align: center; /* 텍스트를 중앙 정렬 */
 }
 
 .Matefilter-line {
@@ -40,7 +42,6 @@
 }
 
 .filter-bar-container .ant-btn-primary:hover {
-  background-color: rgb(93, 155, 0);
   background-color: rgb(93, 155, 0);
 }
 

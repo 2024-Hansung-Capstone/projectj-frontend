@@ -58,11 +58,11 @@ const Home = () => {
             <p>냉장고 속 재료로 어떤 요리를 해야할지 고민되세요?</p>
             <p>AI 레시피에게 물어보세요.</p>
           </div>
-          <img src="/assets/cook/cookai2.png"/>
+          <img src="/assets/cook/cook3.png"/>
         </div>
 
         <div className='Home-cook2'> 
-          <img src="/assets/cook/cook3.png"/>
+          <img src="/assets/cook/cook4.png" />
           <p>AI가 검색한 레시피로 쉽고 간편하게</p>
         </div>
       </div>
@@ -73,8 +73,10 @@ const Home = () => {
         <img src='/assets/oneroom/home.png' style={{width:'40px', height: '40px', marginRight:'10px'}}/>
         <h2>원룸</h2>
       </div>
-      <p>지도를 이동하여 원하는 지역의 원룸 정보를 받아보세요.</p>
-      <img src="/assets/oneroom/oneroom2.png" alt="oneroom"/>
+      <div className="Home-oneroom1">
+        <p>지도를 이동하여 원하는 지역의 원룸 정보를 받아보세요.</p>
+        <img src="/assets/oneroom/oneroom2.png" alt="oneroom"/>
+      </div>
       </div>
 
        {/* 자취메이트 */}
@@ -111,8 +113,15 @@ const Home = () => {
         <img src='/assets/community/write.png' style={{width:'40px', height: '40px', marginTop:'8px', marginRight:'10px'}}/>
         <h2>커뮤니티</h2>
       </div>
-      <p>메시지를 통해 다른 사용자와 대화를 나눌 수 있어요.</p>
-      </div>
+        <div className='Home-community1'>
+          <p>메시지를 통해 다른 사용자와 대화를 나눌 수 있어요.</p>
+          <img src="/assets/community/board3.png"/>
+          </div>
+          <div className='Home-community2'>
+            <img src="/assets/community/board2.png"/>
+            <p>댓글로 함께 일상을 공유해보세요.</p>
+          </div>
+        </div>
 
       {/* 메시지 */}
       <div className='Home-message'> 
@@ -120,8 +129,10 @@ const Home = () => {
         <img src='/assets/home/message.png' style={{width:'40px', height: '40px', marginTop:'8px', marginRight:'10px'}}/>
         <h2>메시지</h2>
       </div>
-      <p>메시지를 통해 다른 사용자와 대화를 나눌 수 있어요.</p>
-      <img src="/assets/message/messagebox.png"/>
+        <div className='Home-notification1'> 
+          <p>메시지를 통해 다른 사용자와 대화를 나눌 수 있어요.</p>
+          <img src="/assets/message/messagebox.png"/>
+        </div>
       </div>
 
        {/* 알림 */}
@@ -131,13 +142,13 @@ const Home = () => {
           <h2>알림</h2>
         </div>
         <div className='Home-notification1'> 
+        <p>알림을 통해 좋아요, 메시지 등의 알림을 받아요.</p>
         <img src="/assets/notification/notification1.png" />
         </div>
-        <div className='Home-notification2'>  
-        <p>알림을 통해 좋아요, 메시지 등의 알림을 받아요.</p>
       </div>
+      <div className='Home-web'> 
+      <img src="/assets/home/web2.png" />
       </div>
-  
       </div>
     </div>
   );

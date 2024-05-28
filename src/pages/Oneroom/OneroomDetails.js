@@ -96,26 +96,27 @@ const OneroomDetails = () => {
     <div className="oneroom-details-container">
       <div className="oneroom-details-container2">
         <img src="/assets/oneroom/house2.png" alt="house2" />
+        </div>
+
         <div className="oneroom-details-container3">
           <div className="price">
-            <h2>{convertedPrice}</h2>
+            <p>{convertedPrice}</p>
           </div>
           <h2 className="location">{`${dong}, ${jibun}, ${name}`}</h2>
           <div className="details-table">
             <table>
               <tbody>
                 <tr>
-                  <td>전용 면적</td>
+                  <td className='od-td'>전용 면적</td>
                   <td>{area_exclusiveUse || '정보 없음'}m²</td>
                 </tr>
                 <tr>
-                  <td>조회수</td>
+                <td className='od-td'>조회수</td>
                   <td>{view || 0}</td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </div>
       </div>
     </div>
   );
