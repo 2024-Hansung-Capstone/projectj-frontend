@@ -272,8 +272,10 @@ export default function Comment_Item({ comment, isLiked,onDeleteSuccessToComment
             {newComment.comment_reply && newComment.comment_reply.length > 0 && (
             <div className='commentTocomment-container'>
               {newComment.comment_reply.map((comment) => {
-              const isLiked = comment.like_user && comment.like_user.some(like_user => like_user.user.id === whoAmIData.whoAmI.id);
-             return <CommentToComment_Item key={comment.id} CommentToComent={comment} onDeleteSuccess={handleDeleteSuccess} likedCTC={isLiked || false}/>
+                console.log(comment);
+              const isLiked = comment.like_user.some(like_user => like_user.user.id === whoAmIData.whoAmI.id);
+              console.log(isLiked)
+             return <CommentToComment_Item key={comment.id} CommentToComent={comment} onDeleteSuccess={handleDeleteSuccess} likedCTC={isLiked}/>
               })}
           </div>
           )}

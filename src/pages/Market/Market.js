@@ -30,6 +30,13 @@ const GET_USED_PRODUCTS = gql`
           name
         }
       }
+      like_user {
+        id
+          user {
+            id
+            name
+          }
+      }
     }
   }
 `;
@@ -117,7 +124,7 @@ export default function Market() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
-
+    console.log(JSON.stringify(error, null, 2));
     const loggedInUser = localStorage.getItem('loggedInUserName');
     if (loggedInUser) {
       setLoggedInUserName(loggedInUser);
@@ -239,7 +246,7 @@ export default function Market() {
         {loading || whoAmILoading ? (
           <p>Loading...</p>
         ) : error || whoAmIError ? (
-          <p>Error: {error ? error.message : whoAmIError.message}</p>
+          <p>Error: {error ? error.message : whoAmIError.message}{console.log(JSON.stringify(error, null, 2))}</p>
         ) : (
           itemsToDisplay && itemsToDisplay.length > 0 ? (
             itemsToDisplay.map((product, index) => (

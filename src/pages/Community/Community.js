@@ -97,9 +97,62 @@ const FETCH_BOARDS_BY_SEARCH = gql`
   query FetchBoardsBySearch($searchBoardInput: SearchBoardInput!) {
     fetchBoardsBySerach(SerachBoardInput: $searchBoardInput) {
       id
-      category
       title
       detail
+      category
+      view
+      user {
+        id
+        name
+        profile_image{
+          imagePath
+        }
+      }
+      like
+      create_at
+      reply {
+        id
+        like
+        detail
+        user {
+          id
+          name
+        }
+        like_user {
+          id
+          user {
+            id
+            name
+          }
+        }
+        comment_reply {
+          id
+          like
+          detail
+          user {
+            id
+            name
+          }
+          like_user {
+            id
+            user {
+              id
+              name
+            }
+          }
+        }
+      }
+      post_images {
+        id
+        imagePath
+      }
+      like_user {
+        id
+        user {
+          id
+          name
+        }
+      }
     }
   }
 `;
@@ -200,7 +253,7 @@ const Community = () => {
 
   const renderBoardList = () => {
     if (searchloading || loading) return <p>Loading...</p>;
-    console.log(JSON.stringify(error, null, 2));
+    console.log(JSON.stringify(searcherror, null, 2));
     let boards;
     if (searchInput.title || searchInput.detail) {
       boards = searchdata?.fetchBoardsBySerach;
@@ -215,8 +268,8 @@ const Community = () => {
     }
 
     return boards.map((board) => {
-     
-      const isLiked = board.like_user.some(like_user => like_user.user.id === dataWho.whoAmI.id);
+      var isLiked=null;
+      isLiked = board.like_user.some(like_user => like_user.user.id === dataWho.whoAmI.id);
      
       return (
         <Community_Item

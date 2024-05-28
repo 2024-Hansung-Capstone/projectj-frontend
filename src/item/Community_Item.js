@@ -56,6 +56,10 @@ export default function Community_Item({ board, selectedItem, onClick,isLiked })
       headers: {
         authorization: `Bearer ${token || ''}`
       }
+    },onError: (error) => {
+      alert('좋아요 실패 사유:'+error.message);
+      console.log(JSON.stringify(error, null, 2))
+      setLiked(false);
     },
     onCompleted: (data) => {
       setLikeCount(data.increaseBoardLike.like);
@@ -67,6 +71,8 @@ export default function Community_Item({ board, selectedItem, onClick,isLiked })
       headers: {
         authorization: `Bearer ${token || ''}`
       }
+    },onError: (error) => {
+      alert('좋아요를 하지 않았음', error);
     },
     onCompleted: (data) => {
       setLikeCount(data.decreaseBoardLike.like);

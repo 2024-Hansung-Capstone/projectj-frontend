@@ -62,7 +62,7 @@ export default function CommentToComment_Item({CommentToComent, onDeleteSuccess,
     },
     onCompleted: (data) => {
       setLikeCount((prev) => prev + 1);
-      setLiked(!liked);
+      setLiked(true);
     },
     onError: (error) => {
       alert('댓글 좋아요 중 오류가 발생했습니다.'+error);
@@ -74,7 +74,7 @@ export default function CommentToComment_Item({CommentToComent, onDeleteSuccess,
   const [decreaseReplyLike] = useMutation(DECREASE_REPLY_LIKE, {
     onCompleted: () => {
       setLikeCount((prev) => prev - 1);
-      setLiked(!liked);
+      setLiked(false);
     },
     onError: (error) => {
       console.error('대댓글 삭제 중 오류 발생:', error);
