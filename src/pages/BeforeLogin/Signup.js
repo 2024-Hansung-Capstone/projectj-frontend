@@ -31,7 +31,7 @@ const SIGN_UP = gql`
 
 const CREATE_TOKEN = gql`
   mutation CreateToken($phone_number: String!) {
-    testCreateToken(phone_number: $phone_number)
+    createToken(phone_number: $phone_number)
   }
 `;
 
@@ -257,10 +257,10 @@ const Signup = () => {
       try {
         // createToken 뮤테이션 호출
         const { data } = await createTokenMutation({ variables: { phone_number: phoneNumberValue } });
-        if (data.testCreateToken) {
+        if (data.createToken) {
           setShowAuthInput(true);
           setPhoneNumber(phoneNumberValue); // 전화번호 상태 설정
-          console.log('토큰:', data.testCreateToken);
+          console.log('토큰:', data.createToken);
         }
       } catch (error) {
         console.error('토큰 생성 중 오류:', error);
