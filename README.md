@@ -58,25 +58,25 @@ $ npm start
  <img width="466" alt="image" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/22fbe1fb-3fb8-42a4-be22-f01bc92543ee">
 
 
-#### (2) 요리 : 자취생들이 입력한 요리 재료를 기반으로 AI가 메뉴를 추천한다. 
+#### (2) 요리 : 자취생들의 냉장고에 있는 재료를 입력받아 AI가 레시피를 추천해줍니다. 
 <img width="577" alt="요리1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/d15e7451-4490-4dbd-924b-e8b01d049e39">
 
 
 
-#### (3) 원룸 : 원룸 api를 이용하여 내 주변 원룸을 지도로 확인 가능하다. 
+#### (3) 원룸 : 원룸 api를 이용하여 내 주변 원룸을 지도로 확인 가능합니다.
 <img width="576" alt="원룸1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/36cf12e2-d32c-471e-a3ac-c73437876d56">
 
 
-#### (4) 자취메이트 : 동네 자취생 친구를 만들 수 있는 페이지이며, 사용자에게 받은 입력값을 바탕으로 친구를 추천하여 지역 커뮤니티를 활성화한다. 
+#### (4) 자취메이트 : 동네 자취생 친구를 만들 수 있는 페이지이며, 사용자에게 받은 입력값을 바탕으로 친구를 추천하여 지역 커뮤니티를 활성화합니다.
 <img width="579" alt="자취메이트1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/e950bede-42d6-4ceb-9fee-5111e079f663">
 
 
-#### (5) 중고마켓 : 사용자와 같은 지역에 거주하는 유저가 올린 중고 상품을 띄워 쪽지를 통해 거래를 한다. 
+#### (5) 중고마켓 : 사용자와 같은 지역에 거주하는 유저가 올린 중고 상품을 띄워 쪽지를 통해 거래를 할 수 있습니다. 
 <img width="580" alt="중고마켓1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/4baef226-1d68-46e1-aa6c-74112abfeabe">
 
 
 
-#### (6) 커뮤니티 : 자취생들에게 필요한 정보들을 같은 자취생들과 공유하고, 소통한다. 
+#### (6) 커뮤니티 : 자취생들에게 필요한 정보들을 같은 자취생들과 공유합니다. 
 <img width="575" alt="커뮤니티1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/bc2297d6-4b6e-4086-975f-2b991746fcb9">
 
 
@@ -85,14 +85,9 @@ $ npm start
 <img width="707" alt="messagebox" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/328f39be-fbba-4917-b520-b864e5556759">
 
 
-
 #### (8) 알림
 <img width="782" alt="notification1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/d7dd0698-c906-41d0-b3bb-a0ca95a1f98f">
 
-
-#### (7) 마이페이지 : 포인트, 메시지 등이 확인 가능하다. 
-
-<img width="653" alt="mypage" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/a057e4dc-0c6f-4144-a6d5-c4367d07a9da">
 
 
 # ﻿웹페이지 구조
