@@ -101,8 +101,8 @@ const App = () => {
       <div className="root-wrap">
         <BrowserRouter>
         <div className="header-section">
-          <HeaderB onLogin={handleLogin} />
-        </div>
+            {isAuthenticated ? <HeaderA /> : <HeaderB onLogin={handleLogin} />}
+          </div>
           <NotificationBanner /> {/* Render NotificationBanner component */}
           <div className="main-section">
             <Category />
