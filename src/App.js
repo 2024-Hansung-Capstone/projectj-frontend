@@ -65,17 +65,6 @@ const App = () => {
     }
   }, []);
 
-    // 창을 닫을 때 토큰을 삭제
-    useEffect(() => {
-      const handleWindowClose = () => {
-        localStorage.removeItem('token');
-      };
-      window.addEventListener('beforeunload', handleWindowClose);
-      return () => {
-        window.removeEventListener('beforeunload', handleWindowClose);
-      };
-    }, []);
-
   // 인증 헤더 설정
   const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem('token');
