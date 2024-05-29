@@ -82,7 +82,7 @@ const Home = () => {
        {/* 자취메이트 */}
       <div className='Home-mate'> 
         <div className="Home-title">
-          <img src='/assets/mate/mate2.png' style={{width:'40px', height: '40px', marginTop:'8px', marginRight:'10px'}}/>
+          <img src='/assets/mate/mate2.png' style={{width:'40px', height: '40px', marginRight:'10px'}}/>
           <h2>자취메이트</h2>
         </div>
         <div className='Home-mate1'> 
@@ -98,7 +98,7 @@ const Home = () => {
        {/* 중고마켓 */}
       <div className='Home-market'> 
         <div className="Home-title">
-          <img src='/assets/market/marketPost.png' style={{width:'40px', height: '40px', marginTop:'8px', marginRight:'10px'}}/>
+          <img src='/assets/market/marketPost.png' style={{width:'40px', height: '40px', marginRight:'10px'}}/>
           <h2>중고마켓</h2>
         </div>
         <div className='Home-market1'> 
@@ -110,7 +110,7 @@ const Home = () => {
        {/* 커뮤니티 */}
       <div className='Home-community'>
       <div className="Home-title">
-        <img src='/assets/community/write.png' style={{width:'40px', height: '40px', marginTop:'8px', marginRight:'10px'}}/>
+        <img src='/assets/community/write.png' style={{width:'40px', height: '40px', marginRight:'10px'}}/>
         <h2>커뮤니티</h2>
       </div>
         <div className='Home-community1'>
@@ -126,7 +126,7 @@ const Home = () => {
       {/* 메시지 */}
       <div className='Home-message'> 
       <div className="Home-title">
-        <img src='/assets/home/message.png' style={{width:'40px', height: '40px', marginTop:'8px', marginRight:'10px'}}/>
+        <img src='/assets/home/message.png' style={{width:'40px', height: '40px', marginRight:'10px'}}/>
         <h2>메시지</h2>
       </div>
         <div className='Home-notification1'> 
@@ -138,16 +138,13 @@ const Home = () => {
        {/* 알림 */}
       <div className='Home-notification'> 
       <div className="Home-title">
-        <img src='/assets/notification/notification.png' style={{width:'40px', height: '40px', marginTop:'8px', marginRight:'10px'}}/>
+        <img src='/assets/notification/notification.png' style={{width:'40px', height: '40px', marginRight:'10px'}}/>
           <h2>알림</h2>
         </div>
         <div className='Home-notification1'> 
         <p>알림을 통해 좋아요, 메시지 등의 알림을 받아요.</p>
         <img src="/assets/notification/notification1.png" />
         </div>
-      </div>
-      <div className='Home-web'> 
-      <img src="/assets/home/web.png" />
       </div>
       </div>
     </div>

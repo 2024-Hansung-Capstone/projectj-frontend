@@ -441,6 +441,7 @@
   .cookingDelete-btn {
     font-size: 6px;
     padding: 2px;
+    text-align: center;
   }
   .cooking-dishes-grid {
     display: grid;

@@ -141,14 +141,21 @@ export default function Cooking() {
     } else {
       setLoggedInUserName('');
     }
-  }, []);
+  }, [isLoggedIn]); // isLoggedIn 상태가 변경될 때마다 실행
 
-  // 여기서 location.pathname이 변경될 때마다 ingredient 관련 상태값을 초기화합니다.
-  useEffect(() => {
-    setIngredient('');
-    setQuantity('');
-    setUnit('');
-  }, [location.pathname, isLoggedIn]);
+  // 로컬 스토리지에 저장된 재료 정보가 있는지 확인하고, 있으면 해당 정보를 상태에 설정합니다.
+useEffect(() => {
+  const storedIngredientName = localStorage.getItem('ingredientName');
+  const storedVolume = localStorage.getItem('volume');
+  const storedVolumeUnit = localStorage.getItem('volume_unit');
+  
+  if (storedIngredientName && storedVolume && storedVolumeUnit) {
+    setIngredient(storedIngredientName);
+    setQuantity(storedVolume);
+    setUnit(storedVolumeUnit);
+  }
+}, []);
+
 
   useEffect(() => {
     refetchAll().then((result) => {
@@ -185,11 +192,16 @@ export default function Cooking() {
     navigate("/CookingDetails", { state: { cook } });
   };
 
+  
 // 재료 추가
   const handleAddIngredient = async (e) => {
     e.preventDefault();
     if (ingredientName && volume && volume_unit) {
       try {
+        localStorage.setItem('ingredientName', ingredientName);
+        localStorage.setItem('volume', volume);
+        localStorage.setItem('volume_unit', volume_unit);
+
         await createIngredient({
           variables: {
             createIngredientInput: {
