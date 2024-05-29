@@ -1,5 +1,3 @@
-<img width="857" alt="중고마켓" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/f75f8d60-e2db-4b34-9907-b6437b464907">![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=10&height=200&text=ProjectJ-frontend&fontSize=50&animation=twinkling&fontAlign=68&fontAlignY=36)
-
 <img width="922" alt="web mobile1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/26aeb48e-9ad5-4b9e-ba21-75539e716b61">
 
 # ﻿1. 정의
