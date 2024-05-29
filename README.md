@@ -1,4 +1,6 @@
-![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=10&height=200&text=ProjectJ-frontend&fontSize=50&animation=twinkling&fontAlign=68&fontAlignY=36)
+<img width="857" alt="중고마켓" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/f75f8d60-e2db-4b34-9907-b6437b464907">![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=10&height=200&text=ProjectJ-frontend&fontSize=50&animation=twinkling&fontAlign=68&fontAlignY=36)
+
+<img width="922" alt="web mobile1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/26aeb48e-9ad5-4b9e-ba21-75539e716b61">
 
 # ﻿1. 정의
 ### ﻿자취생들을 위한 통합 웹사이트    
@@ -36,6 +38,16 @@ Tool: VSCode
 ---
 
 # ﻿5. 웹페이지 소개
+
+<img width="862" alt="요리" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/9f326dd0-be8e-409b-9eb3-7bf8c01afdf9">
+<img width="864" alt="원룸" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/1368ec5d-2d93-4ac0-8d58-76919de3245d">
+<img width="864" alt="자취메이트" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/1b621d0a-2166-4cbe-87bc-f2ae1a099a16">
+<img width="857" alt="중고마켓" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/dc86449b-00f6-48f5-bf2b-121957879128">
+<img width="855" alt="커뮤니티" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/e69ff2f0-dda2-4512-934b-a49998454b99">
+<img width="858" alt="메시지" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/c7dc839e-1fc4-49f7-92f5-8a8191c65600">
+<img width="857" alt="알림" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/700de0b0-2697-4760-9315-e41e2ed14f00">
+
+
 
 #### (1) ﻿로그인/회원가입
 
