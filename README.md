@@ -54,24 +54,25 @@ Tool: VSCode
 #### (2) 홈화면 
 
 #### (3) 요리 : 자취생들이 입력한 요리 재료를 기반으로 AI가 메뉴를 추천한다. 
+<img width="577" alt="요리1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/d15e7451-4490-4dbd-924b-e8b01d049e39">
 
-<img width="846" alt="cook" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/d53039a4-665b-4d29-905c-c73663b5e64b">
+
 
 #### (4) 원룸 : 원룸 api를 이용하여 내 주변 원룸을 지도로 확인 가능하다. 
+<img width="576" alt="원룸1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/36cf12e2-d32c-471e-a3ac-c73437876d56">
 
-<img width="424" alt="oneroom" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/d2e76778-424d-41d5-8f40-66018361894d">
 
 #### (5) 자취메이트 : 동네 자취생 친구를 만들 수 있는 페이지이며, 사용자에게 받은 입력값을 바탕으로 친구를 추천하여 지역 커뮤니티를 활성화한다. 
+<img width="579" alt="자취메이트1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/e950bede-42d6-4ceb-9fee-5111e079f663">
 
-<img width="510" alt="mate" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/752124df-98f6-476f-b439-194d034ea5e7">
 
 #### (6) 중고마켓 : 사용자와 같은 지역에 거주하는 유저가 올린 중고 상품을 띄워 쪽지를 통해 거래를 한다. 
-
-<img width="606" alt="market" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/0e26e04d-cd36-495c-8b20-d953fc6d732e">
+<img width="580" alt="중고마켓1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/4baef226-1d68-46e1-aa6c-74112abfeabe">
 
 #### (7) 커뮤니티 : 자취생들에게 필요한 정보들을 같은 자취생들과 공유하고, 소통한다. 
+<img width="575" alt="커뮤니티1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/bc2297d6-4b6e-4086-975f-2b991746fcb9">
 
-<img width="555" alt="board" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/c5fa75bb-a95a-494f-8032-d5b595f19c09">
+
 
 #### (8) 마이페이지 : 포인트, 메시지 등이 확인 가능하다. 
 
