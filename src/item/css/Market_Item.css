@@ -59,7 +59,7 @@
 /* 모바일 반응형 */
 @media (max-width: 768px) {
     .marketitem-container {
-        width: 180px; /* 모바일 화면에서 너비를 200px로 변경 */
+        width: 150px; /* 모바일 화면에서 너비를 200px로 변경 */
         height: auto;
         padding: 3px; /* 패딩 줄이기 */
         margin: 3px; /* 마진 줄이기 */
@@ -75,7 +75,7 @@
     }
 
     .marketitem-price {
-        font-size: 12px; /* 폰트 크기 줄이기 */
+        font-size: 11px; /* 폰트 크기 줄이기 */
     }
 
     .marketitem-StateAndTime {

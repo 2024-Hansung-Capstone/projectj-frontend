@@ -128,4 +128,12 @@
   .Mate-filter img {
     width: 40px;
   }
+  @media (max-width: 768px) {
+    .Mate-product-item {
+      width: calc(50% - 20px); /* Adjusted width for two items per row */
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
+  }
+  
 }

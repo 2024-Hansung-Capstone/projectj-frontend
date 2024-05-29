@@ -7,11 +7,9 @@
     text-align: center; 
     overflow: hidden; /* 자식 요소가 부모 요소를 벗어나지 않도록 함 */
 }
-
 .Home-detail img {
     width: 50%;
 }
-
 .Home-photoList {
     width: 100%;
     margin-bottom: 20px;
@@ -71,7 +69,7 @@
 
 .Home-cook1 img,
 .Home-cook2 img,
-.Home-market img,
+.Home-market1 img,
 .Home-oneroom1 img,
 .Home-mate1 img,
 .Home-mate2 img,
@@ -148,7 +146,6 @@
 }
 
 .Home-market1 {
-    display: flex;
     align-items: center; 
     text-align: center; 
 }

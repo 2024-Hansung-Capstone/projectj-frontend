@@ -143,6 +143,13 @@ export default function Cooking() {
     }
   }, []);
 
+  // 여기서 location.pathname이 변경될 때마다 ingredient 관련 상태값을 초기화합니다.
+  useEffect(() => {
+    setIngredient('');
+    setQuantity('');
+    setUnit('');
+  }, [location.pathname, isLoggedIn]);
+
   useEffect(() => {
     refetchAll().then((result) => {
       console.log(result.data);
@@ -203,6 +210,7 @@ export default function Cooking() {
       setUnit('');
     }
   };
+
 // 재료 삭제
   const handleDeleteIngredient = async (ingredientId) => {
     try {
@@ -218,75 +226,77 @@ export default function Cooking() {
       alert('식재료 삭제 중 오류가 발생했습니다.');
     }
   };
+
   // 재료 수정
   const [isEditing, setIsEditing] = useState(false);
-const [editedIngredient, setEditedIngredient] = useState({
-  id: "",
-  name: "",
-  volume: "",
-  volume_unit: ""
-});
-
-const handleUpdateIngredient = (ingredientId, name, volume, volume_unit) => {
-  setIsEditing(true); // 수정 폼을 보여줌
-  setEditedIngredient({
-    id: ingredientId,
-    name: name,
-    volume: volume,
-    volume_unit: volume_unit
+  const [editedIngredient, setEditedIngredient] = useState({
+    id: "",
+    name: "",
+    volume: "",
+    volume_unit: ""
   });
-};
 
-const handleFinishEdit = async () => {
-  try {
-    await updateIngredient({
-      variables: {
-        updateIngredientInput: {
-          id: editedIngredient.id,
-          name: editedIngredient.name,
-          volume: parseFloat(editedIngredient.volume),
-          volume_unit: editedIngredient.volume_unit,
-        },
-      },
+  const handleUpdateIngredient = (ingredientId, name, volume, volume_unit) => {
+    setIsEditing(true); // 수정 폼을 보여줌
+    setEditedIngredient({
+      id: ingredientId,
+      name: name,
+      volume: volume,
+      volume_unit: volume_unit
     });
-    setIsEditing(false); // 수정 폼을 닫음
-    await refetch(); // 재료 정보를 다시 불러옴
-    alert('재료 정보가 성공적으로 수정되었습니다.');
-  } catch (error) {
-    console.error('재료 정보 수정 중 오류 발생:', error);
-    alert('재료 정보 수정 중 오류가 발생했습니다.');
-  }
-};
-// 레시피 줄바꿈
-const renderDetailItems = (detail) => {
-  if (typeof detail === 'string') {
-    return detail.split(',').map((item, index) => (
-      <p key={index} className="detail-item">{item.trim()}</p>
-    ));
-  }
-};
+  };
 
-const renderPagination = () => {
-  const cooks = keyword ? dataSearch?.searchCook : data?.fetchAllCooks;
-  const pageCount = Math.ceil(cooks.length / itemsPerPage);
-  const pages = [];
-  for (let i = 1; i <= pageCount; i++) {
-    pages.push(i);
-  }
-  return (
-    <div className="pagination">
-      {pages.map((page) => (
-        <button
-          key={page}
-          onClick={() => setCurrentPage(page)}
-          className={page === currentPage ? 'active' : ''}
-        >
-          {page}
-        </button>
-      ))}
-    </div>
-  );
-};
+  const handleFinishEdit = async () => {
+    try {
+      await updateIngredient({
+        variables: {
+          updateIngredientInput: {
+            id: editedIngredient.id,
+            name: editedIngredient.name,
+            volume: parseFloat(editedIngredient.volume),
+            volume_unit: editedIngredient.volume_unit,
+          },
+        },
+      });
+      setIsEditing(false); // 수정 폼을 닫음
+      await refetch(); // 재료 정보를 다시 불러옴
+      alert('재료 정보가 성공적으로 수정되었습니다.');
+    } catch (error) {
+      console.error('재료 정보 수정 중 오류 발생:', error);
+      alert('재료 정보 수정 중 오류가 발생했습니다.');
+    }
+  };
+
+  // 레시피 줄바꿈
+  const renderDetailItems = (detail) => {
+    if (typeof detail === 'string') {
+      return detail.split(',').map((item, index) => (
+        <p key={index} className="detail-item">{item.trim()}</p>
+      ));
+    }
+  };
+
+  const renderPagination = () => {
+    const cooks = keyword ? dataSearch?.searchCook : data?.fetchAllCooks;
+    const pageCount = Math.ceil(cooks.length / itemsPerPage);
+    const pages = [];
+    for (let i = 1; i <= pageCount; i++) {
+      pages.push(i);
+    }
+    return (
+      <div className="pagination">
+        {pages.map((page) => (
+          <button
+            key={page}
+            onClick={() => setCurrentPage(page)}
+            className={page === currentPage ? 'active' : ''}
+          >
+            {page}
+          </button>
+        ))}
+      </div>
+    );
+  };
 
   const renderCooks = () => {
     const cooks = keyword ? dataSearch?.searchCook : data?.fetchAllCooks;
@@ -313,26 +323,26 @@ const renderPagination = () => {
             <p>인기 레시피  BEST</p>
           </div>
           <div className="best-dishes">
-          {topdata && topdata.fetchCookByViewRank ? (
-          topdata.fetchCookByViewRank.map((cook) => (
-          <div className="best-dish" key={cook.id}>
-            {cook.post_images && cook.post_images.length > 0 && (
-            <img src={cook.post_images[0].imagePath} alt={cook.name} />
+            {topdata && topdata.fetchCookByViewRank ? (
+              topdata.fetchCookByViewRank.map((cook) => (
+                <div className="best-dish" key={cook.id}>
+                  {cook.post_images && cook.post_images.length > 0 && (
+                    <img src={cook.post_images[0].imagePath} alt={cook.name} />
+                  )}
+                  <div className="best-dish-context">
+                    <div className="dish-name">
+                      <h3>{cook.name}</h3>
+                    </div>
+                    <div className="dish-details">
+                      {/* ","로 분할된 항목을 p 태그로 렌더링 */}
+                      {renderDetailItems(cook.detail)}
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <pre>{JSON.stringify(toperror, null, 2)}</pre>
             )}
-          <div className="best-dish-context">
-            <div className="dish-name">
-              <h3>{cook.name}</h3>
-            </div>
-            <div className="dish-details">
-              {/* ","로 분할된 항목을 p 태그로 렌더링 */}
-              {renderDetailItems(cook.detail)}
-            </div>
-          </div>
-        </div>
-        ))
-      ) : (
-      <pre>{JSON.stringify(toperror, null, 2)}</pre>
-      )}
           </div>
         </div>
         <div className='custom-search-container'>
@@ -345,11 +355,11 @@ const renderPagination = () => {
               className='custom-search-input'
             />
             <button onClick={handleSearch} className='custom-search-button'>검색</button>
-           </div>
+          </div>
         </div>
         <div className='cooking-items-container'>
-        <div className='cooking-items-header'>
-          <img src="/assets/cook/cook2.png" alt="cook" style={{width: '40px', marginRight:'10px'}} />
+          <div className='cooking-items-header'>
+            <img src="/assets/cook/cook2.png" alt="cook" style={{width: '40px', marginRight:'10px'}} />
             <p style={{fontSize:'24px'}}>전체 레시피</p>
           </div>
           <div className='cooking-dishes-grid'>

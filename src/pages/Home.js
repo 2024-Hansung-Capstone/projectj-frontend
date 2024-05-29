@@ -82,7 +82,7 @@ const Home = () => {
        {/* 자취메이트 */}
       <div className='Home-mate'> 
         <div className="Home-title">
-          <img src='/assets/cook/cook2.png' alt='cook2' style={{width:'40px', height: '40px', marginTop:'8px', marginRight:'10px'}}/>
+          <img src='/assets/mate/mate2.png' style={{width:'40px', height: '40px', marginTop:'8px', marginRight:'10px'}}/>
           <h2>자취메이트</h2>
         </div>
         <div className='Home-mate1'> 
@@ -147,7 +147,7 @@ const Home = () => {
         </div>
       </div>
       <div className='Home-web'> 
-      <img src="/assets/home/web2.png" />
+      <img src="/assets/home/web.png" />
       </div>
       </div>
     </div>

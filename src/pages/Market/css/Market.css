@@ -104,6 +104,14 @@
       margin-right: auto; /* 오른쪽 여백을 자동으로 추가하여 가운데 정렬 */
     }
 }
+@media (max-width: 768px) {
+  .market-item > * {
+      width:180px;
+      box-sizing: border-box;
+      padding: 10px;
+  }
+}
+
 
 
 
