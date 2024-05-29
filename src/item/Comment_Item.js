@@ -103,6 +103,7 @@ export default function Comment_Item({ comment, isLiked,onDeleteSuccessToComment
   const [likeCount, setLikeCount] = useState(comment.like);
   const [createCommentReply] = useMutation(CREATE_COMMENT_REPLY);
   const [newComment, setComment] = useState(comment);
+  const [profileImage, setProfileImage] = useState(comment.user.profile_image?.imagePath); // 상태로 프로필 이미지 저장
   const { loading: whoAmILoading, error: whoAmIError, data: whoAmIData } = useQuery(WHO_AM_I_QUERY);
   const handleOptionsClick = () => {
     setShowOptions(!showOptions);
@@ -276,7 +277,7 @@ export default function Comment_Item({ comment, isLiked,onDeleteSuccessToComment
             <div className='commentTocomment-container'>
               {newComment.comment_reply.map((comment) => {
                 console.log(comment);
-              const isLiked = comment.like_user.some(like_user => like_user.user.id === whoAmIData.whoAmI.id);
+                const isLiked = comment.like_user && comment.like_user.length > 0 && comment.like_user.some(like_user => like_user.user.id === whoAmIData?.whoAmI?.id);
               console.log(isLiked)
              return <CommentToComment_Item key={comment.id} CommentToComent={comment} onDeleteSuccess={handleDeleteSuccess} likedCTC={isLiked}/>
               })}

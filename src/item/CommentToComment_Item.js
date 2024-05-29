@@ -113,7 +113,11 @@ export default function CommentToComment_Item({CommentToComent, onDeleteSuccess,
     <div className='commentTocomment-container0'>
       <div className='commentTocomment-container1'> {/* 사진, 이름, 삭제 */}
         <div className='comment-photo'>
-          <p>{CommentToComent.user.profile_image}</p>
+          {CommentToComent.user.profile_image && CommentToComent.user.profile_image.imagePath ? (
+          <img className="comment-photo" src={CommentToComent.user.profile_image.imagePath} alt={CommentToComent.user.name} />
+        ) : (
+          <img className="comment-photo" src="assets/mate/user.jpeg" alt="user" />
+        )}
         </div>
         <div className='commentTocomment-name'>
           <p>{CommentToComent.user.name}</p>
