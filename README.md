@@ -41,7 +41,11 @@ $ npm start
 
 ---
 
-# ﻿6. 웹페이지 소개
+# ﻿6. 웹페이지 구조
+<img width="803" alt="image" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/fdc45325-40e0-4ba3-b107-4264205cbf81">
+
+
+# ﻿7. 웹페이지 소개
 
 <img width="862" alt="요리" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/9f326dd0-be8e-409b-9eb3-7bf8c01afdf9">
 <img width="864" alt="원룸" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/1368ec5d-2d93-4ac0-8d58-76919de3245d">
@@ -87,11 +91,6 @@ $ npm start
 
 #### (8) 알림
 <img width="782" alt="notification1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/d7dd0698-c906-41d0-b3bb-a0ca95a1f98f">
-
-
-
-# ﻿웹페이지 구조
-<img width="803" alt="image" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/fdc45325-40e0-4ba3-b107-4264205cbf81">
 
 
 
