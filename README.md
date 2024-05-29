@@ -1,3 +1,5 @@
+![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=10&height=200&text=ProjectJ-FrontEnd&fontSize=50&animation=twinkling&fontAlign=68&fontAlignY=36)
+
 <img width="922" alt="web mobile1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/26aeb48e-9ad5-4b9e-ba21-75539e716b61">
 
 # ﻿1. 정의
