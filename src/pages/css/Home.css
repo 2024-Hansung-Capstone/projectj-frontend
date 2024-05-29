@@ -1,6 +1,6 @@
 .Home-container {
     font-family: 'KCC-Hanbit';
-    background-color: rgb(250, 248, 238);
+    background-color: rgb(251, 250, 244);
     color: black;
     justify-content: center;
     align-items: center; 
@@ -42,11 +42,11 @@
     text-align: center;
     padding: 0 10px;
     border-radius: 10px;
-    font-size: 15px; /* 제목의 폰트 크기 조정 */
+    font-size: 12px; /* 제목의 폰트 크기 조정 */
     font-weight: bold; /* 제목의 굵기 설정 */
     color: #333; /* 제목의 색상 설정 */
     margin-bottom: 10px;
-    background-color: rgb(225, 222, 202);
+    background-color: rgb(236, 234, 217);
 }
 
 .Home-cook, .Home-oneroom, .Home-mate, .Home-market, .Home-community, .Home-message, .Home-notification, .Home-web {

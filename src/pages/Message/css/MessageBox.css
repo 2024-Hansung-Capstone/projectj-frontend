@@ -5,6 +5,7 @@
   width: 100%;
   font-family: 'KCC-Hanbit';
   min-height: 500px;
+  background-color: rgb(251, 250, 244);
 }
 
 .message-header {

@@ -1,8 +1,9 @@
 .marketdetail-container {
   font-family: 'KCC-Hanbit';
-  max-width: 1100px;
+  max-width: 1150px;
   margin: 20px auto;
   padding: 20px;
+  background-color: white;
 }
 
 .header {

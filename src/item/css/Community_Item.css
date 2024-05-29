@@ -7,9 +7,10 @@
   width: 90%;
   margin-top: 5px;
   text-align: center;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 3px 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 박스 그림자 */
+  background-color: white;
 }
 
 .ci-title {

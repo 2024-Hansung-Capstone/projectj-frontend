@@ -1,11 +1,12 @@
 .message-post-container {
-  max-width: 600px;
+  max-width: 1150px;
   margin: 20px auto;
   padding: 60px;
   border-radius: 5px;
   background-color: #f9f9f9;
   font-family: 'KCC-Hanbit';
   margin-top: 50px;
+  background-color: rgb(251, 250, 244);
 }
 
 .message-post-container h2 {

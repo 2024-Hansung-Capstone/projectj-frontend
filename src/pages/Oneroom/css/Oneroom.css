@@ -1,10 +1,12 @@
 .oneroom-container1 {
-  width: 100%;
+  width: 98%;
   position: relative;
   min-height: 1300px;
   display: flex; /* Flexbox를 사용하여 가운데 정렬 */
   flex-direction: column; /* 세로 방향으로 아이템을 정렬 */
   margin: auto; /* 좌우 여백을 자동으로 추가하여 가운데 정렬 */
+  background-color: rgb(251, 250, 244);
+  padding: 5px;
 }
 
 .oneroom-container2 {
@@ -24,7 +26,7 @@
   z-index: 2; /* Higher z-index to ensure it is above the map */
   top: 0;
   right: 0;
-  max-height: 700px;
+  max-height: 670px;
   border: 1px solid gray;
   margin-right: 10px;
   overflow-y: auto;
@@ -88,6 +90,7 @@
   border-radius: 10px;
   padding: 10px;
   box-shadow: 0 2px 4px rgb(93, 155, 0);
+  width: 97%;
 }
 
 .popular-room-list > * {
@@ -133,8 +136,8 @@
 
 @media (min-width: 1150px) {
   .oneroom-container1, .oneroom-container2 {
-    width: 100%;
-    max-width: 1100px;
+    width: 99%;
+    max-width: 1150px;
     margin-left: auto;
     margin-right: auto;
   }

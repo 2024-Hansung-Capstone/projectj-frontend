@@ -155,6 +155,7 @@
   
   .menu-container:hover .board-list {
     display: block;
+    width: 150px;
   }
   
   .toggle-board-list {
