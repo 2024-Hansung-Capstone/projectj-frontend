@@ -8,6 +8,7 @@
   justify-content: center;
   overflow: hidden; /* 컨테이너 경계를 벗어나는 내용을 숨기기. */
   border: 1px solid #ddd;
+  background-color: white;
 }
 .mi-container2 {
     display: flex;

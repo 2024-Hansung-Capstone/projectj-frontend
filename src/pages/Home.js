@@ -114,7 +114,7 @@ const Home = () => {
         <h2>커뮤니티</h2>
       </div>
         <div className='Home-community1'>
-          <p>메시지를 통해 다른 사용자와 대화를 나눌 수 있어요.</p>
+          <p>다른 유저들의 생생한 자취 정보를 얻을 수 있어요.</p>
           <img src="/assets/community/board3.png"/>
           </div>
           <div className='Home-community2'>

@@ -6,6 +6,7 @@
     text-align: center;
     padding: 40px;
     border: 1px solid #ddd;
+    background-color: white;
     border-radius: 10px;
     margin-bottom: 200px;
     box-sizing: border-box; /* padding과 border를 포함한 전체 너비 계산 */
