@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Cooking_Item from '../../item/Cooking_Item';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery, gql, useMutation } from '@apollo/client'; 
@@ -128,7 +128,7 @@ export default function Cooking() {
   const [createIngredient] = useMutation(CREATE_INGREDIENT);
   const [deleteIngredient] = useMutation(DELETE_INGREDIENT);
   const [updateIngredient] = useMutation(UPDATE_INGREDIENT);
-
+  const inputRef = useRef();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
@@ -169,14 +169,16 @@ useEffect(() => {
   };
 
   // 레시피 검색
-  const handleSearch = (value) => {
+  const handleSearch = () => {
+    const value = inputRef.current.value;
     setKeyword(value);
+
   };
 
   // AI 검색
   const handleAISearch = (e) => {
     e.preventDefault();
-    navigate("/CookingAI");
+  
   };
 
   // 조회수
@@ -362,8 +364,7 @@ useEffect(() => {
             <input 
               type="text" 
               placeholder="재료/요리를 검색하세요" 
-              onChange={(e) => setKeyword(e.target.value)} 
-              value={keyword}
+              ref={inputRef}
               className='custom-search-input'
             />
             <button onClick={handleSearch} className='custom-search-button'>검색</button>
