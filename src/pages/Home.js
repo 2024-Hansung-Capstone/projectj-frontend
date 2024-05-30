@@ -172,22 +172,22 @@ const Home = () => {
               <tr>
                 <td>lv2</td>
                 <td>1001~2000</td>
-                <td>자취어린이</td>
+                <td>초보자취생</td>
               </tr>
               <tr>
                 <td>lv3</td>
                 <td>2001~3000</td>
-                <td>자취어린이</td>
+                <td>N년차자취생</td>
               </tr>
               <tr>
                 <td>lv4</td>
                 <td>3001~4000</td>
-                <td>자취어린이</td>
+                <td>자취도사</td>
               </tr>
               <tr>
                 <td>lv5</td>
                 <td>4001~</td>
-                <td>자취어린이</td>
+                <td>자취만렙</td>
               </tr>
             </tbody>
           </table>
