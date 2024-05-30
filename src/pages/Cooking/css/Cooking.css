@@ -451,3 +451,100 @@
   }
   
 }
+
+@media (max-width: 320px) {
+  .cooking-container {
+    width: 90%;
+    padding: 0;
+  }
+
+  .cooking-items-container {
+    max-width: 90%;
+    padding: 10px;
+  }
+
+  .cooking-items-header {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .best-dish {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .best-dish img {
+    width: 90%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .dish-name {
+    margin-bottom: 3px;
+    background-color: rgb(93, 155, 0);
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    padding: 0;
+  }
+
+  .dish-details {
+    font-size: 12px;
+  }
+
+  .best-dish-context {
+    width: 100%;
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+    background-color: #eee;
+  }
+
+  .ingredient-inputs {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .update-ingredient-btn,
+  .cookingDelete-btn {
+    font-size: 6px;
+    padding: 2px;
+    text-align: center;
+  }
+
+  .cooking-dishes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  .cooking-nodata {
+    color: gray;
+    font-size: 18px;
+    text-align: center;
+  }
+  .post-button2 {
+    font-size: 18px;
+    font-weight: bold;
+    position: fixed;
+    bottom: 20px;
+    right: -20px;
+    background-color: #29ADB2;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .cook-ai {
+    width: 90%;
+    max-width: 240px;
+    height: auto;
+    border: 2.5px solid #ccc;
+    border-radius: 14px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+}
+

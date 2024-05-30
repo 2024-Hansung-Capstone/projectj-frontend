@@ -121,7 +121,7 @@ const CookingAI = () => {
     return (
       <div key={index} className={`ai-recipe`}>
         <p className='ai-recipe-title'>{currentIndex + 1} 번째 레시피</p>
-        <p style={{fontSize:'18px'}}>{recipe.name}</p>
+        <p className='ai-recipe-name'>{recipe.name}</p>
         <h3>사용된 재료</h3>
         <ul>
           {recipe.used_ingredients.map((ingredient, idx) => (
