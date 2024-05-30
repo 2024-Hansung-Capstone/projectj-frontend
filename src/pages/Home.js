@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of navigate
+import { useNavigate } from 'react-router-dom';
+import { TbSquareRoundedLetterP } from "react-icons/tb";
 import './css/Home.css';
 
 export const images = [
@@ -146,6 +147,53 @@ const Home = () => {
         <img src="/assets/notification/notification1.png" />
         </div>
       </div>
+{/* 등급 */}
+<div className='Home-level'> 
+        <div className='Home-title'>
+          <TbSquareRoundedLetterP style={{ width: '40px', height: '40px', marginRight: '10px' }} />
+          <h2>등급 및 포인트</h2>
+        </div>
+        <div className='Home-level1'> 
+          <p>게시글 작성을 통해 포인트를 얻어, 레벨업 할 수 있어요!</p>
+          <table className="level-table">
+            <thead>
+              <tr>
+                <th>level</th>
+                <th>point</th>
+                <th>name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>lv1</td>
+                <td>0~1000</td>
+                <td>자취어린이</td>
+              </tr>
+              <tr>
+                <td>lv2</td>
+                <td>1001~2000</td>
+                <td>자취어린이</td>
+              </tr>
+              <tr>
+                <td>lv3</td>
+                <td>2001~3000</td>
+                <td>자취어린이</td>
+              </tr>
+              <tr>
+                <td>lv4</td>
+                <td>3001~4000</td>
+                <td>자취어린이</td>
+              </tr>
+              <tr>
+                <td>lv5</td>
+                <td>4001~</td>
+                <td>자취어린이</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
       </div>
     </div>
   );

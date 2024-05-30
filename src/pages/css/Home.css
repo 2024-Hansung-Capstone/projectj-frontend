@@ -49,7 +49,7 @@
     background-color: rgb(236, 234, 217);
 }
 
-.Home-cook, .Home-oneroom, .Home-mate, .Home-market, .Home-community, .Home-message, .Home-notification, .Home-web {
+.Home-cook, .Home-oneroom, .Home-mate, .Home-market, .Home-community, .Home-message, .Home-notification, .Home-level, .Home-web {
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -216,6 +216,24 @@
     color: #f4e869; /* 클릭된 카테고리의 텍스트 색을 노란색으로 변경 */
 }
 }
+
+
+.level-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .level-table th, .level-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .level-table th {
+    background-color: #4aadb1;
+    color: white;
+  }
 
 @media (min-width: 1150px) {
     /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
