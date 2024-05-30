@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{ useEffect} from 'react';
 import { PiUserCircleLight } from "react-icons/pi";
 import { TbSquareRoundedLetterP } from "react-icons/tb";
 import { SlEnvolopeLetter } from "react-icons/sl";
@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import DELETE_USER_MUTATION from './gql/deleteUserGql';
 import './css/MyPage.css';
-
+import { useLocation} from 'react-router-dom';
 const GET_USER_INFO = gql`
   query FetchUserInfo($userId: String!) {
     fetchUserById(user_id: $userId) {
@@ -44,12 +44,13 @@ export const FETCH_MY_ROLE_QUERY = gql`
 
 export default function MyPage({ onLogout }) {
   const [deleteUser] = useMutation(DELETE_USER_MUTATION);
+  const location = useLocation();
 
   const getToken = () => {
     return localStorage.getItem('token') || ''; // 토큰이 없을 경우 빈 문자열 반환
   };
 
-  const { loading: loadingWhoAmI, error: errorWhoAmI, data: dataWhoAmI } = useQuery(WHO_AM_I_QUERY, {
+  const { loading: loadingWhoAmI, error: errorWhoAmI, data: dataWhoAmI ,refetch} = useQuery(WHO_AM_I_QUERY, {
     context: {
       headers: {
         authorization: `Bearer ${getToken()}`
@@ -66,7 +67,9 @@ export default function MyPage({ onLogout }) {
     },
   });
   const myRole = dataMyRole?.fetchMyRole;
-
+  useEffect(() => {
+    refetch();
+  }, [location.pathname]);
   const handleDeleteUser = async () => {
     const confirmation = window.confirm("정말로 탈퇴하시겠습니까?");
 
