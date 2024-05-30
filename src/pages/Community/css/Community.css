@@ -241,3 +241,44 @@
     margin-right: auto;
   }
 }
+
+@media (max-width: 320px) {
+  .post-button2 {
+    position: fixed;
+    right: 15px;
+    bottom: 20px;
+    margin: 0;
+    font-size: 14px;
+    padding: 10px 20px;
+    background-color: #29ADB2;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .input-group {
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    margin-bottom: 20px;
+    width: 90%;
+    margin: 10px;
+  }
+
+  .input-group input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 8px;
+  }
+
+  .filter-bar-container {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+    width: 95%;
+  }
+  .filter-bar-container input {
+    width: 110px;
+  }
+}

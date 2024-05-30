@@ -48,6 +48,7 @@
 .comment-send {
   width: 100px;
   padding: 5px;
+  font-weight: bold;
   background-color: #29ADB2;
   border-radius: 10px;
   text-align: center;
@@ -253,4 +254,91 @@ input[type="comment-text"] {
     justify-content: center;
     align-items: center;
   }
+}
+
+@media (max-width: 320px) {
+  .comment-container4 {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    border-radius: 10px;
+    margin-top: 10px;
+    justify-content: space-between;
+    height: 50px;
+    width: 90%;
+    padding: 5px;
+    align-items: center;  /* 가운데정렬 */
+    background-color: white;
+  }
+
+  input[type="comment-text"] {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-left: 3px;
+    width: 100%;
+  }
+
+  .comment-send {
+    font-size: 15px;
+    font-weight: bold;
+    width: 80px;
+    height: 50px;
+    padding: 0px;
+    background-color: #29ADB2;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .comment-photo {
+    width:30px;
+    height: 30px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .comment-recomment,
+.comment-like {
+  margin-left: auto;
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+.comment-name {
+  display: flex;
+  font-weight: bold;
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+.comment-more {
+  margin-top: 5px;
+  font-size: 20px;
+  color: gray;
+  margin-left: auto; /* 오른쪽 정렬 */
+  cursor: pointer;
+  position: relative; /* Make parent relative */
+}
+
+.comment-post {
+  flex: 1;
+  display: flex;
+  font-size: 12px;
+}
+.comment-like img {
+  width: 15px;
+  height: 15px;
+  margin-right: 2px;
+}
+.comment-container2 {
+  display: flex;
+  height: 40px;
+}
 }

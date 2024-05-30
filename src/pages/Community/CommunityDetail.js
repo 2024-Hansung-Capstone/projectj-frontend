@@ -119,7 +119,7 @@ const CommunityDetail =  () => {
           />
             </div>
             <div className='comment-send'onClick={handleSubmitComment}>
-                <h4>전송</h4>
+                <p>전송</p>
             </div>
         </div>
     </div>
