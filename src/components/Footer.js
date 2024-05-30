@@ -1,9 +1,10 @@
 import React from 'react';
+import './css/Footer.css';
 
 const Footer = () => {
   return (
-    <div className="footer-container" style={styles.footerContainer}>
-        <div className='footer-detail' style={styles.footerDetail}>
+    <div className="footer-container">
+        <div className='footer-detail'>
             <p>주소: 서울특별시 성북구 삼선교로16길 116</p>
             <p>전화번호: 02-1234-5678</p>
             <p>상호명: (주)자취만렙</p>
@@ -16,18 +17,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-const styles = {
-  footerContainer: {
-    fontFamily: 'Pretendard-Regular',
-    backgroundColor: '#4aadb1',
-    color: 'white',
-    padding: '10px',
-    paddingLeft: '40px',
-    textAlign: 'left',
-    marginTop: '20px', /* 모바일 화면에서 상단 여백 조정 */
-  },
-  footerDetail: {
-    fontSize: '14px', /* 모바일 화면에서 폰트 크기 조정 */
-  }
-};
