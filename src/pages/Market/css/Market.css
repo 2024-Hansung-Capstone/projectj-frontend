@@ -95,6 +95,16 @@
     background-color: #007bff; /* 활성 페이지 배경 색상 */
     color: #fff; /* 활성 페이지 글자 색상 */
   }
+
+  .market-user-dong {
+    margin-left: auto; /* 자동 여백을 추가하여 오른쪽으로 배치 */
+    margin-right: 10px;
+    font-size: 24px; /* 글자 크기 조정 */
+    color: #333; /* 글자 색상 설정 */
+    background-color: #f9f9f9; /* 배경 색상 설정 */
+    padding: 8px 12px; /* 패딩 설정 */
+    border-radius: 5px; /* 둥근 모서리 설정 */
+  }
   
 @media (min-width: 1150px) {
     /* 가로 1150px 이상일 때 페이지 전체의 양 옆 여백을 늘리는 스타일 추가 */
@@ -113,6 +123,38 @@
   }
 }
 
+@media (max-width: 768px) {
+  .market-item > * {
+      width:140px;
+      box-sizing: border-box;
+      padding: 10px;
+  }
+  .market-user-dong {
+    margin-left: auto; /* 자동 여백을 추가하여 오른쪽으로 배치 */
+    margin-right: 5px;
+    font-size: 12px; /* 글자 크기 조정 */
+    color: #333; /* 글자 색상 설정 */
+    background-color: #f9f9f9; /* 배경 색상 설정 */
+    padding: 8px 12px; /* 패딩 설정 */
+    border-radius: 5px; /* 둥근 모서리 설정 */
+  }
+  .market-search-icon {
+    width: 8%;
+    height: 38px;
+    margin-left: 10px;
+}
+.market-search-input {
+    display: block;  /* 가운데정렬 */
+    margin-left: 5px;
+    height: 20px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    width: 140px;
+}
+
+
+}
 
 
 

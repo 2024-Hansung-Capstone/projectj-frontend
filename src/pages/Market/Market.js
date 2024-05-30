@@ -226,6 +226,11 @@ export default function Market() {
           }}
         />
         <IoSearchOutline className="market-search-icon" onClick={handleSearch} />
+        {whoAmIData && whoAmIData.whoAmI && (
+          <div className="market-user-dong">
+            <p>{whoAmIData.whoAmI.dong.name}</p>
+          </div>
+        )}
       </div>
       {isHovered && (
         <div
