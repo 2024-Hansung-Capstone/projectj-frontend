@@ -54,7 +54,11 @@ $ npm start
 <img width="855" alt="커뮤니티" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/e69ff2f0-dda2-4512-934b-a49998454b99">
 <img width="858" alt="메시지" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/c7dc839e-1fc4-49f7-92f5-8a8191c65600">
 <img width="857" alt="알림" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/700de0b0-2697-4760-9315-e41e2ed14f00">
-<img width="1094" alt="포인트" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/ed0d6cce-ac87-4e7e-8461-72d25c7511e0">
+<img width="874" alt="image" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/bf911af8-0490-4071-af3d-106c1302f246">
+
+
+
+
 
 
 
