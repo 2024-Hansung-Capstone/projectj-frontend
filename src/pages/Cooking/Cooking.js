@@ -442,9 +442,9 @@ useEffect(() => {
                     ) : (
                       <div className="ingredient-item">
                         <div className="ingredient-item-container" style={{ display: 'flex', alignItems: 'center' }}>
-                          <span style={{ marginRight: '12px' }}>{ing.name}</span>
-                          <span style={{ marginRight: '5px' }}>{ing.volume}</span>
-                          <span>{ing.volume_unit}</span>
+                          <span className="ingredient-item-name">{ing.name}</span>
+                          <span className="ingredient-item-volume">{ing.volume}</span>
+                          <span className="ingredient-item-volume-unit">{ing.volume_unit}</span>
                         </div>
                         <button className="update-ingredient-btn" onClick={() => handleUpdateIngredient(ing.id, ing.name, ing.volume, ing.volume_unit)}>수정</button>
                         <button className="cookingDelete-btn" onClick={() => handleDeleteIngredient(ing.id)}>삭제</button>
