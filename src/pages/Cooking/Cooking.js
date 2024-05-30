@@ -178,7 +178,7 @@ useEffect(() => {
   // AI 검색
   const handleAISearch = (e) => {
     e.preventDefault();
-  
+    navigate('/CookingAI')
   };
 
   // 조회수
