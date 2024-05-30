@@ -115,6 +115,9 @@ export default function MarketDetail({isLiked}) {
     },
     onCompleted: (data) => {
       setLikeCount(data.increaseUsedProductLike.like);
+    },onError: (error) => {
+      alert('좋아요 실패 사유:'+error.message);
+      console.log(JSON.stringify(error, null, 2))
     },
   });
 
