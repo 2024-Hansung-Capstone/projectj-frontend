@@ -178,6 +178,10 @@ useEffect(() => {
   // AI 검색
   const handleAISearch = (e) => {
     e.preventDefault();
+    if (dataIngredients.fetchMyIngredients.length ===0) {
+      alert("재료를 입력해주세요");
+      return;
+    }
     navigate('/CookingAI')
   };
 
