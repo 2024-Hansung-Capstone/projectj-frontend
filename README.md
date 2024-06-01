@@ -29,8 +29,8 @@ $ npm start
 # ﻿4. 기술 스택
 
 개발 환경 : Windows, MacOS
-개발 언어 : Typescript, JavaScript, CSS
-개발 도구 : VSCode, MySQL, Docker, GraphQL, CoolSMS
+개발 언어 : TypeScript, JavaScript, CSS
+개발 도구 : VSCode, MySQL, Docker, GraphQL, OpenAI Playground, CoolSMS
 프레임워크 : React, NestJS
 
 
