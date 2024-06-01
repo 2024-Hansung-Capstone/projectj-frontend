@@ -4,11 +4,11 @@
 
 # ﻿1. 정의
 ### ﻿자취생들을 위한 통합 웹사이트    
-원룸 : 딱 1인가구를 위한 자취생 맞춤 원룸! 자취생들에게 제공하는 원룸 찾기     
-요리 : 매일 메뉴고민에 빠진 자취생에게 제공하는 AI 요리 레시피       
-커뮤니티: 자취생들의 공감대를 형성하는 자취 커뮤니티   
-중고마켓 : 버리는 것도 고민되는 자취생에게 제공하는 중고마켓    
-자취생메이트: 혼밥이 지겨울 때 자취메이트에서 밥 친구 찾기  
+-요리 : 매일 메뉴고민에 빠진 자취생에게 제공하는 AI 요리 레시피 </br>
+-원룸 : 딱 1인가구를 위한 자취생 맞춤 원룸! 자취생들에게 제공하는 원룸 찾기 </br>
+-커뮤니티: 자취생들의 공감대를 형성하는 자취 커뮤니티 </br>
+-중고마켓 : 버리는 것도 고민되는 자취생에게 제공하는 중고마켓 </br>
+-자취생메이트: 혼밥이 지겨울 때 자취메이트에서 밥 친구 찾기  
 
 ---
 
@@ -28,10 +28,10 @@ $ npm start
 
 # ﻿4. 기술 스택
 
-개발 환경 : Windows, MacOS
-개발 언어 : TypeScript, JavaScript, CSS
-개발 도구 : VSCode, MySQL, Docker, GraphQL, OpenAI Playground, CoolSMS
-프레임워크 : React, NestJS
+-개발 환경 : Windows, MacOS </br>
+-개발 언어 : TypeScript, JavaScript, CSS </br>
+-개발 도구 : VSCode, MySQL, Docker, GraphQL, OpenAI Playground, CoolSMS </br>
+-프레임워크 : React, NestJS </br>
 
 
 ---
@@ -62,39 +62,39 @@ $ npm start
 
 
 
-#### (1) ﻿로그인/회원가입
+#### (1) ﻿로그인/회원가입 : 회원가입을 할 때, 인증번호 발송을 통해서 안전성을 확보해준다.
 
  <img width="466" alt="image" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/22fbe1fb-3fb8-42a4-be22-f01bc92543ee">
 
 
-#### (2) 요리 : 자취생들의 냉장고에 있는 재료를 입력받아 AI가 레시피를 추천해줍니다. 
+#### (2) 요리 : 자취생들의 냉장고에 있는 재료를 입력받아 AI가 레시피를 추천해준다. 
 <img width="577" alt="요리1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/d15e7451-4490-4dbd-924b-e8b01d049e39">
 
 
 
-#### (3) 원룸 : 원룸 api를 이용하여 내 주변 원룸을 지도로 확인 가능합니다.
+#### (3) 원룸 : 원룸 api를 이용하여 내 주변 원룸을 지도로 확인 가능하다.
 <img width="576" alt="원룸1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/36cf12e2-d32c-471e-a3ac-c73437876d56">
 
 
-#### (4) 자취메이트 : 동네 자취생 친구를 만들 수 있는 페이지이며, 사용자에게 받은 입력값을 바탕으로 친구를 추천하여 지역 커뮤니티를 활성화합니다.
+#### (4) 자취생생메이트 : 동네 자취생 친구를 만들 수 있는 페이지이며, 회원가입 때 사용자에게 받은 입력값을 바탕으로 친구를 추천하여 지역 커뮤니티를 활성화한다.
 <img width="579" alt="자취메이트1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/e950bede-42d6-4ceb-9fee-5111e079f663">
 
 
-#### (5) 중고마켓 : 사용자와 같은 지역에 거주하는 유저가 올린 중고 상품을 띄워 쪽지를 통해 거래를 할 수 있습니다. 
+#### (5) 중고마켓 : 사용자와 같은 지역에 거주하는 유저가 올린 중고 상품을 띄워 쪽지를 통해 거래를 할 수 있다. 
 <img width="580" alt="중고마켓1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/4baef226-1d68-46e1-aa6c-74112abfeabe">
 
 
 
-#### (6) 커뮤니티 : 자취생들에게 필요한 정보들을 같은 자취생들과 공유합니다. 
+#### (6) 커뮤니티 : 자취생들에게 필요한 정보들을 다른 자취생들과 공유한다. 
 <img width="575" alt="커뮤니티1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/bc2297d6-4b6e-4086-975f-2b991746fcb9">
 
 
 
-#### (7) 메시지
+#### (7) 쪽지 : 중고마켓과 자취생메이트 카테고리를 사용하는 중에 다른 사용자와 쪽지를 주고 받을 수 있고, 상대방이 내 쪽지를 읽었는지 확인도 가능하다.
 <img width="707" alt="messagebox" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/328f39be-fbba-4917-b520-b864e5556759">
 
 
-#### (8) 알림
+#### (8) 알림 : 좋아요와 댓글, 쪽지 등을 받거나 내가 찜한 상품의 가격이 변동되는 등의 상황일 때, 알림을 통해 사용자에게 정보를 전달한다.
 <img width="782" alt="notification1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/d7dd0698-c906-41d0-b3bb-a0ca95a1f98f">
 
 
