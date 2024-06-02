@@ -76,7 +76,7 @@ $ npm start
 <img width="576" alt="원룸1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/36cf12e2-d32c-471e-a3ac-c73437876d56">
 
 
-#### (4) 자취생생메이트 : 동네 자취생 친구를 만들 수 있는 페이지이며, 회원가입 때 사용자에게 받은 입력값을 바탕으로 친구를 추천하여 지역 커뮤니티를 활성화한다.
+#### (4) 자취생메이트 : 동네 자취생 친구를 만들 수 있는 페이지이며, 회원가입 때 사용자에게 받은 입력값을 바탕으로 친구를 추천하여 지역 커뮤니티를 활성화한다.
 <img width="579" alt="자취메이트1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/e950bede-42d6-4ceb-9fee-5111e079f663">
 
 
