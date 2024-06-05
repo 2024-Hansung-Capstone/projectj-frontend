@@ -2,6 +2,11 @@
 
 <img width="922" alt="web mobile1" src="https://github.com/2024-Hansung-Capstone/projectj-frontend/assets/101031116/26aeb48e-9ad5-4b9e-ba21-75539e716b61">
 
+# <노션 링크>
+https://www.notion.so/2024-Hansung-Capstone-77b3aed17b6d49a6b03315a2495406a7?pvs=4
+
+---
+
 # ﻿1. 정의
 ### ﻿자취생들을 위한 통합 웹사이트    
 -요리 : 매일 메뉴고민에 빠진 자취생에게 제공하는 AI 요리 레시피 </br>
